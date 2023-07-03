@@ -1,4 +1,4 @@
-import 'package:hardware_lo/other_config.dart';
+  import 'package:hardware_lo/other_config.dart';
 import 'package:hardware_lo/presenter/cart_counter.dart';
 import 'package:hardware_lo/presenter/currency_presenter.dart';
 import 'package:hardware_lo/presenter/home_presenter.dart';
@@ -66,7 +66,8 @@ main() async {
       debug: true,
       // optional: set to false to disable printing logs to console (default: true)
       ignoreSsl:
-          true // option: set to false to disable working with http links (default: false)
+          true //
+    // : set to false to disable working with http links (default: false)
       );
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
