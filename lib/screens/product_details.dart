@@ -1030,50 +1030,51 @@ class _ProductDetailsState extends State<ProductDetails>
                               ? buildChoiceOptionList()
                               : buildVariantShimmers(),
                         ),
-                        Padding(
-                          padding:
-                              EdgeInsets.only(top: 14, left: 14, right: 14),
-                          child: _productDetails != null
-                              ? (_colorList.length > 0
-                                  ? buildColorRow()
-                                  : Container())
-                              : ShimmerHelper().buildBasicShimmer(
-                                  height: 30.0,
-                                ),
-                        ),
+                        // Padding(
+                        //   padding:
+                        //       EdgeInsets.only(top: 14, left: 14, right: 14),
+                        //   child: _productDetails != null
+                        //       ? (_colorList.length > 0
+                        //           ? buildColorRow()
+                        //           : Container())
+                        //       : ShimmerHelper().buildBasicShimmer(
+                        //           height: 30.0,
+                        //         ),
+                        // ),
 
                         ///whole sale
-                        Visibility(
-                          visible: whole_sale_addon_installed.$,
-                          child: Padding(
-                            padding:
-                                EdgeInsets.only(top: 14, left: 14, right: 14),
-                            child: _productDetails != null
-                                ? _productDetails.wholesale.isNotEmpty
-                                    ? buildWholeSaleQuantityPrice()
-                                    : SizedBox.shrink()
-                                : ShimmerHelper().buildBasicShimmer(
-                                    height: 30.0,
-                                  ),
-                          ),
-                        ),
-                        Padding(
-                          padding:
-                              EdgeInsets.only(top: 14, left: 14, right: 14),
-                          child: _productDetails != null
-                              ? buildQuantityRow()
-                              : ShimmerHelper().buildBasicShimmer(
-                                  height: 30.0,
-                                ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 14, bottom: 14),
-                          child: _productDetails != null
-                              ? buildTotalPriceRow()
-                              : ShimmerHelper().buildBasicShimmer(
-                                  height: 30.0,
-                                ),
-                        ),
+                        // Visibility(
+                        //   visible: whole_sale_addon_installed.$,
+                        //   child: Padding(
+                        //     padding:
+                        //         EdgeInsets.only(top: 14, left: 14, right: 14),
+                        //     child: _productDetails != null
+                        //         ? _productDetails.wholesale.isNotEmpty
+                        //             ? buildWholeSaleQuantityPrice()
+                        //             : SizedBox.shrink()
+                        //         : ShimmerHelper().buildBasicShimmer(
+                        //             height: 30.0,
+                        //           ),
+                        //   ),
+                        // ),
+
+                        // Padding(
+                        //   padding:
+                        //       EdgeInsets.only(top: 14, left: 14, right: 14),
+                        //   child: _productDetails != null
+                        //       ? buildQuantityRow()
+                        //       : ShimmerHelper().buildBasicShimmer(
+                        //           height: 30.0,
+                        //         ),
+                        // ),
+                        // Padding(
+                        //   padding: EdgeInsets.only(top: 14, bottom: 14),
+                        //   child: _productDetails != null
+                        //       ? buildTotalPriceRow()
+                        //       : ShimmerHelper().buildBasicShimmer(
+                        //           height: 30.0,
+                        //         ),
+                        // ),
                       ],
                     ),
                   ),
@@ -1124,51 +1125,51 @@ class _ProductDetailsState extends State<ProductDetails>
                             ],
                           ),
                         ),
-
-                        divider(),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                                  return CommonWebviewScreen(
-                                    url:
-                                    "${AppConfig.RAW_BASE_URL}/mobile-page/support-policy",
-                                    page_name: AppLocalizations.of(context)
-                                        .support_policy_ucf,
-                                  );
-                                }));
-                          },
-                          child: Container(
-                            color: MyTheme.white,
-                            height: 48,
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(
-                                18.0,
-                                14.0,
-                                18.0,
-                                14.0,
-                              ),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    AppLocalizations.of(context)
-                                        .support_policy_ucf,
-                                    style: TextStyle(
-                                        color: MyTheme.dark_font_grey,
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                  Spacer(),
-                                  Image.asset(
-                                    "assets/arrow.png",
-                                    height: 11,
-                                    width: 20,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
+                        //
+                        // divider(),
+                        // InkWell(
+                        //   onTap: () {
+                        //     Navigator.push(context,
+                        //         MaterialPageRoute(builder: (context) {
+                        //           return CommonWebviewScreen(
+                        //             url:
+                        //             "${AppConfig.RAW_BASE_URL}/mobile-page/support-policy",
+                        //             page_name: AppLocalizations.of(context)
+                        //                 .support_policy_ucf,
+                        //           );
+                        //         }));
+                        //   },
+                        //   child: Container(
+                        //     color: MyTheme.white,
+                        //     height: 48,
+                        //     child: Padding(
+                        //       padding: const EdgeInsets.fromLTRB(
+                        //         18.0,
+                        //         14.0,
+                        //         18.0,
+                        //         14.0,
+                        //       ),
+                        //       child: Row(
+                        //         children: [
+                        //           Text(
+                        //             AppLocalizations.of(context)
+                        //                 .support_policy_ucf,
+                        //             style: TextStyle(
+                        //                 color: MyTheme.dark_font_grey,
+                        //                 fontSize: 13,
+                        //                 fontWeight: FontWeight.w600),
+                        //           ),
+                        //           Spacer(),
+                        //           Image.asset(
+                        //             "assets/arrow.png",
+                        //             height: 11,
+                        //             width: 20,
+                        //           ),
+                        //         ],
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                         divider(),
                       ]),
                 ),
@@ -1459,8 +1460,10 @@ class _ProductDetailsState extends State<ProductDetails>
                           ),
                         ),
                         divider(),
+                        SizedBox(height: 75,)
                       ]),
                 ),
+
 
               ],
             ),
@@ -1490,24 +1493,24 @@ class _ProductDetailsState extends State<ProductDetails>
                     padding: app_language_rtl.$
                         ? EdgeInsets.only(left: 8.0)
                         : EdgeInsets.only(right: 8.0),
-                    child: Container(
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6.0),
-                        border: Border.all(
-                            color: Color.fromRGBO(112, 112, 112, .3), width: 1),
-                        //shape: BoxShape.rectangle,
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(6.0),
-                        child: FadeInImage.assetNetwork(
-                          placeholder: 'assets/placeholder.png',
-                          image: _productDetails.shop_logo,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
+                    // child: Container(
+                    //   width: 30,
+                    //   height: 30,
+                    //   decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(6.0),
+                    //     border: Border.all(
+                    //         color: Color.fromRGBO(112, 112, 112, .3), width: 1),
+                    //     //shape: BoxShape.rectangle,
+                    //   ),
+                    //   // child: ClipRRect(
+                    //   //   borderRadius: BorderRadius.circular(6.0),
+                    //   //   child: FadeInImage.assetNetwork(
+                    //   //     placeholder: 'assets/placeholder.png',
+                    //   //     image: _productDetails.shop_logo,
+                    //   //     fit: BoxFit.cover,
+                    //   //   ),
+                    //   // ),
+                    // ),
                   ),
                 ),
           Container(

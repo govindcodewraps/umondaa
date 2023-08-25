@@ -1,5 +1,6 @@
 import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
 import 'package:circular_bottom_navigation/tab_item.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:hardware_lo/custom/common_functions.dart';
 import 'package:hardware_lo/helpers/shared_value_helper.dart';
 import 'package:hardware_lo/my_theme.dart';
@@ -112,13 +113,19 @@ class _MainState extends State<Main> {
       // ),
     ),
     TabItem(
+      // SvgPicture.asset(
+      //   'assets/circ.svg', // Replace with your SVG asset path
+      //   width: 200,  // Adjust width as needed
+      //   height: 200, // Adjust height as needed
+      // ),
+      //Image.asset("assets/brand_image.png"),
       Icons.category_outlined,
       "Categories",
       Colors.blue,
       //circleStrokeColor: Colors.white,
     ),
     TabItem(
-      Icons.add_link_outlined,
+      Icons.add,
       "Place Ad",
       Colors.blue,
       // labelStyle: TextStyle(
@@ -139,6 +146,7 @@ class _MainState extends State<Main> {
       Colors.blue,
     ),
   ]);
+
 
   CircularBottomNavigationController _navigationController;
 
