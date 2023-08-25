@@ -96,7 +96,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           borderRadius: BorderRadius.circular(8)
                         ),
                         child: Image.asset(
-                            "assets/hardwarelogo.jpg",
+                            "assets/umondalogo.png",
                           filterQuality: FilterQuality.low,
                         ),
                       ),

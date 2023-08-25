@@ -19,7 +19,6 @@ import 'package:hardware_lo/repositories/auth_repository.dart';
 import 'package:hardware_lo/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:validators/validators.dart';
-
 import '../repositories/address_repository.dart';
 
 class Registration extends StatefulWidget {

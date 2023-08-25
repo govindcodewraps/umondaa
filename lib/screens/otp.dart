@@ -105,7 +105,7 @@ class _OtpState extends State<Otp> {
                       width: 75,
                       height: 75,
                       child:
-                          Image.asset('assets/hardwarelogo.jpg'),
+                          Image.asset('assets/umondalogo.png'),
                     ),
                   ),
                   Padding(

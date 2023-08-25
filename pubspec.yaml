@@ -89,6 +89,7 @@ dependencies:
   flutter_downloader: ^1.8.3+2
   path_provider: ^2.0.11
   change_app_package_name: ^1.1.0
+  circular_bottom_navigation: ^2.3.0
 
 
 dev_dependencies:
@@ -101,10 +102,11 @@ dev_dependencies:
 
 
 
-flutter_icons:
-  android: true
+flutter_launcher_icons:
+  android: "launcher_icon"
   ios: true
-  image_path: "assets/hardwarelogo.jpg"
+  image_path: "assets/umondalogo.png"
+  min_sdk_android: 21
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

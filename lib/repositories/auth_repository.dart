@@ -143,12 +143,17 @@ class AuthRepository {
         {"user_id": "$user_id", "verification_code": "$verification_code"});
 
     Uri url = Uri.parse("${AppConfig.BASE_URL}/auth/confirm_code");
+
+    print(url);
+    print(post_body);
+
     final response = await http.post(url,
         headers: {
           "Content-Type": "application/json",
           "App-Language": app_language.$,
         },
         body: post_body);
+    print("confirm code response ${response.body}");
 
     return confirmCodeResponseFromJson(response.body);
   }

@@ -320,6 +320,7 @@ class _ProfileState extends State<Profile> {
 
           buildBottomVerticalCardListItem("assets/download.png",
               LangText(context).local.all_digital_products_ucf,
+
               onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return DigitalProducts();
@@ -527,47 +528,47 @@ class _ProfileState extends State<Profile> {
     return Container(
       margin: EdgeInsets.only(top: 20),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          buildHorizontalSettingItem(true, "assets/language.png",
-              AppLocalizations.of(context).language_ucf, () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return ChangeLanguage();
-                },
-              ),
-            );
-          }),
-          InkWell(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return CurrencyChange();
-              }));
-            },
-            child: Column(
-              children: [
-                Image.asset(
-                  "assets/currency.png",
-                  height: 16,
-                  width: 16,
-                  color: MyTheme.white,
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  AppLocalizations.of(context).currency_ucf,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 10,
-                      color: MyTheme.white,
-                      fontWeight: FontWeight.w500),
-                )
-              ],
-            ),
-          ),
+          // buildHorizontalSettingItem(true, "assets/language.png",
+          //     AppLocalizations.of(context).language_ucf, () {
+          //   Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //       builder: (context) {
+          //         return ChangeLanguage();
+          //       },
+          //     ),
+          //   );
+          // }),
+          // InkWell(
+          //   onTap: () {
+          //     Navigator.push(context, MaterialPageRoute(builder: (context) {
+          //       return CurrencyChange();
+          //     }));
+          //   },
+          //   child: Column(
+          //     children: [
+          //       Image.asset(
+          //         "assets/currency.png",
+          //         height: 16,
+          //         width: 16,
+          //         color: MyTheme.white,
+          //       ),
+          //       SizedBox(
+          //         height: 5,
+          //       ),
+          //       Text(
+          //         AppLocalizations.of(context).currency_ucf,
+          //         textAlign: TextAlign.center,
+          //         style: TextStyle(
+          //             fontSize: 10,
+          //             color: MyTheme.white,
+          //             fontWeight: FontWeight.w500),
+          //       )
+          //     ],
+          //   ),
+          // ),
           buildHorizontalSettingItem(
               is_logged_in.$,
               "assets/edit.png",
@@ -832,68 +833,78 @@ class _ProfileState extends State<Profile> {
                         }));
                       }
                     : () => null),
-          if (refund_addon_installed.$)
-            buildSettingAndAddonsHorizontalMenuItem(
-                "assets/refund.png",
-                AppLocalizations.of(context)
-                    .refund_requests_ucf,
-                is_logged_in.$
-                    ? () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return RefundRequest();
-                        }));
-                      }
-                    : () => null),
-          if (conversation_system_status.$)
-            buildSettingAndAddonsHorizontalMenuItem(
-                "assets/messages.png",
-                AppLocalizations.of(context).messages_ucf,
-                is_logged_in.$
-                    ? () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return MessengerList();
-                        }));
-                      }
-                    : () => null),
-          // if (auction_addon_installed.$)
-          if (false)
-            buildSettingAndAddonsHorizontalMenuItem(
-                "assets/auction.png",
-                AppLocalizations.of(context).auction_ucf,
-                is_logged_in.$
-                    ? () {
-                        // Navigator.push(context,
-                        //     MaterialPageRoute(builder: (context) {
-                        //   return MessengerList();
-                        // }));
-                      }
-                    : () => null),
-          if (classified_product_status.$)
-            buildSettingAndAddonsHorizontalMenuItem(
-                "assets/classified_product.png",
-                AppLocalizations.of(context).classified_products,
-                is_logged_in.$
-                    ? () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return MyClassifiedAds();
-                        }));
-                      }
-                    : () => null),
 
-            buildSettingAndAddonsHorizontalMenuItem(
-                "assets/download.png",
-                AppLocalizations.of(context).downloads_ucf,
-                is_logged_in.$
-                    ? () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return PurchasedDigitalProducts();
-                        }));
-                      }
-                    : () => null),
+          //refund_requests button
+
+          // if (refund_addon_installed.$)
+          //   buildSettingAndAddonsHorizontalMenuItem(
+          //       "assets/refund.png",
+          //       AppLocalizations.of(context)
+          //           .refund_requests_ucf,
+          //       is_logged_in.$
+          //           ? () {
+          //               Navigator.push(context,
+          //                   MaterialPageRoute(builder: (context) {
+          //                 return RefundRequest();
+          //               }));
+          //             }
+          //           : () => null),
+          // if (conversation_system_status.$)
+          //   buildSettingAndAddonsHorizontalMenuItem(
+          //       "assets/messages.png",
+          //       AppLocalizations.of(context).messages_ucf,
+          //       is_logged_in.$
+          //           ? () {
+          //               Navigator.push(context,
+          //                   MaterialPageRoute(builder: (context) {
+          //                 return MessengerList();
+          //               }));
+          //             }
+          //           : () => null),
+          // // if (auction_addon_installed.$)
+
+
+
+         // if (false)
+         //    buildSettingAndAddonsHorizontalMenuItem(
+         //        "assets/auction.png",
+         //        AppLocalizations.of(context).auction_ucf,
+         //        is_logged_in.$
+         //            ? () {
+         //                // Navigator.push(context,
+         //                //     MaterialPageRoute(builder: (context) {
+         //                //   return MessengerList();
+         //                // }));
+         //              }
+         //            : () => null),
+
+
+          //Download button
+
+          // if (classified_product_status.$)
+          //   buildSettingAndAddonsHorizontalMenuItem(
+          //       "assets/classified_product.png",
+          //       AppLocalizations.of(context).classified_products,
+          //       is_logged_in.$
+          //           ? () {
+          //               Navigator.push(context,
+          //                   MaterialPageRoute(builder: (context) {
+          //                 return MyClassifiedAds();
+          //               }));
+          //             }
+          //           : () => null),
+          //
+          //   buildSettingAndAddonsHorizontalMenuItem(
+          //       "assets/download.png",
+          //       AppLocalizations.of(context).downloads_ucf,
+          //       is_logged_in.$
+          //           ? () {
+          //               Navigator.push(context,
+          //                   MaterialPageRoute(builder: (context) {
+          //                 return PurchasedDigitalProducts();
+          //               }));
+          //             }
+          //           : () => null),
         ],
       ),
     );
