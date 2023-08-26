@@ -9,6 +9,7 @@ import 'package:hardware_lo/screens/category_products.dart';
 import 'package:hardware_lo/screens/filter.dart';
 import 'package:hardware_lo/screens/flash_deal_list.dart';
 import 'package:hardware_lo/screens/todays_deal_products.dart';
+import 'package:hardware_lo/screens/top_brands.dart';
 import 'package:hardware_lo/screens/top_selling_products.dart';
 import 'package:hardware_lo/screens/wishlist.dart';
 import 'package:hardware_lo/ui_elements/mini_product_card.dart';
@@ -335,11 +336,11 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                               color: MyTheme.dark_grey,
                                             ),
 
-                                            onTap: () {
-                                              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                                return TopSellingProducts();
-                                              }));
-                                            },
+                                            // onTap: () {
+                                            //   Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                            //     return TopBrand();
+                                            //   }));
+                                            // },
                                           ),
                                         ),
                                         Container(
@@ -353,7 +354,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
                                             onTap: () {
                                               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                                return TopSellingProducts();
+                                                return TopBrand();
                                               }));
                                             },
                                           ),
@@ -369,7 +370,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
                                             onTap: () {
                                               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                                return TopSellingProducts();
+                                                return TopBrand();
                                               }));
                                             },
                                           ),
@@ -381,7 +382,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                   ),
 
                                   Container(
-                                    margin: const EdgeInsets.fromLTRB(5, 15, 5, 30),
+                                    margin: const EdgeInsets.fromLTRB(5, 15, 5, 0),
                                     decoration: BoxDecorations.buildBoxDecoration_1(),
                                     child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,

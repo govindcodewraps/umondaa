@@ -80,8 +80,6 @@ class BrandsLinks {
   };
 }
 
-
-
 class Meta {
   Meta({
     this.currentPage,
@@ -121,3 +119,120 @@ class Meta {
     "total": total,
   };
 }
+
+
+
+
+
+
+/*
+
+// To parse this JSON data, do
+//
+//     final brandResponse = brandResponseFromJson(jsonString);
+
+import 'dart:convert';
+
+BrandResponse brandResponseFromJson(String str) => BrandResponse.fromJson(json.decode(str));
+
+String brandResponseToJson(BrandResponse data) => json.encode(data.toJson());
+
+class BrandResponse {
+  final List<Datum> data;
+  final bool success;
+  final int status;
+
+  BrandResponse({
+    this.data,
+    this.success,
+    this.status,
+  });
+
+  BrandResponse copyWith({
+    List<Datum> data,
+    bool success,
+    int status,
+  }) =>
+      BrandResponse(
+        data: data ?? this.data,
+        success: success ?? this.success,
+        status: status ?? this.status,
+      );
+
+  factory BrandResponse.fromJson(Map<String, dynamic> json) => BrandResponse(
+    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+    success: json["success"],
+    status: json["status"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "data": List<dynamic>.from(data.map((x) => x.toJson())),
+    "success": success,
+    "status": status,
+  };
+}
+
+class Datum {
+  final int id;
+  final String name;
+  final String logo;
+  final Links links;
+
+  Datum({
+    this.id,
+    this.name,
+    this.logo,
+    this.links,
+  });
+
+  Datum copyWith({
+    int id,
+    String name,
+    String logo,
+    Links links,
+  }) =>
+      Datum(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        logo: logo ?? this.logo,
+        links: links ?? this.links,
+      );
+
+  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+    id: json["id"],
+    name: json["name"],
+    logo: json["logo"],
+    links: Links.fromJson(json["links"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "name": name,
+    "logo": logo,
+    "links": links.toJson(),
+  };
+}
+
+class Links {
+  final String products;
+
+  Links({
+    this.products,
+  });
+
+  Links copyWith({
+    String products,
+  }) =>
+      Links(
+        products: products ?? this.products,
+      );
+
+  factory Links.fromJson(Map<String, dynamic> json) => Links(
+    products: json["products"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "products": products,
+  };
+}
+*/
