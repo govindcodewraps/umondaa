@@ -23,11 +23,13 @@ import 'package:provider/provider.dart';
 import 'package:toast/toast.dart';
 
 import '../custom/toast_component.dart';
+import '../helpers/auth_helper.dart';
 import 'drawermenu/Aboutus.dart';
 import 'drawermenu/ContactInf.dart';
 import 'drawermenu/privacy_policy.dart';
 import 'drawermenu/shipping_delivery.dart';
 import 'drawermenu/terms_conditions.dart';
+import 'main.dart';
 import 'order_list.dart';
 
 class Home extends StatefulWidget {
@@ -635,6 +637,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               title: const Text('Log Out'),
               onTap: () {
                 Navigator.pop(context);
+                AuthHelper().clearUserData();
+                Provider.of<HomePresenter>(context,listen: false).dispose();
+
+                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
+                  return Main();
+                }), (route) => false);
               },
             ),
           ],

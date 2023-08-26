@@ -313,10 +313,10 @@ class _CartState extends State<Cart> {
                   ],
                 ),
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: buildBottomContainer(),
-              )
+              // Align(
+              //   alignment: Alignment.bottomCenter,
+              //   child: buildBottomContainer(),
+              // )
             ],
           )),
     );
@@ -552,6 +552,12 @@ class _CartState extends State<Cart> {
                   ),
                 ),
                 buildCartSellerItemList(index),
+
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: buildBottomContainer(),
+                )
+
               ],
             );
           },

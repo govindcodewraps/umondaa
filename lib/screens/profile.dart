@@ -259,22 +259,24 @@ class _ProfileState extends State<Profile> {
         child: SafeArea(
           child: Column(
             children: [
-              Align(
-                alignment: Alignment.topRight,
-                child: Container(
-                  margin: EdgeInsets.only(right: 18),
-                  height: 30,
-                  child: InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Icon(
-                        Icons.close,
-                        color: MyTheme.white,
-                        size: 20,
-                      )),
-                ),
-              ),
+              SizedBox(height: 15,),
+              // Align(
+              //   alignment: Alignment.topRight,
+              //   child: Container(
+              //     margin: EdgeInsets.only(right: 18),
+              //     height: 30,
+              //     child: InkWell(
+              //         onTap: () {
+              //           //Navigator.pop(context);
+              //         },
+              //         // child: Icon(
+              //         //   Icons.close,
+              //         //   color: MyTheme.white,
+              //         //   size: 20,
+              //         // )
+              //     ),
+              //   ),
+              // ),
 
               // Container(
               //   margin: EdgeInsets.symmetric(vertical: 8),
