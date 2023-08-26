@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 import '../app_config.dart';
+import '../data_model/TopBrandsModel.dart';
 import '../data_model/classified_ads_details_response.dart';
 import '../data_model/classified_ads_response.dart';
 import '../data_model/common_response.dart';
@@ -25,6 +26,16 @@ class ProductRepository {
     return productMiniResponseFromJson(response.body);
   }
 
+  Future<TopBrandsModel> getTopBrands() async {
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/brands/top");
+    final response = await http.get(url, headers: {
+      "App-Language": app_language.$,
+      "Currency-Code": SystemConfig.systemCurrency?.code,
+      "Currency-Exchange-Rate": SystemConfig.systemCurrency?.exchangeRate,
+    });
+    print("product_repository.dart, getTopBrands : ${response.body}");
+    return topBrandsModelFromJson(response.body);
+  }
   Future<ProductMiniResponse> getBestSellingProducts() async {
     Uri url = Uri.parse("${AppConfig.BASE_URL}/products/best-seller");
     final response = await http.get(url, headers: {

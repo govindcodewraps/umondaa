@@ -37,8 +37,8 @@ class WhichFilter {
   }
 }
 
-class Filter extends StatefulWidget {
-  Filter({
+class TopBrands extends StatefulWidget {
+  TopBrands({
     Key key,
     this.selected_filter = "product",
   }) : super(key: key);
@@ -46,10 +46,10 @@ class Filter extends StatefulWidget {
   final String selected_filter;
 
   @override
-  _FilterState createState() => _FilterState();
+  _TopBrandsState createState() => _TopBrandsState();
 }
 
-class _FilterState extends State<Filter> {
+class _TopBrandsState extends State<TopBrands> {
   final _amountValidator = RegExInputFormatter.withRegex(
       '^\$|^(0|([1-9][0-9]{0,}))(\\.[0-9]{0,})?\$');
 
@@ -105,8 +105,8 @@ class _FilterState extends State<Filter> {
   //----------------------------------------
 
   fetchFilteredBrands() async {
-    var filteredBrandResponse = await BrandRepository().getFilterPageBrands();
-    _filterBrandList.addAll(filteredBrandResponse.brands);
+    var filteredBrandResponse = await BrandRepository().getTopBrands();
+    _filterBrandList.addAll(filteredBrandResponse.data);
     _filteredBrandsCalled = true;
     setState(() {});
   }
@@ -226,13 +226,13 @@ class _FilterState extends State<Filter> {
 
   fetchBrandData() async {
     var brandResponse =
-    await BrandRepository().getBrands(page: _brandPage, name: _searchKey);
-    _topbrandList.addAll(brandResponse.brands);
+    await BrandRepository().getTopBrands();
+    _topbrandList.addAll(brandResponse.data);
     _isBrandInitial = false;
-    _totalBrandData = brandResponse.meta.total;
+    //_totalBrandData = brandResponse.meta.total;
     _showBrandLoadingContainer = false;
     setState(() {});
-    print("filter.dart, fetchBrandData, brandResponse : ${brandResponse.brands}");
+    print("govind fetchBrandData, brandResponse : ${brandResponse.data.toString()}");
   }
 
   resetBrandList() {
@@ -1170,7 +1170,8 @@ class _FilterState extends State<Filter> {
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   // 3
-                  return BrandSquareCard(
+                  return
+                    BrandSquareCard(
                     id: _topbrandList[index].id,
                     image: _topbrandList[index].logo,
                     name: _topbrandList[index].name,
