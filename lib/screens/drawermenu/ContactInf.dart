@@ -16,16 +16,7 @@ class ContactInf extends StatelessWidget {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Color.fromARGB(255, 2, 70, 40),
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text('Contact Information',
-          style: TextStyle(color:  Color.fromARGB(255, 255, 255, 255)),),
-      ),
+      appBar: buildAppBar(context),
       body: Center(
         child: Container(
           margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -35,9 +26,10 @@ class ContactInf extends StatelessWidget {
 
             children: [
               Container(
-                child: Image.asset('assets/topbarlogo1.png',
-                  height: 140,
-                  width: 350,),
+                padding: EdgeInsets.only(top: 0, bottom: 0),
+                child: Image.asset('assets/appbarlogo.png',
+                  height: 100,
+                  width: 150,),
               ),
               Container(
                 margin: EdgeInsets.all(10.0),
@@ -82,4 +74,37 @@ class ContactInf extends StatelessWidget {
       ),
     );
   }
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+      iconTheme: IconThemeData(color: Colors.black),
+      backgroundColor: Color.fromARGB(240, 243, 237, 237),
+      title: buildAppBarTitleOption(context),
+      elevation: 0.0,
+      titleSpacing: 0,
+
+    );
+  }
+
+  Widget buildAppBarTitleOption(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 0),
+      child: Row(
+        children: [
+          Container(
+            width: 20,
+            // child: UsefulElements.backButton(context, color: "white"),
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 0),
+
+            child: Text('Contact Information',
+              style: TextStyle(color:  Colors.black,),
+            ),
+          )
+
+        ],
+      ),
+    );
+  }
+
 }
