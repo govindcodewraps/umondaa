@@ -1,31 +1,26 @@
-
+import 'package:hardware_lo/custom/btn.dart';
+import 'package:hardware_lo/custom/useful_elements.dart';
+import 'package:hardware_lo/my_theme.dart';
+import 'package:hardware_lo/screens/seller_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hardware_lo/screens/seller_details.dart';
-
+import 'package:hardware_lo/ui_elements/product_card.dart';
+import 'package:hardware_lo/ui_elements/shop_square_card.dart';
+import 'package:hardware_lo/ui_elements/brand_square_card.dart';
 import 'package:toast/toast.dart';
-
+import 'package:hardware_lo/custom/toast_component.dart';
+import 'package:hardware_lo/repositories/category_repository.dart';
+import 'package:hardware_lo/repositories/brand_repository.dart';
+import 'package:hardware_lo/repositories/shop_repository.dart';
+import 'package:hardware_lo/helpers/reg_ex_inpur_formatter.dart';
+import 'package:hardware_lo/repositories/product_repository.dart';
+import 'package:hardware_lo/helpers/shimmer_helper.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-
+import 'package:hardware_lo/repositories/search_repository.dart';
+import 'package:hardware_lo/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:one_context/one_context.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-
-import '../custom/btn.dart';
-import '../custom/toast_component.dart';
-import '../custom/useful_elements.dart';
-import '../helpers/reg_ex_inpur_formatter.dart';
-import '../helpers/shared_value_helper.dart';
-import '../helpers/shimmer_helper.dart';
-import '../my_theme.dart';
-import '../repositories/brand_repository.dart';
-import '../repositories/category_repository.dart';
-import '../repositories/product_repository.dart';
-import '../repositories/search_repository.dart';
-import '../repositories/shop_repository.dart';
-import '../ui_elements/brand_square_card.dart';
-import '../ui_elements/product_card.dart';
-import '../ui_elements/shop_square_card.dart';
 
 class WhichFilter {
   String option_key;
@@ -42,8 +37,8 @@ class WhichFilter {
   }
 }
 
-class TopBrand extends StatefulWidget {
-  TopBrand({
+class TopBrands extends StatefulWidget {
+  TopBrands({
     Key key,
     this.selected_filter = "product",
   }) : super(key: key);
@@ -51,10 +46,10 @@ class TopBrand extends StatefulWidget {
   final String selected_filter;
 
   @override
-  _FilterState createState() => _FilterState();
+  _TopBrandsState createState() => _TopBrandsState();
 }
 
-class _FilterState extends State<TopBrand> {
+class _TopBrandsState extends State<TopBrands> {
   final _amountValidator = RegExInputFormatter.withRegex(
       '^\$|^(0|([1-9][0-9]{0,}))(\\.[0-9]{0,})?\$');
 
@@ -67,7 +62,7 @@ class _FilterState extends State<TopBrand> {
   ScrollController _scrollController;
   WhichFilter _selectedFilter;
   String _givenSelectedFilterOptionKey; // may be it can come from another page
-  String _selectedSort = "";
+  var _selectedSort = "";
 
   List<WhichFilter> _which_filter_list = WhichFilter.getWhichFilterList();
   List<DropdownMenuItem<WhichFilter>> _dropdownWhichFilterItems;
@@ -79,12 +74,12 @@ class _FilterState extends State<TopBrand> {
   final TextEditingController _maxPriceController = new TextEditingController();
 
   //--------------------
-  List<dynamic> _filterBrandList =[];
+  List<dynamic> _filterBrandList = List();
   bool _filteredBrandsCalled = false;
-  List<dynamic> _filterCategoryList =[];
+  List<dynamic> _filterCategoryList = List();
   bool _filteredCategoriesCalled = false;
 
-  List<dynamic> _searchSuggestionList =[];
+  List<dynamic> _searchSuggestionList = List();
 
   //----------------------------------------
   String _searchKey = "";
@@ -95,7 +90,7 @@ class _FilterState extends State<TopBrand> {
   int _totalProductData = 0;
   bool _showProductLoadingContainer = false;
 
-  List<dynamic> _brandList = [];
+  List<dynamic> _topbrandList = [];
   bool _isBrandInitial = true;
   int _brandPage = 1;
   int _totalBrandData = 0;
@@ -110,11 +105,10 @@ class _FilterState extends State<TopBrand> {
   //----------------------------------------
 
   fetchFilteredBrands() async {
-    var filteredBrandResponse = await BrandRepository().getFilterTopBrands();
+    var filteredBrandResponse = await BrandRepository().getTopBrands();
     _filterBrandList.addAll(filteredBrandResponse.data);
     _filteredBrandsCalled = true;
     setState(() {});
-    print("top_brands.dart, fetchFilteredBrands() : ${filteredBrandResponse.brands}");
   }
 
   fetchFilteredCategories() async {
@@ -218,6 +212,7 @@ class _FilterState extends State<TopBrand> {
     _totalProductData = productResponse.meta.total;
     _showProductLoadingContainer = false;
     setState(() {});
+    print("filter.dart, fetchProductData, productResponse : ${productResponse.products}");
   }
 
   resetProductList() {
@@ -230,21 +225,18 @@ class _FilterState extends State<TopBrand> {
   }
 
   fetchBrandData() async {
-    print("Filter.dart, fetchBrandData(), _brandPage : ${_brandPage}, _searchKey : ${_searchKey}");
-
     var brandResponse =
     await BrandRepository().getTopBrands();
-    _brandList.addAll(brandResponse.brands);
+    _topbrandList.addAll(brandResponse.data);
     _isBrandInitial = false;
-    _totalBrandData = brandResponse.meta.total;
+    //_totalBrandData = brandResponse.meta.total;
     _showBrandLoadingContainer = false;
-    print("top_brand, fetchBrancData, brandResponse : ${brandResponse}");
-
     setState(() {});
+    print("govind fetchBrandData, brandResponse : ${brandResponse.data.toString()}");
   }
 
   resetBrandList() {
-    _brandList.clear();
+    _topbrandList.clear();
     _isBrandInitial = true;
     _totalBrandData = 0;
     _brandPage = 1;
@@ -337,8 +329,8 @@ class _FilterState extends State<TopBrand> {
 
   List<DropdownMenuItem<WhichFilter>> buildDropdownWhichFilterItems(
       List which_filter_list) {
-    List<DropdownMenuItem<WhichFilter>> items =[];
-    for (WhichFilter which_filter_item in which_filter_list as Iterable<WhichFilter>) {
+    List<DropdownMenuItem<WhichFilter>> items = List();
+    for (WhichFilter which_filter_item in which_filter_list) {
       items.add(
         DropdownMenuItem(
           value: which_filter_item,
@@ -352,7 +344,6 @@ class _FilterState extends State<TopBrand> {
 
 
   Container buildProductLoadingContainer() {
-    print("Top_brands, buildProductLoadingContainer()");
     return Container(
       height: _showProductLoadingContainer ? 36 : 0,
       width: double.infinity,
@@ -366,13 +357,12 @@ class _FilterState extends State<TopBrand> {
   }
 
   Container buildBrandLoadingContainer() {
-    print("Top_brands, buildBrandLoadingContainer()");
     return Container(
       height: _showBrandLoadingContainer ? 36 : 0,
       width: double.infinity,
       color: Colors.white,
       child: Center(
-        child: Text(_totalBrandData == _brandList.length
+        child: Text(_totalBrandData == _topbrandList.length
             ? AppLocalizations.of(context).no_more_brands_ucf
             : AppLocalizations.of(context).loading_more_brands_ucf),
       ),
@@ -380,7 +370,6 @@ class _FilterState extends State<TopBrand> {
   }
 
   Container buildShopLoadingContainer() {
-    print("Top_brands, buildShopLoadingContainer()");
     return Container(
       height: _showShopLoadingContainer ? 36 : 0,
       width: double.infinity,
@@ -439,10 +428,7 @@ class _FilterState extends State<TopBrand> {
         flexibleSpace: Padding(
           padding: const EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 0.0),
           child: Column(
-            children: [
-              buildTopAppbar(context),
-              //buildBottomAppBar(context)
-            ],
+            children: [buildTopAppbar(context), buildBottomAppBar(context)],
           ),
         ));
   }
@@ -558,7 +544,7 @@ class _FilterState extends State<TopBrand> {
                             controlAffinity:
                             ListTileControlAffinity.leading,
                             title:  Text(AppLocalizations.of(context).default_ucf),
-                            onChanged: (dynamic value) {
+                            onChanged: (value) {
                               setState(() {
                                 _selectedSort = value;
                               });
@@ -574,7 +560,7 @@ class _FilterState extends State<TopBrand> {
                             controlAffinity:
                             ListTileControlAffinity.leading,
                             title:  Text(AppLocalizations.of(context).price_high_to_low),
-                            onChanged: (dynamic value) {
+                            onChanged: (value) {
                               setState(() {
                                 _selectedSort = value;
                               });
@@ -590,7 +576,7 @@ class _FilterState extends State<TopBrand> {
                             controlAffinity:
                             ListTileControlAffinity.leading,
                             title:  Text(AppLocalizations.of(context).price_low_to_high),
-                            onChanged: (dynamic value) {
+                            onChanged: (value) {
                               setState(() {
                                 _selectedSort = value;
                               });
@@ -606,7 +592,7 @@ class _FilterState extends State<TopBrand> {
                             controlAffinity:
                             ListTileControlAffinity.leading,
                             title:  Text(AppLocalizations.of(context).new_arrival_ucf),
-                            onChanged: (dynamic value) {
+                            onChanged: (value) {
                               setState(() {
                                 _selectedSort = value;
                               });
@@ -622,7 +608,7 @@ class _FilterState extends State<TopBrand> {
                             controlAffinity:
                             ListTileControlAffinity.leading,
                             title:  Text(AppLocalizations.of(context).popularity_ucf),
-                            onChanged: (dynamic value) {
+                            onChanged: (value) {
                               setState(() {
                                 _selectedSort = value;
                               });
@@ -638,7 +624,7 @@ class _FilterState extends State<TopBrand> {
                             controlAffinity:
                             ListTileControlAffinity.leading,
                             title: Text(AppLocalizations.of(context).top_rated_ucf),
-                            onChanged: (dynamic value) {
+                            onChanged: (value) {
                               setState(() {
                                 _selectedSort = value;
                               });
@@ -733,7 +719,7 @@ class _FilterState extends State<TopBrand> {
                     child: Center(child: Text(AppLocalizations.of(context).loading_suggestions,style:TextStyle(color: MyTheme.medium_grey))),
                   );
                 },
-                itemBuilder: (context, dynamic suggestion) {
+                itemBuilder: (context, suggestion) {
                   //print(suggestion.toString());
                   var subtitle = "${AppLocalizations.of(context).searched_for_all_lower} ${suggestion.count} ${AppLocalizations.of(context).times_all_lower}";
                   if(suggestion.type != "search"){
@@ -751,7 +737,7 @@ class _FilterState extends State<TopBrand> {
                     child: Center(child: Text(AppLocalizations.of(context).no_suggestion_available,style:TextStyle(color: MyTheme.medium_grey))),
                   );
                 },
-                onSuggestionSelected: (dynamic suggestion) {
+                onSuggestionSelected: (suggestion) {
                   _searchController.text = suggestion.query;
                   _searchKey = suggestion.query;
                   setState(() {});
@@ -798,7 +784,7 @@ class _FilterState extends State<TopBrand> {
       textDirection: app_language_rtl.$ ? TextDirection.rtl : TextDirection.ltr,
       child: Drawer(
         child: Container(
-          padding: EdgeInsets.only(top: 0),
+          padding: EdgeInsets.only(top: 50),
           child: Column(
             children: [
               Container(
@@ -1108,7 +1094,7 @@ class _FilterState extends State<TopBrand> {
                 crossAxisCount: 2,
                 mainAxisSpacing: 14,
                 crossAxisSpacing: 14,
-                padding: EdgeInsets.only(top: 10,bottom: 10,left: 18,right: 18),
+                padding: EdgeInsets.only(top:10,bottom: 10,left: 18,right: 18),
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
@@ -1149,11 +1135,11 @@ class _FilterState extends State<TopBrand> {
   }
 
   buildBrandScrollableList() {
-    if (_isBrandInitial && _brandList.length == 0) {
+    if (_isBrandInitial && _topbrandList.length == 0) {
       return SingleChildScrollView(
           child: ShimmerHelper()
               .buildSquareGridShimmer(scontroller: _scrollController));
-    } else if (_brandList.length > 0) {
+    } else if (_topbrandList.length > 0) {
       return RefreshIndicator(
         color: Colors.white,
         backgroundColor: MyTheme.accent_color,
@@ -1172,7 +1158,7 @@ class _FilterState extends State<TopBrand> {
               GridView.builder(
                 // 2
                 //addAutomaticKeepAlives: true,
-                itemCount: _brandList.length,
+                itemCount: _topbrandList.length,
                 controller: _scrollController,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
@@ -1184,10 +1170,11 @@ class _FilterState extends State<TopBrand> {
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   // 3
-                  return BrandSquareCard(
-                    id: _brandList[index].id,
-                    image: _brandList[index].logo,
-                    name: _brandList[index].name,
+                  return
+                    BrandSquareCard(
+                    id: _topbrandList[index].id,
+                    image: _topbrandList[index].logo,
+                    name: _topbrandList[index].name,
                   );
                 },
               )

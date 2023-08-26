@@ -1,26 +1,25 @@
-/*
 // To parse this JSON data, do
 //
-//     final brandResponse = brandResponseFromJson(jsonString);
+//     final topBrandsModel = topBrandsModelFromJson(jsonString);
 
 import 'dart:convert';
 
-BrandsResponse brandsResponseFromJson(String str) => BrandsResponse.fromJson(json.decode(str));
+TopBrandsModel topBrandsModelFromJson(String str) => TopBrandsModel.fromJson(json.decode(str));
 
-String brandsResponseToJson(BrandsResponse data) => json.encode(data.toJson());
+String topBrandsModelToJson(TopBrandsModel data) => json.encode(data.toJson());
 
-class BrandsResponse {
+class TopBrandsModel {
   List<Datum> data;
   bool success;
   int status;
 
-  BrandsResponse({
+  TopBrandsModel({
     this.data,
     this.success,
     this.status,
   });
 
-  factory BrandsResponse.fromJson(Map<String, dynamic> json) => BrandsResponse(
+  factory TopBrandsModel.fromJson(Map<String, dynamic> json) => TopBrandsModel(
     data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
     success: json["success"],
     status: json["status"],
@@ -76,4 +75,3 @@ class Links {
     "products": products,
   };
 }
-*/

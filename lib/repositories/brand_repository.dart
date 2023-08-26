@@ -1,50 +1,48 @@
 import 'package:http/http.dart' as http;
 
 import '../app_config.dart';
-import '../data_model/brands_respon.dart';
+import '../data_model/TopBrandsModel.dart';
+import '../data_model/brand_response.dart';
 import '../helpers/shared_value_helper.dart';
-//import '../repositories/api_request.dart';
 
 
 class BrandRepository {
 
-  Future<BrandsResponse> getFilterPageBrands() async {
+  Future<BrandResponse> getFilterPageBrands() async {
     Uri url = Uri.parse("${AppConfig.BASE_URL}/filter/brands");
     final response =
-    await http.get(url, headers: {
+    await http.get(url,headers: {
       "App-Language": app_language.$,
     });
-    return brandsResponseFromJson(response.body);
+    return brandResponseFromJson(response.body);
   }
 
-  Future<BrandsResponse> getBrands({name = "", page = 1}) async {
+  Future<BrandResponse> getBrands({name = "", page = 1}) async {
     Uri url = Uri.parse("${AppConfig.BASE_URL}/brands"+
         "?page=${page}&name=${name}");
     final response =
     await http.get(url,headers: {
       "App-Language": app_language.$,
     });
-    return brandsResponseFromJson(response.body);
+    return brandResponseFromJson(response.body);
   }
-
-  Future<BrandsResponse> getFilterTopBrands() async {
+  Future<TopBrandsModel> getFilterTopBrands() async {
     Uri url = Uri.parse("${AppConfig.BASE_URL}/brands/top");
     final response =
     await http.get(url, headers: {
       "App-Language": app_language.$,
     });
-    print("Brand_Repository, getFilterTopBrands, response : ${response.body}");
-    return brandsResponseFromJson(response.body);
+    return topBrandsModelFromJson(response.body);
   }
 
-  Future<BrandsResponse> getTopBrands() async {
+  Future<TopBrandsModel> getTopBrands() async {
     Uri url = Uri.parse("${AppConfig.BASE_URL}/brands/top");
     final response =
     await http.get(url, headers: {
       "App-Language": app_language.$,
     });
-    print("Brand_Repository, getTopBranc, response : ${response.body}");
-    return brandsResponseFromJson(response.body);
+    return topBrandsModelFromJson(response.body);
   }
+
 
 }
