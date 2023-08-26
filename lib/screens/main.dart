@@ -125,7 +125,7 @@ class _MainState extends State<Main> {
       //circleStrokeColor: Colors.white,
     ),
     TabItem(
-      Icons.add,
+      Icons.add_circle_outline_outlined,
       "Place Ad",
       Colors.blue,
       // labelStyle: TextStyle(

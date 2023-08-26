@@ -112,7 +112,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         ),
 
                         Container(
-                            margin: const EdgeInsets.fromLTRB(30, 0, 10, 0),
+                          padding: EdgeInsets.only(bottom: 4,left: 33),
+                           //margin: const EdgeInsets.fromLTRB(30, 5, 10, 0),
                             child: GestureDetector(
                                 onTap: () {
                                   Navigator.push(context, MaterialPageRoute(builder: (context) => Filter()));
@@ -129,22 +130,28 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
                             )
                         ),
-                        Icon(Icons.notifications,size:20,color: Colors.black,),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 2,bottom: 5),
+                          child: Icon(Icons.notifications,size:20,color: Colors.black,),
+                        ),
                         SizedBox(width: 7,),
                         //Icon(Icons.shopping_cart,color: Colors.black,),
 
                         //                                                                                                                                                                                                Image.asset("assets/icons/wishicon.png",height: 30,width: 30,),
 
                         //buildSettingAndAddonsHorizontalMenu(),
-                        SizedBox(
-                          height: 30,
-                          width: 30,
-                          child: Expanded(
+                        Padding(
+                          padding:  EdgeInsets.only(bottom: 4),
+                          child: SizedBox(
+                            height: 30,
+                            width: 30,
+                            child: Expanded(
 
-                              child: buildBodyChildren()),
+                                child: buildBodyChildren()),
+                          ),
                         ),
 
-                        SizedBox(width: 10,),
+                        SizedBox(width: 14,),
                       ],
                     )
                   ],

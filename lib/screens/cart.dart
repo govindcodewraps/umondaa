@@ -331,10 +331,10 @@ class _CartState extends State<Cart> {
                 )*/
       ),
 
-      height: widget.has_bottomnav ? 200 : 120,
+      //height: widget.has_bottomnav ? 200 : 120,
       //color: Colors.white,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0,vertical: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 4.0,vertical: 4),
         child: Column(
           children: [
             Container(
@@ -421,10 +421,10 @@ class _CartState extends State<Cart> {
                 //   ),
                 // ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
+                  padding: const EdgeInsets.only(top: 10.0),
                   child: Container(
-                    height: 58,
-                    width: (MediaQuery.of(context).size.width - 48) * (1),
+                    height: 55,
+                    width: (MediaQuery.of(context).size.width - 50) * (1),
 
                     //width: (MediaQuery.of(context).size.width - 48) * (2 / 3),
                     decoration: BoxDecoration(
@@ -447,7 +447,8 @@ class _CartState extends State<Cart> {
                     child: Btn.basic(
                       minWidth: MediaQuery.of(context).size.width,
 
-                      color: MyTheme.accent_color,
+                     // color: MyTheme.accent_color,
+                      color:Color(0xfffff),
                       shape: app_language_rtl.$
                           ? RoundedRectangleBorder(
                               borderRadius: const BorderRadius.only(
@@ -516,51 +517,70 @@ class _CartState extends State<Cart> {
               .buildListShimmer(item_count: 5, item_height: 100.0));
     } else if (_shopList.length > 0) {
       return SingleChildScrollView(
-        child: ListView.separated(
-          separatorBuilder: (context, index) => SizedBox(
-            height: 26,
-          ),
-          itemCount: _shopList.length,
-          scrollDirection: Axis.vertical,
-          physics: NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 12.0),
-                  child: Row(
-                    children: [
-                      Text(
-                        _shopList[index].name,
-                        style: TextStyle(
-                            color: MyTheme.dark_font_grey,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 12),
+        child: Column(
+          children: [
+            ListView.separated(
+              separatorBuilder: (context, index) => SizedBox(
+                height: 26,
+              ),
+              itemCount: _shopList.length,
+              scrollDirection: Axis.vertical,
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 12.0),
+                      child: Row(
+                        children: [
+                          Text(
+                            _shopList[index].name,
+                            style: TextStyle(
+                                color: MyTheme.dark_font_grey,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 12),
+                          ),
+                          Spacer(),
+                          Text(
+
+                            partialTotalString(index),
+                            style: TextStyle(
+                                color: MyTheme.accent_color,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 12),
+                          ),
+                        ],
                       ),
-                      Spacer(),
-                      Text(
+                    ),
+                    buildCartSellerItemList(index),
 
-                        partialTotalString(index),
-                        style: TextStyle(
-                            color: MyTheme.accent_color,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 12),
-                      ),
-                    ],
-                  ),
-                ),
-                buildCartSellerItemList(index),
+                    // Align(
+                    //   alignment: Alignment.bottomCenter,
+                    //   child: buildBottomContainer(),
+                    // )
 
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: buildBottomContainer(),
-                )
+                  ],
+                );
+              },
+            ),
 
-              ],
-            );
-          },
+
+            Padding(
+              padding:  EdgeInsets.only(top: 50),
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: buildBottomContainer(),
+              ),
+            ),
+
+
+
+
+
+
+          ],
         ),
       );
     } else if (!_isInitial && _shopList.length == 0) {
