@@ -102,10 +102,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     Row(
                       children: [
 
-
-
                         Image.asset(
-                          'assets/topbarlogo1.png',
+                          'assets/appbarlogo.png',
                           //height: 40,
                           //width: 250,
                         ),
@@ -117,7 +115,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => Filter()));
                                 return;
                               },
-                              child: Icon(Icons.search_rounded,size:30,color: Colors.black,)
+                              child: Icon(Icons.search_rounded,size:20,color: Colors.black,)
 
                               // Image.asset(
                               //   'assets/search.png',
@@ -128,7 +126,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
                             )
                         ),
-                        Icon(Icons.notifications,color: Colors.black,),
+                        Icon(Icons.notifications,size:20,color: Colors.black,),
                         SizedBox(width: 7,),
                         //Icon(Icons.shopping_cart,color: Colors.black,),
 
@@ -136,8 +134,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
                         //buildSettingAndAddonsHorizontalMenu(),
                         SizedBox(
-                          height: 40,
-                          width: 40,
+                          height: 30,
+                          width: 30,
                           child: Expanded(
 
                               child: buildBodyChildren()),
@@ -440,7 +438,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                   ),
 
                                   Container(
-                                    margin: const EdgeInsets.fromLTRB(5, 15, 5, 30),
+                                    margin: const EdgeInsets.fromLTRB(5, 15, 5, 0),
                                     decoration: BoxDecorations.buildBoxDecoration_1(),
                                     child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -739,7 +737,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       //snapshot.hasData
       return GridView.builder(
           padding:
-          const EdgeInsets.only(left: 18, right: 18, top: 3, bottom: 2),
+          const EdgeInsets.only(left: 18, right: 18, top: 12, bottom: 0),
           scrollDirection: Axis.horizontal,
           controller: homeData.featuredCategoryScrollController,
           itemCount: homeData.featuredCategoryList.length,
@@ -1796,8 +1794,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           children: [
             Image.asset(
               img,
-              width: 33,
-              height: 33,
+              width: 20,
+              height: 20,
               color: is_logged_in.$
                   ? Colors.black
                   : MyTheme.medium_grey_50,

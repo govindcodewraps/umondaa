@@ -171,8 +171,8 @@ class _CategoryListState extends State<CategoryList> {
               gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
                 mainAxisSpacing: 14,
                 crossAxisSpacing: 14,
-                childAspectRatio: 0.7,
-                crossAxisCount: 3,
+                childAspectRatio: 1,
+                crossAxisCount: 2,
               ),
 
               itemCount: categoryResponse.categories.length,
@@ -253,7 +253,7 @@ class _CategoryListState extends State<CategoryList> {
 
   Widget buildCategoryItemCard(categoryResponse, index) {
 
-    var itemWidth= ((DeviceInfo(context).width-36)/3);
+    var itemWidth= ((DeviceInfo(context).width-36)/2.7);
     print(itemWidth);
 
     return Container(
