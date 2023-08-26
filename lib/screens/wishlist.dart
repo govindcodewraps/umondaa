@@ -171,10 +171,18 @@ class _WishlistState extends State<Wishlist> {
       );
     } else {
       return Container(
-          height: 100,
+        padding: EdgeInsets.only(top: 77),
+          //height: 100,
           child: Center(
-              child: Text(AppLocalizations.of(context).no_item_is_available,
-                  style: TextStyle(color: MyTheme.font_grey))));
+              child: Column(
+                children: [
+
+                  Icon(Icons.production_quantity_limits,size: 80,color: MyTheme.font_grey),
+
+                  Text(AppLocalizations.of(context).no_item_is_available,
+                      style: TextStyle(color: MyTheme.font_grey)),
+                ],
+              )));
     }
   }
 

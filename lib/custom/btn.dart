@@ -9,6 +9,7 @@ class Btn {
       child = const SizedBox(),
       EdgeInsets padding = EdgeInsets.zero,
       dynamic minWidth,
+      dynamic minHeight,
       dynamic onPressed}) {
     //if (width != null && height != null)
     return TextButton(

@@ -251,7 +251,7 @@ class _OrderListState extends State<OrderList> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment. spaceBetween,
         children: [
           Container(
             decoration: BoxDecorations.buildBoxDecoration_1(),
@@ -291,7 +291,7 @@ class _OrderListState extends State<OrderList> {
             width: MediaQuery.of(context).size.width * .4,
             child: new DropdownButton<DeliveryStatus>(
               icon: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 6.0),
                 child: Icon(Icons.expand_more, color: Colors.black54),
               ),
               hint: Text(
@@ -438,7 +438,19 @@ class _OrderListState extends State<OrderList> {
         ),
       );
     } else if (_totalData == 0) {
-      return Center(child: Text(AppLocalizations.of(context).no_data_is_available));
+      return Container(
+        padding: EdgeInsets.only(top: 77),
+        child: Center(
+          child: Column(
+            children: [
+
+              Icon(Icons.folder_off_outlined,size: 88,color: MyTheme.font_grey),
+
+              Text(AppLocalizations.of(context).no_data_is_available),
+            ],
+          ),
+        ),
+      );
     } else {
       return Container(); // should never be happening
     }

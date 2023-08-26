@@ -21,7 +21,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
+import 'package:toast/toast.dart';
 
+import '../custom/toast_component.dart';
 import 'drawermenu/Aboutus.dart';
 import 'drawermenu/ContactInf.dart';
 import 'drawermenu/privacy_policy.dart';
@@ -92,10 +94,66 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           child: SafeArea(
             child: Scaffold(
                 key: scaffoldKey,
-                appBar: PreferredSize(
-                  preferredSize: Size.fromHeight(80),
-                  child: buildAppBar(statusBarHeight, context),
+                appBar: AppBar(
+                  backgroundColor: Colors.white,
+                  iconTheme: IconThemeData(
+                    color: Colors.black, // Change this to your desired color
+                  ),
+                  actions: [
+                    Row(
+                      children: [
+
+                        Image.asset(
+                          'assets/appbarlogo.png',
+                          //height: 40,
+                          //width: 250,
+                        ),
+
+                        Container(
+                            margin: const EdgeInsets.fromLTRB(30, 0, 10, 0),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => Filter()));
+                                return;
+                              },
+                              child: Icon(Icons.search_rounded,size:20,color: Colors.black,)
+
+                              // Image.asset(
+                              //   'assets/search.png',
+                              //   height: 16,
+                              //   //color: MyTheme.dark_grey,
+                              //   color: MyTheme.dark_grey,
+                              // ),
+
+                            )
+                        ),
+                        Icon(Icons.notifications,size:20,color: Colors.black,),
+                        SizedBox(width: 7,),
+                        //Icon(Icons.shopping_cart,color: Colors.black,),
+
+                    //                                                                                                                                                                                                Image.asset("assets/icons/wishicon.png",height: 30,width: 30,),
+
+                        //buildSettingAndAddonsHorizontalMenu(),
+                        SizedBox(
+                          height: 30,
+                          width: 30,
+                          child: Expanded(
+
+                              child: buildBodyChildren()),
+                        ),
+                     
+                     SizedBox(width: 10,),
+                      ],
+                    )
+                  ],
                 ),
+
+
+                //
+                // PreferredSize(
+                //   preferredSize: Size.fromHeight(80),
+                //   child: buildAppBar(statusBarHeight, context),
+                // ),
                 drawer: MainDrawer(),
                 body: Stack(
                   children: [
@@ -244,7 +302,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                 ),
                               ),
                               Container(
-                                height: 80,
+                                height: 25,
                                 //color: Colors.red,
                               )
                             ]),
@@ -304,8 +362,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           SliverList(
                             delegate: SliverChildListDelegate([
                               Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
+                                //crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   buildHomeBannerTwo(context, homeData),
                                   // Padding(
@@ -462,234 +519,133 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
   MainDrawer(){
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          UserAccountsDrawerHeader(
-            accountName: Text('Umonda'),
-            accountEmail: Text('umonda@gmail.com'),
-            currentAccountPicture:
-            CircleAvatar(
-              backgroundImage: AssetImage('assets/topbarlogo1.png'),
-            ),
-            decoration: BoxDecoration(color: Colors.amber),
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.home,
-            ),
-            title: const Text('Home'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.heart_broken,
-            ),
-            title: const Text('My Wishlist'),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>Wishlist()));
-            },
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.history,
-            ),
-            title: const Text('Order History'),
-            onTap: () {
-              Navigator.pop(context);
-              //OrderList
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>OrderList()));
-            },
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.directions_bike_rounded,
-            ),
-            title: const Text('Shipping & Delivery'),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return ShippingDelivery();
-              }));
-            },
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.notes,
-            ),
-            title: const Text('Terms & Condition'),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return TermsConditions();
-              }));
-            },
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.privacy_tip_outlined,
-            ),
-            title: const Text('Privacy Policy'),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return PrivacyPolicy();
-              }));
-            },
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.info_outline,
-            ),
-            title: const Text('About Us'),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return Aboutus();
-              }));
-            },
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.phone_android,
-            ),
-            title: const Text('Contact Information'),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return ContactInf();
-              }));
-            },
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.logout,
-            ),
-            title: const Text('Log Out'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-        ],
 
+      child: Container(
+        //color: Colors.blue,
+        child: ListView(
+
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+
+
+
+            UserAccountsDrawerHeader(
+
+              accountName: Text('Umonda'),
+              accountEmail: Text('umonda@gmail.com'),
+              currentAccountPicture:
+              CircleAvatar(
+                backgroundImage: AssetImage('assets/topbarlogo1.png'),
+              ),
+              decoration: BoxDecoration(color: Colors.amber),
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.home,
+              ),
+              title: const Text('Home'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.heart_broken,
+              ),
+              title: const Text('My Wishlist'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Wishlist()));
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.history,
+              ),
+              title: const Text('Order History'),
+              onTap: () {
+                Navigator.pop(context);
+                //OrderList
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>OrderList()));
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.directions_bike_rounded,
+              ),
+              title: const Text('Shipping & Delivery'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return ShippingDelivery();
+                }));
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.notes,
+              ),
+              title: const Text('Terms & Condition'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return TermsConditions();
+                }));
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.privacy_tip_outlined,
+              ),
+              title: const Text('Privacy Policy'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return PrivacyPolicy();
+                }));
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.info_outline,
+              ),
+              title: const Text('About Us'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return Aboutus();
+                }));
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.phone_android,
+              ),
+              title: const Text('Contact Information'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return ContactInf();
+                }));
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.logout,
+              ),
+              title: const Text('Log Out'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+
+        ),
       ),
 
     );
 
   }
-
-
-/*  MainDrawer(){
-    return Drawer(
-      child: ListView(
-        //padding: EdgeInsets.zero,
-        children: <Widget>[
-          UserAccountsDrawerHeader(
-            accountName: Text('Umonda'),
-            accountEmail: Text('umonda@gmail.com'),
-            currentAccountPicture:
-            CircleAvatar(
-              backgroundImage: AssetImage('assets/topbarlogo1.png'),
-            ),
-            decoration: BoxDecoration(color: Colors.amber),
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.home,
-            ),
-            title: const Text('Home'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.heart_broken,
-            ),
-            title: const Text('My Wishlist'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.history,
-            ),
-            title: const Text('Order History'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.directions_bike_rounded,
-            ),
-            title: const Text('Shipping & Delivery'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.notes,
-            ),
-            title: const Text('Terms & Condition'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.privacy_tip_outlined,
-            ),
-            title: const Text('Privacy Policy'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.info_outline,
-            ),
-            title: const Text('About Us'),
-            onTap: () {
-              Navigator.pop(context);
-              // Navigator.push(context, MaterialPageRoute(builder: (context) {
-              //   return Aboutus();
-              // }));
-            },
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.phone_android,
-            ),
-            title: const Text('Contact Us'),
-            onTap: () {
-              Navigator.pop(context);
-              // Navigator.push(context, MaterialPageRoute(builder: (context) {
-              //   return ContactInf();
-              // }));
-            },
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.logout,
-            ),
-            title: const Text('Login Out'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-        ],
-
-      ),
-
-    );
-
-  }*/
 
 
   Widget buildHomeAllProducts(context, HomePresenter homeData) {
@@ -746,7 +702,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           crossAxisSpacing: 14,
           itemCount: homeData.allProductList.length,
           shrinkWrap: true,
-          padding: EdgeInsets.only(top: 20.0, bottom: 10, left: 18, right: 18),
+          padding: EdgeInsets.only(top: 20.0, bottom: 1, left: 18, right: 18),
           physics: NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return ProductCard(
@@ -782,7 +738,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       //snapshot.hasData
       return GridView.builder(
           padding:
-          const EdgeInsets.only(left: 18, right: 18, top: 3, bottom: 20),
+          const EdgeInsets.only(left: 18, right: 18, top: 12, bottom: 0),
           scrollDirection: Axis.horizontal,
           controller: homeData.featuredCategoryScrollController,
           itemCount: homeData.featuredCategoryList.length,
@@ -938,14 +894,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   //       height: 100,
   //     );
   //   }
-  // }
-
-
-
-
-
-
-
+  //
 
   Widget buildHomeFeatureProductHorizontalList(HomePresenter homeData) {
     if (homeData.isFeaturedProductInitial == true &&
@@ -1388,49 +1337,137 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     }
   }
 
+
+
+  // Widget buildHomeBannerTwo(context, HomePresenter homeData) {
+  //   if (homeData.isBannerTwoInitial &&
+  //       homeData.bannerTwoImageList.length == 0) {
+  //     return Padding(
+  //         padding:
+  //         const EdgeInsets.only(left: 18.0, right: 18, top: 10, bottom: 20),
+  //         child: ShimmerHelper().buildBasicShimmer(height: 120));
+  //   } else if (homeData.bannerTwoImageList.length > 0) {
+  //     return Padding(
+  //       padding: app_language_rtl.$
+  //           ? const EdgeInsets.only(right: 9.0)
+  //           : const EdgeInsets.only(left: 9.0),
+  //       child: CarouselSlider(
+  //         options: CarouselOptions(
+  //             aspectRatio: 270 / 120,
+  //             viewportFraction: .7,
+  //             initialPage: 0,
+  //             padEnds: false,
+  //             enableInfiniteScroll: false,
+  //             reverse: false,
+  //             autoPlay: true,
+  //             onPageChanged: (index, reason) {
+  //               // setState(() {
+  //               //   homeData.current_slider = index;
+  //               // });
+  //             }),
+  //         items: homeData.bannerTwoImageList.map((i) {
+  //           return Builder(
+  //             builder: (BuildContext context) {
+  //               return Padding(
+  //                 padding: const EdgeInsets.only(
+  //                     left: 9.0, right: 9, top: 20.0, bottom: 20),
+  //                 child: Container(
+  //                   //color: Colors.amber,
+  //
+  //                   width: double.infinity,
+  //                   child: AIZImage.radiusImage(i, 6),
+  //                 ),
+  //               );
+  //             },
+  //           );
+  //         }).toList(),
+  //       ),
+  //     );
+  //   } else if (!homeData.isBannerTwoInitial &&
+  //       homeData.bannerTwoImageList.length == 0) {
+  //     return Container(
+  //         height: 100,
+  //
+  //         child: Center(
+  //             child: Text(
+  //               AppLocalizations.of(context).no_carousel_image_found,
+  //               style: TextStyle(color: MyTheme.font_grey),
+  //             )));
+  //   } else {
+  //     // should not be happening
+  //     return Container(
+  //       height: 100,
+  //     );
+  //   }
+  // }
+
+
   Widget buildHomeBannerTwo(context, HomePresenter homeData) {
-    if (homeData.isBannerTwoInitial &&
-        homeData.bannerTwoImageList.length == 0) {
+    if (homeData.isBannerTwoInitial && homeData.bannerTwoImageList.length == 0) {
       return Padding(
           padding:
-              const EdgeInsets.only(left: 18.0, right: 18, top: 10, bottom: 10),
+          const EdgeInsets.only(left: 18, right: 18, top: 0, bottom: 20),
           child: ShimmerHelper().buildBasicShimmer(height: 120));
     } else if (homeData.bannerTwoImageList.length > 0) {
-      return Padding(
-        padding: app_language_rtl.$
-            ? const EdgeInsets.only(right: 9.0)
-            : const EdgeInsets.only(left: 9.0),
-        child: CarouselSlider(
-          options: CarouselOptions(
-              aspectRatio: 270 / 120,
-              viewportFraction: 0.7,
-              enableInfiniteScroll: true,
-              reverse: false,
-              autoPlay: true,
-              autoPlayInterval: Duration(seconds: 5),
-              autoPlayAnimationDuration: Duration(milliseconds: 1000),
-              autoPlayCurve: Curves.easeInExpo,
-              enlargeCenterPage: false,
-              scrollDirection: Axis.horizontal,
-              onPageChanged: (index, reason) {
-                // setState(() {
-                //   homeData.current_slider = index;
-                // });
-              }),
-          items: homeData.bannerTwoImageList.map((i) {
-            return Builder(
-              builder: (BuildContext context) {
-                return Padding(
-                  padding: const EdgeInsets.only(
-                      left: 9.0, right: 9, top: 20.0, bottom: 10),
-                  child: Container(
-                      width: double.infinity,
-                      child: AIZImage.radiusImage(i, 6)),
-                );
-              },
-            );
-          }).toList(),
-        ),
+      return CarouselSlider(
+        options: CarouselOptions(
+            aspectRatio: 270 / 120,
+            viewportFraction: 1,
+            initialPage: 0,
+            enableInfiniteScroll: true,
+            reverse: false,
+            autoPlay: true,
+            autoPlayInterval: Duration(seconds: 5),
+            autoPlayAnimationDuration: Duration(milliseconds: 1000),
+            autoPlayCurve: Curves.easeInExpo,
+            enlargeCenterPage: false,
+            scrollDirection: Axis.horizontal,
+            onPageChanged: (index, reason)
+            {
+             // homeData.incrementCurrentSlider(index);
+            }
+            ),
+        items: homeData.bannerTwoImageList.map((i) {
+          return Builder(
+            builder: (BuildContext context) {
+              return Padding(
+                padding: const EdgeInsets.only(
+                    left: 18, right: 18, top: 16, bottom: 20),
+                child: Stack(
+                  children: <Widget>[
+                    Container(
+                      //color: Colors.amber,
+                        width: double.infinity,
+                        height: 140,
+                        //decoration: BoxDecorations.buildBoxDecoration_1(),
+                        child: AIZImage.radiusImage(i, 6)),
+                    // Align(
+                    //   alignment: Alignment.bottomCenter,
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.center,
+                    //     children: homeData.carouselImageList.map((url) {
+                    //       int index = homeData.carouselImageList.indexOf(url);
+                    //       return Container(
+                    //         width: 7.0,
+                    //         height: 7.0,
+                    //         margin: EdgeInsets.symmetric(
+                    //             vertical: 10.0, horizontal: 4.0),
+                    //         decoration: BoxDecoration(
+                    //           shape: BoxShape.circle,
+                    //           color: homeData.current_slider == index
+                    //               ? MyTheme.white
+                    //               : Color.fromRGBO(112, 112, 112, .3),
+                    //         ),
+                    //       );
+                    //     }).toList(),
+                    //   ),
+                    // ),
+                  ],
+                ),
+              );
+            },
+          );
+        }).toList(),
       );
     } else if (!homeData.isCarouselInitial &&
         homeData.carouselImageList.length == 0) {
@@ -1438,9 +1475,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           height: 100,
           child: Center(
               child: Text(
-            AppLocalizations.of(context).no_carousel_image_found,
-            style: TextStyle(color: MyTheme.font_grey),
-          )));
+                AppLocalizations.of(context).no_carousel_image_found,
+                style: TextStyle(color: MyTheme.font_grey),
+              )));
     } else {
       // should not be happening
       return Container(
@@ -1448,6 +1485,67 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       );
     }
   }
+
+  // Widget buildHomeBannerTwo(context, HomePresenter homeData) {
+  //   if (homeData.isBannerTwoInitial &&
+  //       homeData.bannerTwoImageList.length == 0) {
+  //     return Padding(
+  //         padding:
+  //             const EdgeInsets.only(left: 1.0, right: 1, top: 10, bottom: 10),
+  //         child: ShimmerHelper().buildBasicShimmer(height: 120));
+  //   } else if (homeData.bannerTwoImageList.length > 0) {
+  //     return Padding(
+  //       padding: app_language_rtl.$
+  //           ? const EdgeInsets.only(right: 9.0)
+  //           : const EdgeInsets.only(left: 9.0),
+  //       child: CarouselSlider(
+  //         options: CarouselOptions(
+  //             aspectRatio: 270 / 120,
+  //             viewportFraction: 0.7,
+  //             enableInfiniteScroll: true,
+  //             reverse: false,
+  //             autoPlay: true,
+  //             autoPlayInterval: Duration(seconds: 5),
+  //             autoPlayAnimationDuration: Duration(milliseconds: 1000),
+  //             autoPlayCurve: Curves.easeInExpo,
+  //             enlargeCenterPage: false,
+  //             scrollDirection: Axis.horizontal,
+  //             onPageChanged: (index, reason) {
+  //               // setState(() {
+  //               //   homeData.current_slider = index;
+  //               // });
+  //             }),
+  //         items: homeData.bannerTwoImageList.map((i) {
+  //           return Builder(
+  //             builder: (BuildContext context) {
+  //               return Padding(
+  //                 padding: const EdgeInsets.only(
+  //                     left: 9.0, right: 9.0, top: 20.0, bottom: 10),
+  //                 child: Container(
+  //                     width: 666,
+  //                     child: AIZImage.radiusImage(i, 6)),
+  //               );
+  //             },
+  //           );
+  //         }).toList(),
+  //       ),
+  //     );
+  //   } else if (!homeData.isCarouselInitial &&
+  //       homeData.carouselImageList.length == 0) {
+  //     return Container(
+  //         height: 100,
+  //         child: Center(
+  //             child: Text(
+  //           AppLocalizations.of(context).no_carousel_image_found,
+  //           style: TextStyle(color: MyTheme.font_grey),
+  //         )));
+  //   } else {
+  //     // should not be happening
+  //     return Container(
+  //       height: 100,
+  //     );
+  //   }
+  // }
 
   AppBar buildAppBar(double statusBarHeight, BuildContext context) {
     return AppBar(
@@ -1457,7 +1555,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       centerTitle: false,
       elevation: 0,
       flexibleSpace: Row(
-
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           GestureDetector(
             onTap: () {
@@ -1492,7 +1590,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               child: GestureDetector(
                 child: Image.asset(
                   'assets/menu1.png',
-                  height: 80,
+                  height: 50,
                   //color: MyTheme.dark_grey,
                   color: MyTheme.dark_grey,
                 ),
@@ -1522,8 +1620,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         width: 100,
                         child: Image.asset(
                           'assets/topbarlogo1.png',
-                          height: 140,
-                          width: 350,
+                          //height: 40,
+                          //width: 250,
                         ),
                       ),
                     ),
@@ -1554,6 +1652,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
                 )
             ),
+
+            Icon(Icons.notifications),
+
             // Container(
             //   margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
             //   child: Stack(
@@ -1630,6 +1731,39 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     );
   }*/
 
+
+
+
+
+
+  CustomScrollView buildBodyChildren() {
+    return CustomScrollView(
+      //controller: _mainScrollController,
+      physics:
+      const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+      slivers: [
+        SliverList(
+          delegate: SliverChildListDelegate([
+            buildSettingAndAddonsHorizontalMenu(),
+
+          ]),
+        )
+      ],
+    );
+  }
+
+
+
+
+
+
+
+  showLoginWarning() {
+    return ToastComponent.showDialog(
+        AppLocalizations.of(context).you_need_to_log_in,
+        gravity: Toast.center,
+        duration: Toast.lengthLong);
+  }
   Container buildProductLoadingContainer(HomePresenter homeData) {
     return Container(
       height: homeData.showAllLoadingContainer ? 36 : 0,
@@ -1643,4 +1777,84 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       ),
     );
   }
+
+  Container buildSettingAndAddonsHorizontalMenuItem(
+      String img, String text, Function() onTap) {
+    return Container(
+      alignment: Alignment.center,
+      // color: Colors.red,
+      // width: DeviceInfo(context).width / 4,
+      child: InkWell(
+        onTap: is_logged_in.$
+            ? onTap
+            : () {
+          showLoginWarning();
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              img,
+              width: 20,
+              height: 20,
+              color: is_logged_in.$
+                  ? Colors.black
+                  : MyTheme.medium_grey_50,
+            ),
+            // SizedBox(
+            //   height: 10,
+            // ),
+            // Text(
+            //   text,
+            //   textAlign: TextAlign.center,
+            //   maxLines: 1,
+            //   style: TextStyle(
+            //       color: is_logged_in.$
+            //           ? MyTheme.dark_font_grey
+            //           : MyTheme.medium_grey_50,
+            //       fontSize: 12),
+            // )
+          ],
+        ),
+      ),
+    );
+  }
+  Widget buildSettingAndAddonsHorizontalMenu() {
+    return Container(
+     // padding: EdgeInsets.symmetric(vertical: 20,horizontal: 16),
+      //margin: EdgeInsets.only(top: ),
+      //width: DeviceInfo(context).width,
+      decoration: BoxDecorations.buildBoxDecoration_1(),
+      child: GridView.count(
+        // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        //   crossAxisCount: 3,
+        // ),
+        crossAxisCount: 1,
+
+        childAspectRatio: 1,
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        cacheExtent: 5.0,
+        mainAxisSpacing: 16,
+        children: [
+
+          buildSettingAndAddonsHorizontalMenuItem(
+              "assets/icons/wishicon.png",
+              AppLocalizations.of(context).my_wishlist_ucf,
+              is_logged_in.$
+                  ? () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) {
+                      return Wishlist();
+                    }));
+              }
+                  : () => null),
+
+        ],
+      ),
+    );
+  }
+
+
+
 }

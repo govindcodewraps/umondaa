@@ -559,12 +559,23 @@ class _CartState extends State<Cart> {
       );
     } else if (!_isInitial && _shopList.length == 0) {
       return Container(
-          height: 100,
-          child: Center(
-              child: Text(
-            AppLocalizations.of(context).cart_is_empty,
-            style: TextStyle(color: MyTheme.font_grey),
-          )));
+        padding: EdgeInsets.only(top: 90),
+          height: 400,
+          child: Column(
+            children: [
+
+              Icon(Icons.shopping_cart,size: 77,color: MyTheme.font_grey,),
+
+              Center(
+                  child: Text(
+                AppLocalizations.of(context).cart_is_empty,
+                style: TextStyle(color: MyTheme.font_grey),
+              )),
+
+
+              //Image.asset("assets/icons/wishicon.png"),
+            ],
+          ));
     }
   }
 

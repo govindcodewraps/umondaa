@@ -1348,13 +1348,13 @@ class _AddressState extends State<Address> {
         ),
       );
     } else if (!_isInitial && _shippingAddressList.length == 0) {
-      return Container(
-          height: 100,
-          child: Center(
-              child: Text(
-            AppLocalizations.of(context).no_address_is_added,
-            style: TextStyle(color: MyTheme.font_grey),
-          )));
+      // return Container(
+      //     height: 100,
+      //     child: Center(
+      //         child: Text(
+      //       AppLocalizations.of(context).no_address_is_added,
+      //       style: TextStyle(color: MyTheme.font_grey),
+      //     )));
     }
   }
 

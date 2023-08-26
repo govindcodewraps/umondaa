@@ -472,10 +472,11 @@ class _ProfileEditState extends State<ProfileEdit> {
                 alignment: Alignment.centerRight,
                 child: Container(
                   alignment: Alignment.center,
-                  width: 150
-                  ,
+                  width: DeviceInfo(context).width/1,
+
                   child: Btn.basic(
                     minWidth: MediaQuery.of(context).size.width,
+                   // minHeight: MediaQuery.of(context).size.height,
                     color: MyTheme.accent_color,
                     shape: RoundedRectangleBorder(
                         borderRadius:
@@ -485,7 +486,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                           .update_password_ucf,
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 14,
+                          fontSize: 16,
                           fontWeight: FontWeight.w600),
                     ),
                     onPressed: () {
@@ -629,9 +630,12 @@ class _ProfileEditState extends State<ProfileEdit> {
                 alignment: Alignment.centerRight,
                 child: Container(
                   alignment: Alignment.center,
-                  width: DeviceInfo(context).width/2.5,
+                 // height: 60,
+                  width: DeviceInfo(context).width/1,
                   child: Btn.basic(
+
                     minWidth: MediaQuery.of(context).size.width,
+
                     color: MyTheme.accent_color,
                     shape: RoundedRectangleBorder(
                         borderRadius:
@@ -641,7 +645,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                           .update_profile_ucf,
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 14,
+                          fontSize: 16,
                           fontWeight: FontWeight.w600),
                     ),
                     onPressed: () {

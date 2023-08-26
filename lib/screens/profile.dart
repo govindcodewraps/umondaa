@@ -322,9 +322,9 @@ class _ProfileState extends State<Profile> {
               LangText(context).local.all_digital_products_ucf,
 
               onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return DigitalProducts();
-            }));
+            // Navigator.push(context, MaterialPageRoute(builder: (context) {
+            //   return DigitalProducts();
+            // }));
           }),
           Divider(
             thickness: 1,
@@ -424,11 +424,11 @@ class _ProfileState extends State<Profile> {
               buildBottomVerticalCardListItem("assets/shop.png",
                   LangText(context).local.browse_all_sellers_ucf,
                   onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return Filter(
-                    selected_filter: "sellers",
-                  );
-                }));
+                // Navigator.push(context, MaterialPageRoute(builder: (context) {
+                //   return Filter(
+                //     selected_filter: "sellers",
+                //   );
+                // }));
               }),
               Divider(
                 thickness: 1,
@@ -443,9 +443,9 @@ class _ProfileState extends State<Profile> {
               buildBottomVerticalCardListItem("assets/shop.png",
                   LangText(context).local.followed_sellers_ucf,
                   onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return FollowedSellers();
-                }));
+                // Navigator.push(context, MaterialPageRoute(builder: (context) {
+                //   return FollowedSellers();
+                // }));
               }),
               Divider(
                 thickness: 1,
