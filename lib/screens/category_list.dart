@@ -41,7 +41,7 @@ class _CategoryListState extends State<CategoryList> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
-
+ //final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
 
   @override
@@ -68,6 +68,73 @@ class _CategoryListState extends State<CategoryList> {
         ),
         Scaffold(
           backgroundColor:Colors.transparent,
+            //key: _scaffoldKey,
+
+
+
+            // appBar: AppBar(
+            //   backgroundColor: Colors.white,
+            //   iconTheme: IconThemeData(
+            //     color: Colors.black, // Change this to your desired color
+            //   ),
+            //   actions: [
+            //     Row(
+            //       crossAxisAlignment: CrossAxisAlignment.center,
+            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //       children: [
+            //
+            //         // PreferredSize(
+            //         //      child: buildAppBar(context),
+            //         //       preferredSize:Size(DeviceInfo(context).width,50,)),
+            //
+            //         //buildAppBar(context),
+            //         Padding(
+            //           padding: const EdgeInsets.only(left: 2,bottom: 5),
+            //           child: Icon(Icons.phishing,size:20,color: Colors.black,),
+            //         ),
+            //         Image.asset(
+            //           'assets/appbarlogo.png',
+            //           //height: 40,
+            //           //width: 250,
+            //         ),
+            //
+            //         // Container(
+            //         //     padding: EdgeInsets.only(bottom: 4,left: 33),
+            //         //     //margin: const EdgeInsets.fromLTRB(30, 5, 10, 0),
+            //         //     child: GestureDetector(
+            //         //         onTap: () {
+            //         //           // Navigator.push(context, MaterialPageRoute(builder: (context) => Filter()));
+            //         //           // return;
+            //         //         },
+            //         //         child: Icon(Icons.search_rounded,size:20,color: Colors.black,)
+            //         //
+            //         //       // Image.asset(
+            //         //       //   'assets/search.png',
+            //         //       //   height: 16,
+            //         //       //   //color: MyTheme.dark_grey,
+            //         //       //   color: MyTheme.dark_grey,
+            //         //       // ),
+            //         //
+            //         //     )
+            //         // ),
+            //         Padding(
+            //           padding: const EdgeInsets.only(left: 2,bottom: 5),
+            //           child: Icon(Icons.notifications,size:20,color: Colors.black,),
+            //         ),
+            //         //SizedBox(width: 7,),
+            //         //Icon(Icons.shopping_cart,color: Colors.black,),
+            //
+            //         //                                                                                                                                                                                                Image.asset("assets/icons/wishicon.png",height: 30,width: 30,),
+            //
+            //         //buildSettingAndAddonsHorizontalMenu(),
+            //
+            //
+            //         SizedBox(width: 14,),
+            //       ],
+            //     )
+            //   ],
+            // ),
+
           appBar: PreferredSize(
               child: buildAppBar(context),
               preferredSize:Size(DeviceInfo(context).width,50,)),
@@ -103,27 +170,39 @@ class _CategoryListState extends State<CategoryList> {
   }
 
   AppBar buildAppBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.transparent,
+    return
+
+      AppBar(
+      backgroundColor: Colors.white,
       //centerTitle: true,
       leading: widget.is_base_category
           ? Builder(
             builder: (context) => Padding(
               padding: const EdgeInsets.symmetric(
                   vertical: 0.0, horizontal: 0.0),
-              child: UsefulElements.backToMain(context, go_back: false,color: "white"),
+              child: UsefulElements.backToMain(context, go_back: false,color:Colors.black),
             ),
           )
           : Builder(
               builder: (context) => IconButton(
-                icon: Icon(CupertinoIcons.arrow_left, color: MyTheme.white),
+                icon: Icon(CupertinoIcons.arrow_left, color: Colors.black),
                 onPressed: () => Navigator.of(context).pop(),
               ),
             ),
-      title: Text(
-        getAppBarTitle(),
-        style: TextStyle(
-            fontSize: 16, color: MyTheme.white, fontWeight: FontWeight.bold),
+      title: Row(
+        children: [
+          Text(
+            getAppBarTitle(),
+            style: TextStyle(
+                fontSize: 16, color:Colors.black, fontWeight: FontWeight.bold),
+          ),
+         // Icon(Icons.add_box_rounded),
+          Image.asset(
+            'assets/appbarlogo.png',width:100,height: 80,
+            //height: 40,
+            //width: 250,
+          ),
+        ],
       ),
       elevation: 0.0,
       titleSpacing: 0,
@@ -308,7 +387,7 @@ class _CategoryListState extends State<CategoryList> {
                   maxLines: 2,
                   style: TextStyle(
                       color: MyTheme.font_grey,
-                      fontSize: 10,
+                      fontSize: 17,
                       height: 1.6,
                       fontWeight: FontWeight.w600),
 
