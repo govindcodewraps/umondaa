@@ -64,6 +64,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     // change();
     // TODO: implement initState
     super.initState();
+    print("0- home.dart, is_logged_in :");
+    if (is_logged_in.$ == true) {
+      //fetchAll();
+      print("1- home.dart, is_logged_in : ${is_logged_in}");
+      print("2- home.dart, is_logged_in : ${is_logged_in.$}");
+    }
   }
 
   change() {
@@ -103,52 +109,43 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   ),
                   actions: [
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
 
-                        Image.asset(
-                          'assets/appbarlogo.png',
-                          //height: 40,
-                          //width: 250,
-                        ),
 
-                        Container(
-                          padding: EdgeInsets.only(bottom: 4,left: 33),
-                           //margin: const EdgeInsets.fromLTRB(30, 5, 10, 0),
-                            child: GestureDetector(
-                                onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => Filter()));
-                                  return;
-                                },
-                                child: Icon(Icons.search_rounded,size:20,color: Colors.black,)
+                        Image.asset('assets/appbarlogo.png',
+                           //height: 40,
+                           //width: 250,
+                         ),
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => Filter()));
+                              return;
+                            },
+                            child: Icon(Icons.search_rounded,size:20,color: Colors.black,)
 
-                              // Image.asset(
-                              //   'assets/search.png',
-                              //   height: 16,
-                              //   //color: MyTheme.dark_grey,
-                              //   color: MyTheme.dark_grey,
-                              // ),
+                          // Image.asset(
+                          //   'assets/search.png',
+                          //   height: 16,
+                          //   //color: MyTheme.dark_grey,
+                          //   color: MyTheme.dark_grey,
+                          // ),
 
-                            )
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 2,bottom: 5),
-                          child: Icon(Icons.notifications,size:20,color: Colors.black,),
-                        ),
+                        Icon(Icons.notifications,size:20,color: Colors.black,),
                         SizedBox(width: 7,),
                         //Icon(Icons.shopping_cart,color: Colors.black,),
-
-                        //                                                                                                                                                                                                Image.asset("assets/icons/wishicon.png",height: 30,width: 30,),
+                        //
+                        //Image.asset("assets/icons/wishicon.png",height: 30,width: 30,),
 
                         //buildSettingAndAddonsHorizontalMenu(),
-                        Padding(
-                          padding:  EdgeInsets.only(bottom: 4),
-                          child: SizedBox(
-                            height: 30,
-                            width: 30,
-                            child: Expanded(
+                        SizedBox(
+                          height: 30,
+                          width: 30,
+                          child: Expanded(
 
-                                child: buildBodyChildren()),
-                          ),
+                              child: buildBodyChildren()),
                         ),
 
                         SizedBox(width: 14,),
@@ -233,25 +230,25 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               )
                                   : Container(),
                               buildHomeCarouselSlider(context, homeData),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(
-                                  18.0,
-                                  0.0,
-                                  18.0,
-                                  0.0,
-                                ),
-                                child: buildHomeMenuRow1(context, homeData),
-                              ),
+                              // Padding(
+                              //   padding: const EdgeInsets.fromLTRB(
+                              //     18.0,
+                              //     0.0,
+                              //     18.0,
+                              //     0.0,
+                              //   ),
+                              //   //child: buildHomeMenuRow1(context, homeData),
+                              // ),
                               //buildHomeBannerOne(context, homeData),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(
-                                  18.0,
-                                  0.0,
-                                  18.0,
-                                  18.0,
-                                ),
-                                child: buildHomeMenuRow2(context),
-                              ),
+                              // Padding(
+                              //   padding: const EdgeInsets.fromLTRB(
+                              //     18.0,
+                              //     0.0,
+                              //     18.0,
+                              //     18.0,
+                              //   ),
+                              //   child: buildHomeMenuRow2(context),    //New Ads
+                              // ),
                             ]),
                           ),
                           // SliverList(
@@ -278,9 +275,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           //     ),
                           //   ]),
                           // ),
-
-
-                          // Text("datataa"),
                           SliverList(
                             delegate: SliverChildListDelegate([
                               Padding(
@@ -551,12 +545,37 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
             UserAccountsDrawerHeader(
 
-              accountName: Text('Umonda'),
-              accountEmail: Text('umonda@gmail.com'),
               currentAccountPicture:
-              CircleAvatar(
-                backgroundImage: AssetImage('assets/topbarlogo1.png'),
+              Padding(
+                padding: const EdgeInsets.only(right: 0),
+                child: Container(
+                  width: 260,
+                  height: 260,
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(100),
+                    border: Border.all(color: MyTheme.white, width: 1),
+                    shape: BoxShape.rectangle,
+                  ),
+                  child: is_logged_in.$
+                      ? ClipRRect(
+                      clipBehavior: Clip.hardEdge,
+                      borderRadius: BorderRadius.all(Radius.circular(100.0)),
+                      child: FadeInImage.assetNetwork(
+                        placeholder: 'assets/profile_placeholder.png',
+                        image: "${avatar_original.$}",
+                        fit: BoxFit.fill,
+                      ))
+                      : Image.asset('assets/profile_placeholder.png',
+                        height: 260,
+                        width: 260,
+                        fit: BoxFit.fitHeight,
+                  ),
+                ),
               ),
+
+              accountName: Text('${user_name.$}'),
+              accountEmail: Text('${user_email.$ != "" && user_email.$ != null ? user_email.$ : user_phone.$ != "" && user_phone.$ != null ? user_phone.$ : ''}'),
               decoration: BoxDecoration(color: Colors.amber),
             ),
             ListTile(
@@ -786,7 +805,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               },
               child: Container(
                 //decoration: BoxDecorations.buildBoxDecoration_1(),
+
                 child: Column(
+
                   children: <Widget>[
                     Container(
                         child: ClipRRect(
@@ -803,15 +824,14 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             ))),
                     Flexible(
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(4.0),
                         child: Text(
                           homeData.featuredCategoryList[index].name,
                           textAlign: TextAlign.left,
                           overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
+                          maxLines: 2,
                           softWrap: true,
-                          style:
-                          TextStyle(fontSize: 12, color:Colors.black, ),
+                          style: TextStyle(fontSize: 12, color:Colors.black,),
                         ),
                       ),
                     ),
@@ -1651,14 +1671,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         ),
                       ),
                     ),
-                    // Expanded(
-                    //   child: Container(
-                    //     height: 1,
-                    //   child: Text("Buy and Sell with just one click",
-                    //       style: TextStyle(fontSize: 10,
-                    //               color: Color.fromARGB(255, 10, 10, 90))),
-                    // ),
-                    // ),
                   ],
                 )
             ),

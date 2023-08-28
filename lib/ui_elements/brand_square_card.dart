@@ -7,7 +7,7 @@ class BrandSquareCard extends StatefulWidget {
   String image;
   String name;
 
-  BrandSquareCard({Key key, this.id,this.image, this.name}) : super(key: key);
+  BrandSquareCard({Key key, this.id, this.image, this.name}) : super(key: key);
 
   @override
   _BrandSquareCardState createState() => _BrandSquareCardState();

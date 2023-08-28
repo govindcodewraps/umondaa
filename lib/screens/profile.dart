@@ -1309,7 +1309,7 @@ class _ProfileState extends State<Profile> {
                       clipBehavior: Clip.hardEdge,
                       borderRadius: BorderRadius.all(Radius.circular(100.0)),
                       child: FadeInImage.assetNetwork(
-                        placeholder: 'assets/placeholder.png',
+                        placeholder: 'assets/profile_placeholder.png',
                         image: "${avatar_original.$}",
                         fit: BoxFit.fill,
                       ))
