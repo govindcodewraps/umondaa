@@ -48,32 +48,32 @@ class _ProfileEditState extends State<ProfileEdit> {
   chooseAndUploadImage(context) async {
     var status = await Permission.photos.request();
 
-    if (status.isDenied) {
-      // We didn't ask for permission yet.
-      showDialog(
-          context: context,
-          builder: (BuildContext context) => CupertinoAlertDialog(
-                title:
-                    Text(AppLocalizations.of(context).photo_permission_ucf),
-                content: Text(
-                    AppLocalizations.of(context).this_app_needs_permission),
-                actions: <Widget>[
-                  CupertinoDialogAction(
-                    child: Text(AppLocalizations.of(context).deny_ucf),
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
-                  CupertinoDialogAction(
-                    child: Text(AppLocalizations.of(context).settings_ucf),
-                    onPressed: () => openAppSettings(),
-                  ),
-                ],
-              ));
-    } else if (status.isRestricted) {
-      ToastComponent.showDialog(
-          AppLocalizations.of(context).go_to_your_application_settings_and_give_photo_permission,
-          gravity: Toast.center,
-          duration: Toast.lengthLong);
-    } else if (status.isGranted) {
+    // if (status.isDenied) {
+    //   // We didn't ask for permission yet.
+    //   showDialog(
+    //       context: context,
+    //       builder: (BuildContext context) => CupertinoAlertDialog(
+    //             title:
+    //                 Text(AppLocalizations.of(context).photo_permission_ucf),
+    //             content: Text(
+    //                 AppLocalizations.of(context).this_app_needs_permission),
+    //             actions: <Widget>[
+    //               CupertinoDialogAction(
+    //                 child: Text(AppLocalizations.of(context).deny_ucf),
+    //                 onPressed: () => Navigator.of(context).pop(),
+    //               ),
+    //               CupertinoDialogAction(
+    //                 child: Text(AppLocalizations.of(context).settings_ucf),
+    //                 onPressed: () => openAppSettings(),
+    //               ),
+    //             ],
+    //           ));
+    // } else if (status.isRestricted) {
+    //   ToastComponent.showDialog(
+    //       AppLocalizations.of(context).go_to_your_application_settings_and_give_photo_permission,
+    //       gravity: Toast.center,
+    //       duration: Toast.lengthLong);
+    // } else if (status.isGranted) {
       //file = await ImagePicker.pickImage(source: ImageSource.camera);
       _file = await _picker.pickImage(source: ImageSource.gallery);
 
@@ -106,7 +106,7 @@ class _ProfileEditState extends State<ProfileEdit> {
         avatar_original.$ = profileImageUpdateResponse.path;
         setState(() {});
       }
-    }
+    //}
   }
 
   Future<void> _onPageRefresh() async {}
@@ -471,12 +471,16 @@ class _ProfileEditState extends State<ProfileEdit> {
               Align(
                 alignment: Alignment.centerRight,
                 child: Container(
+                  margin:  const EdgeInsets.fromLTRB(0, 0, 0, 20),
                   alignment: Alignment.center,
                   width: DeviceInfo(context).width/1,
+                  height: 50,
 
                   child: Btn.basic(
                     minWidth: MediaQuery.of(context).size.width,
-                   // minHeight: MediaQuery.of(context).size.height,
+                    // minHeight: MediaQuery.of(context).size.height * 2,
+                    minHeight: 60,
+
                     color: MyTheme.accent_color,
                     shape: RoundedRectangleBorder(
                         borderRadius:
@@ -487,7 +491,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 16,
-                          fontWeight: FontWeight.w600),
+                          fontWeight: FontWeight.w600,),
                     ),
                     onPressed: () {
                       onPressUpdatePassword();

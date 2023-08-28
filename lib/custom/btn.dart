@@ -12,6 +12,7 @@ class Btn {
       dynamic minHeight,
       dynamic onPressed}) {
     //if (width != null && height != null)
+    print("btn.dart, ${minHeight}");
     return TextButton(
       style: TextButton.styleFrom(
           padding: padding,
@@ -19,7 +20,7 @@ class Btn {
           primary: MyTheme.noColor,
           minimumSize: minWidth == null ? null : Size(minWidth.toDouble(), 10),
           shape: shape),
-      child: child,
+          child: child,
       onPressed: onPressed != null ? onPressed : () {},
     );
   }

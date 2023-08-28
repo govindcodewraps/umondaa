@@ -89,6 +89,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final double statusBarHeight = MediaQuery.of(context).padding.top;
+    final double screenWidth = MediaQuery.of(context).size.width;
 
     return Consumer<HomePresenter>(builder: (context, homeData, child) {
       return WillPopScope(
@@ -109,15 +110,14 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   ),
                   actions: [
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-
-
-                        Image.asset('assets/appbarlogo.png',
+                        Container(
+                          margin: const EdgeInsets.fromLTRB(0, 0, 50, 0),
+                          child: Image.asset('assets/appbarlogo.png',
                            //height: 40,
                            //width: 250,
                          ),
+                        ),
                         GestureDetector(
                             onTap: () {
                               Navigator.push(context, MaterialPageRoute(builder: (context) => Filter()));
