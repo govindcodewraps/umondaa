@@ -28,7 +28,7 @@ class ProfileRepository {
         "Authorization": "Bearer ${access_token.$}","App-Language": app_language.$,
       },
     );
-
+print("profile_repository, response : ${response.body}");
     bool checkResult = ResponseCheck.apply(response.body);
 
     if(!checkResult)
@@ -44,6 +44,7 @@ class ProfileRepository {
     final response = await http.post(url,
         headers: {"Content-Type": "application/json", "Authorization": "Bearer ${access_token.$}","App-Language": app_language.$,},body: post_body );
 
+    print("profile_repository, getProfileUpdateResponse : ${response.body}");
     bool checkResult = ResponseCheck.apply(response.body);
 
     if(!checkResult)
@@ -60,7 +61,7 @@ class ProfileRepository {
     Uri url = Uri.parse("${AppConfig.BASE_URL}/profile/update-device-token");
     final response = await http.post(url,
         headers: {"Content-Type": "application/json", "Authorization": "Bearer ${access_token.$}","App-Language": app_language.$,},body: post_body );
-
+print("profile_repository, getDeviceTokenUpdateResponse : ${response.body}");
     bool checkResult = ResponseCheck.apply(response.body);
 
     if(!checkResult)
@@ -80,6 +81,7 @@ class ProfileRepository {
         headers: {"Content-Type": "application/json", "Authorization": "Bearer ${access_token.$}","App-Language": app_language.$,},body: post_body );
 
     bool checkResult = ResponseCheck.apply(response.body);
+    print("profile_repository, getProfileImageUpdateResponse : ${response.body}");
 
     if(!checkResult)
       return responseCheckModelFromJson(response.body);
