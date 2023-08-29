@@ -28,13 +28,13 @@ class _ProfileEditState extends State<ProfileEdit> {
   ScrollController _mainScrollController = ScrollController();
 
   TextEditingController _nameController =
-      TextEditingController(text: "${user_name.$}");
+  TextEditingController(text: "${user_name.$}");
 
   TextEditingController _phoneController =
-      TextEditingController(text: "${user_phone.$}");
+  TextEditingController(text: "${user_phone.$}");
 
   TextEditingController _emailController =
-      TextEditingController(text: "${user_email.$}");
+  TextEditingController(text: "${user_email.$}");
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _passwordConfirmController = TextEditingController();
 
@@ -53,21 +53,21 @@ class _ProfileEditState extends State<ProfileEdit> {
     //   showDialog(
     //       context: context,
     //       builder: (BuildContext context) => CupertinoAlertDialog(
-    //             title:
-    //                 Text(AppLocalizations.of(context).photo_permission_ucf),
-    //             content: Text(
-    //                 AppLocalizations.of(context).this_app_needs_permission),
-    //             actions: <Widget>[
-    //               CupertinoDialogAction(
-    //                 child: Text(AppLocalizations.of(context).deny_ucf),
-    //                 onPressed: () => Navigator.of(context).pop(),
-    //               ),
-    //               CupertinoDialogAction(
-    //                 child: Text(AppLocalizations.of(context).settings_ucf),
-    //                 onPressed: () => openAppSettings(),
-    //               ),
-    //             ],
-    //           ));
+    //         title:
+    //         Text(AppLocalizations.of(context).photo_permission_ucf),
+    //         content: Text(
+    //             AppLocalizations.of(context).this_app_needs_permission),
+    //         actions: <Widget>[
+    //           CupertinoDialogAction(
+    //             child: Text(AppLocalizations.of(context).deny_ucf),
+    //             onPressed: () => Navigator.of(context).pop(),
+    //           ),
+    //           CupertinoDialogAction(
+    //             child: Text(AppLocalizations.of(context).settings_ucf),
+    //             onPressed: () => openAppSettings(),
+    //           ),
+    //         ],
+    //       ));
     // } else if (status.isRestricted) {
     //   ToastComponent.showDialog(
     //       AppLocalizations.of(context).go_to_your_application_settings_and_give_photo_permission,
@@ -90,7 +90,7 @@ class _ProfileEditState extends State<ProfileEdit> {
       String fileName = _file.path.split("/").last;
 
       var profileImageUpdateResponse =
-          await ProfileRepository().getProfileImageUpdateResponse(
+      await ProfileRepository().getProfileImageUpdateResponse(
         base64Image,
         fileName,
       );
@@ -106,7 +106,7 @@ class _ProfileEditState extends State<ProfileEdit> {
         avatar_original.$ = profileImageUpdateResponse.path;
         setState(() {});
       }
-    //}
+   // }
   }
 
   Future<void> _onPageRefresh() async {}
@@ -134,7 +134,7 @@ class _ProfileEditState extends State<ProfileEdit> {
     var post_body = jsonEncode({"name": "${name}","phone":phone});
 
     var profileUpdateResponse =
-        await ProfileRepository().getProfileUpdateResponse(post_body:post_body);
+    await ProfileRepository().getProfileUpdateResponse(post_body:post_body);
 
     if (profileUpdateResponse.result == false) {
       ToastComponent.showDialog(profileUpdateResponse.message,
@@ -191,8 +191,8 @@ class _ProfileEditState extends State<ProfileEdit> {
     var post_body = jsonEncode({"password": "$password"});
 
     var profileUpdateResponse =
-        await ProfileRepository().getProfileUpdateResponse(
-       post_body : post_body,
+    await ProfileRepository().getProfileUpdateResponse(
+      post_body : post_body,
     );
 
     if (profileUpdateResponse.result == false) {
@@ -242,9 +242,9 @@ class _ProfileEditState extends State<ProfileEdit> {
           height: 100,
           child: Center(
               child: Text(
-            AppLocalizations.of(context).please_log_in_to_see_the_profile,
-            style: TextStyle(color: MyTheme.font_grey),
-          )));
+                AppLocalizations.of(context).please_log_in_to_see_the_profile,
+                style: TextStyle(color: MyTheme.font_grey),
+              )));
     } else {
       return RefreshIndicator(
         color: MyTheme.accent_color,
@@ -314,7 +314,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                     ),
                     shape: CircleBorder(
                       side:
-                          new BorderSide(color: MyTheme.light_grey, width: 1.0),
+                      new BorderSide(color: MyTheme.light_grey, width: 1.0),
                     ),
                     color: MyTheme.light_grey,
                     onPressed: () {
@@ -333,7 +333,7 @@ class _ProfileEditState extends State<ProfileEdit> {
   buildProfileForm(context) {
     return Padding(
       padding:
-          const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 16.0, right: 16.0),
+      const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 16.0, right: 16.0),
       child: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -350,261 +350,266 @@ class _ProfileEditState extends State<ProfileEdit> {
   Column buildChangePassword(context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 30.0,bottom: 10),
+          child: Text(
+            LangText(context).local.password_changes_ucf,
+            style: TextStyle(
+              fontFamily: 'Public Sans',
+              fontSize: 16,
+              color: Colors.black,
+              fontWeight: FontWeight.w700,
+            ),
+            textHeightBehavior: TextHeightBehavior(applyHeightToFirstAscent: false),
+            textAlign: TextAlign.center,
+            softWrap: false,
+          ),
+        ),
+
+        Padding(
+          padding: const EdgeInsets.only(bottom: 4.0),
+          child: Text(
+            AppLocalizations.of(context).new_password_ucf,
+            style: TextStyle(
+                fontSize: 12,
+                color: MyTheme.dark_font_grey, fontWeight: FontWeight.normal),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 30.0,bottom: 10),
-                child: Center(
-                  child: Text(
-                    LangText(context).local.password_changes_ucf,
-                    style: TextStyle(
-                      fontFamily: 'Public Sans',
-                      fontSize: 16,
-                      color: MyTheme.accent_color,
-                      fontWeight: FontWeight.w700,
+              Container(
+                decoration: BoxDecorations.buildBoxDecoration_1(),
+                height: 36,
+                child: TextField(
+                  style: TextStyle(fontSize: 12),
+                  controller: _passwordController,
+                  autofocus: false,
+                  obscureText: !_showPassword,
+                  enableSuggestions: false,
+                  autocorrect: false,
+                  decoration: InputDecorations.buildInputDecoration_1(
+                      hint_text: "• • • • • • • •").copyWith(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide.none,
                     ),
-                    textHeightBehavior: TextHeightBehavior(applyHeightToFirstAscent: false),
-                    textAlign: TextAlign.center,
-                    softWrap: false,
-                  ),
-                ),
-              ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: MyTheme.accent_color),
 
-              Padding(
-                padding: const EdgeInsets.only(bottom: 4.0),
-                child: Text(
-                  AppLocalizations.of(context).new_password_ucf,
-                  style: TextStyle(
-                    fontSize: 12,
-                      color: MyTheme.dark_font_grey, fontWeight: FontWeight.normal),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Container(
-                      decoration: BoxDecorations.buildBoxDecoration_1(),
-                      height: 36,
-                      child: TextField(
-                        style: TextStyle(fontSize: 12),
-                        controller: _passwordController,
-                        autofocus: false,
-                        obscureText: !_showPassword,
-                        enableSuggestions: false,
-                        autocorrect: false,
-                        decoration: InputDecorations.buildInputDecoration_1(
-                            hint_text: "• • • • • • • •").copyWith(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                          ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: MyTheme.accent_color),
-
-                            ),
-                            suffixIcon: InkWell(
-                              onTap: (){
-                                _showPassword = !_showPassword;
-                                setState((){});
-                              },
-                              child: Icon(_showPassword?Icons.visibility_outlined:Icons.visibility_off_outlined,
-                                color: MyTheme.accent_color,
-                              ),
-                            ),),
-                      ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 4.0),
-                      child: Text(
-                        AppLocalizations.of(context)
-                            .password_must_contain_at_least_6_characters,
-                        style: TextStyle(
-                            color: MyTheme.accent_color,
-                            fontStyle: FontStyle.italic),
+                    suffixIcon: InkWell(
+                      onTap: (){
+                        _showPassword = !_showPassword;
+                        setState((){});
+                      },
+                      child: Icon(_showPassword?Icons.visibility_outlined:Icons.visibility_off_outlined,
+                        color: MyTheme.accent_color,
                       ),
-                    )
-                  ],
+                    ),),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 4.0),
+                padding: const EdgeInsets.only(top: 4.0),
                 child: Text(
                   AppLocalizations.of(context)
-                      .retype_password_ucf,
+                      .password_must_contain_at_least_6_characters,
                   style: TextStyle(
-                    fontSize: 12,
-                      color: MyTheme.dark_font_grey, fontWeight: FontWeight.normal),
+                      color: MyTheme.accent_color,
+                      fontStyle: FontStyle.italic),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: Container(
-                  decoration: BoxDecorations.buildBoxDecoration_1(),
-                  height: 36,
-                  child: TextField(
-                    controller: _passwordConfirmController,
-                    autofocus: false,
-                    obscureText: !_showConfirmPassword,
-                    enableSuggestions: false,
-                    autocorrect: false,
-                    decoration: InputDecorations.buildInputDecoration_1(
-                        hint_text: "• • • • • • • •").copyWith(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: MyTheme.accent_color),
-
-                        ),
-                        suffixIcon: InkWell(
-                          onTap: (){
-                            _showConfirmPassword = !_showConfirmPassword;
-                            setState((){});
-                          },
-                          child: Icon(_showConfirmPassword?Icons.visibility_outlined:Icons.visibility_off_outlined,
-                            color: MyTheme.accent_color,
-                          ),
-                        )),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Container(
-                  margin:  const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                  alignment: Alignment.center,
-                  width: DeviceInfo(context).width/1,
-                  height: 50,
-
-                  child: Btn.basic(
-                    minWidth: MediaQuery.of(context).size.width,
-                    // minHeight: MediaQuery.of(context).size.height * 2,
-                    minHeight: 60,
-
-                    color: MyTheme.accent_color,
-                    shape: RoundedRectangleBorder(
-                        borderRadius:
-                        const BorderRadius.all(Radius.circular(8.0))),
-                    child: Text(
-                      AppLocalizations.of(context)
-                          .update_password_ucf,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,),
-                    ),
-                    onPressed: () {
-                      onPressUpdatePassword();
-                    },
-                  ),
-                ),
-              ),
+              )
             ],
-          );
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 4.0),
+          child: Text(
+            AppLocalizations.of(context)
+                .retype_password_ucf,
+            style: TextStyle(
+                fontSize: 12,
+                color: MyTheme.dark_font_grey, fontWeight: FontWeight.normal),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: Container(
+            decoration: BoxDecorations.buildBoxDecoration_1(),
+            height: 36,
+            child: TextField(
+              controller: _passwordConfirmController,
+              autofocus: false,
+              obscureText: !_showConfirmPassword,
+              enableSuggestions: false,
+              autocorrect: false,
+              decoration: InputDecorations.buildInputDecoration_1(
+                  hint_text: "• • • • • • • •").copyWith(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: MyTheme.accent_color),
+
+                  ),
+                  suffixIcon: InkWell(
+                    onTap: (){
+                      _showConfirmPassword = !_showConfirmPassword;
+                      setState((){});
+                    },
+                    child: Icon(_showConfirmPassword?Icons.visibility_outlined:Icons.visibility_off_outlined,
+                      color: MyTheme.accent_color,
+                    ),
+                  )),
+            ),
+          ),
+        ),
+        Align(
+          alignment: Alignment.centerRight,
+          child: Container(
+            alignment: Alignment.center,
+            width: DeviceInfo(context).width/1,
+
+            child:
+            SizedBox(
+              height: 45,
+              width:double.infinity,
+              child: ElevatedButton(
+
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(MyTheme.accent_color),
+
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+
+                            borderRadius: BorderRadius.circular(12.0),
+                            side: BorderSide(color:MyTheme.accent_color)
+                        )
+                    )
+                ),
+
+                onPressed: (){
+                  onPressUpdatePassword();
+                },
+                child:Text(
+                  AppLocalizations.of(context)
+                      .update_password_ucf,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ),),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 
   Column buildBasicInfo(context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: 18.0),
+          child: Text(
+            AppLocalizations.of(context)
+                .basic_information_ucf,
+            style: TextStyle(
+                color: MyTheme.font_grey,
+                fontWeight: FontWeight.bold,
+                fontSize: 14.0),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 4.0),
+          child: Text(
+            AppLocalizations.of(context).name_ucf,
+            style: TextStyle(
+                fontSize: 12,
+                color: MyTheme.dark_font_grey, fontWeight: FontWeight.normal),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 14.0),
+          child: Container(
+            decoration: BoxDecorations.buildBoxDecoration_1(),
+            height: 36,
+            child: TextField(
+              controller: _nameController,
+              autofocus: false,
+              style: TextStyle(color:MyTheme.dark_font_grey,fontSize: 12),
+              decoration: InputDecorations.buildInputDecoration_1(
+                  hint_text: "John Doe").copyWith(
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: MyTheme.accent_color),
+
+                ),),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 4.0),
+          child: Text(
+            AppLocalizations.of(context).phone_ucf,
+            style: TextStyle(
+                fontSize: 12,
+                color: MyTheme.dark_font_grey, fontWeight: FontWeight.normal),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 14.0),
+          child: Container(
+            decoration: BoxDecorations.buildBoxDecoration_1(),
+            height: 36,
+            child: TextField(
+              controller: _phoneController,
+              autofocus: false,
+              keyboardType:TextInputType.phone,
+              style: TextStyle(color:MyTheme.dark_font_grey,fontSize: 12),
+              decoration: InputDecorations.buildInputDecoration_1(
+                  hint_text: "+01xxxxxxxxxx").copyWith(
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: MyTheme.accent_color),
+
+                ),),
+            ),
+          ),
+        ),
+
+
+        Visibility(
+          visible: true,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(bottom: 18.0),
-                child: Text(
-                  AppLocalizations.of(context)
-                      .basic_information_ucf,
-                  style: TextStyle(
-                      color: MyTheme.font_grey,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14.0),
-                ),
-              ),
-              Padding(
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: Text(
-                  AppLocalizations.of(context).name_ucf,
+                  AppLocalizations.of(context).email_ucf,
                   style: TextStyle(
-                    fontSize: 12,
-                      color: MyTheme.dark_font_grey, fontWeight: FontWeight.normal),
+                      fontSize: 12,
+                      color: MyTheme.dark_font_grey,
+                      fontWeight: FontWeight.normal),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 14.0),
                 child: Container(
-                  decoration: BoxDecorations.buildBoxDecoration_1(),
-                  height: 36,
-                  child: TextField(
-                    controller: _nameController,
-                    autofocus: false,
-                    style: TextStyle(color:MyTheme.dark_font_grey,fontSize: 12),
-                    decoration: InputDecorations.buildInputDecoration_1(
-                        hint_text: "John Doe").copyWith(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: MyTheme.accent_color),
-
-                        ),),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 4.0),
-                child: Text(
-                  AppLocalizations.of(context).phone_ucf,
-                  style: TextStyle(
-                    fontSize: 12,
-                      color: MyTheme.dark_font_grey, fontWeight: FontWeight.normal),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 14.0),
-                child: Container(
-                  decoration: BoxDecorations.buildBoxDecoration_1(),
-                  height: 36,
-                  child: TextField(
-                    controller: _phoneController,
-                    autofocus: false,
-                    keyboardType:TextInputType.phone,
-                    style: TextStyle(color:MyTheme.dark_font_grey,fontSize: 12),
-                    decoration: InputDecorations.buildInputDecoration_1(
-                        hint_text: "+01xxxxxxxxxx").copyWith(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: MyTheme.accent_color),
-
-                        ),),
-                  ),
-                ),
-              ),
-
-
-              Visibility(
-                visible: true,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 4.0),
-                      child: Text(
-                        AppLocalizations.of(context).email_ucf,
-                        style: TextStyle(
-                          fontSize: 12,
-                            color: MyTheme.dark_font_grey,
-                            fontWeight: FontWeight.normal),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 14.0),
-                      child: Container(
-                        decoration: BoxDecorations.buildBoxDecoration_1(),
-                        height: 36,
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        alignment: Alignment.centerLeft,
-                        child: Text(_emailController.text,style: TextStyle(fontSize: 12,color: MyTheme.grey_153),)
-                        /*TextField(
+                    decoration: BoxDecorations.buildBoxDecoration_1(),
+                    height: 36,
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    alignment: Alignment.centerLeft,
+                    child: Text(_emailController.text,style: TextStyle(fontSize: 12,color: MyTheme.grey_153),)
+                  /*TextField(
                           style: TextStyle(color:MyTheme.grey_153,fontSize: 12),
                           enabled: false,
                           enableIMEPersonalizedLearning: true,
@@ -624,41 +629,52 @@ class _ProfileEditState extends State<ProfileEdit> {
 
                         ),),
                         ),*/
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              Align(
-                alignment: Alignment.centerRight,
-                child: Container(
-                  alignment: Alignment.center,
-                 // height: 60,
-                  width: DeviceInfo(context).width/1,
-                  child: Btn.basic(
-
-                    minWidth: MediaQuery.of(context).size.width,
-
-                    color: MyTheme.accent_color,
-                    shape: RoundedRectangleBorder(
-                        borderRadius:
-                        const BorderRadius.all(Radius.circular(8.0))),
-                    child: Text(
-                      AppLocalizations.of(context)
-                          .update_profile_ucf,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600),
-                    ),
-                    onPressed: () {
-                      onPressUpdate();
-                    },
-                  ),
                 ),
               ),
             ],
-          );
+          ),
+        ),
+
+        Align(
+          alignment: Alignment.centerRight,
+          child: Container(
+            alignment: Alignment.center,
+            // height: 60,
+            width: DeviceInfo(context).width/1,
+            child:
+            SizedBox(
+              height: 45,
+              width:double.infinity,
+              child: ElevatedButton(
+
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(MyTheme.accent_color),
+
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+
+                            borderRadius: BorderRadius.circular(12.0),
+                            side: BorderSide(color:MyTheme.accent_color)
+                        )
+                    )
+                ),
+
+                onPressed: (){
+                  onPressUpdate();
+                },
+                child:Text(
+                  AppLocalizations.of(context)
+                      .update_profile_ucf,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ),),
+            ),
+
+          ),
+        ),
+      ],
+    );
   }
 }

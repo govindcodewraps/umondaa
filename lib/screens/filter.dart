@@ -180,6 +180,8 @@ class _FilterState extends State<Filter> {
         });
         _showBrandLoadingContainer = true;
         fetchBrandData();
+        print("filter.dart, L 182, _totalProductData : ${_totalProductData}");
+        print("filter.dart, L 183, _productList.length : ${_productList.length}");
       }
     });
 
@@ -357,6 +359,9 @@ class _FilterState extends State<Filter> {
   }
 
   Container buildBrandLoadingContainer() {
+    print("filter.dart, L 362, _totalBrandData : ${_totalBrandData}");
+    print("filter.dart, L 363, _topbrandList : ${_productList.length}");
+
     return Container(
       height: _showBrandLoadingContainer ? 36 : 0,
       width: double.infinity,

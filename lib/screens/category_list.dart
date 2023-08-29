@@ -191,17 +191,16 @@ class _CategoryListState extends State<CategoryList> {
             ),
       title: Row(
         children: [
-          Text(
-            getAppBarTitle(),
-            style: TextStyle(
-                fontSize: 16, color:Colors.black, fontWeight: FontWeight.bold),
-          ),
-         // Icon(Icons.add_box_rounded),
+          Spacer(),
           Image.asset(
             'assets/appbarlogo.png',width:100,height: 80,
             //height: 40,
             //width: 250,
           ),
+          Spacer(),
+          Icon(Icons.notifications),
+          Icon(Icons.notifications),
+
         ],
       ),
       elevation: 0.0,
@@ -255,7 +254,7 @@ class _CategoryListState extends State<CategoryList> {
               ),
 
               itemCount: categoryResponse.categories.length,
-              padding: EdgeInsets.only(left: 18,right: 18,bottom: widget.is_base_category?30:0),
+              padding: EdgeInsets.only(top:15,left: 18,right: 18,bottom: widget.is_base_category?30:0),
               scrollDirection: Axis.vertical,
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,

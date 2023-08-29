@@ -109,6 +109,7 @@ class _TopBrandsState extends State<TopBrands> {
     _filterBrandList.addAll(filteredBrandResponse.data);
     _filteredBrandsCalled = true;
     setState(() {});
+    print("top_brands.dart, fetchFilteredBrands(), ${_filterBrandList}");
   }
 
   fetchFilteredCategories() async {
@@ -176,10 +177,12 @@ class _TopBrandsState extends State<TopBrands> {
       if (_brandScrollController.position.pixels ==
           _brandScrollController.position.maxScrollExtent) {
         setState(() {
-          _brandPage++;
+          //_brandPage++;
         });
+        print("top_brands.dart, L 182, _totalProductData : ${_totalProductData}");
+        print("top_brands.dart, L 183, _productList.length : ${_productList.length}");
         _showBrandLoadingContainer = true;
-        fetchBrandData();
+        //fetchBrandData();
       }
     });
 
@@ -341,8 +344,6 @@ class _TopBrandsState extends State<TopBrands> {
     return items;
   }
 
-
-
   Container buildProductLoadingContainer() {
     return Container(
       height: _showProductLoadingContainer ? 36 : 0,
@@ -358,14 +359,14 @@ class _TopBrandsState extends State<TopBrands> {
 
   Container buildBrandLoadingContainer() {
     return Container(
-      height: _showBrandLoadingContainer ? 36 : 0,
-      width: double.infinity,
-      color: Colors.white,
-      child: Center(
-        child: Text(_totalBrandData == _topbrandList.length
-            ? AppLocalizations.of(context).no_more_brands_ucf
-            : AppLocalizations.of(context).loading_more_brands_ucf),
-      ),
+      // height: _showBrandLoadingContainer ? 36 : 0,
+      // width: double.infinity,
+      // color: Colors.white,
+      // child: Center(
+      //   child: Text(_totalBrandData == _topbrandList.length
+      //       ? AppLocalizations.of(context).no_more_brands_ucf
+      //       : AppLocalizations.of(context).loading_more_brands_ucf),
+      // ),
     );
   }
 
@@ -383,7 +384,6 @@ class _TopBrandsState extends State<TopBrands> {
   }
 
   //--------------------
-
   @override
   Widget build(BuildContext context) {
 
@@ -393,8 +393,9 @@ class _TopBrandsState extends State<TopBrands> {
         endDrawer: buildFilterDrawer(),
         key: _scaffoldKey,
         backgroundColor: Colors.white,
-        body: Stack(fit: StackFit.loose, children: [
-          _selectedFilter.option_key == 'product'
+        body: Stack(fit: StackFit.loose,
+            children: [
+              _selectedFilter.option_key == 'product'
               ? buildProductList()
               : (_selectedFilter.option_key == 'brands'
               ? buildBrandList()

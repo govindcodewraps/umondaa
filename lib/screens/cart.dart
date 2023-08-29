@@ -447,8 +447,7 @@ class _CartState extends State<Cart> {
                     child: Btn.basic(
                       minWidth: MediaQuery.of(context).size.width,
 
-                     // color: MyTheme.accent_color,
-                      color:Color(0xfffff),
+                      color: MyTheme.accent_color,
                       shape: app_language_rtl.$
                           ? RoundedRectangleBorder(
                               borderRadius: const BorderRadius.only(
@@ -493,9 +492,23 @@ class _CartState extends State<Cart> {
         builder: (context) =>
             widget.from_navigation ? UsefulElements.backToMain(context, go_back: false) : UsefulElements.backButton(context),
       ),
-      title: Text(
-        AppLocalizations.of(context).shopping_cart_ucf,
-        style: TextStyles.buildAppBarTexStyle(),
+      title: Row(
+        children: [
+          // Text(
+          //   AppLocalizations.of(context).shopping_cart_ucf,
+          //   style: TextStyles.buildAppBarTexStyle(),
+          // ),
+          Spacer(),
+          Image.asset(
+            'assets/appbarlogo.png',width:100,height: 80,
+            //height: 40,
+            //width: 250,
+          ),
+          Spacer(),
+          Icon(Icons.notifications),
+          Icon(Icons.notifications),
+
+        ],
       ),
       elevation: 0.0,
       titleSpacing: 0,
