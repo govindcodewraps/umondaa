@@ -106,7 +106,7 @@ class _MainState extends State<Main> {
     TabItem(
       Icons.home,
       "Home",
-      Colors.blue,
+      Color(0xff4566be),
       // labelStyle: TextStyle(
       //color: Colors.red,
       //fontWeight: FontWeight.bold,
@@ -121,13 +121,13 @@ class _MainState extends State<Main> {
       //Image.asset("assets/brand_image.png"),
       Icons.category_outlined,
       "Categories",
-      Colors.blue,
+      Color(0xff4566be),
       //circleStrokeColor: Colors.white,
     ),
     TabItem(
       Icons.add_circle_outline_outlined,
       "Place Ad",
-      Colors.blue,
+      Color(0xff4566be),
       // labelStyle: TextStyle(
       //fontWeight: FontWeight.normal,
       // ),
@@ -136,14 +136,14 @@ class _MainState extends State<Main> {
     TabItem(
       Icons.shopping_cart,
       "Cart",
-      Colors.blue,
+      Color(0xff4566be),
       circleStrokeColor: Colors.white,
 
     ),
     TabItem(
       Icons.person,
       "Profile",
-      Colors.blue,
+      Color(0xff4566be),
     ),
   ]);
 

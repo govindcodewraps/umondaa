@@ -107,49 +107,69 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   iconTheme: IconThemeData(
                     color: Colors.black, // Change this to your desired color
                   ),
+                  // actions: [
+                  //   Expanded(
+                  //     child: Row(children: [
+                  //       SizedBox(width: 44,),
+                  //       Icon(Icons.add_box_rounded),
+                  //       Spacer(),
+                  //       Icon(Icons.add_box_rounded),
+                  //       Spacer(),
+                  //       Icon(Icons.add_box_rounded),
+                  //     ],),
+                  //   )
+                  // ],
                   actions: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+                    Expanded(
+                      child: Row(
+                        //crossAxisAlignment: CrossAxisAlignment.center,
+                        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                          //  width: 44,
+                          width: (MediaQuery.of(context).size.width*0.25),
+                          ),
+                          //Text("aaaaaaaa"),
+                          Text("",style: TextStyle(color: Colors.black),),
+                          Spacer(),
+                          Image.asset('assets/appbarlogo.png',
+                             //height: 40,
+                             //width: 250,
+                           ),
+                          Spacer(),
+                          GestureDetector(
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => Filter()));
+                                return;
+                              },
+                              child: Icon(Icons.search_rounded,size:20,color: Colors.black,)
 
+                            // Image.asset(
+                            //   'assets/search.png',
+                            //   height: 16,
+                            //   //color: MyTheme.dark_grey,
+                            //   color: MyTheme.dark_grey,
+                            // ),
 
-                        Image.asset('assets/appbarlogo.png',
-                           //height: 40,
-                           //width: 250,
-                         ),
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => Filter()));
-                              return;
-                            },
-                            child: Icon(Icons.search_rounded,size:20,color: Colors.black,)
+                          ),
+                          Icon(Icons.notifications,size:20,color: Colors.black,),
+                          SizedBox(width: 7,),
+                          //Icon(Icons.shopping_cart,color: Colors.black,),
+                          //
+                          //Image.asset("assets/icons/wishicon.png",height: 30,width: 30,),
 
-                          // Image.asset(
-                          //   'assets/search.png',
-                          //   height: 16,
-                          //   //color: MyTheme.dark_grey,
-                          //   color: MyTheme.dark_grey,
-                          // ),
+                          //buildSettingAndAddonsHorizontalMenu(),
+                          SizedBox(
+                            height: 30,
+                            width: 30,
+                            child: Expanded(
+                      flex: 1,
+                                child: buildBodyChildren()),
+                          ),
 
-                        ),
-                        Icon(Icons.notifications,size:20,color: Colors.black,),
-                        SizedBox(width: 7,),
-                        //Icon(Icons.shopping_cart,color: Colors.black,),
-                        //
-                        //Image.asset("assets/icons/wishicon.png",height: 30,width: 30,),
-
-                        //buildSettingAndAddonsHorizontalMenu(),
-                        SizedBox(
-                          height: 30,
-                          width: 30,
-                          child: Expanded(
-
-                              child: buildBodyChildren()),
-                        ),
-
-                        SizedBox(width: 14,),
-                      ],
+                          SizedBox(width: 14,),
+                        ],
+                      ),
                     )
                   ],
                 ),
@@ -827,9 +847,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         padding: const EdgeInsets.all(4.0),
                         child: Text(
                           homeData.featuredCategoryList[index].name,
-                          textAlign: TextAlign.left,
+                          textAlign: TextAlign.center,
                           overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
+                          maxLines: 1,
                           softWrap: true,
                           style: TextStyle(fontSize: 12, color:Colors.black,),
                         ),
