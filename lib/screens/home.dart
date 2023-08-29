@@ -25,6 +25,7 @@ import 'package:toast/toast.dart';
 
 import '../custom/toast_component.dart';
 import '../helpers/auth_helper.dart';
+import '../ui_sections/drawer.dart';
 import 'drawermenu/Aboutus.dart';
 import 'drawermenu/ContactInf.dart';
 import 'drawermenu/privacy_policy.dart';
@@ -102,87 +103,145 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           child: SafeArea(
             child: Scaffold(
                 key: scaffoldKey,
+
                 appBar: AppBar(
                   backgroundColor: Colors.white,
-                  iconTheme: IconThemeData(
-                    color: Colors.black, // Change this to your desired color
-                  ),
-                  // actions: [
-                  //   Expanded(
-                  //     child: Row(children: [
-                  //       SizedBox(width: 44,),
-                  //       Icon(Icons.add_box_rounded),
-                  //       Spacer(),
-                  //       Icon(Icons.add_box_rounded),
-                  //       Spacer(),
-                  //       Icon(Icons.add_box_rounded),
-                  //     ],),
-                  //   )
-                  // ],
+      iconTheme: IconThemeData(
+           color: Colors.black, // Change this to your desired color
+         ),
                   actions: [
-                    Expanded(
+                    Container(
+                      color: MyTheme.white,
+                      height:50,
+                      padding: EdgeInsets.only(left: 16,right: 16),
                       child: Row(
-                        //crossAxisAlignment: CrossAxisAlignment.center,
-                        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          SizedBox(
-                          //  width: 44,
-                          width: (MediaQuery.of(context).size.width*0.25),
-                          ),
-                          //Text("aaaaaaaa"),
-                          Text("",style: TextStyle(color: Colors.black),),
-                          Spacer(),
                           Image.asset('assets/appbarlogo.png',
-                             //height: 40,
-                             //width: 250,
-                           ),
-                          Spacer(),
-                          GestureDetector(
-                              onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => Filter()));
-                                return;
-                              },
-                              child: Icon(Icons.search_rounded,size:20,color: Colors.black,)
+                            //height: 40,
+                            //width: 250,
+                          ),
 
-                            // Image.asset(
-                            //   'assets/search.png',
-                            //   height: 16,
-                            //   //color: MyTheme.dark_grey,
-                            //   color: MyTheme.dark_grey,
+                          SizedBox(width: 40,),
+                          Row(children: [
+                            InkWell(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => Filter()));
+                                  return;
+                                },
+                                child: Icon(Icons.search)),
+                            Icon(Icons.notifications),
+
+              InkWell(
+                  onTap: (){
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                          return Wishlist();
+                        }));
+                  },
+                  child: Image.asset("assets/icons/wishicon.png",height: 25,width: 25,)),
+
+
+
+
+                            // SizedBox(
+                            //   height: 30,
+                            //   width: 30,
+                            //   child: Expanded(
+                            //       flex: 1,
+                            //       child: buildBodyChildren()),
                             // ),
+                          ],),
 
-                          ),
-                          Icon(Icons.notifications,size:20,color: Colors.black,),
-                          SizedBox(width: 7,),
-                          //Icon(Icons.shopping_cart,color: Colors.black,),
-                          //
-                          //Image.asset("assets/icons/wishicon.png",height: 30,width: 30,),
 
-                          //buildSettingAndAddonsHorizontalMenu(),
-                          SizedBox(
-                            height: 30,
-                            width: 30,
-                            child: Expanded(
-                      flex: 1,
-                                child: buildBodyChildren()),
-                          ),
 
-                          SizedBox(width: 14,),
-                        ],
-                      ),
-                    )
+                        ],),
+                    ),
                   ],
                 ),
 
-
+                // appBar: AppBar(
+                //   backgroundColor: Colors.white,
+                //   iconTheme: IconThemeData(
+                //     color: Colors.black, // Change this to your desired color
+                //   ),
+                //   // actions: [
+                //   //   Expanded(
+                //   //     child: Row(children: [
+                //   //       SizedBox(width: 44,),
+                //   //       Icon(Icons.add_box_rounded),
+                //   //       Spacer(),
+                //   //       Icon(Icons.add_box_rounded),
+                //   //       Spacer(),
+                //   //       Icon(Icons.add_box_rounded),
+                //   //     ],),
+                //   //   )
+                //   // ],
+                //   actions: [
+                //     Expanded(
+                //       child: Row(
+                //         //crossAxisAlignment: CrossAxisAlignment.center,
+                //         //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //         children: [
+                //           SizedBox(
+                //           //  width: 44,
+                //           width:MediaQuery.of(context).size.width*0.25,
+                //           ),
+                //           //Text("aaaaaaaa"),
+                //           Text("",style: TextStyle(color: Colors.black),),
+                //           Spacer(),
+                //           Image.asset('assets/appbarlogo.png',
+                //              //height: 40,
+                //              //width: 250,
+                //            ),
+                //           Spacer(),
+                //           GestureDetector(
+                //               onTap: () {
+                //                 Navigator.push(context, MaterialPageRoute(builder: (context) => Filter()));
+                //                 return;
+                //               },
+                //               child: Icon(Icons.search_rounded,size:20,color: Colors.black,)
                 //
+                //             // Image.asset(
+                //             //   'assets/search.png',
+                //             //   height: 16,
+                //             //   //color: MyTheme.dark_grey,
+                //             //   color: MyTheme.dark_grey,
+                //             // ),
+                //
+                //           ),
+                //           Icon(Icons.notifications,size:20,color: Colors.black,),
+                //           SizedBox(width: 7,),
+                //           //Icon(Icons.shopping_cart,color: Colors.black,),
+                //           //
+                //           //Image.asset("assets/icons/wishicon.png",height: 30,width: 30,),
+                //
+                //           //buildSettingAndAddonsHorizontalMenu(),
+                //           SizedBox(
+                //             height: 30,
+                //             width: 30,
+                //             child: Expanded(
+                //               flex: 1,
+                //                 child: buildBodyChildren()),
+                //           ),
+                //
+                //           SizedBox(width: 14,),
+                //         ],
+                //       ),
+                //     )
+                //   ],
+                // ),
+
+
+
                 // PreferredSize(
                 //   preferredSize: Size.fromHeight(80),
                 //   child: buildAppBar(statusBarHeight, context),
                 // ),
-                drawer: MainDrawer(),
+               drawer: MainDrawer(),
                 body: Stack(
                   children: [
+
                     RefreshIndicator(
                       color: MyTheme.accent_color,
                       backgroundColor: Colors.white,
@@ -195,7 +254,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         slivers: <Widget>[
                           SliverToBoxAdapter(
                             child: SizedBox(
-                              height: 154,
+                              height:150,
                               child: buildHomeFeaturedCategories(
                                   context, homeData),
                             ),
@@ -539,6 +598,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         ],
                       ),
                     ),
+
+
                     Align(
                         alignment: Alignment.center,
                         child: buildProductLoadingContainer(homeData))
@@ -803,7 +864,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       //snapshot.hasData
       return GridView.builder(
           padding:
-          const EdgeInsets.only(left: 18, right: 18, top: 12, bottom: 0),
+          const EdgeInsets.only(left: 18, right: 18, top: 15, bottom:0),
           scrollDirection: Axis.horizontal,
           controller: homeData.featuredCategoryScrollController,
           itemCount: homeData.featuredCategoryList.length,
@@ -849,7 +910,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           homeData.featuredCategoryList[index].name,
                           textAlign: TextAlign.center,
                           overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
+                          maxLines: 2,
                           softWrap: true,
                           style: TextStyle(fontSize: 12, color:Colors.black,),
                         ),
