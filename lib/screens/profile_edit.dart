@@ -106,7 +106,9 @@ class _ProfileEditState extends State<ProfileEdit> {
         avatar_original.$ = profileImageUpdateResponse.path;
         setState(() {});
       }
+
    // }
+
   }
 
   Future<void> _onPageRefresh() async {}

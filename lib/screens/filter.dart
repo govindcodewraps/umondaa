@@ -1169,7 +1169,7 @@ class _FilterState extends State<Filter> {
                     crossAxisCount: 2,
                     crossAxisSpacing: 14,
                     mainAxisSpacing: 14,
-                    childAspectRatio: 1),
+                    childAspectRatio: 2),
                 padding: EdgeInsets.only(top:20,bottom:10,left:18,right:18),
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,

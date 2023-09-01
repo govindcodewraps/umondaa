@@ -23,39 +23,40 @@ class _BrandSquareCardState extends State<BrandSquareCard> {
         }));
       },
       child: Container(
-        decoration: BoxDecorations.buildBoxDecoration_1(),
+         decoration: BoxDecorations.buildBoxDecoration_1(),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Flexible(
-                flex: 1,
-                //height: 60,
-                  //width: double.infinity,
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(16), bottom: Radius.zero),
-                      child: FadeInImage.assetNetwork(
-                        placeholder: 'assets/placeholder.png',
-                        image:  widget.image,
-                        fit: BoxFit.cover,
-                      ))),
+              // Flexible(
+              //   flex: 1,
+              //   //height: 60,
+              //     //width: double.infinity,
+              //     child: ClipRRect(
+              //         borderRadius: BorderRadius.vertical(
+              //             top: Radius.circular(16), bottom: Radius.zero),
+              //         child: FadeInImage.assetNetwork(
+              //           placeholder: 'assets/placeholder.png',
+              //           image:  widget.image,
+              //           fit: BoxFit.cover,
+              //         )
+              //     )
+              // ),
               Container(
-                height: 40,
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+                // child: Padding(
+                //   padding: EdgeInsets.fromLTRB(6, 6, 6, 6),
                   child: Text(
                     widget.name,
                     textAlign: TextAlign.left,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                     style: TextStyle(
-                        color: MyTheme.font_grey,
-                        fontSize: 14,
+                        color: MyTheme.blue,
+                        fontSize: 17,
                         height: 1.6,
                         fontWeight: FontWeight.bold),
                   ),
-                ),
+//                ),
               ),
             ]),
       ),
