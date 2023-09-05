@@ -41,6 +41,8 @@ import 'package:toast/toast.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../repositories/auth_repository.dart';
+import 'InProfileScreen/Payment_Screen.dart';
+import 'InProfileScreen/commisssion_history_screen.dart';
 
 class Profile extends StatefulWidget {
   Profile({Key key, this.show_back_button = false}) : super(key: key);
@@ -324,9 +326,9 @@ class _ProfileState extends State<Profile> {
               LangText(context).local.all_digital_products_ucf,
 
               onPressed: () {
-            // Navigator.push(context, MaterialPageRoute(builder: (context) {
-            //   return DigitalProducts();
-            // }));
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return PaymentScreen();
+            }));
           }),
           Divider(
             thickness: 1,
@@ -445,9 +447,9 @@ class _ProfileState extends State<Profile> {
               buildBottomVerticalCardListItem("assets/shop.png",
                   LangText(context).local.followed_sellers_ucf,
                   onPressed: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context) {
-                //   return FollowedSellers();
-                // }));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return CommissionHistoryScreen();
+                }));
               }),
               Divider(
                 thickness: 1,
