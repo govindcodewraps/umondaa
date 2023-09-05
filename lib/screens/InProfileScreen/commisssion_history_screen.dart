@@ -22,7 +22,32 @@ class _CommissionHistoryScreenState extends State<CommissionHistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: Scaffold(
-      body:listview(),
+      appBar: AppBar(
+        centerTitle:true,
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(
+          color: Colors.black, // Change this to your desired color
+        ),
+        title: Row(
+          children: [
+            Spacer(),
+            Image.asset(
+              'assets/appbarlogo.png',width:100,height: 80,
+              //height: 40,
+              //width: 250,
+            ),
+            Spacer(),
+            Icon(Icons.notifications,color: Colors.white,),
+            Icon(Icons.notifications,color: Colors.white,),
+
+
+          ],
+        ),
+      ),
+      body:Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: listview(),
+      ),
     ));
   }
 
@@ -47,52 +72,34 @@ class _CommissionHistoryScreenState extends State<CommissionHistoryScreen> {
                         //crossAxisAlignment: CrossAxisAlignment.end,
                         //mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Row(
-                            //crossAxisAlignment: CrossAxisAlignment.end,
-                            // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text("Id :                          ", textAlign: TextAlign.start,),
-                              SizedBox(width: 30,),
-                              Text(snapshot.data.data[index].id.toString(),),
-                            ],),
+
                           Row(
                             children: [
-                              Text("Order ID :              "),
-                              SizedBox(width: 30,),
-                              Text(snapshot.data.data[index].orderId.toString(),),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                Text("Id :", style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
+                                Text("Order ID :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
+                                Text("User_ID :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
+                                Text("Seller Earning :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
+                                Text("Created At :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
+                                Text("updated At :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
 
-                            ],),
-                          Row(
-                            children: [
-                              Text("User_ID :               "),
-                              SizedBox(width: 30,),
-                              Text(snapshot.data.data[index].userId.toString(),),
+                              ],),
+                              SizedBox(width: 8,),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                Text(snapshot.data.data[index].id.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                                Text(snapshot.data.data[index].orderId.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                                Text(snapshot.data.data[index].userId.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                                Text(snapshot.data.data[index].sellerEarning.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                                Text(snapshot.data.data[index].createdAt.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                                Text(snapshot.data.data[index].updatedAt.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
 
-                            ],),
-                          Row(
-                            children: [
-                              Text("Seller Earning :   "),
-                              SizedBox(width: 30,),
-
-                              Text(snapshot.data.data[index].sellerEarning.toString(),),
-
-                            ],),
-                          Row(
-                            children: [
-                              Text("Created At :          "),
-                              SizedBox(width: 30,),
-
-                              Text(snapshot.data.data[index].createdAt.toString(),),
-
-                            ],),
-                          Row(
-                            children: [
-                              Text("updated At :         "),
-                              SizedBox(width: 30,),
-
-                              Text(snapshot.data.data[index].updatedAt.toString(),),
-
-                            ],),
+                              ],),
+                            ],
+                          ),
 
                           SizedBox(height: 25,),
 

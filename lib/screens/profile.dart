@@ -405,24 +405,24 @@ class _ProfileState extends State<Profile> {
 
 
           // this is addon
-          if(false)
-          Column(
-            children: [
-              buildBottomVerticalCardListItem("assets/wholesale.png",
-                  LangText(context).local.wholesale_products_ucf,
-                  onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return WholeSaleProducts();
-                }));
-              }),
-              Divider(
-                thickness: 1,
-                color: MyTheme.light_grey,
-              ),
-            ],
-          ),
+          //if(false)
+          // Column(
+          //   children: [
+          //     buildBottomVerticalCardListItem("assets/wholesale.png",
+          //         LangText(context).local.wholesale_products_ucf,
+          //         onPressed: () {
+          //       Navigator.push(context, MaterialPageRoute(builder: (context) {
+          //         return WholeSaleProducts();
+          //       }));
+          //     }),
+          //     Divider(
+          //       thickness: 1,
+          //       color: MyTheme.light_grey,
+          //     ),
+          //   ],
+          // ),
 
-          if(vendor_system.$)
+         // if(vendor_system.$)
           Column(
             children: [
               buildBottomVerticalCardListItem("assets/shop.png",
@@ -792,7 +792,7 @@ class _ProfileState extends State<Profile> {
         cacheExtent: 5.0,
         mainAxisSpacing: 16,
         children: [
-          if (wallet_system_status.$)
+         // if (wallet_system_status.$)
             Container(
               // color: Colors.red,
 
