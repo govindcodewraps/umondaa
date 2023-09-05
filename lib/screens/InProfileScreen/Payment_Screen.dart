@@ -21,7 +21,33 @@ class _PaymentScreenState extends State<PaymentScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: Scaffold(
-      body:listview(),
+    appBar: AppBar(
+      centerTitle:true,
+      backgroundColor: Colors.white,
+      iconTheme: IconThemeData(
+        color: Colors.black, // Change this to your desired color
+      ),
+      title: Row(
+        children: [
+          Spacer(),
+          Image.asset(
+            'assets/appbarlogo.png',width:100,height: 80,
+            //height: 40,
+            //width: 250,
+          ),
+          Spacer(),
+          Icon(Icons.notifications,color: Colors.white,),
+          Icon(Icons.notifications,color: Colors.white,),
+
+
+        ],
+      ),
+    ),
+
+      body:Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: listview(),
+      ),
     ));
   }
 
@@ -46,103 +72,176 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         //crossAxisAlignment: CrossAxisAlignment.end,
                         //mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Row(
-                            //crossAxisAlignment: CrossAxisAlignment.end,
-                            // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text("Id :", textAlign: TextAlign.start,),
-                              SizedBox(width: 30,),
-                              Text(snapshot.data.data[index].id.toString(), textAlign: TextAlign.center,),
-                            ],),
-                          Row(
-                            children: [
-                              Text("Code :"),
-                              SizedBox(width: 30,),
-                              Text(snapshot.data.data[index].code.toString(),),
-                            ],),
-                          Row(
-                            children: [
-                              Text("User_ID :"),
-                              SizedBox(width: 30,),
-                              Text(snapshot.data.data[index].userId.toString(),),
-                            ],),
-                          Row(
-                            children: [
-                              Text("Payment_type :"),
-                              SizedBox(width: 30,),
+Row(children: [
+  Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
 
-                              Text(snapshot.data.data[index].paymentType.toString().substring(12),),
-                            ],),
-                          Row(
-                            children: [
-                              Text("Payment_status :"),
-                              SizedBox(width: 30,),
+      Text("Id :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600),),
 
-                              Text(snapshot.data.data[index].paymentStatus.toString().substring(14),),
-                            ],),
-                          Row(
-                            children: [
-                              Text("Payment status string :"),
-                              SizedBox(width: 30,),
+      Text("Code :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
 
-                              Text(snapshot.data.data[index].paymentStatusString.toString().substring(20),),
-                            ],),
-                          Row(
-                            children: [
-                              Text("Delivery Status :"),
-                              SizedBox(width: 30,),
+      Text("User_ID :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
 
-                              Text(snapshot.data.data[index].deliveryStatus.toString().substring(15)),
-                            ],),
-                          Row(
-                            children: [
-                              Text("Grand Total :"),
-                              SizedBox(width: 30,),
+      Text("Payment_type :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
 
-                              Text(snapshot.data.data[index].grandTotal.toString(),),
-                            ],),
-                          Row(
-                            children: [
-                              Text("Plane Grand Total :"),
-                              SizedBox(width: 30,),
+      Text("Payment_status :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
 
-                              Text(snapshot.data.data[index].planeGrandTotal.toString()),
-                            ],),
-                          Row(
-                            children: [
-                              Text("Coupon Discount :"),
-                              SizedBox(width: 30,),
+      Text("Payment status string :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
 
-                              Text(snapshot.data.data[index].couponDiscount.toString().substring(15),),
-                             // Text(snapshot.data.data[index].couponDiscount.toString(),),
-                            ],),
-                          Row(
-                            children: [
-                              Text("Shipping Cost :"),
-                              SizedBox(width: 30,),
+      Text("Delivery Status :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
 
-                              Text(snapshot.data.data[index].shippingCost.toString().substring(15),),
-                            ],),
-                          Row(
-                            children: [
-                              Text("Sub Total :"),
-                              SizedBox(width: 30,),
+      Text("Grand Total :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
 
-                              Text(snapshot.data.data[index].subtotal.toString(),),
-                            ],),
-                          Row(
-                            children: [
-                              Text("Tax :"),
-                              SizedBox(width: 30,),
+      Text("Plane Grand Total :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
 
-                              Text(snapshot.data.data[index].tax.toString(),),
-                            ],),
-                          Row(
-                            children: [
-                              Text("Date :"),
-                              SizedBox(width: 30,),
-                              Text(snapshot.data.data[index].date.toString(),),
-                            ],),
+      Text("Coupon Discount :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
+
+      Text("Shipping Cost :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
+
+      Text("Sub Total :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
+
+      Text("Tax : ",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
+
+      Text("Date :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
+
+    ],),
+
+
+  SizedBox(width: 8,),
+  Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+
+    Text(snapshot.data.data[index].id.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+
+    Text(snapshot.data.data[index].code.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+      Text(snapshot.data.data[index].userId.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+
+    Text(snapshot.data.data[index].paymentType.toString().substring(12),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+
+    Text(snapshot.data.data[index].paymentStatus.toString().substring(14),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+
+    Text(snapshot.data.data[index].paymentStatusString.toString().substring(20),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+
+    Text(snapshot.data.data[index].deliveryStatus.toString().substring(15),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+
+    Text(snapshot.data.data[index].grandTotal.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+
+    Text(snapshot.data.data[index].planeGrandTotal.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+
+    Text(snapshot.data.data[index].couponDiscount.toString().substring(15),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+
+    Text(snapshot.data.data[index].shippingCost.toString().substring(15),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+
+    Text(snapshot.data.data[index].subtotal.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+
+    Text(snapshot.data.data[index].tax.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+
+    Text(snapshot.data.data[index].date.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+
+  ],),
+],),
+
+
+                          //
+                          // Row(
+                          //   //crossAxisAlignment: CrossAxisAlignment.end,
+                          //   // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          //   children: [
+                          //     Text("Id :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500),),
+                          //     SizedBox(width: 30,),
+                          //     Text(snapshot.data.data[index].id.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //   ],),
+                          // Row(
+                          //   children: [
+                          //     Text("Code :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //     SizedBox(width: 30,),
+                          //     Text(snapshot.data.data[index].code.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //   ],),
+                          // Row(
+                          //   children: [
+                          //     Text("User_ID :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //     SizedBox(width: 30,),
+                          //     Text(snapshot.data.data[index].userId.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //   ],),
+                          // Row(
+                          //   children: [
+                          //     Text("Payment_type :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //     SizedBox(width: 30,),
+                          //
+                          //     Text(snapshot.data.data[index].paymentType.toString().substring(12),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //   ],),
+                          // Row(
+                          //   children: [
+                          //     Text("Payment_status :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //     SizedBox(width: 30,),
+                          //
+                          //     Text(snapshot.data.data[index].paymentStatus.toString().substring(14),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //   ],),
+                          // Row(
+                          //   children: [
+                          //     Text("Payment status string :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //     SizedBox(width: 30,),
+                          //
+                          //     Text(snapshot.data.data[index].paymentStatusString.toString().substring(20),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //   ],),
+                          // Row(
+                          //   children: [
+                          //     Text("Delivery Status :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //     SizedBox(width: 30,),
+                          //
+                          //     Text(snapshot.data.data[index].deliveryStatus.toString().substring(15),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //   ],),
+                          // Row(
+                          //   children: [
+                          //     Text("Grand Total :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //     SizedBox(width: 30,),
+                          //
+                          //     Text(snapshot.data.data[index].grandTotal.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //   ],),
+                          // Row(
+                          //   children: [
+                          //     Text("Plane Grand Total :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //     SizedBox(width: 30,),
+                          //
+                          //     Text(snapshot.data.data[index].planeGrandTotal.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //   ],),
+                          // Row(
+                          //   children: [
+                          //     Text("Coupon Discount :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //     SizedBox(width: 30,),
+                          //
+                          //     Text(snapshot.data.data[index].couponDiscount.toString().substring(15),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //    // Text(snapshot.data.data[index].couponDiscount.toString(),),
+                          //   ],),
+                          // Row(
+                          //   children: [
+                          //     Text("Shipping Cost :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //     SizedBox(width: 30,),
+                          //
+                          //     Text(snapshot.data.data[index].shippingCost.toString().substring(15),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //   ],),
+                          // Row(
+                          //   children: [
+                          //     Text("Sub Total :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //     SizedBox(width: 30,),
+                          //
+                          //     Text(snapshot.data.data[index].subtotal.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //   ],),
+                          // Row(
+                          //   children: [
+                          //     Text("Tax :                           ",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //     SizedBox(width: 30,),
+                          //
+                          //     Text(snapshot.data.data[index].tax.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //   ],),
+                          // Row(
+                          //   children: [
+                          //     Text("Date :                        ",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //     SizedBox(width: 30,),
+                          //     Text(snapshot.data.data[index].date.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                          //   ],),
                           SizedBox(height: 25,),
 
                         ],);
