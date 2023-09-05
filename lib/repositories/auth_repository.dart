@@ -33,6 +33,7 @@ class AuthRepository {
           "App-Language": app_language.$,
         },
         body: post_body);
+    print("login respone id "+response.body.toString());
 
     return loginResponseFromJson(response.body);
   }
@@ -54,7 +55,7 @@ class AuthRepository {
         },
         body: post_body);
     print(post_body);
-    print(response.body.toString());
+    print("login respone id "+response.body.toString());
     return loginResponseFromJson(response.body);
   }
 
