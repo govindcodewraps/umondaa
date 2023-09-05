@@ -428,7 +428,7 @@ class _TopBrandsState extends State<TopBrands> {
         ],
         centerTitle: false,
         flexibleSpace: Padding(
-          padding: const EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 0.0),
+          padding: const EdgeInsets.fromLTRB(0.0, 6.0, 0.0, 0.0),
           child: Column(
             children: [buildTopAppbar(context), buildBottomAppBar(context)],
           ),
@@ -1056,6 +1056,7 @@ class _TopBrandsState extends State<TopBrands> {
 
   Container buildProductList() {
     return Container(
+      margin:  const EdgeInsets.fromLTRB(0, 25, 0, 0),
       child: Column(
         children: [
           Expanded(
@@ -1125,6 +1126,7 @@ class _TopBrandsState extends State<TopBrands> {
 
   Container buildBrandList() {
     return Container(
+      margin:  const EdgeInsets.fromLTRB(0, 25, 0, 0),
       child: Column(
         children: [
           Expanded(
@@ -1192,6 +1194,7 @@ class _TopBrandsState extends State<TopBrands> {
 
   Container buildShopList() {
     return Container(
+      margin:  const EdgeInsets.fromLTRB(0, 25, 0, 0),
       child: Column(
         children: [
           Expanded(

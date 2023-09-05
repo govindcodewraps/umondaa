@@ -142,9 +142,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   },
                   child: Image.asset("assets/icons/wishicon.png",height: 25,width: 25,)),
 
-
-
-
                             // SizedBox(
                             //   height: 30,
                             //   width: 30,
@@ -883,7 +880,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     category_id: homeData.featuredCategoryList[index].id,
                     category_name: homeData.featuredCategoryList[index].name,
                   );
-                }));
+                }
+                ));
               },
               child: Container(
                 //decoration: BoxDecorations.buildBoxDecoration_1(),
@@ -1226,11 +1224,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           ),
         ),*/
 
-
-
-
-
-
         /*       Flexible(
           flex: 1,
           fit: FlexFit.tight,
@@ -1314,11 +1307,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             ),
           ),
         ),*/
-
-
-
-
-
       ],
     );
   }
@@ -1346,7 +1334,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             onPageChanged: (index, reason) {
               homeData.incrementCurrentSlider(index);
             }),
-        items: homeData.carouselImageList.map((i) {
+          items: homeData.carouselImageList.map((i) {
           return Builder(
             builder: (BuildContext context) {
               return Padding(
@@ -1354,31 +1342,76 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     left: 18, right: 18, top: 0, bottom: 20),
                 child: Stack(
                   children: <Widget>[
-                    Container(
-                      //color: Colors.amber,
-                        width: double.infinity,
-                        height: 140,
-                        //decoration: BoxDecorations.buildBoxDecoration_1(),
-                        child: AIZImage.radiusImage(i, 6)),
-                    Align(
+                    GestureDetector(
+                    onTap: () {
+                      if(homeData.current_slider == 0) {
+                        Navigator.push(
+                            context, MaterialPageRoute(builder: (context) {
+                              return CategoryProducts(
+                                category_id: homeData.featuredCategoryList[2].id,
+                                category_name: homeData.featuredCategoryList[2].name,
+                              );
+                            }
+                            )
+                        );
+                      }
+                      if(homeData.current_slider == 1) {
+                        Navigator.push(
+                            context, MaterialPageRoute(builder: (context) {
+                          return CategoryProducts(
+                            category_id: homeData.featuredCategoryList[0].id,
+                            category_name: homeData.featuredCategoryList[0].name,
+                          );
+                        }
+                        )
+                        );
+                      }
+                      if(homeData.current_slider == 2) {
+                        Navigator.push(
+                            context, MaterialPageRoute(builder: (context) {
+                          return CategoryProducts(
+                            category_id: homeData.featuredCategoryList[1].id,
+                            category_name: homeData.featuredCategoryList[1].name,
+                          );
+                        }
+                        )
+                        );
+                      }
+                    },
+                      child: Container(
+
+                            //color: Colors.amber,
+                              width: double.infinity,
+                              height: 140,
+                              //decoration: BoxDecorations.buildBoxDecoration_1(),
+                              child: AIZImage.radiusImage(i, 6)
+                      ),
+                    ),
+
+                Align(
                       alignment: Alignment.bottomCenter,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: homeData.carouselImageList.map((url) {
                           int index = homeData.carouselImageList.indexOf(url);
+
                           return Container(
+                              child: Container(
                             width: 7.0,
                             height: 7.0,
                             margin: EdgeInsets.symmetric(
                                 vertical: 10.0, horizontal: 4.0),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: homeData.current_slider == index
-                                  ? MyTheme.white
-                                  : Color.fromRGBO(112, 112, 112, .3),
-                            ),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: homeData.current_slider == index
+                                      ? MyTheme.white
+                                      : Color.fromRGBO(112, 112, 112, .3),
+                                ),
+                              ),
+
                           );
-                        }).toList(),
+                        }
+                        ).toList(),
                       ),
                     ),
                   ],
@@ -1427,6 +1460,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               reverse: false,
               autoPlay: true,
               onPageChanged: (index, reason) {
+                print("home.dart, Line 1444 ${index}");
                 // setState(() {
                 //   homeData.current_slider = index;
                 // });

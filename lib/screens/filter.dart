@@ -1060,6 +1060,7 @@ class _FilterState extends State<Filter> {
 
   Container buildProductList() {
     return Container(
+      margin:  const EdgeInsets.fromLTRB(0, 35, 0, 0),
       child: Column(
         children: [
           Expanded(
@@ -1129,6 +1130,7 @@ class _FilterState extends State<Filter> {
 
   Container buildBrandList() {
     return Container(
+      margin:  const EdgeInsets.fromLTRB(0, 35, 0, 0),
       child: Column(
         children: [
           Expanded(
@@ -1195,6 +1197,7 @@ class _FilterState extends State<Filter> {
 
   Container buildShopList() {
     return Container(
+      margin:  const EdgeInsets.fromLTRB(0, 35, 0, 0),
       child: Column(
         children: [
           Expanded(
