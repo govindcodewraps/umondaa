@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:hardware_lo/custom/device_info.dart';
 import 'package:hardware_lo/my_theme.dart';
 import 'package:hardware_lo/custom/useful_elements.dart';
@@ -10,6 +12,9 @@ import 'package:hardware_lo/custom/toast_component.dart';
 import 'package:toast/toast.dart';
 import 'package:hardware_lo/repositories/place_ad_repository.dart';
 
+const List<String> category = <String>['Select Category', 'Home & Garden', 'Electronics', 'Motors', 'Fashion', 'Collectibles & Arts', 'Sports', 'Health & Beauty', 'Industrial Equipment'];
+const List<String> brands = <String>['Select Brand', 'Adidas', 'Apple', 'Bosch', 'Hugo Bosss', 'Nike', 'Rolex', 'Sony'];
+
 class placead extends StatefulWidget {
   // const placead({super.key});
 
@@ -18,7 +23,12 @@ class placead extends StatefulWidget {
 }
 
 class _placeadState extends State<placead> {
-  bool light = true;
+  bool light = false, isChecked = true;
+  List<File> selectedImages = [];
+  final picker = ImagePicker();
+  String dropdownBrands = brands[0];
+  String dropdownCategory = category[0];
+
   TextEditingController _ProductName = TextEditingController();
   TextEditingController _Category = TextEditingController();
   TextEditingController _Brand = TextEditingController();
@@ -84,17 +94,17 @@ class _placeadState extends State<placead> {
   }
 
   Widget buildBody() {
-    bool light = true;
+    bool light = false;
     return ListView(
         children: [
           Container(
-            margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+            margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
             child: Card(
               elevation: 10,
               child: Column(
                 children: [
                   Container(
-                      margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                      margin: const EdgeInsets.fromLTRB(5, 20, 0, 0),
                       child: const Align(
                         alignment: Alignment.topLeft,
                         child: Text("Ad Information",
@@ -103,7 +113,7 @@ class _placeadState extends State<placead> {
                       )
                   ),
                   Container(
-                    margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    margin: const EdgeInsets.fromLTRB(5, 0, 0, 0),
                     child: TextField(
                       controller: _ProductName,
                       autofocus: false,
@@ -117,7 +127,7 @@ class _placeadState extends State<placead> {
                   ),
 
                   Container(
-                      margin: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+                      margin: const EdgeInsets.fromLTRB(5, 16, 0, 0),
                       child: const Align(
                         alignment: Alignment.topLeft,
                         child: Text("Category",
@@ -126,39 +136,45 @@ class _placeadState extends State<placead> {
                       )
                   ),
                   Container(
-                    margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                    child: TextField(
-                      controller: _Category,
-                      autofocus: false,
-                      enableSuggestions: false,
-                      autocorrect: false,
-                      decoration: const InputDecoration(
-                        border: UnderlineInputBorder(),
-                        labelText: 'Nothing slected',
-                      ),
-                    ),
+                    margin: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                    alignment: Alignment.topLeft,
+                    // child: TextField(
+                    //   controller: _Category,
+                    //   autofocus: false,
+                    //   enableSuggestions: false,
+                    //   autocorrect: false,
+                    //   decoration: const InputDecoration(
+                    //     border: UnderlineInputBorder(),
+                    //     labelText: 'Nothing slected',
+                    //   ),
+                    // ),
+                    child: CategoryDropdown(),
                   ),
                   Container(
-                      margin: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+                      margin: const EdgeInsets.fromLTRB(5, 16, 0, 0),
                       child: const Align(
                         alignment: Alignment.topLeft,
                         child: Text("Brand",
                             style: TextStyle(fontSize: 20,
-                                color: Color.fromARGB(255, 0, 0, 0))),
+                                color: Color.fromARGB(255, 0, 0, 0))
+                        ),
                       )
                   ),
                   Container(
-                    margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                    child: TextField(
-                      controller: _Brand,
-                      autofocus: false,
-                      enableSuggestions: false,
-                      autocorrect: false,
-                      decoration: const InputDecoration(
-                        border: UnderlineInputBorder(),
-                        labelText: 'Nothing slected',
-                      ),
-                    ),
+                    margin: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                    alignment: Alignment.topLeft,
+                    // child: TextField(
+                    //   controller: _Brand,
+                    //   autofocus: false,
+                    //   enableSuggestions: false,
+                    //   autocorrect: false,
+                    //   decoration: const InputDecoration(
+                    //     border: UnderlineInputBorder(),
+                    //     labelText: 'Nothing slected',
+                    //   ),
+                    // ),
+                      child: BrandDropdown(),
+
                   ),
                   Container(
                     margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
@@ -168,14 +184,16 @@ class _placeadState extends State<placead> {
               ),
             ),
           ),
+
           //-------------------
           Container(
+            margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
             child: Card(
               elevation: 10,
               child: Column(
                 children: [
                   Container(
-                      margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                      margin: const EdgeInsets.fromLTRB(5, 20, 0, 0),
                       child: const Align(
                         alignment: Alignment.topLeft,
                         child: Text("Ad Image",
@@ -184,22 +202,67 @@ class _placeadState extends State<placead> {
                       )
                   ),
                   Container(
-                    margin: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-                    child: GestureDetector(
-                        child: const Align(
-                          alignment: Alignment.center,
-                          child: Text("Drop files here to upload",
-                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold,
+                   // alignment: Alignment.center,
+                    child: Center(
+                      child: Column(
+                        //mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(Colors.green)),
+                              child: const Text('Select Image from Gallery',
+                                  style: TextStyle(fontSize: 20,
                                   color: Color.fromARGB(255, 0, 0, 0))),
-                        ),
-                        onTap: () {
-                          //imagepick();
-                        }
+                              onPressed: () {
+                                getImages();
+                              },
+                          ),
 
+                          SizedBox(
+                            height: 300,
+                            width: 300,
+                            child: selectedImages.isEmpty
+                                ?  Center(child: Text('Sorry nothing selected!!'))
+                                : GridView.builder(
+                              itemCount: selectedImages.length,
+                              gridDelegate:
+                               SliverGridDelegateWithFixedCrossAxisCount(
+                                 crossAxisSpacing: 5,
+                                  mainAxisSpacing: 5,
+                                  crossAxisCount: 2),
+                              itemBuilder: (BuildContext context, int index) {
+                                print("Placead.dart, index : ${index}");
+                                return Center(
+                                    child: Stack(
+                                    children: [
+                                      Container(
+                                        width: 200,
+                                        height: 200,
+                                        alignment: Alignment.center,
+                                        child: Image.file(selectedImages[index],fit: BoxFit.cover,),
+                                      ),
+                                      Positioned(
+                                        top: 5, right: 20,
+                                        child: GestureDetector(
+                                          child: Icon(Icons.close, size: 30, color: Colors.red,),
+                                          onTap: (){
+                                            delete(index);
+                                          },
+                                      ),
+                                      ),
+                                    ],
+                                      //child: Image.file(selectedImages[index])
+                                    ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                   ),
                 ],
               ),
@@ -207,7 +270,7 @@ class _placeadState extends State<placead> {
           ),
           //---------------------
           Container(
-            margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+            margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
             child: Card(
               elevation: 10,
               child: Column(
@@ -222,7 +285,7 @@ class _placeadState extends State<placead> {
                       )
                   ),
                   Container(
-                    margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    margin: const EdgeInsets.fromLTRB(5, 0, 0, 0),
                     child: TextField(
                       controller: _PriceAED,
                       autofocus: false,
@@ -247,30 +310,26 @@ class _placeadState extends State<placead> {
                         Container(
                           child: _SwitchExampleState(),
                         ),
-                        // Container(
-                        //   child: Text(light ? "true": "false",
-                        //       style: TextStyle(fontSize: 20,
-                        //           color: Color.fromARGB(255, 0, 0, 0))),
-                        // ),
+                        Container(
+                          child: light == false ? Container(
+                              ): Container(margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            child: TextField(
+                              controller: _MinOfferPrice,
+                              autofocus: false,
+                              enableSuggestions: false,
+                              autocorrect: false,
+                              decoration: const InputDecoration(
+                                border: UnderlineInputBorder(),
+                                labelText: 'Minimum Offer Price',
+                              ),
+                            ),
+                          ),
+                        ),
 
                       ],
                     ),
                   ),
                   Container(
-                    margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                    child: TextField(
-                      controller: _MinOfferPrice,
-                      autofocus: false,
-                      enableSuggestions: false,
-                      autocorrect: false,
-                      decoration: const InputDecoration(
-                        border: UnderlineInputBorder(),
-                        labelText: 'Minimum Offer Price',
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                   ),
                 ],
               ),
@@ -278,13 +337,13 @@ class _placeadState extends State<placead> {
           ),
           //---------------------
           Container(
-            margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+            margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
             child: Card(
               elevation: 10,
               child: Column(
                 children: [
                   Container(
-                      margin: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+                      margin: const EdgeInsets.fromLTRB(5, 16, 0, 0),
                       child: const Align(
                         alignment: Alignment.topLeft,
                         child: Text("Ad Description",
@@ -293,7 +352,7 @@ class _placeadState extends State<placead> {
                       )
                   ),
                   Container(
-                    margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                    margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
                     child: TextField(
                       controller: _Description,
                       decoration: const InputDecoration(
@@ -305,22 +364,19 @@ class _placeadState extends State<placead> {
                       maxLines: 11,
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                  ),
                 ],
               ),
             ),
           ),
           //---------------------
           Container(
-            margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+            margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
             child: Card(
               elevation: 10,
               child: Column(
                 children: [
                   Container(
-                      margin: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+                      margin: const EdgeInsets.fromLTRB(5, 16, 0, 0),
                       child: const Align(
                         alignment: Alignment.topLeft,
                         child: Text("User Details",
@@ -329,7 +385,7 @@ class _placeadState extends State<placead> {
                       )
                   ),
                   Container(
-                    margin: const EdgeInsets.fromLTRB(0, 12, 0, 0),
+                    margin: const EdgeInsets.fromLTRB(5, 12, 0, 0),
                     child: TextField(
                       controller: _EmailID,
                       autofocus: false,
@@ -342,7 +398,7 @@ class _placeadState extends State<placead> {
                     ),
                   ),
                   Container(
-                    margin: const EdgeInsets.fromLTRB(0, 12, 0, 0),
+                    margin: const EdgeInsets.fromLTRB(5, 12, 0, 0),
                     child: TextField(
                       controller: _PassWord,
                       autofocus: false,
@@ -355,8 +411,34 @@ class _placeadState extends State<placead> {
                       ),
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child: Row(
+                      children: [
+                        Container(
+                          child: _CheckState(),
+                        ),
+                        Container(
+                          child: Column(
+                              children: [
+                                Container(
+                                  child: Text("I hereby agree to the Terms and Conditions",
+                                      style: TextStyle(fontSize: 14,
+                                          color: Color.fromARGB(255, 0, 0, 0))),
+                                ),
+                                Container(
+                                  child: Text("and Privacy Policy of UMONDA LLC.",
+                                      style: TextStyle(fontSize: 14,
+                                          color: Color.fromARGB(255, 0, 0, 0))),
+                                ),
+                              ]
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   Container(
-                      margin: const EdgeInsets.fromLTRB(0, 6, 0, 0),
+                      margin: const EdgeInsets.fromLTRB(5, 6, 0, 0),
                       child: const Align(
                         alignment: Alignment.topLeft,
                         child: Text("* Mandatory Fields",
@@ -408,6 +490,80 @@ class _placeadState extends State<placead> {
     );
   }
 //------------------------
+  _CheckState () {
+    Color getColor(Set<MaterialState> states) {
+      const Set<MaterialState> interactiveStates = <MaterialState>{
+        MaterialState.pressed,
+        MaterialState.hovered,
+        MaterialState.focused,
+      };
+      if (states.any(interactiveStates.contains)) {
+        return Colors.blue;
+      }
+      return Colors.red;
+    }
+    return Checkbox(
+      checkColor: Colors.white,
+      fillColor: MaterialStateProperty.resolveWith(getColor),
+      value: isChecked,
+      onChanged: (bool value) {
+        setState(() {
+          isChecked = value;
+        });
+      },
+    );
+  }
+  //------------------------
+  CategoryDropdown () {
+    return DropdownButton<String>(
+      value: dropdownCategory,
+      icon: const Icon(Icons.keyboard_arrow_down, size: 35,),
+      elevation: 5,
+      style: const TextStyle(color: Colors.black),
+      underline: Container(
+        height: 1,
+        color: Colors.black,
+      ),
+      onChanged: (String value) {
+        // This is called when the user selects an item.
+        setState(() {
+          dropdownCategory = value;
+        });
+      },
+      items: category.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value, style: TextStyle(fontSize: 18),),
+        );
+      }).toList(),
+    );
+  }
+  //------------------------
+  BrandDropdown () {
+    return DropdownButton<String>(
+      value: dropdownBrands,
+      icon: const Icon(Icons.keyboard_arrow_down, size: 35,),
+      elevation: 5,
+      style: const TextStyle(color: Colors.black),
+      underline: Container(
+        height: 1,
+        color: Colors.black,
+      ),
+      onChanged: (String value) {
+        // This is called when the user selects an item.
+        setState(() {
+          dropdownBrands = value;
+        });
+      },
+      items: brands.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value, style: TextStyle(fontSize: 18),),
+        );
+      }).toList(),
+    );
+  }
+//------------------------
   _SwitchExampleState () {
 
     return Switch(
@@ -423,6 +579,26 @@ class _placeadState extends State<placead> {
       },
     );
   }
+
+//-------------------------------
+  Future getImages() async {
+    final pickedFile = await picker.pickMultiImage(
+        imageQuality: 100, maxHeight: 1000, maxWidth: 1000);
+    List<XFile> xfilePick = pickedFile;
+
+    setState(
+          () {
+        if (xfilePick.isNotEmpty) {
+          for (var i = 0; i < xfilePick.length; i++) {
+            selectedImages.add(File(xfilePick[i].path));
+          }
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Nothing is selected')));
+        }
+      },
+    );
+  }
 //----------------
 //   _getFromGallery() async {
 //     PickedFile pickedFile = await ImagePicker().getImage(
@@ -431,10 +607,11 @@ class _placeadState extends State<placead> {
 //       maxHeight: 1800,
 //     );
 //     if (pickedFile != null) {
-//       File imageFile = File(pickedFile.path);
+//       setState(() {
+//         imageFile = File(pickedFile.path);
+//       });
 //     }
 //   }
-
 //-----------------------
   onPressedUploadAd() async {
     var ProdName = _ProductName.text.toString();
@@ -458,6 +635,13 @@ class _placeadState extends State<placead> {
       ToastComponent.showDialog(PAResponse.message,
           gravity: Toast.center, duration: Toast.lengthLong);
     }
+  }
+//-----------------------------
+  void delete(int index){
+    setState(() {
+      selectedImages.removeAt(index);
+      print("tile number#$index is deleted");
+    });
   }
 
 

@@ -306,7 +306,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                 ),
                               )
                                   : Container(),
-                              buildHomeCarouselSlider(context, homeData),
+                               buildHomeCarouselSlider(context, homeData),
+
                               // Padding(
                               //   padding: const EdgeInsets.fromLTRB(
                               //     18.0,
@@ -444,7 +445,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               Column(
                                 //crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  buildHomeBannerTwo(context, homeData),
+                                  //buildHomeBannerTwo(context, homeData),
                                   // Padding(
                                   //   padding: const EdgeInsets.fromLTRB(
                                   //     18.0,
