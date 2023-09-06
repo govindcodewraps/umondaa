@@ -1,4 +1,4 @@
-import 'dart:async';
+﻿import 'dart:async';
 
 import 'package:hardware_lo/custom/box_decorations.dart';
 import 'package:hardware_lo/custom/btn.dart';
@@ -322,18 +322,18 @@ class _ProfileState extends State<Profile> {
             ],
           ),
 
-          buildBottomVerticalCardListItem("assets/download.png",
-              LangText(context).local.all_digital_products_ucf,
-
-              onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return PaymentScreen();
-            }));
-          }),
-          Divider(
-            thickness: 1,
-            color: MyTheme.light_grey,
-          ),
+          // buildBottomVerticalCardListItem("assets/download.png",
+          //     LangText(context).local.all_digital_products_ucf,
+          //
+          //     onPressed: () {
+          //   Navigator.push(context, MaterialPageRoute(builder: (context) {
+          //     return PaymentScreen();
+          //   }));
+          // }),
+          // Divider(
+          //   thickness: 1,
+          //   color: MyTheme.light_grey,
+          // ),
 
           // this is addon
           if(false)
@@ -423,6 +423,7 @@ class _ProfileState extends State<Profile> {
           // ),
 
          // if(vendor_system.$)
+          if(is_logged_in.$)
           Column(
             children: [
               buildBottomVerticalCardListItem("assets/shop.png",
@@ -440,6 +441,32 @@ class _ProfileState extends State<Profile> {
               ),
             ],
           ),
+          if(is_logged_in.$)
+            Column(
+              children: [
+                buildBottomVerticalCardListItem("assets/download.png",
+                    LangText(context).local.all_digital_products_ucf,
+
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                        return PaymentScreen();
+                      }));
+                    }),
+                Divider(
+                  thickness: 1,
+                  color: MyTheme.light_grey,
+                ),
+              ],
+            ),
+
+
+
+
+
+
+
+
+
 
           if(is_logged_in.$)
           Column(
@@ -792,7 +819,7 @@ class _ProfileState extends State<Profile> {
         cacheExtent: 5.0,
         mainAxisSpacing: 16,
         children: [
-         // if (wallet_system_status.$)
+          if (wallet_system_status.$)
             Container(
               // color: Colors.red,
 

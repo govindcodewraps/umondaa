@@ -74,28 +74,124 @@ class _CommissionHistoryScreenState extends State<CommissionHistoryScreen> {
                         children: [
 
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                Text("Id :", style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
-                                Text("Order ID :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
-                                Text("User_ID :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
-                                Text("Seller Earning :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
-                                Text("Created At :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
-                                Text("updated At :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)),
+                                Container(
+                                    padding: EdgeInsets.only(left: 7),
+                                    width:MediaQuery.of(context).size.width*0.33,
+                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      color: Colors.grey[300],
+                                      //border: Border.all(color: MyTheme.accent_color)
+                                    ),
+                                    child: Text("Id :", style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
+
+                               SizedBox(height:4),
+                                Container(
+                                  padding: EdgeInsets.only(left: 7),
+                                  width:MediaQuery.of(context).size.width*0.33,
+                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      color: Colors.grey[300],
+                                      //border: Border.all(color: MyTheme.accent_color)
+                      ),
+                                    child: Text("Order ID :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
+                                  SizedBox(height:4),
+                                Container(
+                                    padding: EdgeInsets.only(left: 7),
+                                    width:MediaQuery.of(context).size.width*0.33,
+                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      color: Colors.grey[300],
+                                      //border: Border.all(color: MyTheme.accent_color)
+                                    ),
+                                    child: Text("User_ID :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
+                                  SizedBox(height:4),
+                                 Container(
+                                    padding: EdgeInsets.only(left: 7),
+                                    width:MediaQuery.of(context).size.width*0.33,
+                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      color: Colors.grey[300],
+                                      //border: Border.all(color: MyTheme.accent_color)
+                                    ),
+                                    child: Text("Seller Earning :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
+                                  SizedBox(height:4),
+                                Container(
+                                    padding: EdgeInsets.only(left: 7),
+                                    width:MediaQuery.of(context).size.width*0.33,
+                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      color: Colors.grey[300],
+                                      //border: Border.all(color: MyTheme.accent_color)
+                                    ),
+                                    child: Text("Created At :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
+                                  SizedBox(height:4),
+                                  Container(
+                                    padding: EdgeInsets.only(left: 7),
+                                    width:MediaQuery.of(context).size.width*0.33,
+                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      color: Colors.grey[300],
+                                      //border: Border.all(color: MyTheme.accent_color)
+                                    ),
+                                    child: Text("updated At :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
 
                               ],),
                               SizedBox(width: 8,),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                Text(snapshot.data.data[index].id.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
-                                Text(snapshot.data.data[index].orderId.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
-                                Text(snapshot.data.data[index].userId.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
-                                Text(snapshot.data.data[index].sellerEarning.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
-                                Text(snapshot.data.data[index].createdAt.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
-                                Text(snapshot.data.data[index].updatedAt.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                                Container(
+                                    padding: EdgeInsets.only(left: 7),
+                                    width:MediaQuery.of(context).size.width*0.5,
+                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      color: Colors.grey[300],
+                                      //border: Border.all(color: MyTheme.accent_color)
+                                    ),
+                                    child: Text(snapshot.data.data[index].id.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
+                                  SizedBox(height:4),
+                                Container(
+                                    padding: EdgeInsets.only(left: 7),
+                                    width:MediaQuery.of(context).size.width*0.5,
+                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      color: Colors.grey[300],
+                                      //border: Border.all(color: MyTheme.accent_color)
+                                    ),
+                                    child: Text(snapshot.data.data[index].orderId.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
+                                  SizedBox(height:4),
+                                Container(
+                                    padding: EdgeInsets.only(left: 7),
+                                    width:MediaQuery.of(context).size.width*0.5,
+                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      color: Colors.grey[300],
+                                      //border: Border.all(color: MyTheme.accent_color)
+                                    ),
+                                    child: Text(snapshot.data.data[index].userId.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
+                                  SizedBox(height:4),
+                                  Container(
+                                    padding: EdgeInsets.only(left: 7),
+                                    width:MediaQuery.of(context).size.width*0.5,
+                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      color: Colors.grey[300],
+                                      //border: Border.all(color: MyTheme.accent_color)
+                                    ),
+                                    child: Text(snapshot.data.data[index].sellerEarning.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
+                                  SizedBox(height:4),
+                                  Container(
+                                    padding: EdgeInsets.only(left: 7),
+                                    width:MediaQuery.of(context).size.width*0.5,
+                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      color: Colors.grey[300],
+                                      //border: Border.all(color: MyTheme.accent_color)
+                                    ),
+                                    child: Text(snapshot.data.data[index].createdAt.toString().substring(0,10),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
+                                  SizedBox(height:4),
+                                  Container(
+                                    padding: EdgeInsets.only(left: 7),
+                                    width:MediaQuery.of(context).size.width*0.5,
+                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      color: Colors.grey[300],
+                                      //border: Border.all(color: MyTheme.accent_color)
+                                    ),
+                                    child: Text(snapshot.data.data[index].updatedAt.toString().substring(0,10),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
 
                               ],),
                             ],
