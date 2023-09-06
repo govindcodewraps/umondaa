@@ -81,58 +81,58 @@ class _CommissionHistoryScreenState extends State<CommissionHistoryScreen> {
                                 children: [
                                 Container(
                                     padding: EdgeInsets.only(left: 7),
-                                    width:MediaQuery.of(context).size.width*0.3,
+                                    width:MediaQuery.of(context).size.width*0.33,
                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                      color: Colors.grey,
+                                      color: Colors.grey[300],
                                       //border: Border.all(color: MyTheme.accent_color)
                                     ),
-                                    child: Text("Id :", style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600))),
+                                    child: Text("Id :", style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
 
                                SizedBox(height:4),
                                 Container(
                                   padding: EdgeInsets.only(left: 7),
-                                  width:MediaQuery.of(context).size.width*0.3,
+                                  width:MediaQuery.of(context).size.width*0.33,
                                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                      color: Colors.grey,
+                                      color: Colors.grey[300],
                                       //border: Border.all(color: MyTheme.accent_color)
                       ),
-                                    child: Text("Order ID :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600))),
+                                    child: Text("Order ID :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
                                   SizedBox(height:4),
                                 Container(
                                     padding: EdgeInsets.only(left: 7),
-                                    width:MediaQuery.of(context).size.width*0.3,
+                                    width:MediaQuery.of(context).size.width*0.33,
                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                      color: Colors.grey,
+                                      color: Colors.grey[300],
                                       //border: Border.all(color: MyTheme.accent_color)
                                     ),
-                                    child: Text("User_ID :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600))),
+                                    child: Text("User_ID :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
                                   SizedBox(height:4),
                                  Container(
                                     padding: EdgeInsets.only(left: 7),
-                                    width:MediaQuery.of(context).size.width*0.3,
+                                    width:MediaQuery.of(context).size.width*0.33,
                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                      color: Colors.grey,
+                                      color: Colors.grey[300],
                                       //border: Border.all(color: MyTheme.accent_color)
                                     ),
-                                    child: Text("Seller Earning :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600))),
+                                    child: Text("Seller Earning :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
                                   SizedBox(height:4),
                                 Container(
                                     padding: EdgeInsets.only(left: 7),
-                                    width:MediaQuery.of(context).size.width*0.3,
+                                    width:MediaQuery.of(context).size.width*0.33,
                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                      color: Colors.grey,
+                                      color: Colors.grey[300],
                                       //border: Border.all(color: MyTheme.accent_color)
                                     ),
-                                    child: Text("Created At :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600))),
+                                    child: Text("Created At :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
                                   SizedBox(height:4),
                                   Container(
                                     padding: EdgeInsets.only(left: 7),
-                                    width:MediaQuery.of(context).size.width*0.3,
+                                    width:MediaQuery.of(context).size.width*0.33,
                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                      color: Colors.grey,
+                                      color: Colors.grey[300],
                                       //border: Border.all(color: MyTheme.accent_color)
                                     ),
-                                    child: Text("updated At :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600))),
+                                    child: Text("updated At :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
 
                               ],),
                               SizedBox(width: 8,),
@@ -143,7 +143,7 @@ class _CommissionHistoryScreenState extends State<CommissionHistoryScreen> {
                                     padding: EdgeInsets.only(left: 7),
                                     width:MediaQuery.of(context).size.width*0.5,
                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                      color: Colors.grey,
+                                      color: Colors.grey[300],
                                       //border: Border.all(color: MyTheme.accent_color)
                                     ),
                                     child: Text(snapshot.data.data[index].id.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
@@ -152,7 +152,7 @@ class _CommissionHistoryScreenState extends State<CommissionHistoryScreen> {
                                     padding: EdgeInsets.only(left: 7),
                                     width:MediaQuery.of(context).size.width*0.5,
                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                      color: Colors.grey,
+                                      color: Colors.grey[300],
                                       //border: Border.all(color: MyTheme.accent_color)
                                     ),
                                     child: Text(snapshot.data.data[index].orderId.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
@@ -161,7 +161,7 @@ class _CommissionHistoryScreenState extends State<CommissionHistoryScreen> {
                                     padding: EdgeInsets.only(left: 7),
                                     width:MediaQuery.of(context).size.width*0.5,
                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                      color: Colors.grey,
+                                      color: Colors.grey[300],
                                       //border: Border.all(color: MyTheme.accent_color)
                                     ),
                                     child: Text(snapshot.data.data[index].userId.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
@@ -170,7 +170,7 @@ class _CommissionHistoryScreenState extends State<CommissionHistoryScreen> {
                                     padding: EdgeInsets.only(left: 7),
                                     width:MediaQuery.of(context).size.width*0.5,
                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                      color: Colors.grey,
+                                      color: Colors.grey[300],
                                       //border: Border.all(color: MyTheme.accent_color)
                                     ),
                                     child: Text(snapshot.data.data[index].sellerEarning.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
@@ -179,19 +179,19 @@ class _CommissionHistoryScreenState extends State<CommissionHistoryScreen> {
                                     padding: EdgeInsets.only(left: 7),
                                     width:MediaQuery.of(context).size.width*0.5,
                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                      color: Colors.grey,
+                                      color: Colors.grey[300],
                                       //border: Border.all(color: MyTheme.accent_color)
                                     ),
-                                    child: Text(snapshot.data.data[index].createdAt.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
+                                    child: Text(snapshot.data.data[index].createdAt.toString().substring(0,10),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
                                   SizedBox(height:4),
                                   Container(
                                     padding: EdgeInsets.only(left: 7),
                                     width:MediaQuery.of(context).size.width*0.5,
                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                      color: Colors.grey,
+                                      color: Colors.grey[300],
                                       //border: Border.all(color: MyTheme.accent_color)
                                     ),
-                                    child: Text(snapshot.data.data[index].updatedAt.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
+                                    child: Text(snapshot.data.data[index].updatedAt.toString().substring(0,10),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
 
                               ],),
                             ],
