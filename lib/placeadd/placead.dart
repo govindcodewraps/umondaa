@@ -311,18 +311,20 @@ class _placeadState extends State<placead> {
                           child: _SwitchExampleState(),
                         ),
                         Container(
-                          child: light == false ? Container(
+                          child: light? Container(
+                            child: Text("${light}"),
                               ): Container(margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                            child: TextField(
-                              controller: _MinOfferPrice,
-                              autofocus: false,
-                              enableSuggestions: false,
-                              autocorrect: false,
-                              decoration: const InputDecoration(
-                                border: UnderlineInputBorder(),
-                                labelText: 'Minimum Offer Price',
-                              ),
-                            ),
+                            child: Text("${light}"),
+                            // child: TextField(
+                            //   controller: _MinOfferPrice,
+                            //   autofocus: false,
+                            //   enableSuggestions: false,
+                            //   autocorrect: false,
+                            //   decoration: const InputDecoration(
+                            //     border: UnderlineInputBorder(),
+                            //     labelText: 'Minimum Offer Price',
+                            //   ),
+                            // ),
                           ),
                         ),
 
@@ -438,7 +440,7 @@ class _placeadState extends State<placead> {
                     ),
                   ),
                   Container(
-                      margin: const EdgeInsets.fromLTRB(5, 6, 0, 0),
+                      margin: const EdgeInsets.fromLTRB(5, 0, 0, 0),
                       child: const Align(
                         alignment: Alignment.topLeft,
                         child: Text("* Mandatory Fields",
