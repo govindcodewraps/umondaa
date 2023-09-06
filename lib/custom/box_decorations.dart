@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class BoxDecorations {
-  static BoxDecoration buildBoxDecoration_1({double radius =6.0}) {
+  static BoxDecoration buildBoxDecoration_1({double radius =20}) {
     return BoxDecoration(
       borderRadius: BorderRadius.circular(radius),
       color: Colors.white,
       boxShadow: [
         BoxShadow(
           color: Colors.black.withOpacity(.08),
-          blurRadius: 20,
-          spreadRadius: 0.0,
-          offset: Offset(0.0, 10.0), // shadow direction: bottom right
+          blurRadius: 30,
+          spreadRadius: 40.0,
+          offset: Offset(0.0, 30.0), // shadow direction: bottom right
         )
       ],
     );
@@ -20,7 +20,6 @@ class BoxDecorations {
     return BoxDecoration(
       borderRadius: BorderRadius.circular(16.0),
       color:  Color.fromRGBO(229,241,248, 1),
-
     );
   }
 

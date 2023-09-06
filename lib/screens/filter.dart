@@ -180,6 +180,8 @@ class _FilterState extends State<Filter> {
         });
         _showBrandLoadingContainer = true;
         fetchBrandData();
+        print("filter.dart, L 182, _totalProductData : ${_totalProductData}");
+        print("filter.dart, L 183, _productList.length : ${_productList.length}");
       }
     });
 
@@ -357,6 +359,9 @@ class _FilterState extends State<Filter> {
   }
 
   Container buildBrandLoadingContainer() {
+    print("filter.dart, L 362, _totalBrandData : ${_totalBrandData}");
+    print("filter.dart, L 363, _topbrandList : ${_productList.length}");
+
     return Container(
       height: _showBrandLoadingContainer ? 36 : 0,
       width: double.infinity,
@@ -1055,6 +1060,7 @@ class _FilterState extends State<Filter> {
 
   Container buildProductList() {
     return Container(
+      margin:  const EdgeInsets.fromLTRB(0, 35, 0, 0),
       child: Column(
         children: [
           Expanded(
@@ -1124,6 +1130,7 @@ class _FilterState extends State<Filter> {
 
   Container buildBrandList() {
     return Container(
+      margin:  const EdgeInsets.fromLTRB(0, 35, 0, 0),
       child: Column(
         children: [
           Expanded(
@@ -1164,7 +1171,7 @@ class _FilterState extends State<Filter> {
                     crossAxisCount: 2,
                     crossAxisSpacing: 14,
                     mainAxisSpacing: 14,
-                    childAspectRatio: 1),
+                    childAspectRatio: 2),
                 padding: EdgeInsets.only(top:20,bottom:10,left:18,right:18),
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
@@ -1190,6 +1197,7 @@ class _FilterState extends State<Filter> {
 
   Container buildShopList() {
     return Container(
+      margin:  const EdgeInsets.fromLTRB(0, 35, 0, 0),
       child: Column(
         children: [
           Expanded(

@@ -109,6 +109,7 @@ class _TopBrandsState extends State<TopBrands> {
     _filterBrandList.addAll(filteredBrandResponse.data);
     _filteredBrandsCalled = true;
     setState(() {});
+    print("top_brands.dart, fetchFilteredBrands(), ${_filterBrandList}");
   }
 
   fetchFilteredCategories() async {
@@ -176,10 +177,12 @@ class _TopBrandsState extends State<TopBrands> {
       if (_brandScrollController.position.pixels ==
           _brandScrollController.position.maxScrollExtent) {
         setState(() {
-          _brandPage++;
+          //_brandPage++;
         });
+        print("top_brands.dart, L 182, _totalProductData : ${_totalProductData}");
+        print("top_brands.dart, L 183, _productList.length : ${_productList.length}");
         _showBrandLoadingContainer = true;
-        fetchBrandData();
+        //fetchBrandData();
       }
     });
 
@@ -337,11 +340,10 @@ class _TopBrandsState extends State<TopBrands> {
           child: Text(which_filter_item.name),
         ),
       );
+      print("top_brands.dar, buildDropdownWhichFilterItems, which_filter_item : ${which_filter_item.name}");
     }
     return items;
   }
-
-
 
   Container buildProductLoadingContainer() {
     return Container(
@@ -358,14 +360,14 @@ class _TopBrandsState extends State<TopBrands> {
 
   Container buildBrandLoadingContainer() {
     return Container(
-      height: _showBrandLoadingContainer ? 36 : 0,
-      width: double.infinity,
-      color: Colors.white,
-      child: Center(
-        child: Text(_totalBrandData == _topbrandList.length
-            ? AppLocalizations.of(context).no_more_brands_ucf
-            : AppLocalizations.of(context).loading_more_brands_ucf),
-      ),
+      // height: _showBrandLoadingContainer ? 36 : 0,
+      // width: double.infinity,
+      // color: Colors.white,
+      // child: Center(
+      //   child: Text(_totalBrandData == _topbrandList.length
+      //       ? AppLocalizations.of(context).no_more_brands_ucf
+      //       : AppLocalizations.of(context).loading_more_brands_ucf),
+      // ),
     );
   }
 
@@ -383,7 +385,6 @@ class _TopBrandsState extends State<TopBrands> {
   }
 
   //--------------------
-
   @override
   Widget build(BuildContext context) {
 
@@ -393,8 +394,9 @@ class _TopBrandsState extends State<TopBrands> {
         endDrawer: buildFilterDrawer(),
         key: _scaffoldKey,
         backgroundColor: Colors.white,
-        body: Stack(fit: StackFit.loose, children: [
-          _selectedFilter.option_key == 'product'
+        body: Stack(fit: StackFit.loose,
+            children: [
+              _selectedFilter.option_key == 'product'
               ? buildProductList()
               : (_selectedFilter.option_key == 'brands'
               ? buildBrandList()
@@ -426,7 +428,7 @@ class _TopBrandsState extends State<TopBrands> {
         ],
         centerTitle: false,
         flexibleSpace: Padding(
-          padding: const EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 0.0),
+          padding: const EdgeInsets.fromLTRB(0.0, 6.0, 0.0, 0.0),
           child: Column(
             children: [buildTopAppbar(context), buildBottomAppBar(context)],
           ),
@@ -448,7 +450,7 @@ class _TopBrandsState extends State<TopBrands> {
           width: MediaQuery.of(context).size.width * .33,
           child: new DropdownButton<WhichFilter>(
             icon: Padding(
-              padding: app_language_rtl.$ ? const EdgeInsets.only(right: 18.0) :  const EdgeInsets.only(left: 18.0),
+              padding: app_language_rtl.$ ? const EdgeInsets.only(right: 18.0) : const EdgeInsets.only(left: 18.0),
               child: Icon(Icons.expand_more, color: Colors.black54),
             ),
             hint: Text(
@@ -482,7 +484,6 @@ class _TopBrandsState extends State<TopBrands> {
                 AppLocalizations.of(context).you_can_use_sorting_while_searching_for_products,
                 gravity: Toast.center,
                 duration: Toast.lengthLong);
-            ;
           },
           child: Container(
             decoration: BoxDecoration(
@@ -1055,6 +1056,7 @@ class _TopBrandsState extends State<TopBrands> {
 
   Container buildProductList() {
     return Container(
+      margin:  const EdgeInsets.fromLTRB(0, 25, 0, 0),
       child: Column(
         children: [
           Expanded(
@@ -1124,6 +1126,7 @@ class _TopBrandsState extends State<TopBrands> {
 
   Container buildBrandList() {
     return Container(
+      margin:  const EdgeInsets.fromLTRB(0, 25, 0, 0),
       child: Column(
         children: [
           Expanded(
@@ -1164,7 +1167,7 @@ class _TopBrandsState extends State<TopBrands> {
                     crossAxisCount: 2,
                     crossAxisSpacing: 14,
                     mainAxisSpacing: 14,
-                    childAspectRatio: 1),
+                    childAspectRatio: 2),
                 padding: EdgeInsets.only(top:20,bottom:10,left:18,right:18),
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
@@ -1175,7 +1178,7 @@ class _TopBrandsState extends State<TopBrands> {
                     id: _topbrandList[index].id,
                     image: _topbrandList[index].logo,
                     name: _topbrandList[index].name,
-                  );
+                    );
                 },
               )
             ],
@@ -1191,6 +1194,7 @@ class _TopBrandsState extends State<TopBrands> {
 
   Container buildShopList() {
     return Container(
+      margin:  const EdgeInsets.fromLTRB(0, 25, 0, 0),
       child: Column(
         children: [
           Expanded(

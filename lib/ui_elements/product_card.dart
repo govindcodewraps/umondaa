@@ -80,7 +80,7 @@ class _ProductCardState extends State<ProductCard> {
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         style: TextStyle(
-                            color: MyTheme.font_grey,
+                            color: MyTheme.blue_grey,
                             fontSize: 14,
                             height: 1.2,
                             fontWeight: FontWeight.w400),

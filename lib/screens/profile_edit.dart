@@ -106,7 +106,9 @@ class _ProfileEditState extends State<ProfileEdit> {
         avatar_original.$ = profileImageUpdateResponse.path;
         setState(() {});
       }
-    //}
+
+   // }
+
   }
 
   Future<void> _onPageRefresh() async {}
@@ -478,29 +480,29 @@ class _ProfileEditState extends State<ProfileEdit> {
               width:double.infinity,
               child: ElevatedButton(
 
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(MyTheme.accent_color),
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(MyTheme.accent_color),
 
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
 
-                              borderRadius: BorderRadius.circular(12.0),
-                              side: BorderSide(color:MyTheme.accent_color)
-                          )
-                      )
-                  ),
+                            borderRadius: BorderRadius.circular(12.0),
+                            side: BorderSide(color:MyTheme.accent_color)
+                        )
+                    )
+                ),
 
-                  onPressed: (){
-                    onPressUpdatePassword();
-                  },
-                  child:Text(
-                    AppLocalizations.of(context)
-                        .update_password_ucf,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600),
-                  ),),
+                onPressed: (){
+                  onPressUpdatePassword();
+                },
+                child:Text(
+                  AppLocalizations.of(context)
+                      .update_password_ucf,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ),),
             ),
           ),
         ),
