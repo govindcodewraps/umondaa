@@ -391,7 +391,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           ),
 
 
-
+//featured ads
+//                         if( buildHomeFeatureProductHorizontalList(
+//                             homeData) == null)
                           SliverList(
                             delegate: SliverChildListDelegate([
                               Container(
@@ -441,12 +443,18 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
 
 
+
+
+// second banner
                           SliverList(
                             delegate: SliverChildListDelegate([
                               Column(
                                 //crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  buildHomeBannerTwo(context, homeData),
+                                 // buildHomeBannerTwo(context, homeData),
+
+
+
                                   // Padding(
                                   //   padding: const EdgeInsets.fromLTRB(
                                   //     18.0,

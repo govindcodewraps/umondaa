@@ -101,12 +101,16 @@ class _MainState extends State<Main> {
 
 
 
-  List<TabItem> tabItems = List.of([
 
+
+  List<TabItem> tabItems = List.of([
     TabItem(
-      Icons.home,
+      Image.asset('assets/home.png'),
+     //Icons.home,
       "Home",
-      Color(0xff4566be),
+        Colors.white,
+      circleStrokeColor: Color(0xff4566be),
+      //Color(0xff4566be),
       // labelStyle: TextStyle(
       //color: Colors.red,
       //fontWeight: FontWeight.bold,
@@ -118,32 +122,43 @@ class _MainState extends State<Main> {
       //   width: 200,  // Adjust width as needed
       //   height: 200, // Adjust height as needed
       // ),
-      //Image.asset("assets/brand_image.png"),
-      Icons.category_outlined,
+      //Image.asset('assets/appbarlogo.png'),
+      Image.asset('assets/categories.png'),
+      //Icons.category_outlined,
       "Categories",
-      Color(0xff4566be),
+        Colors.white,
+      circleStrokeColor: Color(0xff4566be),
+      // Color(0xff4566be),
       //circleStrokeColor: Colors.white,
     ),
     TabItem(
-      Icons.add_circle_outline_outlined,
+      Image.asset('assets/adplace.png'),
+      //Icons.add_circle_outline_outlined,
       "Place Ad",
-      Color(0xff4566be),
+        Colors.white,
+      circleStrokeColor: Color(0xff4566be),
+      //Color(0xff4566be),
       // labelStyle: TextStyle(
       //fontWeight: FontWeight.normal,   pubxml f
       // ),
     ),
 
     TabItem(
-      Icons.shopping_cart,
+      Image.asset('assets/cart.png'),
+      //Icons.shopping_cart,
       "Cart",
-      Color(0xff4566be),
-      circleStrokeColor: Colors.white,
+      Colors.white,
+      //Color(0xff4566be),
+      circleStrokeColor: Color(0xff4566be),
 
     ),
     TabItem(
-      Icons.person,
+      Image.asset('assets/profile.png'),
+      //Icons.person,
       "Profile",
-      Color(0xff4566be),
+        Colors.white,
+      circleStrokeColor: Color(0xff4566be),
+      //Color(0xff4566be),
     ),
   ]);
 
@@ -280,46 +295,46 @@ class _MainState extends State<Main> {
       );
   }
 
-    Widget bottomNav(int i) {
+  Widget bottomNav(int i) {
     return CircularBottomNavigation(
-    tabItems,
+      tabItems,
 
-    controller: _navigationController,
-    selectedPos: selectedPos,
-    barHeight: bottomNavBarHeight,
-    // use either barBackgroundColor or barBackgroundGradient to have a gradient on bar background
-    barBackgroundColor: Colors.white,
-    // barBackgroundGradient: LinearGradient(
-    //   begin: Alignment.bottomCenter,
-    //   end: Alignment.topCenter,
-    //   colors: [
-    //     Colors.blue,
-    //     Colors.red,
-    //   ],
-    // ),
-    backgroundBoxShadow: <BoxShadow>[
-    BoxShadow(color: Colors.black45, blurRadius: 10.0),
-    ],
-    animationDuration: Duration(milliseconds: 300),
-    selectedCallback: (int selectedPos) {
-      if (!is_logged_in.$ && (selectedPos == 3)) {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
-        return;
-      }
-    setState(() {
-    this.selectedPos = selectedPos ?? 0;
-    print(_navigationController.value);
-    });
-    },
+      controller: _navigationController,
+      selectedPos: selectedPos,
+      barHeight: bottomNavBarHeight,
+      // use either barBackgroundColor or barBackgroundGradient to have a gradient on bar background
+      barBackgroundColor: Colors.white,
+      // barBackgroundGradient: LinearGradient(
+      //   begin: Alignment.bottomCenter,
+      //   end: Alignment.topCenter,
+      //   colors: [
+      //     Colors.blue,
+      //     Colors.red,
+      //   ],
+      // ),
+      backgroundBoxShadow: <BoxShadow>[
+        BoxShadow(color: Colors.black45, blurRadius: 10.0),
+      ],
+      animationDuration: Duration(milliseconds: 300),
+      selectedCallback: (int selectedPos) {
+        if (!is_logged_in.$ && (selectedPos == 3)) {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+          return;
+        }
+        setState(() {
+          this.selectedPos = selectedPos ?? 0;
+          print(_navigationController.value);
+        });
+      },
     );
-    }
+  }
 
-    @override
-    void dispose() {
+  @override
+  void dispose() {
     super.dispose();
     _navigationController.dispose();
-    }
   }
+}
 
 
 
