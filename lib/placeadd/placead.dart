@@ -5,6 +5,8 @@ import 'package:hardware_lo/custom/device_info.dart';
 import 'package:hardware_lo/my_theme.dart';
 import 'package:hardware_lo/custom/useful_elements.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:hardware_lo/repositories/brand_repository.dart';
+import '../data_model/brand_response.dart';
 import '../app_config.dart';
 import '../helpers/shared_value_helper.dart';
 import 'package:http/http.dart' as http;
@@ -13,7 +15,6 @@ import 'package:toast/toast.dart';
 import 'package:hardware_lo/repositories/place_ad_repository.dart';
 
 const List<String> category = <String>['Select Category', 'Home & Garden', 'Electronics', 'Motors', 'Fashion', 'Collectibles & Arts', 'Sports', 'Health & Beauty', 'Industrial Equipment'];
-const List<String> brands = <String>['Select Brand', 'Adidas', 'Apple', 'Bosch', 'Hugo Bosss', 'Nike', 'Rolex', 'Sony'];
 
 class placead extends StatefulWidget {
   // const placead({super.key});
@@ -24,10 +25,12 @@ class placead extends StatefulWidget {
 
 class _placeadState extends State<placead> {
   bool light = false, isChecked = true;
+  bool _filteredBrandsCalled = false;
   List<File> selectedImages = [];
+  List<dynamic> brandsList = [];
   final picker = ImagePicker();
-  String dropdownBrands = brands[0];
-  String dropdownCategory = category[0];
+  String dropdownBrands = "Select brand";
+  String dropdownCategory = "Select category";
 
   TextEditingController _ProductName = TextEditingController();
   TextEditingController _Category = TextEditingController();
@@ -37,6 +40,20 @@ class _placeadState extends State<placead> {
   TextEditingController _Description = TextEditingController();
   TextEditingController _EmailID = TextEditingController();
   TextEditingController _PassWord = TextEditingController();
+
+  @override
+  void initState() {
+    fetch_Brands();             //fetchFilteredBrands();
+    super.initState();
+  }
+
+  fetch_Brands() async {
+    var filteredBrandResponse = await BrandRepository().getFilterPageBrands();
+    brandsList.addAll(filteredBrandResponse.brands);
+    print("placead.dart, fetch_Brands(), brandsList : ${filteredBrandResponse.brands}");
+    _filteredBrandsCalled = true;
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +125,7 @@ class _placeadState extends State<placead> {
                       child: const Align(
                         alignment: Alignment.topLeft,
                         child: Text("Ad Information",
-                            style: TextStyle(fontSize: 20,
+                            style: TextStyle(fontSize: 14,
                                 color: Color.fromARGB(255, 0, 0, 0))),
                       )
                   ),
@@ -123,6 +140,7 @@ class _placeadState extends State<placead> {
                         border: UnderlineInputBorder(),
                         labelText: 'Product Name',
                       ),
+                      style: TextStyle(fontSize: 14),
                     ),
                   ),
 
@@ -131,7 +149,7 @@ class _placeadState extends State<placead> {
                       child: const Align(
                         alignment: Alignment.topLeft,
                         child: Text("Category",
-                            style: TextStyle(fontSize: 20,
+                            style: TextStyle(fontSize: 14,
                                 color: Color.fromARGB(255, 0, 0, 0))),
                       )
                   ),
@@ -148,14 +166,14 @@ class _placeadState extends State<placead> {
                     //     labelText: 'Nothing slected',
                     //   ),
                     // ),
-                    child: CategoryDropdown(),
+                    // child: CategoryDropdown(),
                   ),
                   Container(
                       margin: const EdgeInsets.fromLTRB(5, 16, 0, 0),
                       child: const Align(
                         alignment: Alignment.topLeft,
                         child: Text("Brand",
-                            style: TextStyle(fontSize: 20,
+                            style: TextStyle(fontSize: 14,
                                 color: Color.fromARGB(255, 0, 0, 0))
                         ),
                       )
@@ -163,16 +181,6 @@ class _placeadState extends State<placead> {
                   Container(
                     margin: const EdgeInsets.fromLTRB(5, 0, 0, 0),
                     alignment: Alignment.topLeft,
-                    // child: TextField(
-                    //   controller: _Brand,
-                    //   autofocus: false,
-                    //   enableSuggestions: false,
-                    //   autocorrect: false,
-                    //   decoration: const InputDecoration(
-                    //     border: UnderlineInputBorder(),
-                    //     labelText: 'Nothing slected',
-                    //   ),
-                    // ),
                       child: BrandDropdown(),
 
                   ),
@@ -197,7 +205,7 @@ class _placeadState extends State<placead> {
                       child: const Align(
                         alignment: Alignment.topLeft,
                         child: Text("Ad Image",
-                            style: TextStyle(fontSize: 20,
+                            style: TextStyle(fontSize: 14,
                                 color: Color.fromARGB(255, 0, 0, 0))),
                       )
                   ),
@@ -212,10 +220,10 @@ class _placeadState extends State<placead> {
                           ),
                           ElevatedButton(
                             style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(Colors.green)),
+                                backgroundColor: MaterialStateProperty.all(Colors.white)),
                               child: const Text('Select Image from Gallery',
-                                  style: TextStyle(fontSize: 20,
-                                  color: Color.fromARGB(255, 0, 0, 0))),
+                                  style: TextStyle(fontSize: 14,
+                                  color: Color.fromARGB(255, 104, 104, 104))),
                               onPressed: () {
                                 getImages();
                               },
@@ -280,7 +288,7 @@ class _placeadState extends State<placead> {
                       child: const Align(
                         alignment: Alignment.topLeft,
                         child: Text("Ad Price",
-                            style: TextStyle(fontSize: 20,
+                            style: TextStyle(fontSize: 14,
                                 color: Color.fromARGB(255, 0, 0, 0))),
                       )
                   ),
@@ -295,6 +303,7 @@ class _placeadState extends State<placead> {
                         border: UnderlineInputBorder(),
                         labelText: 'Price in AED',
                       ),
+                      style: TextStyle(fontSize: 14),
                     ),
                   ),
 
@@ -304,7 +313,7 @@ class _placeadState extends State<placead> {
                       children: [
                         Container(
                           child: Text("Make an offer",
-                              style: TextStyle(fontSize: 20,
+                              style: TextStyle(fontSize: 14,
                                   color: Color.fromARGB(255, 0, 0, 0))),
                         ),
                         Container(
@@ -349,7 +358,7 @@ class _placeadState extends State<placead> {
                       child: const Align(
                         alignment: Alignment.topLeft,
                         child: Text("Ad Description",
-                            style: TextStyle(fontSize: 20,
+                            style: TextStyle(fontSize: 14,
                                 color: Color.fromARGB(255, 0, 0, 0))),
                       )
                   ),
@@ -382,7 +391,7 @@ class _placeadState extends State<placead> {
                       child: const Align(
                         alignment: Alignment.topLeft,
                         child: Text("User Details",
-                            style: TextStyle(fontSize: 20,
+                            style: TextStyle(fontSize: 14,
                                 color: Color.fromARGB(255, 0, 0, 0))),
                       )
                   ),
@@ -413,8 +422,8 @@ class _placeadState extends State<placead> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(0, 12, 0, 0),
                     child: Row(
                       children: [
                         Container(
@@ -456,6 +465,23 @@ class _placeadState extends State<placead> {
             ),
           ),
 
+          Row(
+            children: [
+              Spacer(),
+              Container(
+              child: Text("Don't have an account? ",
+                  style: TextStyle(fontSize: 14,
+                      color: Color.fromARGB(255, 0, 0, 0))),
+              ),
+              Container(
+                margin: const EdgeInsets.fromLTRB(0, 5, 8, 0),
+                child: Text("Register Now",
+                    style: TextStyle(fontSize: 14,
+                        color: Colors.blue,
+                    )),
+              ),
+            ],
+          ),
           Container(
             margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
             color: Colors.lightBlue,
@@ -483,9 +509,6 @@ class _placeadState extends State<placead> {
               // }
 
             ),
-          ),
-          Container(
-            margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
           ),
 
         ]
@@ -541,9 +564,12 @@ class _placeadState extends State<placead> {
     );
   }
   //------------------------
-  BrandDropdown () {
-    return DropdownButton<String>(
-      value: dropdownBrands,
+  BrandDropdown() {
+    print("placead.dart, BrandDropdown(), dropdownBrands : ${dropdownBrands}");
+    return DropdownButton<dynamic>(
+      hint: Text("Select brand"),
+      isExpanded: true,
+      //value: dropdownBrands,
       icon: const Icon(Icons.keyboard_arrow_down, size: 35,),
       elevation: 5,
       style: const TextStyle(color: Colors.black),
@@ -551,17 +577,21 @@ class _placeadState extends State<placead> {
         height: 1,
         color: Colors.black,
       ),
-      onChanged: (String value) {
+      onChanged: (value) {
         // This is called when the user selects an item.
+
+        dropdownBrands = value;
         setState(() {
+          print("Selected city is $value");
           dropdownBrands = value;
         });
       },
-      items: brands.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value, style: TextStyle(fontSize: 18),),
-        );
+      items: brandsList.map((brands) {
+        print("placead.dart, BrandDropdown(), brandsList.map : ${brands.name}");
+         return DropdownMenuItem(
+           value: brands.name,
+           child: Text(brands.name, style: TextStyle(fontSize: 14),),
+         );
       }).toList(),
     );
   }

@@ -14,6 +14,8 @@ class BrandRepository {
     await http.get(url,headers: {
       "App-Language": app_language.$,
     });
+    print("brand_repository.dart, fetch_Brands(), brandsList : ${response.body}");
+
     return brandResponseFromJson(response.body);
   }
 
