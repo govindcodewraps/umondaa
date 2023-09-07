@@ -45,10 +45,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         ),
       ),
 
-      body:Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: listview(),
-      ),
+      body:listview(),
     ));
   }
 
@@ -65,7 +62,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 Container(
                   //padding: EdgeInsets.only(top: 23),
                   child: ListView.builder(
-
+                    itemCount: snapshot.data.data.length-1,
                     shrinkWrap: true,
                     //physics:  NeverScrollableScrollPhysics(),
                     itemBuilder: (context, int index) {
@@ -73,495 +70,501 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         //crossAxisAlignment: CrossAxisAlignment.end,
                         //mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Container(
-                            padding: EdgeInsets.only(top: 10,bottom: 10),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                               // border: Border.all(color: MyTheme.accent_color)
+                          Padding(
+                            padding: const EdgeInsets.all(14.0),
+                            child: Container(
+                              padding: EdgeInsets.only(top: 10,bottom: 10),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(12),
+                                  //border: Border.all(color: MyTheme.accent_color),
+                                  boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,offset: Offset(1,3))]
+                              ),
+                              child:   Row(
+
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+
+
+
+                                children: [
+
+                                  Column(
+
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+
+                                    children: [
+
+
+
+                                      Container(
+                                          padding: EdgeInsets.only(left: 7),
+                                          width:MediaQuery.of(context).size.width*0.43,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            //border: Border.all(color: MyTheme.accent_color)
+
+
+
+                                          ),
+
+
+
+                                          child: Text("Id :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500),)),
+
+                                      SizedBox(height: 4,),
+
+                                      Container(
+                                          padding: EdgeInsets.only(left: 7),
+                                          width:MediaQuery.of(context).size.width*0.43,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            // border: Border.all(color: MyTheme.accent_color)
+
+                                          ),
+
+                                          child: Text("Code :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+                                      SizedBox(height: 4,),
+
+                                      Container(
+                                          padding: EdgeInsets.only(left: 7),
+                                          width:MediaQuery.of(context).size.width*0.43,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            //border: Border.all(color: MyTheme.accent_color)
+
+                                          ),
+
+                                          child: Text("User_ID :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+                                      SizedBox(height: 4,),
+
+                                      Container(
+                                          padding: EdgeInsets.only(left: 7),
+                                          width:MediaQuery.of(context).size.width*0.43,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            //border: Border.all(color: MyTheme.accent_color)
+
+                                          ),
+
+                                          child: Text("Payment_type :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+                                      SizedBox(height: 4,),
+
+                                      Container(
+                                          padding: EdgeInsets.only(left: 7),
+                                          width:MediaQuery.of(context).size.width*0.43,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            //border: Border.all(color: MyTheme.accent_color)
+
+                                          ),
+
+                                          child: Text("Payment_status :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+                                      SizedBox(height: 4,),
+
+                                      Container(
+                                          padding: EdgeInsets.only(left: 7),
+                                          width:MediaQuery.of(context).size.width*0.43,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            //border: Border.all(color: MyTheme.accent_color)
+
+                                          ),
+
+                                          child: Text("Payment status string :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+                                      SizedBox(height: 4,),
+
+                                      Container(
+                                          padding: EdgeInsets.only(left: 7),
+                                          width:MediaQuery.of(context).size.width*0.43,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            // border: Border.all(color: MyTheme.accent_color)
+
+                                          ),
+
+                                          child: Text("Delivery Status :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+                                      SizedBox(height: 4,),
+
+                                      Container(
+                                          padding: EdgeInsets.only(left: 7),
+                                          width:MediaQuery.of(context).size.width*0.43,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            //border: Border.all(color: MyTheme.accent_color)
+
+                                          ),
+
+                                          child: Text("Grand Total :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+                                      SizedBox(height: 4,),
+
+                                      Container(
+                                          padding: EdgeInsets.only(left: 7),
+                                          width:MediaQuery.of(context).size.width*0.43,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            // border: Border.all(color: MyTheme.accent_color)
+
+                                          ),
+
+                                          child: Text("Plane Grand Total :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+                                      SizedBox(height: 4,),
+
+                                      Container(
+                                          padding: EdgeInsets.only(left: 7),
+                                          width:MediaQuery.of(context).size.width*0.43,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            //border: Border.all(color: MyTheme.accent_color)
+
+                                          ),
+
+                                          child: Text("Coupon Discount :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+                                      SizedBox(height: 4,),
+
+                                      Container(
+
+
+                                          padding: EdgeInsets.only(left: 7),
+                                          width:MediaQuery.of(context).size.width*0.43,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            //border: Border.all(color: MyTheme.accent_color)
+
+                                          ),child: Text("Shipping Cost :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+                                      SizedBox(height: 4,),
+
+                                      Container(
+                                          padding: EdgeInsets.only(left: 7),
+                                          width:MediaQuery.of(context).size.width*0.43,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            //border: Border.all(color: MyTheme.accent_color)
+
+                                          ),
+
+                                          child: Text("Sub Total :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+                                      SizedBox(height: 4,),
+
+                                      Container(
+                                          padding: EdgeInsets.only(left: 7),
+                                          width:MediaQuery.of(context).size.width*0.43,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            // border: Border.all(color: MyTheme.accent_color)
+
+                                          ),
+
+                                          child: Text("Tax : ",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+                                      SizedBox(height: 4,),
+
+                                      Container(
+                                          padding: EdgeInsets.only(left: 7),
+                                          width:MediaQuery.of(context).size.width*0.43,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            //  border: Border.all(color: MyTheme.accent_color)
+
+                                          ),
+
+                                          child: Text(" Date :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+
+
+                                    ],),
+
+
+
+
+
+                                  SizedBox(width: 8,),
+
+                                  Column(
+
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+
+                                    children: [
+
+
+
+                                      Container(
+
+                                          width:MediaQuery.of(context).size.width*0.4,
+                                       padding: EdgeInsets.only(left: 10),
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            //border: Border.all(color: MyTheme.accent_color)
+
+                                          ),
+
+
+
+                                          child: Text(snapshot.data.data[index].id.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+
+                                      SizedBox(height: 4,),
+                                      Container(
+                                          padding: EdgeInsets.only(left: 6),
+                                          width:MediaQuery.of(context).size.width*0.4,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            //border: Border.all(color: MyTheme.accent_color)
+
+                                          ),
+                                          child: Text(snapshot.data.data[index].code.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+                                      SizedBox(height: 4,),
+                                      Container(
+                                          padding: EdgeInsets.only(left: 10),
+                                          width:MediaQuery.of(context).size.width*0.4,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            //border: Border.all(color: MyTheme.accent_color)
+
+                                          ),
+                                          child: Text(snapshot.data.data[index].userId.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+
+                                      SizedBox(height: 4,),
+                                      Container(
+                                          padding: EdgeInsets.only(left: 10),
+                                          width:MediaQuery.of(context).size.width*0.4,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            //border: Border.all(color: MyTheme.accent_color)
+
+                                          ),
+                                          child: Text(snapshot.data.data[index].paymentType.toString().substring(12),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+
+                                      SizedBox(height: 4,),
+                                      Container(
+                                          padding: EdgeInsets.only(left: 10),
+                                          width:MediaQuery.of(context).size.width*0.4,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            //border: Border.all(color: MyTheme.accent_color)
+
+                                          ),
+                                          child: Text(snapshot.data.data[index].paymentStatus.toString().substring(14),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+
+                                      SizedBox(height: 4,),
+                                      Container(
+                                          padding: EdgeInsets.only(left: 10),
+                                          width:MediaQuery.of(context).size.width*0.4,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            //border: Border.all(color: MyTheme.accent_color)
+
+                                          ),
+                                          child: Text(snapshot.data.data[index].paymentStatusString.toString().substring(20),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+
+                                      SizedBox(height: 4,),
+                                      Container(
+                                          padding: EdgeInsets.only(left: 10),
+                                          width:MediaQuery.of(context).size.width*0.4,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            //border: Border.all(color: MyTheme.accent_color)
+
+                                          ),
+                                          child: Text(snapshot.data.data[index].deliveryStatus.toString().substring(15),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+
+                                      SizedBox(height: 4,),
+                                      Container(
+                                          padding: EdgeInsets.only(left: 10),
+                                          width:MediaQuery.of(context).size.width*0.4,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            //border: Border.all(color: MyTheme.accent_color)
+
+                                          ),
+                                          child: Text(snapshot.data.data[index].grandTotal.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+
+                                      SizedBox(height: 4,),
+                                      Container(
+                                          padding: EdgeInsets.only(left: 10),
+                                          width:MediaQuery.of(context).size.width*0.4,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            //border: Border.all(color: MyTheme.accent_color)
+
+                                          ),
+                                          child: Text(snapshot.data.data[index].planeGrandTotal.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+
+                                      SizedBox(height: 4,),
+                                      Container(
+                                          padding: EdgeInsets.only(left: 10),
+                                          width:MediaQuery.of(context).size.width*0.4,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            //border: Border.all(color: MyTheme.accent_color)
+
+                                          ),
+                                          child: Text(snapshot.data.data[index].couponDiscount.toString().substring(15),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+
+                                      SizedBox(height: 4,),
+                                      Container(
+                                          padding: EdgeInsets.only(left: 10),
+                                          width:MediaQuery.of(context).size.width*0.4,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            //border: Border.all(color: MyTheme.accent_color)
+
+                                          ),
+                                          child: Text(snapshot.data.data[index].shippingCost.toString().substring(15),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+
+                                      SizedBox(height: 4,),
+                                      Container(
+                                          padding: EdgeInsets.only(left: 10),
+                                          width:MediaQuery.of(context).size.width*0.4,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            //border: Border.all(color: MyTheme.accent_color)
+
+                                          ),
+                                          child: Text(snapshot.data.data[index].subtotal.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+
+                                      SizedBox(height: 4,),
+                                      Container(
+                                          padding: EdgeInsets.only(left: 10),
+                                          width:MediaQuery.of(context).size.width*0.4,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            //border: Border.all(color: MyTheme.accent_color)
+
+                                          ),
+                                          child: Text(snapshot.data.data[index].tax.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+
+                                      SizedBox(height: 4,),
+                                      Container(
+                                          padding: EdgeInsets.only(left: 10),
+                                          width:MediaQuery.of(context).size.width*0.4,
+
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+
+                                            //color: Colors.grey[300],
+
+                                            //border: Border.all(color: MyTheme.accent_color)
+
+                                          ),
+                                          child: Text(snapshot.data.data[index].date.toString().substring(9),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+
+
+                                    ],),
+
+                                ],),
                             ),
-                            child:   Row(
-
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-
-
-
-                              children: [
-
-                                Column(
-
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-
-                                  children: [
-
-
-
-                                    Container(
-                                        padding: EdgeInsets.only(left: 7),
-                                        width:MediaQuery.of(context).size.width*0.43,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          //border: Border.all(color: MyTheme.accent_color)
-
-
-
-                                        ),
-
-
-
-                                        child: Text("Id :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500),)),
-
-                                    SizedBox(height: 4,),
-
-                                    Container(
-                                        padding: EdgeInsets.only(left: 7),
-                                        width:MediaQuery.of(context).size.width*0.43,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          // border: Border.all(color: MyTheme.accent_color)
-
-                                        ),
-
-                                        child: Text("Code :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                    SizedBox(height: 4,),
-
-                                    Container(
-                                        padding: EdgeInsets.only(left: 7),
-                                        width:MediaQuery.of(context).size.width*0.43,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          //border: Border.all(color: MyTheme.accent_color)
-
-                                        ),
-
-                                        child: Text("User_ID :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                    SizedBox(height: 4,),
-
-                                    Container(
-                                        padding: EdgeInsets.only(left: 7),
-                                        width:MediaQuery.of(context).size.width*0.43,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          //border: Border.all(color: MyTheme.accent_color)
-
-                                        ),
-
-                                        child: Text("Payment_type :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                    SizedBox(height: 4,),
-
-                                    Container(
-                                        padding: EdgeInsets.only(left: 7),
-                                        width:MediaQuery.of(context).size.width*0.43,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          //border: Border.all(color: MyTheme.accent_color)
-
-                                        ),
-
-                                        child: Text("Payment_status :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                    SizedBox(height: 4,),
-
-                                    Container(
-                                        padding: EdgeInsets.only(left: 7),
-                                        width:MediaQuery.of(context).size.width*0.43,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          //border: Border.all(color: MyTheme.accent_color)
-
-                                        ),
-
-                                        child: Text("Payment status string :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                    SizedBox(height: 4,),
-
-                                    Container(
-                                        padding: EdgeInsets.only(left: 7),
-                                        width:MediaQuery.of(context).size.width*0.43,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          // border: Border.all(color: MyTheme.accent_color)
-
-                                        ),
-
-                                        child: Text("Delivery Status :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                    SizedBox(height: 4,),
-
-                                    Container(
-                                        padding: EdgeInsets.only(left: 7),
-                                        width:MediaQuery.of(context).size.width*0.43,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          //border: Border.all(color: MyTheme.accent_color)
-
-                                        ),
-
-                                        child: Text("Grand Total :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                    SizedBox(height: 4,),
-
-                                    Container(
-                                        padding: EdgeInsets.only(left: 7),
-                                        width:MediaQuery.of(context).size.width*0.43,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          // border: Border.all(color: MyTheme.accent_color)
-
-                                        ),
-
-                                        child: Text("Plane Grand Total :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                    SizedBox(height: 4,),
-
-                                    Container(
-                                        padding: EdgeInsets.only(left: 7),
-                                        width:MediaQuery.of(context).size.width*0.43,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          //border: Border.all(color: MyTheme.accent_color)
-
-                                        ),
-
-                                        child: Text("Coupon Discount :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                    SizedBox(height: 4,),
-
-                                    Container(
-
-
-                                        padding: EdgeInsets.only(left: 7),
-                                        width:MediaQuery.of(context).size.width*0.43,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          //border: Border.all(color: MyTheme.accent_color)
-
-                                        ),child: Text("Shipping Cost :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                    SizedBox(height: 4,),
-
-                                    Container(
-                                        padding: EdgeInsets.only(left: 7),
-                                        width:MediaQuery.of(context).size.width*0.43,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          //border: Border.all(color: MyTheme.accent_color)
-
-                                        ),
-
-                                        child: Text("Sub Total :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                    SizedBox(height: 4,),
-
-                                    Container(
-                                        padding: EdgeInsets.only(left: 7),
-                                        width:MediaQuery.of(context).size.width*0.43,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          // border: Border.all(color: MyTheme.accent_color)
-
-                                        ),
-
-                                        child: Text("Tax : ",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                    SizedBox(height: 4,),
-
-                                    Container(
-                                        padding: EdgeInsets.only(left: 7),
-                                        width:MediaQuery.of(context).size.width*0.43,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          //  border: Border.all(color: MyTheme.accent_color)
-
-                                        ),
-
-                                        child: Text(" Date :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-
-                                  ],),
-
-
-
-
-
-                                SizedBox(width: 8,),
-
-                                Column(
-
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-
-                                  children: [
-
-
-
-                                    Container(
-
-                                        width:MediaQuery.of(context).size.width*0.4,
-                                     padding: EdgeInsets.only(left: 10),
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          //border: Border.all(color: MyTheme.accent_color)
-
-                                        ),
-
-
-
-                                        child: Text(snapshot.data.data[index].id.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                    SizedBox(height: 4,),
-                                    Container(
-                                        padding: EdgeInsets.only(left: 6),
-                                        width:MediaQuery.of(context).size.width*0.4,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          //border: Border.all(color: MyTheme.accent_color)
-
-                                        ),
-                                        child: Text(snapshot.data.data[index].code.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-                                    SizedBox(height: 4,),
-                                    Container(
-                                        padding: EdgeInsets.only(left: 10),
-                                        width:MediaQuery.of(context).size.width*0.4,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          //border: Border.all(color: MyTheme.accent_color)
-
-                                        ),
-                                        child: Text(snapshot.data.data[index].userId.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                    SizedBox(height: 4,),
-                                    Container(
-                                        padding: EdgeInsets.only(left: 10),
-                                        width:MediaQuery.of(context).size.width*0.4,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          //border: Border.all(color: MyTheme.accent_color)
-
-                                        ),
-                                        child: Text(snapshot.data.data[index].paymentType.toString().substring(12),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                    SizedBox(height: 4,),
-                                    Container(
-                                        padding: EdgeInsets.only(left: 10),
-                                        width:MediaQuery.of(context).size.width*0.4,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          //border: Border.all(color: MyTheme.accent_color)
-
-                                        ),
-                                        child: Text(snapshot.data.data[index].paymentStatus.toString().substring(14),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                    SizedBox(height: 4,),
-                                    Container(
-                                        padding: EdgeInsets.only(left: 10),
-                                        width:MediaQuery.of(context).size.width*0.4,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          //border: Border.all(color: MyTheme.accent_color)
-
-                                        ),
-                                        child: Text(snapshot.data.data[index].paymentStatusString.toString().substring(20),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                    SizedBox(height: 4,),
-                                    Container(
-                                        padding: EdgeInsets.only(left: 10),
-                                        width:MediaQuery.of(context).size.width*0.4,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          //border: Border.all(color: MyTheme.accent_color)
-
-                                        ),
-                                        child: Text(snapshot.data.data[index].deliveryStatus.toString().substring(15),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                    SizedBox(height: 4,),
-                                    Container(
-                                        padding: EdgeInsets.only(left: 10),
-                                        width:MediaQuery.of(context).size.width*0.4,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          //border: Border.all(color: MyTheme.accent_color)
-
-                                        ),
-                                        child: Text(snapshot.data.data[index].grandTotal.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                    SizedBox(height: 4,),
-                                    Container(
-                                        padding: EdgeInsets.only(left: 10),
-                                        width:MediaQuery.of(context).size.width*0.4,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          //border: Border.all(color: MyTheme.accent_color)
-
-                                        ),
-                                        child: Text(snapshot.data.data[index].planeGrandTotal.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                    SizedBox(height: 4,),
-                                    Container(
-                                        padding: EdgeInsets.only(left: 10),
-                                        width:MediaQuery.of(context).size.width*0.4,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          //border: Border.all(color: MyTheme.accent_color)
-
-                                        ),
-                                        child: Text(snapshot.data.data[index].couponDiscount.toString().substring(15),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                    SizedBox(height: 4,),
-                                    Container(
-                                        padding: EdgeInsets.only(left: 10),
-                                        width:MediaQuery.of(context).size.width*0.4,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          //border: Border.all(color: MyTheme.accent_color)
-
-                                        ),
-                                        child: Text(snapshot.data.data[index].shippingCost.toString().substring(15),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                    SizedBox(height: 4,),
-                                    Container(
-                                        padding: EdgeInsets.only(left: 10),
-                                        width:MediaQuery.of(context).size.width*0.4,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          //border: Border.all(color: MyTheme.accent_color)
-
-                                        ),
-                                        child: Text(snapshot.data.data[index].subtotal.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                    SizedBox(height: 4,),
-                                    Container(
-                                        padding: EdgeInsets.only(left: 10),
-                                        width:MediaQuery.of(context).size.width*0.4,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          //border: Border.all(color: MyTheme.accent_color)
-
-                                        ),
-                                        child: Text(snapshot.data.data[index].tax.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                    SizedBox(height: 4,),
-                                    Container(
-                                        padding: EdgeInsets.only(left: 10),
-                                        width:MediaQuery.of(context).size.width*0.4,
-
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                          color: Colors.grey[300],
-
-                                          //border: Border.all(color: MyTheme.accent_color)
-
-                                        ),
-                                        child: Text(snapshot.data.data[index].date.toString().substring(9),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-
-                                  ],),
-
-                              ],),
                           ),
 
 
 
-                          SizedBox(height: 25,),
+                          //SizedBox(height: 25,),
 
                         ],);
                     },
-                    itemCount: snapshot.data.data.length,
+                    //itemCount: 12,
+                   // itemCount: snapshot.data.data.length??"",
                   ),
                 );
             }

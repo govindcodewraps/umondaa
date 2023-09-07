@@ -26,6 +26,7 @@ import 'package:toast/toast.dart';
 import '../custom/toast_component.dart';
 import '../helpers/auth_helper.dart';
 import '../ui_sections/drawer.dart';
+import 'InProfileScreen/commisssion_history_screen.dart';
 import 'drawermenu/Aboutus.dart';
 import 'drawermenu/ContactInf.dart';
 import 'drawermenu/privacy_policy.dart';
@@ -106,9 +107,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
                 appBar: AppBar(
                   backgroundColor: Colors.white,
-      iconTheme: IconThemeData(
-           color: Colors.black, // Change this to your desired color
-         ),
+                  iconTheme: IconThemeData(
+                    color: Colors.black, // Change this to your desired color
+                  ),
                   actions: [
                     Container(
                       color: MyTheme.white,
@@ -132,14 +133,14 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                 child: Icon(Icons.search)),
                             Icon(Icons.notifications),
 
-              InkWell(
-                  onTap: (){
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                          return Wishlist();
-                        }));
-                  },
-                  child: Image.asset("assets/icons/wishicon.png",height: 25,width: 25,)),
+                            InkWell(
+                                onTap: (){
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                        return Wishlist();
+                                      }));
+                                },
+                                child: Image.asset("assets/icons/wishicon.png",height: 25,width: 25,)),
 
 
 
@@ -238,7 +239,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 //   preferredSize: Size.fromHeight(80),
                 //   child: buildAppBar(statusBarHeight, context),
                 // ),
-               drawer: MainDrawer(),
+                drawer: MainDrawer(),
                 body: Stack(
                   children: [
 
@@ -308,7 +309,44 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                 ),
                               )
                                   : Container(),
-                              buildHomeCarouselSlider(context, homeData),
+                              InkWell(
+                                onTap: (){
+                                  if(homeData.current_slider == 0){
+                                  print("index Electronics");
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                    //return CommissionHistoryScreen();
+                                    return CategoryProducts(
+                                      category_id: homeData.featuredCategoryList[2].id,
+                                      category_name: homeData.featuredCategoryList[2].name,
+                                    );
+                                  }
+                                  ));
+                                   }
+                                    else if(homeData.current_slider == 1)
+                                      {
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                          return CategoryProducts(
+                                            category_id: homeData.featuredCategoryList[0].id,
+                                            category_name: homeData.featuredCategoryList[0].name,
+                                          );
+                                        }
+                                        ));
+                                        print("index fruits");
+                                      }
+                                  else if(homeData.current_slider == 2)
+                                  {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                      return CategoryProducts(
+                                        category_id: homeData.featuredCategoryList[1].id,
+                                        category_name: homeData.featuredCategoryList[1].name,
+                                      );
+                                    }
+                                    ));
+                                    print("index fashion");
+                                  }
+                                  },
+
+                                child: buildHomeCarouselSlider(context, homeData)),
                               // Padding(
                               //   padding: const EdgeInsets.fromLTRB(
                               //     18.0,
@@ -451,7 +489,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               Column(
                                 //crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                 // buildHomeBannerTwo(context, homeData),
+                                  // buildHomeBannerTwo(context, homeData),
 
 
 
@@ -656,9 +694,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         fit: BoxFit.fill,
                       ))
                       : Image.asset('assets/profile_placeholder.png',
-                        height: 260,
-                        width: 260,
-                        fit: BoxFit.fitHeight,
+                    height: 260,
+                    width: 260,
+                    fit: BoxFit.fitHeight,
                   ),
                 ),
               ),
@@ -669,7 +707,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             ),
             ListTile(
               leading: Icon(
-                Icons.home,
+                Icons.home,color: Colors.grey,
               ),
               title: const Text('Home'),
               onTap: () {
@@ -677,9 +715,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               },
             ),
             ListTile(
-              leading: Icon(
-                Icons.heart_broken,
-              ),
+              leading: Image.asset("assets/heart.png",height: 20,width: 20,color: Colors.grey,),
               title: const Text('My Wishlist'),
               onTap: () {
                 Navigator.pop(context);
@@ -688,7 +724,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             ),
             ListTile(
               leading: Icon(
-                Icons.history,
+                Icons.history,color: Colors.grey,
               ),
               title: const Text('Order History'),
               onTap: () {
@@ -698,9 +734,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               },
             ),
             ListTile(
-              leading: Icon(
-                Icons.directions_bike_rounded,
-              ),
+              leading:Image.asset("assets/truck.png",height: 20,width: 20,color: Colors.grey,),
               title: const Text('Shipping & Delivery'),
               onTap: () {
                 Navigator.pop(context);
@@ -710,9 +744,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               },
             ),
             ListTile(
-              leading: Icon(
-                Icons.notes,
-              ),
+              leading:
+              Image.asset("assets/termm.png",height: 20,width: 20,color: Colors.grey,),
               title: const Text('Terms & Condition'),
               onTap: () {
                 Navigator.pop(context);
@@ -723,7 +756,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             ),
             ListTile(
               leading: Icon(
-                Icons.privacy_tip_outlined,
+                Icons.privacy_tip_outlined,color: Colors.grey,
               ),
               title: const Text('Privacy Policy'),
               onTap: () {
@@ -735,7 +768,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             ),
             ListTile(
               leading: Icon(
-                Icons.info_outline,
+                Icons.info_outline,color: Colors.grey,
               ),
               title: const Text('About Us'),
               onTap: () {
@@ -747,7 +780,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             ),
             ListTile(
               leading: Icon(
-                Icons.phone_android,
+                Icons.phone_android,color: Colors.grey,
               ),
               title: const Text('Contact Information'),
               onTap: () {
@@ -759,7 +792,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             ),
             ListTile(
               leading: Icon(
-                Icons.logout,
+                Icons.logout,color: Colors.grey,
               ),
               title: const Text('Log Out'),
               onTap: () {
@@ -839,16 +872,19 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           padding: EdgeInsets.only(top: 20.0, bottom: 1, left: 18, right: 18),
           physics: NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
-            return ProductCard(
-              id: homeData.allProductList[index].id,
-              image: homeData.allProductList[index].thumbnail_image,
-              name: homeData.allProductList[index].name,
-              main_price: homeData.allProductList[index].main_price,
-              stroked_price: homeData.allProductList[index].stroked_price,
-              has_discount: homeData.allProductList[index].has_discount,
-              discount: homeData.allProductList[index].discount,
-              is_wholesale:
-              homeData.allProductList[index].isWholesale,
+            return SizedBox(
+               height: 270,
+              child: ProductCard(
+                id: homeData.allProductList[index].id,
+                image: homeData.allProductList[index].thumbnail_image,
+                name: homeData.allProductList[index].name,
+                main_price: homeData.allProductList[index].main_price,
+                stroked_price: homeData.allProductList[index].stroked_price,
+                has_discount: homeData.allProductList[index].has_discount,
+                discount: homeData.allProductList[index].discount,
+                is_wholesale:
+                homeData.allProductList[index].isWholesale,
+              ),
             );
           });
     } else if (homeData.totalAllProductData == 0) {
@@ -1334,13 +1370,13 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     if (homeData.isCarouselInitial && homeData.carouselImageList.length == 0) {
       return Padding(
           padding:
-          const EdgeInsets.only(left: 18, right: 18, top: 0, bottom: 20),
+          const EdgeInsets.only(left: 15, right: 15, top: 0, bottom: 20),
           child: ShimmerHelper().buildBasicShimmer(height: 120));
     } else if (homeData.carouselImageList.length > 0) {
       return CarouselSlider(
         options: CarouselOptions(
-            aspectRatio: 338 / 140,
-            viewportFraction: 1,
+            aspectRatio: 351 /120,
+            viewportFraction:1,
             initialPage: 0,
             enableInfiniteScroll: true,
             reverse: false,
@@ -1358,7 +1394,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             builder: (BuildContext context) {
               return Padding(
                 padding: const EdgeInsets.only(
-                    left: 18, right: 18, top: 0, bottom: 20),
+                    left: 15, right: 15, top: 0, bottom: 20),
                 child: Stack(
                   children: <Widget>[
                     Container(
