@@ -108,6 +108,7 @@ class _FilterState extends State<Filter> {
     var filteredBrandResponse = await BrandRepository().getFilterPageBrands();
     _filterBrandList.addAll(filteredBrandResponse.brands);
     _filteredBrandsCalled = true;
+    print("filter.dart, fetchFilteredBrands(), _filterBrandList : ${_filterBrandList}");
     setState(() {});
   }
 
@@ -1020,8 +1021,7 @@ class _FilterState extends State<Filter> {
               }
             },
           ),
-        )
-            .toList()
+        ).toList()
       ],
     );
   }
