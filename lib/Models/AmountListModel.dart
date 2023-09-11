@@ -1,53 +1,44 @@
-// To parse this JSON data, do
-//
-//     final amountListModel = amountListModelFromJson(jsonString);
-
-import 'dart:convert';
-
-List<AmountListModel> amountListModelFromJson(String str) => List<AmountListModel>.from(json.decode(str).map((x) => AmountListModel.fromJson(x)));
-
-String amountListModelToJson(List<AmountListModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
-class AmountListModel {
+class amountlistmodel {
   int id;
   int userId;
   int amount;
   String message;
   int status;
   int viewed;
-  DateTime createdAt;
-  DateTime updatedAt;
+  String createdAt;
+  String updatedAt;
 
-  AmountListModel({
-    this.id,
-    this.userId,
-    this.amount,
-    this.message,
-    this.status,
-    this.viewed,
-    this.createdAt,
-    this.updatedAt,
-  });
+  amountlistmodel(
+      {this.id,
+        this.userId,
+        this.amount,
+        this.message,
+        this.status,
+        this.viewed,
+        this.createdAt,
+        this.updatedAt});
 
-  factory AmountListModel.fromJson(Map<String, dynamic> json) => AmountListModel(
-    id: json["id"],
-    userId: json["user_id"],
-    amount: json["amount"],
-    message: json["message"],
-    status: json["status"],
-    viewed: json["viewed"],
-    createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: DateTime.parse(json["updated_at"]),
-  );
+  amountlistmodel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    userId = json['user_id'];
+    amount = json['amount'];
+    message = json['message'];
+    status = json['status'];
+    viewed = json['viewed'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
 
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "user_id": userId,
-    "amount": amount,
-    "message": message,
-    "status": status,
-    "viewed": viewed,
-    "created_at": createdAt.toIso8601String(),
-    "updated_at": updatedAt.toIso8601String(),
-  };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['user_id'] = this.userId;
+    data['amount'] = this.amount;
+    data['message'] = this.message;
+    data['status'] = this.status;
+    data['viewed'] = this.viewed;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    return data;
+  }
 }

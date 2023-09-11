@@ -58,6 +58,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
           future: paymentdata(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
+
+
               return
                 Container(
                   //padding: EdgeInsets.only(top: 23),
@@ -620,6 +622,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
       print('An error occurred: $error');
     }
   }
+
+
+
+
+
+
 
 }
 

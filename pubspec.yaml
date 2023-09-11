@@ -91,6 +91,7 @@ dependencies:
   change_app_package_name: ^1.1.0
   circular_bottom_navigation: ^2.3.0
   dio: ^4.0.0
+  fluttertoast: ^8.2.2
 
 
 dev_dependencies:
