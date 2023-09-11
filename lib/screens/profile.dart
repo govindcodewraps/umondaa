@@ -43,6 +43,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../repositories/auth_repository.dart';
 import 'InProfileScreen/Payment_Screen.dart';
 import 'InProfileScreen/commisssion_history_screen.dart';
+import 'InProfileScreen/money_withdrawal.dart';
 
 class Profile extends StatefulWidget {
   Profile({Key key, this.show_back_button = false}) : super(key: key);
@@ -426,14 +427,13 @@ class _ProfileState extends State<Profile> {
           if(is_logged_in.$)
           Column(
             children: [
+              //Money withdrawal
               buildBottomVerticalCardListItem("assets/shop.png",
                   LangText(context).local.browse_all_sellers_ucf,
                   onPressed: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context) {
-                //   return Filter(
-                //     selected_filter: "sellers",
-                //   );
-                // }));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return Moneywithdrawal();
+                }));
               }),
               Divider(
                 thickness: 1,

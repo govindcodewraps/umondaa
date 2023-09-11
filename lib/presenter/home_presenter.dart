@@ -104,6 +104,7 @@ class HomePresenter extends ChangeNotifier {
     var categoryResponse = await CategoryRepository().getFeturedCategories();
     featuredCategoryList.addAll(categoryResponse.categories);
     isCategoryInitial = false;
+    print("home_presenter.dart, fetchFeaturedCategories(), response : $featuredCategoryList");
     notifyListeners();
   }
 

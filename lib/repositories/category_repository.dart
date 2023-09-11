@@ -13,8 +13,8 @@ class CategoryRepository {
     await http.get(url,headers: {
       "App-Language": app_language.$,
     });
-    // print("${AppConfig.BASE_URL}/categories?parent_id=${parent_id}");
-    // print(response.body.toString());
+     print("${AppConfig.BASE_URL}/categories?parent_id=${parent_id}");
+     print("category_repository.dart, getCategories, response : $response.body");
     return categoryResponseFromJson(response.body);
   }
 
