@@ -432,50 +432,99 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 //featured ads
 //                         if( buildHomeFeatureProductHorizontalList(
 //                             homeData) == null)
-                          SliverList(
-                            delegate: SliverChildListDelegate([
-                              Container(
-                                color: MyTheme.accent_color,
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      height: 180,
-                                      width: double.infinity,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.end,
+
+
+                          if(homeData.featuredProductList.length > 0)
+                            SliverList(
+                              delegate: SliverChildListDelegate([
+                                Container(
+                                  color: MyTheme.accent_color,
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        height: 180,
+                                        width: double.infinity,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.end,
+                                          children: [
+                                            Image.asset("assets/background_1.png")
+                                          ],
+                                        ),
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                         children: [
-                                          Image.asset("assets/background_1.png")
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 10.0,
+                                                right: 18.0,
+                                                left: 18.0),
+                                            child: Text(
+                                              AppLocalizations.of(context)
+                                                  .featured_products_ucf,
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w700),
+                                            ),
+                                          ),
+                                          buildHomeFeatureProductHorizontalList(
+                                              homeData)
                                         ],
                                       ),
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 10.0,
-                                              right: 18.0,
-                                              left: 18.0),
-                                          child: Text(
-                                            AppLocalizations.of(context)
-                                                .featured_products_ucf,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w700),
-                                          ),
-                                        ),
-                                        buildHomeFeatureProductHorizontalList(
-                                            homeData)
-                                      ],
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ]),
-                          ),
+                              ]),
+                            ),
+
+
+//                           SliverList(
+//                             delegate: SliverChildListDelegate([
+//                               Container(
+//                                 color: MyTheme.accent_color,
+//                                 child: Stack(
+//                                   children: [
+//                                     Container(
+//                                       height: 180,
+//                                       width: double.infinity,
+//                                       child: Row(
+//                                         mainAxisAlignment:
+//                                         MainAxisAlignment.end,
+//                                         children: [
+//                                           Image.asset("assets/background_1.png")
+//                                         ],
+//                                       ),
+//                                     ),
+//                                     Column(
+//                                       crossAxisAlignment:
+//                                       CrossAxisAlignment.start,
+//                                       children: [
+//                                         Padding(
+//                                           padding: const EdgeInsets.only(
+//                                               top: 10.0,
+//                                               right: 18.0,
+//                                               left: 18.0),
+//                                           child: Text(
+//                                             AppLocalizations.of(context)
+//                                                 .featured_products_ucf,
+//                                             style: TextStyle(
+//                                                 color: Colors.white,
+//                                                 fontSize: 18,
+//                                                 fontWeight: FontWeight.w700),
+//                                           ),
+//                                         ),
+//                                         buildHomeFeatureProductHorizontalList(
+//                                             homeData)
+//                                       ],
+//                                     ),
+//                                   ],
+//                                 ),
+//                               ),
+//                             ]),
+//                           ),
 
 
 

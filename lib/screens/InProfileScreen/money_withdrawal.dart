@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:hardware_lo/my_theme.dart';
 import 'package:http/http.dart' as http;
 
 
@@ -56,7 +57,7 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
   Widget Body(){
     return  SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.only(top: 15),
+        padding: const EdgeInsets.only(top: 15,bottom: 20),
         child: Column(
           children: [
             Row(
@@ -70,6 +71,7 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
                   Navigator.push(context,MaterialPageRoute(builder: (context)=>Moneywithdrawalrewuest()));
                 },
                 child: Container(
+                  padding: EdgeInsets.only(left: 20,right: 20,top: 10),
                   height: 150,
                   width: MediaQuery.of(context).size.width*0.4,
                   decoration: BoxDecoration(
@@ -78,16 +80,22 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
                       //border: Border.all(color: MyTheme.accent_color),
                       boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,offset: Offset(1,3))]
                   ),
-                  child: Center(child: Text("Withdrawal Request",style: TextStyle(fontSize: 15),)),
+                  child: Column(
+                    children: [
+                      Icon(Icons.add,size: 57,color: MyTheme.accent_color,),
+                      Text("Send Withdraw Request",style: TextStyle(fontSize: 15),),
+                    ],
+                  ),
                 ),
               ),
             ],),
             SizedBox(height: 16,),
 
             listview(),
-
+            //SizedBox(height: 260,),
 
           ],
+
         ),
       ),
     );
@@ -110,27 +118,13 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
                       //border: Border.all(color: MyTheme.accent_color),
                       boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,offset: Offset(1,3))]
                   ),
-                  child:Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  child:Column(
+                   // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("User :", style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
-                          SizedBox(height:4),
-                          Text("Balance :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
-                          SizedBox(height:4),
-                        ],),
-                      SizedBox(width: 8,),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Govind",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
-                          SizedBox(height:4),
-                          Text(snapshot.data[0].adminToPay.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
-                          SizedBox(height:4),
-
-                        ],),
+                      SizedBox(height:4),
+                      Text("AED "+snapshot.data[0].adminToPay.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700)),
+                      SizedBox(height:4),
+                      Text("Pending Balance", style: TextStyle(fontSize: 15,)),
                     ],
                   ),
                 );
@@ -157,6 +151,7 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
 
               return
                 Container(
+                  padding: EdgeInsets.only(bottom: 60),
                   height: 450,
                   width: MediaQuery.of(context).size.width*1,
                   decoration: BoxDecoration(
@@ -168,7 +163,7 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
                   child:
 
                   ListView.builder(
-
+                      reverse: false,
                       shrinkWrap: true,
                       //physics:  NeverScrollableScrollPhysics(),
                       itemBuilder: (context, int index) {
@@ -195,11 +190,11 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
                                       children: [
                                         Text("Id :", style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
                                         SizedBox(height:4),
-                                        Text("User_ID :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                                        Text("Amount :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
                                         SizedBox(height:4),
-                                        Text("Seller Earning :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                                        Text("Date :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
                                         SizedBox(height:4),
-                                        Text("Created At :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                                        Text("Status :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
 
 
                                       ],),
@@ -210,11 +205,16 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
                                       children: [
                                        Text(snapshot.data[index].id.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
                                         SizedBox(height:4),
-                                        Text(snapshot.data[index].userId.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
-                                        SizedBox(height:4),
-                                        Text(snapshot.data[index].amount.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                                        Text("AED "+snapshot.data[index].amount.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
                                         SizedBox(height:4),
                                         Text(snapshot.data[index].createdAt.toString().substring(0,10),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                                        SizedBox(height:4),
+
+                                        if(snapshot.data[index].status ==0)
+                                      Text("Pending",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: Colors.orangeAccent)),
+                                        if(snapshot.data[index].status ==1)
+                                          Text("Successful",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: Colors.green)),
+                                        //Text(snapshot.data[index].status.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
 
 
                                       ],),
@@ -227,7 +227,7 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
 
                           ],);
                       },
-                     itemCount:3,
+                     itemCount:19,
                     //itemCount: snapshot.data.lenght,
                   ),
 

@@ -58,7 +58,7 @@ class _MoneywithdrawalrewuestState extends State<Moneywithdrawalrewuest> {
               //width: 250,
               child: TextField(
                 controller: _useridController,
-                obscureText: true,
+                obscureText:false,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
@@ -76,7 +76,7 @@ class _MoneywithdrawalrewuestState extends State<Moneywithdrawalrewuest> {
               child: TextField(
                 controller: _amountController,
                 keyboardType: TextInputType.number,
-                obscureText: true,
+                obscureText: false,
                 decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
@@ -93,7 +93,7 @@ class _MoneywithdrawalrewuestState extends State<Moneywithdrawalrewuest> {
               child: TextField(
                 controller: _messageController,
                 //keyboardType: TextInputType.number,
-                obscureText: true,
+                obscureText: false,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
@@ -176,11 +176,11 @@ class _MoneywithdrawalrewuestState extends State<Moneywithdrawalrewuest> {
     if (response.statusCode == 200) {
       Fluttertoast.showToast(
         msg: "Request sending",
-        toastLength: Toast.LENGTH_SHORT,
+        toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM, // You can change the position
         timeInSecForIosWeb: 1, // Duration in seconds the toast should be visible on iOS and web
-        //backgroundColor: Colors.black, // Background color of the toast
-        textColor: Colors.black, // Text color of the toast message
+        backgroundColor: Colors.black87, // Background color of the toast
+        textColor: Colors.white, // Text color of the toast message
         fontSize: 16.0, // Font size of the toast message
       );
       print("request send");
@@ -192,8 +192,8 @@ class _MoneywithdrawalrewuestState extends State<Moneywithdrawalrewuest> {
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM, // You can change the position
         timeInSecForIosWeb: 1, // Duration in seconds the toast should be visible on iOS and web
-        //backgroundColor: Colors.black, // Background color of the toast
-        textColor: Colors.black, // Text color of the toast message
+        backgroundColor: Colors.black87, // Background color of the toast
+        textColor: Colors.white, // Text color of the toast message
         fontSize: 16.0, // Font size of the toast message
       );
     }
