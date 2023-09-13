@@ -93,6 +93,7 @@ dependencies:
   dio: ^4.0.0
   fluttertoast: ^8.2.2
   dropdown_button2: ^1.0.0
+  image: ^4.0.15
 
 
 dev_dependencies:

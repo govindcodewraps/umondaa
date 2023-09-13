@@ -14,7 +14,7 @@ class CategoryRepository {
       "App-Language": app_language.$,
     });
      print("${AppConfig.BASE_URL}/categories?parent_id=${parent_id}");
-     print("category_repository.dart, getCategories, response : $response.body");
+     print("category list${response.body}");
     return categoryResponseFromJson(response.body);
   }
 
@@ -26,6 +26,7 @@ class CategoryRepository {
         });
     //print(response.body.toString());
     //print("--featured cat--");
+    print("category_repository ${response.body}");
     return categoryResponseFromJson(response.body);
   }
 
