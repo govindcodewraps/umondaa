@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import '../../Models/Commission_History_Model.dart';
 import '../../Models/payment_model.dart';
+import '../../app_config.dart';
 
 class CommissionHistoryScreen extends StatefulWidget {
 
@@ -225,8 +226,6 @@ class _CommissionHistoryScreenState extends State<CommissionHistoryScreen> {
             else{
               return
                 Container(
-
-
                     child: Center(child: CircularProgressIndicator()));
             }
           }
@@ -248,7 +247,8 @@ class _CommissionHistoryScreenState extends State<CommissionHistoryScreen> {
     };
 
     // Define the API endpoint
-    String url = "https://umonda.com/api/v2/commission-history/138";
+    String url = "${AppConfig.BASE_URL}/commission-history/138";
+    //String url = "https://webcluestechnology.com/demo/erp/umonda/api/v2/commission-history/138";
 
     try {
       // Make the API call

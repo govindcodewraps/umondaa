@@ -8,6 +8,8 @@ import 'package:dio/dio.dart';
 
 import '../../Models/AmountListModel.dart';
 import '../../Models/withdwawalamountmodel.dart';
+import '../../app_config.dart';
+import '../../helpers/shared_value_helper.dart';
 import 'moneywithdrawal.dart';
 class Moneywithdrawal extends StatefulWidget {
   //const Moneywithdrawal({super.key});
@@ -227,178 +229,12 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
 
                           ],);
                       },
-                     itemCount:19,
-                    //itemCount: snapshot.data.lenght,
+                     //itemCount:19,
+                    itemCount: snapshot.data.length,
                   ),
 
                 );
 
-
-               /* Container(
-
-                  //padding: EdgeInsets.only(top: 23),
-                  child:
-
-                  ListView.builder(
-
-                    shrinkWrap: true,
-                    //physics:  NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, int index) {
-                      return
-
-                        Column(
-                        //crossAxisAlignment: CrossAxisAlignment.end,
-                        //mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-
-                          Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Container(
-                              padding: EdgeInsets.only(top: 10,bottom: 10),
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(12),
-                                  //border: Border.all(color: MyTheme.accent_color),
-                                  boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,offset: Offset(1,3))]
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                          padding: EdgeInsets.only(left: 7),
-                                          width:MediaQuery.of(context).size.width*0.33,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(8),
-                                            // //color: Colors.grey[300],
-
-                                            //borderRadius: BorderRadius.circular(12),
-                                            //border: Border.all(color: MyTheme.accent_color),
-
-                                            //border: Border.all(color: MyTheme.accent_color)
-                                          ),
-                                          child: Text("Id :", style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
-
-                                      SizedBox(height:4),
-                                      Container(
-                                          padding: EdgeInsets.only(left: 7),
-                                          width:MediaQuery.of(context).size.width*0.33,
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                            //color: Colors.grey[300],
-                                            //border: Border.all(color: MyTheme.accent_color)
-                                          ),
-                                          child: Text("Order ID :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
-                                      SizedBox(height:4),
-                                      Container(
-                                          padding: EdgeInsets.only(left: 7),
-                                          width:MediaQuery.of(context).size.width*0.33,
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                            //color: Colors.grey[300],
-                                            //border: Border.all(color: MyTheme.accent_color)
-                                          ),
-                                          child: Text("User_ID :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
-                                      SizedBox(height:4),
-                                      Container(
-                                          padding: EdgeInsets.only(left: 7),
-                                          width:MediaQuery.of(context).size.width*0.33,
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                            //color: Colors.grey[300],
-                                            //border: Border.all(color: MyTheme.accent_color)
-                                          ),
-                                          child: Text("Seller Earning :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
-                                      SizedBox(height:4),
-                                      Container(
-                                          padding: EdgeInsets.only(left: 7),
-                                          width:MediaQuery.of(context).size.width*0.33,
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                            //color: Colors.grey[300],
-                                            //border: Border.all(color: MyTheme.accent_color)
-                                          ),
-                                          child: Text("Created At :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
-                                      SizedBox(height:4),
-                                      Container(
-                                          padding: EdgeInsets.only(left: 7),
-                                          width:MediaQuery.of(context).size.width*0.33,
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                            //color: Colors.grey[300],
-                                            //border: Border.all(color: MyTheme.accent_color)
-                                          ),
-                                          child: Text("updated At :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
-
-                                    ],),
-                                  SizedBox(width: 8,),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                          padding: EdgeInsets.only(left: 7),
-                                          width:MediaQuery.of(context).size.width*0.5,
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                            //color: Colors.grey[300],
-                                            //border: Border.all(color: MyTheme.accent_color)
-                                          ),
-                                          child: Text(snapshot.data.data[index].id.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
-                                      SizedBox(height:4),
-                                      Container(
-                                          padding: EdgeInsets.only(left: 7),
-                                          width:MediaQuery.of(context).size.width*0.5,
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                            //color: Colors.grey[300],
-                                            //border: Border.all(color: MyTheme.accent_color)
-                                          ),
-                                          child: Text(snapshot.data.data[index].orderId.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
-                                      SizedBox(height:4),
-                                      Container(
-                                          padding: EdgeInsets.only(left: 7),
-                                          width:MediaQuery.of(context).size.width*0.5,
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                            //color: Colors.grey[300],
-                                            //border: Border.all(color: MyTheme.accent_color)
-                                          ),
-                                          child: Text(snapshot.data.data[index].userId.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
-                                      SizedBox(height:4),
-                                      Container(
-                                          padding: EdgeInsets.only(left: 7),
-                                          width:MediaQuery.of(context).size.width*0.5,
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                            //color: Colors.grey[300],
-                                            //border: Border.all(color: MyTheme.accent_color)
-                                          ),
-                                          child: Text(snapshot.data.data[index].sellerEarning.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
-                                      SizedBox(height:4),
-                                      Container(
-                                          padding: EdgeInsets.only(left: 7),
-                                          width:MediaQuery.of(context).size.width*0.5,
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                            //color: Colors.grey[300],
-                                            //border: Border.all(color: MyTheme.accent_color)
-                                          ),
-                                          child: Text(snapshot.data.data[index].createdAt.toString().substring(0,10),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
-                                      SizedBox(height:4),
-                                      Container(
-                                          padding: EdgeInsets.only(left: 7),
-                                          width:MediaQuery.of(context).size.width*0.5,
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                            //color: Colors.grey[300],
-                                            //border: Border.all(color: MyTheme.accent_color)
-                                          ),
-                                          child: Text(snapshot.data.data[index].updatedAt.toString().substring(0,10),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
-
-                                    ],),
-                                ],
-                              ),
-                            ),
-                          ),
-
-                          //SizedBox(height: 25,),
-
-                        ],);
-                    },
-                    itemCount: snapshot.data.data.length,
-                  ),
-                );*/
             }
             else{
               return
@@ -413,7 +249,7 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
 
 
   Future<List<Withdrawalamount>> withdrawalaccount() async {
-    var url = Uri.parse('https://webcluestechnology.com/demo/erp/umonda/api/v2/money-withdraw-requests/138');
+    var url = Uri.parse('${AppConfig.BASE_URL}/money-withdraw-requests/${user_id.$}');
 
     final response = await http.get(url);
 
@@ -435,7 +271,7 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
 
 
   Future<List<amountlistmodel>> fetchData() async {
-    var url = Uri.parse('https://webcluestechnology.com/demo/erp/umonda/api/v2/withdraw-requests-list/138');
+    var url = Uri.parse('${AppConfig.BASE_URL}/withdraw-requests-list/${user_id.$}');
 
     final response = await http.get(url);
 

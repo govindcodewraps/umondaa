@@ -6,6 +6,9 @@ import 'package:hardware_lo/my_theme.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../../app_config.dart';
+import '../../helpers/shared_value_helper.dart';
+
 
 class Moneywithdrawalrewuest extends StatefulWidget {
  // const Moneywithdrawalrewuest({super.key});
@@ -17,7 +20,7 @@ class Moneywithdrawalrewuest extends StatefulWidget {
 class _MoneywithdrawalrewuestState extends State<Moneywithdrawalrewuest> {
   @override
   Widget build(BuildContext context) {
-    TextEditingController _useridController = TextEditingController();
+   // TextEditingController _useridController = TextEditingController();
     TextEditingController _amountController = TextEditingController();
     TextEditingController _messageController = TextEditingController();
     return SafeArea(child: Scaffold(
@@ -51,22 +54,22 @@ class _MoneywithdrawalrewuestState extends State<Moneywithdrawalrewuest> {
           crossAxisAlignment: CrossAxisAlignment.start,
           //mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(height: 10,),
-         Text("User Id",style: TextStyle(fontSize: 20),),
-            SizedBox(
-              height: 50,
-              //width: 250,
-              child: TextField(
-                controller: _useridController,
-                obscureText:false,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  //labelText: 'Password',
-                ),
-              ),
-            ),
+         //    SizedBox(height: 10,),
+         // Text("User Id",style: TextStyle(fontSize: 20),),
+         //    SizedBox(
+         //      height: 50,
+         //      //width: 250,
+         //      child: TextField(
+         //        controller: _useridController,
+         //        obscureText:false,
+         //        decoration: InputDecoration(
+         //          border: OutlineInputBorder(
+         //            borderRadius: BorderRadius.circular(10.0),
+         //          ),
+         //          //labelText: 'Password',
+         //        ),
+         //      ),
+         //    ),
             SizedBox(height: 10,),
          Text("Amount",style: TextStyle(fontSize: 20),),
             SizedBox(
@@ -119,6 +122,28 @@ class _MoneywithdrawalrewuestState extends State<Moneywithdrawalrewuest> {
                           )
                       ),
                       onPressed: (){
+
+                        if (_amountController.text.isEmpty || _messageController.text.isEmpty) {
+                          Fluttertoast.showToast(
+                            msg: "Please fill in all fields",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.black87,
+                            textColor: Colors.red,
+                            fontSize: 16.0,
+                          );
+                        } else {
+                          sendrequest(_amountController.text.toString(), _messageController.text.toString());
+                          print(_amountController.text.toString());
+                          print(_messageController.text.toString());
+                          //textController1.clear();
+                          _amountController.clear();
+                          _messageController.clear();
+
+                        }
+
+
                         // Fluttertoast.showToast(
                         //   msg: "This is a short toast message",
                         //   toastLength: Toast.LENGTH_SHORT,
@@ -129,11 +154,12 @@ class _MoneywithdrawalrewuestState extends State<Moneywithdrawalrewuest> {
                         //   fontSize: 16.0, // Font size of the toast message
                         // );
 
-                        sendrequest(_useridController.text.toString(),_amountController.text.toString(),_messageController.text.toString());
+                       // sendrequest(_amountController.text.toString(),_messageController.text.toString());
+                       // sendrequest(_useridController.text.toString(),_amountController.text.toString(),_messageController.text.toString());
 
-                        print(_useridController.text.toString());
-                        print(_amountController.text.toString());
-                        print(_messageController.text.toString());
+                        //print(_useridController.text.toString());
+                        //print(_amountController.text.toString());
+                        //print(_messageController.text.toString());
 
                       },
                       child:Text("Submit")
@@ -151,7 +177,7 @@ class _MoneywithdrawalrewuestState extends State<Moneywithdrawalrewuest> {
   // import 'dart:convert';
   // import 'package:http/http.dart' as http;
 
-  sendrequest(userid,amount,message) async {
+  sendrequest(amount,message) async {
     var headers = {
       'Content-Type': 'application/json',
       'Authorization':
@@ -159,13 +185,13 @@ class _MoneywithdrawalrewuestState extends State<Moneywithdrawalrewuest> {
     };
 
     var data = jsonEncode({
-      'user_id': userid,
+      'user_id': user_id.$,
       'amount': amount,
       'message': message,
     });
 
-    var url = Uri.parse(
-        'https://webcluestechnology.com/demo/erp/umonda/api/v2/withdraw-requests');
+    //var url = Uri.parse('https://webcluestechnology.com/demo/erp/umonda/api/v2/withdraw-requests');
+    var url = Uri.parse('${AppConfig.BASE_URL}/withdraw-requests');
 
     var response = await http.post(
       url,

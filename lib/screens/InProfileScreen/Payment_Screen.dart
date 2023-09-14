@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hardware_lo/my_theme.dart';
 import '../../Models/payment_model.dart';
+import '../../helpers/shared_value_helper.dart';
 
 class PaymentScreen extends StatefulWidget {
 
@@ -57,14 +58,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
       FutureBuilder(
           future: paymentdata(),
           builder: (context, snapshot) {
+
             if (snapshot.hasData) {
-
-
               return
                 Container(
                   //padding: EdgeInsets.only(top: 23),
                   child: ListView.builder(
-                    itemCount: snapshot.data.data.length-1,
                     shrinkWrap: true,
                     //physics:  NeverScrollableScrollPhysics(),
                     itemBuilder: (context, int index) {
@@ -85,8 +84,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               child:   Row(
 
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-
-
 
                                 children: [
 
@@ -559,14 +556,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
                             ),
                           ),
 
-
-
                           //SizedBox(height: 25,),
 
                         ],);
                     },
-                    //itemCount: 12,
-                   // itemCount: snapshot.data.data.length??"",
+                    //itemCount: 17,
+                    itemCount: snapshot.data.data.length,
                   ),
                 );
             }
@@ -586,7 +581,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
     // Define the headers
     Map<String, String> headers = {
-      'Authorization': 'Bearer 131|V1SPLBTs7BaNNUwZth5gTGjZfC1nc2qQ1EB6fpTs',
+     // 'Authorization': 'Bearer 131|V1SPLBTs7BaNNUwZth5gTGjZfC1nc2qQ1EB6fpTs',
+     // 'Authorization': access_token.$,
       'Cookie':
       'XSRF-TOKEN=dT0lZnI5OsbNxA88TLF4S2x45edCmnKMTwmze0oJ; umonda_online_marketplace_session=k3LCVR020r4kAVJFwu2R66nEtLr7CtFTN7ekl25M'
 
@@ -594,6 +590,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     };
 
     // Define the API endpoint
+    //String url = "https://umonda.com/api/v2/payment-history/${user_id.$}";
     String url = "https://umonda.com/api/v2/payment-history/138";
 
     try {

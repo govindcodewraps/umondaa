@@ -25,6 +25,7 @@ import 'dart:convert';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 
 //const List<String> category = <String>['Select Category', 'Homa & Garden', 'Electronics', 'Motors', 'Fashion', 'Collectibles & Arts', 'Sports', 'Health & Beauty', 'Industrial Equipment'];
@@ -755,26 +756,59 @@ class _placeadState extends State<placead> {
                 ),
                 onPressed: _isAgree
                     ? () {
-                  var ProdName = _ProductName.text.toString();
-                  var category = dropdownCategory.split(" ")[0].toString();
-                  var brand = dropdownBrands.split(" ")[0].toString();
-                  var description = _Description.text.toString();
-                  var amount = _PriceAED.text.toString();
-                  var email = _EmailID.text.toString();
-                  var password = _PassWord.text.toString();
-                  var imagebase = imageurl;
 
-                  print("Product name.: ${ProdName}");
-                  print("category.....: ${category}");
-                  print("Brand........: ${brand}");
-                  print("Description..: ${description}");
-                  print("Amount.......: ${amount}");
-                  print("Email........: ${email}");
-                  print("password.....: ${password}");
-                  print("Base 64 url.....: ${imagebase}");
-                  print("User id  .....: ${user_id.$}");
 
-                  place_ad_upload(ProdName,category,brand,imagebase,description,amount,email,password);
+                  if (_ProductName.text.isEmpty ||
+                      dropdownCategory.isEmpty ||
+                      dropdownBrands.isEmpty ||
+                      _Description.text.isEmpty ||
+                      _PriceAED.text.isEmpty ||
+                      imageurl.isEmpty
+
+                  ) {
+                    Fluttertoast.showToast(
+                      msg: "Please fill in all fields",
+                     // toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.black87,
+                      textColor: Colors.red,
+                      fontSize: 16.0,
+                    );
+                  } else {
+
+                    var ProdName = _ProductName.text.toString();
+                    var category = dropdownCategory.split(" ")[0].toString();
+                    var brand = dropdownBrands.split(" ")[0].toString();
+                    var description = _Description.text.toString();
+                    var amount = _PriceAED.text.toString();
+                    var email = _EmailID.text.toString();
+                    var password = _PassWord.text.toString();
+                    var imagebase = imageurl;
+
+                    print("Product name.: ${ProdName}");
+                    print("category.....: ${category}");
+                    print("Brand........: ${brand}");
+                    print("Description..: ${description}");
+                    print("Amount.......: ${amount}");
+                    print("Email........: ${email}");
+                    print("password.....: ${password}");
+                    print("Base 64 url.....: ${imagebase}");
+                    print("User id  .....: ${user_id.$}");
+                    place_ad_upload(ProdName,category,brand,imagebase,description,amount,email,password);
+///////////
+                    _ProductName.clear();
+                    _Description.clear();
+                    _PriceAED.clear();
+                    _EmailID.clear();
+                    _PassWord.clear();
+
+                  }
+
+
+
+
+                  //////
 
                 }
                     : null,
@@ -1039,8 +1073,19 @@ class _placeadState extends State<placead> {
     setState(() {
       selectedImages.removeAt(index);
       print("tile number#$index is deleted");
+
     });
   }
+
+  // void deleteFromIndex(int index) {
+  //   setState(() {
+  //     // Check if the index is within valid bounds
+  //     if (index >= 0 && index < selectedImages.length) {
+  //       selectedImages.removeRange(index, selectedImages.length);
+  //       print("All images from index $index onward are deleted");
+  //     }
+  //   });
+  // }
 
 
 
@@ -1085,7 +1130,30 @@ class _placeadState extends State<placead> {
 
       if (response.statusCode == 200) {
         print(json.encode(json.decode(response.body)));
-      } else {
+        Fluttertoast.showToast(
+          msg: "Product Add successfully",
+          //toastLength:LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM, // You can change the position
+          timeInSecForIosWeb: 1, // Duration in seconds the toast should be visible on iOS and web
+          backgroundColor: Colors.black, // Background color of the toast
+          textColor: Colors.green, // Text color of the toast message
+          fontSize: 16.0, // Font size of the toast message
+        );
+      }
+      else if (response.statusCode == 401) {
+        print("Unauthorized user");
+        Fluttertoast.showToast(
+          msg: "Unauthorized user",
+          //toastLength:LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM, // You can change the position
+          timeInSecForIosWeb: 1, // Duration in seconds the toast should be visible on iOS and web
+          backgroundColor: Colors.black, // Background color of the toast
+          textColor: Colors.red, // Text color of the toast message
+          fontSize: 16.0, // Font size of the toast message
+        );
+      }
+
+      else {
         print('Request failed with status: ${response.statusCode}');
       }
     } catch (e) {
