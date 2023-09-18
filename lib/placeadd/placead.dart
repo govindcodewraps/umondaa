@@ -48,7 +48,7 @@ class _placeadState extends State<placead> {
   String dropdownBrands = "Select Select_Brand";
   String dropdownCategory = "Select Select_Category";
   bool isEnabled = false;
-  String offerstatus;
+  String offerstatus="0";
 
 
   TextEditingController _ProductName = TextEditingController();
@@ -603,7 +603,7 @@ class _placeadState extends State<placead> {
                       imageurl.isEmpty
 
                   ) {
-
+                   print("images url${imageurl}");
                     Fluttertoast.showToast(
                       msg: "Please fill in all fields",
                      // toastLength: Toast.LENGTH_SHORT,
@@ -804,6 +804,7 @@ class _placeadState extends State<placead> {
     setState(
           () {
         if (xfilePick.isNotEmpty) {
+
           for (var i = 0; i < xfilePick.length; i++) {
             selectedImages.add(File(xfilePick[i].path));
 
@@ -813,7 +814,8 @@ class _placeadState extends State<placead> {
             imageurl= base64String;
 
             // Print the base64 URL to the console
-            print('Base64 URL for Image $i: data:image/jpeg;base64,$base64String');
+           // print('Base64 URL for Image $i: data:image/jpeg;base64,$base64String');
+            print('Base64 URL for Image ${base64String}');
           }
         } else {
           ScaffoldMessenger.of(context).showSnackBar(

@@ -1,5 +1,7 @@
 import 'dart:async';
-
+import 'dart:ui';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:hardware_lo/app_config.dart';
 import 'package:hardware_lo/custom/box_decorations.dart';
 import 'package:hardware_lo/custom/btn.dart';
@@ -62,6 +64,7 @@ class _ProductDetailsState extends State<ProductDetails>
   ScrollController _imageScrollController = ScrollController();
   TextEditingController sellerChatTitleController = TextEditingController();
   TextEditingController sellerChatMessageController = TextEditingController();
+  TextEditingController pricecontroller = TextEditingController();
 
   double _scrollPosition = 0.0;
 
@@ -99,7 +102,7 @@ class _ProductDetailsState extends State<ProductDetails>
   @override
   void initState() {
     _ColorAnimationController =
-        AnimationController(vsync: this, duration: Duration(seconds: 0));
+        AnimationController(vsync: this, duration: Duration(seconds: 5));
 
     _colorTween = ColorTween(begin: Colors.transparent, end: Colors.white)
         .animate(_ColorAnimationController);
@@ -969,7 +972,8 @@ class _ProductDetailsState extends State<ProductDetails>
                                 EdgeInsets.only(top: 14, left: 14, right: 14),
                             child: _productDetails != null
                                 ? Text(
-                                    _productDetails.name.toString(),
+                             //"product name",
+                              _productDetails.name.toString(),
                                     style: TextStyles.smallTitleTexStyle(),
                                     maxLines: 2,
                                   )
@@ -2229,16 +2233,16 @@ class _ProductDetailsState extends State<ProductDetails>
         ),
 
 
-
+        //productDetailsResponse.detailed_products.length > 0
           if (_productDetails.minoffer == 1)
-       // ${_productDetails != null ? _productDetails.name : ''}
-         // if (_productDetails.minoffer != null ? _productDetails.minoffer == 1 : '')
-        BottomNavigationBarItem(
+
+          BottomNavigationBarItem(
           backgroundColor: Colors.transparent,
           label: '',
           icon: InkWell(
             onTap: () {
-              onPressAddToCart(context, _addedToCartSnackbar);
+              //onPressAddToCart(context, _addedToCartSnackbar);
+              alertDialog(context);
             },
             child: Container(
               margin: EdgeInsets.only(
@@ -2270,6 +2274,8 @@ class _ProductDetailsState extends State<ProductDetails>
             ),
           ),
         )
+
+
 
 
 
@@ -2819,4 +2825,151 @@ class _ProductDetailsState extends State<ProductDetails>
       height: 5,
     );
   }
+  Widget alertDialog(BuildContext context) {
+
+    showDialog(
+        context: context,
+        builder: (BuildContext context)
+    {
+      return Stack(
+        children: [
+          // Background content
+          Container(
+            color: Colors.black.withOpacity(0.5), // Color overlay
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0), // Blur effect
+              child: Container(
+                color: Colors.transparent, // Transparent to apply blur
+              ),
+            ),
+          ),
+          // AlertDialog with a blur effect
+          AlertDialog(
+            scrollable: true,
+            title: Column(
+              children: [
+                Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Make an Offer"),
+                    InkWell(
+                        onTap: (){
+                          Navigator.of(context).pop();
+                        },
+                        child: Icon(Icons.cancel)),
+                  ],
+                ),
+                Divider(color: Colors.grey,)
+              ],
+            ),
+            content: Container(
+             // width: 400,
+              padding: const EdgeInsets.only(left: 8,right: 8),
+              child: Form(
+                child: Column(
+                  children: [
+
+                    SizedBox(
+                      //height: 50,
+                      //width: 250,
+                      child: TextField(
+                        controller: pricecontroller,
+                        keyboardType: TextInputType.number,
+                        obscureText: false,
+
+                        decoration: InputDecoration(
+                          hintText: 'Enter Your price...',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          //labelText: 'Password',
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            actions: [
+
+              ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(MyTheme.accent_color),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          //side: BorderSide(color: Colors.red)
+                        )
+                    )
+                ),
+                child: Text("Submit",),
+                onPressed: () {
+                  makeanofferapi(pricecontroller.text);
+                  print("Your Price ${pricecontroller.text}");
+                  Navigator.pop(context);
+                  pricecontroller.clear();
+                  // Your code for submitting the form.
+                },
+              ),
+            ],
+          ),
+        ],
+      );
+    }
+    );
+
+
+
+  }
+
+
+  // import 'dart:convert';
+  // import 'package:http/http.dart' as http;
+
+  void makeanofferapi(price) async {
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer 158|C1A8BevHCt8ZgmNZtWC0rxfXgMNNdJCMAchJu6i2'
+    };
+
+    var data = json.encode({
+      "id":  _productDetails.id,
+      "variant": "",
+      "user_id": user_id.$,
+      "quantity": 1,
+      "offerprice": price
+    });
+
+    try {
+      var response = await http.post(
+        Uri.parse('https://webcluestechnology.com/demo/erp/umonda/api/v2/carts/make-offer'),
+        headers: headers,
+        body: data,
+      );
+
+      if (response.statusCode == 200) {
+        Toast.show("Product added to cart successfully",textStyle: TextStyle(color:Colors.green), duration: Toast.lengthShort, gravity:  Toast.bottom);
+        print(json.encode(json.decode(response.body)));
+        print("ADD money ");
+      }
+      else if(response.statusCode == 401) {
+        Toast.show("Product not added to cart",textStyle: TextStyle(color:Colors.red), duration: Toast.lengthShort, gravity:  Toast.bottom);
+        print(json.encode(json.decode(response.body)));
+        print("401 Unauthorized ");
+      }
+
+      else {
+        print('Request failed with status: ${response.statusCode}');
+        print(response.body);
+      }
+    } catch (error) {
+      print('Error: $error');
+    }
+  }
+
+  // void main() {
+  //   makeHttpRequest();
+  // }
+
+
 }
