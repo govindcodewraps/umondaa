@@ -43,6 +43,8 @@ import 'package:provider/provider.dart';
 import 'package:social_share/social_share.dart';
 import 'package:toast/toast.dart';
 
+import '../data_model/product_details_response.dart';
+
 class ProductDetails extends StatefulWidget {
   int id;
 
@@ -54,6 +56,40 @@ class ProductDetails extends StatefulWidget {
 
 class _ProductDetailsState extends State<ProductDetails>
     with TickerProviderStateMixin {
+
+
+  bool isLoading = true; // Initially set to true as data is loading
+  ProductDetailsResponse productDetails;
+
+  //
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // Load product details when the screen is initialized
+  //   loadProductDetails();
+  // }
+
+
+  Future<void> loadProductDetails() async {
+    // Perform your API call to fetch product details here
+    try {
+      final response = await ProductRepository()
+          .getProductDetails(id: _productDetails.id); // Replace with actual product ID
+      setState(() {
+        productDetails = response;
+        isLoading = true; // Data has been loaded, set isLoading to false
+      });
+    } catch (error) {
+      // Handle errors here if necessary
+      print('Error: $error');
+      setState(() {
+        isLoading = false; // Set isLoading to false on error
+      });
+    }
+  }
+
+
+
   bool _showCopied = false;
   String _appbarPriceString = ". . .";
   int _currentImage = 0;
@@ -101,6 +137,11 @@ class _ProductDetailsState extends State<ProductDetails>
 
   @override
   void initState() {
+
+    loadProductDetails();
+
+
+
     _ColorAnimationController =
         AnimationController(vsync: this, duration: Duration(seconds: 5));
 
@@ -785,8 +826,10 @@ class _ProductDetailsState extends State<ProductDetails>
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
+
     final double statusBarHeight = MediaQuery.of(context).padding.top;
     SnackBar _addedToCartSnackbar = SnackBar(
       content: Text(
@@ -816,12 +859,15 @@ class _ProductDetailsState extends State<ProductDetails>
             extendBody: true,
             bottomNavigationBar: buildBottomAppBar(context, _addedToCartSnackbar),
             //appBar: buildAppBar(statusBarHeight, context),
-            body: RefreshIndicator(
+            body:
+             RefreshIndicator(
 
               color: MyTheme.accent_color,
               backgroundColor: Colors.white,
               onRefresh: _onPageRefresh,
-              child: CustomScrollView(
+              child:
+
+                  CustomScrollView(
                 controller: _mainScrollController,
                 physics: const BouncingScrollPhysics(
                     parent: AlwaysScrollableScrollPhysics()),
@@ -2231,74 +2277,47 @@ class _ProductDetailsState extends State<ProductDetails>
             ),
           ),
         ),
-
-
         //productDetailsResponse.detailed_products.length > 0
-          if (_productDetails.minoffer == 1)
-
+        if (_productDetails !=null)
+          if(_productDetails.minoffer == 1)
           BottomNavigationBarItem(
-          backgroundColor: Colors.transparent,
-          label: '',
-          icon: InkWell(
-            onTap: () {
-              //onPressAddToCart(context, _addedToCartSnackbar);
-              alertDialog(context);
-            },
-            child: Container(
-              margin: EdgeInsets.only(
-                left: 18,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6.0),
-                color: MyTheme.accent_color,
-                boxShadow: [
-                  BoxShadow(
-                    color: MyTheme.accent_color_shadow,
-                    blurRadius: 20,
-                    spreadRadius: 0.0,
-                    offset: Offset(0.0, 10.0), // shadow direction: bottom right
-                  )
-                ],
-              ),
-              height: 50,
-              child: Center(
-                child: Text(
-                 // AppLocalizations.of(context).add_to_cart_ucf,
-                  "Make an offer ",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600),
+            backgroundColor: Colors.transparent,
+            label: '',
+            icon: InkWell(
+              onTap: () {
+                //onPressAddToCart(context, _addedToCartSnackbar);
+                alertDialog(context);
+              },
+              child: Container(
+                margin: EdgeInsets.only(
+                  left: 18,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6.0),
+                  color: MyTheme.accent_color,
+                  boxShadow: [
+                    BoxShadow(
+                      color: MyTheme.accent_color_shadow,
+                      blurRadius: 20,
+                      spreadRadius: 0.0,
+                      offset: Offset(0.0, 10.0), // shadow direction: bottom right
+                    )
+                  ],
+                ),
+                height: 50,
+                child: Center(
+                  child: Text(
+                    // AppLocalizations.of(context).add_to_cart_ucf,
+                    "Make an offer ",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
+                  ),
                 ),
               ),
             ),
-          ),
-        )
-
-
-
-
-
-        /*Container(
-          color: Colors.white.withOpacity(0.95),
-          height: 83,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                width: 18,
-              ),
-
-              SizedBox(
-                width: 14,
-              ),
-
-              SizedBox(
-                width: 18,
-              ),
-            ],
-          ),
-        )*/
+          )
       ],
     );
   }

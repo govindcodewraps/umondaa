@@ -27,6 +27,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+
+
+
 class placead extends StatefulWidget {
   // const placead({super.key});
 
@@ -39,7 +42,7 @@ class _placeadState extends State<placead> {
   bool light = false, isChecked = true;
   bool _filteredBrandsCalled = false;
   bool _filteredcategoryCalled = false;
-  List<File> selectedImages = [];
+ // List<File> selectedImages = [];
   List<File> basee = [];
   List<dynamic> brandsList = [];
   List<dynamic> categoryList = [];
@@ -49,6 +52,10 @@ class _placeadState extends State<placead> {
   String dropdownCategory = "Select Select_Category";
   bool isEnabled = false;
   String offerstatus="0";
+  String allurlss;
+  List<File> selectedImages = []; // List to hold selected image files
+  List<String> imageUrls = [];
+  List<String> base64Urls = [];
 
 
   TextEditingController _ProductName = TextEditingController();
@@ -573,6 +580,14 @@ class _placeadState extends State<placead> {
               ],
             ),
           ),
+          ElevatedButton(onPressed: (){
+
+            print("URLLLLLLLL  .....: ${base64Urls}");
+            print("IMAGE_URLLLLL  .....: ${imageUrls}");
+          }, child: Text("Button")),
+
+
+
           Padding(
             padding: const EdgeInsets.only(top: 30.0,left: 16,right: 16),
             child: Container(
@@ -624,6 +639,7 @@ class _placeadState extends State<placead> {
                     var password = _PassWord.text.toString();
                     var offer = _offerControler.text.toString();
                     var imagebase = imageurl;
+                    //var imagebase = allurlss;
 
                     print("Product name.: ${ProdName}");
                     print("category.....: ${category}");
@@ -632,10 +648,14 @@ class _placeadState extends State<placead> {
                     print("Amount.......: ${amount}");
                     print("Email........: ${email}");
                     print("password.....: ${password}");
-                    print("Base 64 url....: ${imagebase}");
+                    //print("Base 64 url....: ${imagebase}");
+                    print("Base 64 url....: ${allurlss}");
                     print("User id  .....: ${user_id.$}");
                     print("Offer price  .....: ${offer}");
                     print("Offer Status  .....: ${offerstatus}");
+                    print("URLLLLLLLL  .....: ${base64Urls}");
+                    print("IMAGE_URLLLLL  .....: ${imageUrls}");
+
 
                     place_ad_upload(ProdName,category,brand,imagebase,description,offer,amount,offerstatus,email,password);
 ///////////
@@ -793,7 +813,93 @@ class _placeadState extends State<placead> {
   }*/
 
 
-  Future<void> getImages() async {
+
+
+
+  //List<String> base64Urls = []; // List to store base64 URLs
+
+  // Future<void> getImages() async {
+  //   final pickedFiles = await picker.pickMultiImage(
+  //     imageQuality: 100,
+  //     maxHeight: 1000,
+  //     maxWidth: 1000,
+  //   );
+  //
+  //   setState(() {
+  //     if (pickedFiles.isNotEmpty) {
+  //       for (var i = 0; i < pickedFiles.length; i++) {
+  //         selectedImages.add(File(pickedFiles[i].path));
+  //
+  //         // Convert the image to base64
+  //         List<int> imageBytes = File(pickedFiles[i].path).readAsBytesSync();
+  //         String base64Url = base64Encode(imageBytes);
+  //         base64Urls.add(base64Url); // Store base64 URL in the list
+  //       }
+  //       print("allll${base64Urls}");
+  //     } else {
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         const SnackBar(content: Text('Nothing is selected')),
+  //       );
+  //     }
+  //   });
+  // }
+
+// Now, base64Urls contains the base64 representations of the selected images.
+
+
+
+
+  // import 'dart:convert';
+  // import 'dart:io';
+  // import 'package:flutter/material.dart';
+  // import 'package:image_picker/image_picker.dart';
+  //
+  // List<File> selectedImages = []; // Store selected images as Files
+  // List<String> base64Urls = []; // Store base64 URLs as strings
+
+/*  Future<void> getImages() async {
+    final picker = ImagePicker();
+    final pickedFiles = await picker.pickMultiImage(
+      imageQuality: 100,
+      maxHeight: 1000,
+      maxWidth: 1000,
+    );
+
+    setState(() {
+      if (pickedFiles.isNotEmpty) {
+        for (var i = 0; i < pickedFiles.length; i++) {
+          final XFile xfile = pickedFiles[i];
+          selectedImages.add(File(xfile.path));
+
+          // Convert the selected image to base64
+          final bytes = File(xfile.path).readAsBytesSync();
+          final base64String = base64Encode(bytes);
+
+          // Add the base64 URL to the list
+          base64Urls.add(base64String);
+        }
+
+        // Print the list of base64 URLs
+        print('Base64 URLs for selected images:');
+        for (var i = 0; i < base64Urls.length; i++) {
+          //print('Image $i: ${base64Urls[i]}');
+         // print(base64Urls[i]);
+          allurlss="${base64Urls[i]}";
+
+          print("GGGGGGGG${allurlss+","+allurlss}");
+        }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Nothing is selected')),
+        );
+      }
+    });
+  }*/
+
+
+
+
+   Future<void> getImages() async {
     final pickedFile = await picker.pickMultiImage(
       imageQuality: 100,
       maxHeight: 1000,
@@ -809,6 +915,7 @@ class _placeadState extends State<placead> {
             selectedImages.add(File(xfilePick[i].path));
 
             // Convert the selected image to base64
+           // final bytes = File(xfilePick[i].path).readAsBytesSync();
             final bytes = File(xfilePick[i].path).readAsBytesSync();
             final base64String = base64Encode(bytes);
             imageurl= base64String;
@@ -827,35 +934,36 @@ class _placeadState extends State<placead> {
   }
 
 
-  // Future getImages() async {
-  //   final pickedFile = await picker.pickMultiImage(
-  //       imageQuality: 100, maxHeight: 1000, maxWidth: 1000);
-  //   List<XFile> xfilePick = pickedFile;
-  //
-  //
-  //   setState(
-  //         () {
-  //       if (xfilePick.isNotEmpty) {
-  //         for (var i = 0; i < xfilePick.length; i++) {
-  //           selectedImages.add(File(xfilePick[i].path));
-  //         }
-  //
-  //
-  //       } else {
-  //         ScaffoldMessenger.of(context).showSnackBar(
-  //             const SnackBar(content: Text('Nothing is selected')));
-  //       }
-  //     },
-  //   );
-  //
-  //
-  //
-  //
-  // }
+//   Future getImages() async {
+//     final pickedFile = await picker.pickMultiImage(
+//         imageQuality: 100, maxHeight: 1000, maxWidth: 1000);
+//     List<XFile> xfilePick = pickedFile;
+//
+//
+//     setState(
+//           () {
+//         if (xfilePick.isNotEmpty) {
+//           for (var i = 0; i < xfilePick.length; i++) {
+//             selectedImages.add(File(xfilePick[i].path));
+//           }
+//
+//
+//         } else {
+//           ScaffoldMessenger.of(context).showSnackBar(
+//               const SnackBar(content: Text('Nothing is selected')));
+//         }
+//       },
+//     );
+//
+//
+//
+//
+//   }
 
-
-
-//----------------
+//
+//
+//
+// ----------------
 //   _getFromGallery() async {
 //     PickedFile pickedFile = await ImagePicker().getImage(
 //       source: ImageSource.gallery,
@@ -868,11 +976,11 @@ class _placeadState extends State<placead> {
 //       });
 //     }
 //   }
-//-----------------------
+// -----------------------
 //
-
-
-
+//
+//
+//
 //   onPressedUploadAd() async {
 //     var ProdName = _ProductName.text.toString();
 //     var Catg = _Category.text.toString();
@@ -896,7 +1004,7 @@ class _placeadState extends State<placead> {
 //           gravity: Toast.center, duration: Toast.lengthLong);
 //     }
 //   }
-//-----------------------------
+// -----------------------------
   void delete(int index){
     setState(() {
       selectedImages.removeAt(index);
@@ -935,7 +1043,7 @@ class _placeadState extends State<placead> {
         headers: headers,
         body: data,
       );
-
+        print("Print respone ad place ${response}");
       if (response.statusCode == 200) {
         print(json.encode(json.decode(response.body)));
         Fluttertoast.showToast(
@@ -968,4 +1076,6 @@ class _placeadState extends State<placead> {
       print('Error: $e');
     }
   }
-} //State
+
+}
+

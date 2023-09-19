@@ -247,6 +247,7 @@ class ProductRepository {
     return commonResponseFromJson(response.body);
   }
 
+
   Future<ProductDetailsResponse> getProductDetails(
       {@required int id = 0}) async {
     Uri url = Uri.parse("${AppConfig.BASE_URL}/products/" + id.toString());
