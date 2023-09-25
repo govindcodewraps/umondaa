@@ -544,29 +544,29 @@ class _CartState extends State<Cart> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 12.0),
-                      child: Row(
-                        children: [
-                          Text(
-                            _shopList[index].name,
-                            style: TextStyle(
-                                color: MyTheme.dark_font_grey,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 12),
-                          ),
-                          Spacer(),
-                          Text(
-
-                            partialTotalString(index),
-                            style: TextStyle(
-                                color: MyTheme.accent_color,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 12),
-                          ),
-                        ],
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.only(bottom: 12.0),
+                    //   child: Row(
+                    //     children: [
+                    //       Text(
+                    //         _shopList[index].name,
+                    //         style: TextStyle(
+                    //             color: MyTheme.dark_font_grey,
+                    //             fontWeight: FontWeight.w700,
+                    //             fontSize: 12),
+                    //       ),
+                    //       Spacer(),
+                    //       Text(
+                    //
+                    //         partialTotalString(index),
+                    //         style: TextStyle(
+                    //             color: MyTheme.accent_color,
+                    //             fontWeight: FontWeight.w700,
+                    //             fontSize: 12),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                     buildCartSellerItemList(index),
 
                     // Align(
@@ -643,11 +643,11 @@ class _CartState extends State<Cart> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Container(
-                width: DeviceInfo(context).width/4,
+                width: DeviceInfo(context).width/2.5,
                 height: 120,
                 child: ClipRRect(
-                    borderRadius: BorderRadius.horizontal(
-                        left: Radius.circular(6), right: Radius.zero),
+                    borderRadius: BorderRadius.circular(10),
+                        //left: Radius.circular(6), right: Radius.zero),
                     child: FadeInImage.assetNetwork(
                       placeholder: 'assets/placeholder.png',
                       image: _shopList[seller_index]

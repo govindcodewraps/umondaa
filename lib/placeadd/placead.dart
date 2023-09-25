@@ -836,7 +836,7 @@ class _placeadState extends State<placead> {
 
     var request = http.MultipartRequest(
       'POST',
-      Uri.parse('https://webcluestechnology.com/demo/erp/umonda/api/v2/product/add'),
+      Uri.parse('${AppConfig.BASE_URL}/product/add'),
     );
 
     request.fields.addAll({
@@ -853,17 +853,6 @@ class _placeadState extends State<placead> {
       'email':email,
       'password':password
 
-      // 'name': name,
-      // 'user_id':userid,
-      // 'category_id':Category,
-      // 'brand_id':Brand,
-      // 'filename': 'products images',
-      // 'description': description,
-      // 'min_offer_price':offer,
-      // 'unit_price':amount,
-      // 'moffer': offerstatus,
-      // 'email':email,
-      // 'password':password,
     });
 
     for(var i=0;i<imageUrls.length;i++)
@@ -872,8 +861,6 @@ class _placeadState extends State<placead> {
 
 
     }
-    // Add files to the request
-    //uest.files.add(await http.MultipartFile.fromPath('thumbnail_img[]', '/C:/Users/hp/Pictures/Screenshots/Screenshot 2023-06-13 005720.png'));
 
     request.headers.addAll(headers);
 

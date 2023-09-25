@@ -91,6 +91,7 @@ class _FilterState extends State<Filter> {
   bool _showProductLoadingContainer = false;
 
   List<dynamic> _topbrandList = [];
+
   bool _isBrandInitial = true;
   int _brandPage = 1;
   int _totalBrandData = 0;

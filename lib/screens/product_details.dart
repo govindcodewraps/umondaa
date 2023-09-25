@@ -1005,6 +1005,12 @@ class _ProductDetailsState extends State<ProductDetails>
                       background: buildProductSliderImageSection(),
                     ),
                   ),
+
+
+                  SliverToBoxAdapter(
+                    child:SizedBox(height: 23,)
+                  ),
+
                   SliverToBoxAdapter(
                     child: Container(
                       //padding: EdgeInsets.symmetric(horizontal: 14),
@@ -1066,14 +1072,15 @@ class _ProductDetailsState extends State<ProductDetails>
                                     height: 50.0,
                                   ),
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 14),
-                            child: _productDetails != null
-                                ? buildSellerRow(context)
-                                : ShimmerHelper().buildBasicShimmer(
-                                    height: 50.0,
-                                  ),
-                          ),
+                          // Padding(
+                          //   padding: EdgeInsets.only(top: 14),
+                          //   child: _productDetails != null
+                          //       ? buildSellerRow(context)
+                          //       : ShimmerHelper().buildBasicShimmer(
+                          //           height: 50.0,
+                          //         ),
+                          // ),
+
                           Padding(
                             padding: EdgeInsets.only(
                                 top: 14,
@@ -1083,6 +1090,10 @@ class _ProductDetailsState extends State<ProductDetails>
                                 ? buildChoiceOptionList()
                                 : buildVariantShimmers(),
                           ),
+
+
+
+
                           // Padding(
                           //   padding:
                           //       EdgeInsets.only(top: 14, left: 14, right: 14),
@@ -1277,7 +1288,7 @@ class _ProductDetailsState extends State<ProductDetails>
                         child: buildTopSellingProductList(),
                       ),
                       Container(
-                        height: 83,
+                        height: 20,
                       )
                     ]),
                   ),
@@ -1380,7 +1391,7 @@ class _ProductDetailsState extends State<ProductDetails>
                               ),
                             ),
                           ),
-                          // divider(),
+                          divider(),
                           // InkWell(
                           //   onTap: () {
                           //     Navigator.push(context,
@@ -1424,7 +1435,7 @@ class _ProductDetailsState extends State<ProductDetails>
                           //     ),
                           //   ),
                           // ),
-                          divider(),
+                      /*    divider(),
                           InkWell(
                             onTap: () {
                               Navigator.push(context,
@@ -1512,8 +1523,8 @@ class _ProductDetailsState extends State<ProductDetails>
                               ),
                             ),
                           ),
-                          divider(),
-                          SizedBox(height: 75,)
+                          divider(),*/
+                          SizedBox(height: 95,)
                         ]),
                   ),
 
@@ -2306,13 +2317,15 @@ class _ProductDetailsState extends State<ProductDetails>
                 ),
                 height: 50,
                 child: Center(
-                  child: Text(
-                    // AppLocalizations.of(context).add_to_cart_ucf,
-                    "Make an offer ",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600),
+                  child: Flexible(
+                    child: Text(
+                      // AppLocalizations.of(context).add_to_cart_ucf,
+                      "Make an\n    offer",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    ),
                   ),
                 ),
               ),
@@ -2441,8 +2454,8 @@ class _ProductDetailsState extends State<ProductDetails>
                   return Btn.basic(
                     child: Text(
                       !controller.expanded
-                          ? AppLocalizations.of(context).view_more_ucf
-                          : AppLocalizations.of(context).show_less_ucf,
+                          ? AppLocalizations.of(context).show_less_ucf
+                          : AppLocalizations.of(context).view_more_ucf,
                       style: TextStyle(color: MyTheme.font_grey, fontSize: 11),
                     ),
                     onPressed: () {

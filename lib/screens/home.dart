@@ -131,8 +131,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                   return;
                                 },
                                 child: Icon(Icons.search)),
+                            SizedBox(width: 10,),
                             Icon(Icons.notifications),
-
+                            SizedBox(width: 10,),
                             InkWell(
                                 onTap: (){
                                   Navigator.push(context,
@@ -921,8 +922,14 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           padding: EdgeInsets.only(top: 20.0, bottom: 1, left: 18, right: 18),
           physics: NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
-            return SizedBox(
-               height: 270,
+            return Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  //border: Border.all(color: MyTheme.accent_color),
+                  boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,offset: Offset(1,3))]
+              ),
+               //height: 270,
               child: ProductCard(
                 id: homeData.allProductList[index].id,
                 image: homeData.allProductList[index].thumbnail_image,
