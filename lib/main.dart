@@ -2,6 +2,7 @@
 import 'package:hardware_lo/presenter/cart_counter.dart';
 import 'package:hardware_lo/presenter/currency_presenter.dart';
 import 'package:hardware_lo/presenter/home_presenter.dart';
+import 'package:hardware_lo/screens/New_Home_Screen/new_home_presenter.dart';
 import 'package:hardware_lo/screens/address.dart';
 import 'package:hardware_lo/screens/cart.dart';
 import 'package:hardware_lo/screens/category_list.dart';
@@ -129,7 +130,8 @@ class _MyAppState extends State<MyApp> {
           ChangeNotifierProvider(create: (_) => LocaleProvider()),
           ChangeNotifierProvider(create: (context) => CartCounter()),
           ChangeNotifierProvider(create: (context) => CurrencyPresenter()),
-          ChangeNotifierProvider(create: (context) => HomePresenter())
+          ChangeNotifierProvider(create: (context) => HomePresenter()),
+          ChangeNotifierProvider(create: (context) => AllHomePresenter())
         ],
         child: Consumer<LocaleProvider>(builder: (context, provider, snapshot) {
           return MaterialApp(

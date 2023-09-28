@@ -1,6 +1,3 @@
-
-
-
 import 'package:hardware_lo/custom/box_decorations.dart';
 import 'package:hardware_lo/custom/device_info.dart';
 import 'package:hardware_lo/helpers/shared_value_helper.dart';
@@ -56,7 +53,6 @@ class AuthScreen{
                       padding: const EdgeInsets.only(bottom: 20.0,top: 10),
                       child: Text(
                         headerText,
-
                         style: TextStyle(
                             color: MyTheme.white,
                             fontSize: 18,
@@ -71,7 +67,7 @@ class AuthScreen{
                           decoration: BoxDecorations.buildBoxDecoration_1(radius: 16),
                           child: child,),
                     ),
-                  ],
+                    ],
                   ),
                 )
               ],

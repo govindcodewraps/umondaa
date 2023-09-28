@@ -588,11 +588,6 @@ class _CartState extends State<Cart> {
               ),
             ),
 
-
-
-
-
-
           ],
         ),
       );
@@ -728,6 +723,7 @@ class _CartState extends State<Cart> {
                 ],
               ),
             ),
+
          /*   Padding(
               padding: const EdgeInsets.all(14.0),
               child: Column(
@@ -779,6 +775,7 @@ class _CartState extends State<Cart> {
                 ],
               ),
             )*/
+
           ]),
     );
   }

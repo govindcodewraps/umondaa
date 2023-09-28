@@ -23,9 +23,11 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 import 'package:toast/toast.dart';
 
+import '../custom/device_info.dart';
 import '../custom/toast_component.dart';
 import '../helpers/auth_helper.dart';
 import '../ui_sections/drawer.dart';
+import 'New_Home_Screen/Allnewads_Screen.dart';
 import 'InProfileScreen/commisssion_history_screen.dart';
 import 'drawermenu/Aboutus.dart';
 import 'drawermenu/ContactInf.dart';
@@ -393,6 +395,70 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           //     ),
                           //   ]),
                           // ),
+
+                          SliverList(
+                            delegate: SliverChildListDelegate([
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(
+                                  18.0,
+                                  18.0,
+                                  20.0,
+                                  0.0,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.centerRight,
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        // height: 60,
+                                        width: DeviceInfo(context).width/1,
+                                        child:
+                                        SizedBox(
+                                          height: 30,
+                                          width:double.infinity,
+                                          child: ElevatedButton(
+
+                                            style: ButtonStyle(
+                                                backgroundColor: MaterialStateProperty.all<Color>(MyTheme.accent_color),
+
+                                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                    RoundedRectangleBorder(
+
+                                                        borderRadius: BorderRadius.circular(12.0),
+                                                        side: BorderSide(color:MyTheme.accent_color)
+                                                    )
+                                                )
+                                            ),
+
+                                            onPressed: (){
+                                              //Navigator.push(context,MaterialPageRoute(builder: (context)=>Allnewads_Screen()));
+                                            },
+                                            child:Text(
+                                              "Get Featured On Home Page",
+                                              // AppLocalizations.of(context).update_profile_ucf,
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600),
+                                            ),),
+                                        ),
+
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ]),
+                          ),
+
+
+
+
+
+
+
                           SliverList(
                             delegate: SliverChildListDelegate([
                               Padding(
@@ -419,6 +485,46 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                 child: Column(
                                   children: [
                                     buildHomeAllProducts2(context, homeData),
+                                SizedBox(height: 10,),
+                                    Align(
+                                      alignment: Alignment.centerRight,
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        // height: 60,
+                                        width: DeviceInfo(context).width/1,
+                                        child:
+                                        SizedBox(
+                                          height: 30,
+                                          width:double.infinity,
+                                          child: ElevatedButton(
+
+                                            style: ButtonStyle(
+                                                backgroundColor: MaterialStateProperty.all<Color>(MyTheme.accent_color),
+
+                                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                    RoundedRectangleBorder(
+
+                                                        borderRadius: BorderRadius.circular(12.0),
+                                                        side: BorderSide(color:MyTheme.accent_color)
+                                                    )
+                                                )
+                                            ),
+
+                                            onPressed: (){
+                                              Navigator.push(context,MaterialPageRoute(builder: (context)=>Allnewads_Screen()));
+                                            },
+                                            child:Text(
+                                              "View All",
+                                              // AppLocalizations.of(context).update_profile_ucf,
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600),
+                                            ),),
+                                        ),
+
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -917,7 +1023,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           crossAxisCount: 2,
           mainAxisSpacing: 14,
           crossAxisSpacing: 14,
-          itemCount: homeData.allProductList.length,
+          itemCount: homeData.allProductList.length =4,
           shrinkWrap: true,
           padding: EdgeInsets.only(top: 20.0, bottom: 1, left: 18, right: 18),
           physics: NeverScrollableScrollPhysics(),
