@@ -59,7 +59,7 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
   Widget Body(){
     return  SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.only(top: 15,bottom: 20),
+        padding:  EdgeInsets.only(top: 15,bottom: 20),
         child: Column(
           children: [
             Row(

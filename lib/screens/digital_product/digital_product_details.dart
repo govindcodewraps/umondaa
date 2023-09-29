@@ -2109,8 +2109,8 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                   return Btn.basic(
                     child: Text(
                       !controller.expanded
-                          ? AppLocalizations.of(context).view_more_ucf
-                          : AppLocalizations.of(context).show_less_ucf,
+                          ? AppLocalizations.of(context).show_less_ucf
+                          : AppLocalizations.of(context).view_more_ucf,
                       style: TextStyle(color: MyTheme.font_grey, fontSize: 11),
                     ),
                     onPressed: () {

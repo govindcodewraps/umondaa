@@ -2228,7 +2228,7 @@ class _ProductDetailsState extends State<ProductDetails>
             },
             child: Container(
               margin: EdgeInsets.only(
-                left: 18,
+                left: 10,
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6.0),
@@ -2248,7 +2248,7 @@ class _ProductDetailsState extends State<ProductDetails>
                   AppLocalizations.of(context).add_to_cart_ucf,
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: 16,
+                      fontSize: 15,
                       fontWeight: FontWeight.w600),
                 ),
               ),
@@ -2262,7 +2262,7 @@ class _ProductDetailsState extends State<ProductDetails>
               onPressBuyNow(context);
             },
             child: Container(
-              margin: EdgeInsets.only(left: 18,),
+              margin: EdgeInsets.only(left: 10,right: 10),
               height: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6.0),
@@ -2281,7 +2281,7 @@ class _ProductDetailsState extends State<ProductDetails>
                   AppLocalizations.of(context).buy_now_ucf,
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: 16,
+                      fontSize: 15,
                       fontWeight: FontWeight.w600),
                 ),
               ),
@@ -2289,6 +2289,7 @@ class _ProductDetailsState extends State<ProductDetails>
           ),
         ),
         //productDetailsResponse.detailed_products.length > 0
+
         if (_productDetails !=null)
           if(_productDetails.minoffer == 1)
           BottomNavigationBarItem(
@@ -2300,9 +2301,8 @@ class _ProductDetailsState extends State<ProductDetails>
                 alertDialog(context);
               },
               child: Container(
-                margin: EdgeInsets.only(
-                  left: 18,
-                ),
+                margin: EdgeInsets.only(right: 10),
+               // padding:EdgeInsets.only(left: 15,right: 15),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6.0),
                   color: MyTheme.accent_color,
@@ -2317,15 +2317,13 @@ class _ProductDetailsState extends State<ProductDetails>
                 ),
                 height: 50,
                 child: Center(
-                  child: Flexible(
-                    child: Text(
-                      // AppLocalizations.of(context).add_to_cart_ucf,
-                      "Make an\n    offer",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600),
-                    ),
+                  child: Text(
+                     //AppLocalizations.of(context).add_to_cart_ucf,
+                    "Make an Offer",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
@@ -2974,7 +2972,7 @@ class _ProductDetailsState extends State<ProductDetails>
 
     try {
       var response = await http.post(
-        Uri.parse('https://webcluestechnology.com/demo/erp/umonda/api/v2/carts/make-offer'),
+        Uri.parse('${AppConfig.BASE_URL}/carts/make-offer'),
         headers: headers,
         body: data,
       );

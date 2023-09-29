@@ -429,54 +429,92 @@ class _placeadState extends State<placead> {
             ),
           ),
           //---------------------
-          Container(
-            margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
-            child: Card(
-              elevation: 10,
-              child: Column(
-                children: [
-                  Container(
-                      margin: const EdgeInsets.fromLTRB(5, 16, 0, 0),
-                      child: const Align(
-                        alignment: Alignment.topLeft,
-                        child: Text("User Details",
-                            style: TextStyle(fontSize: 14,
-                                color: Color.fromARGB(255, 0, 0, 0))),
-                      )
-                  ),
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(5, 12, 0, 0),
-                    child: TextField(
-                      controller: _EmailID,
-                      autofocus: false,
-                      enableSuggestions: false,
-                      autocorrect: false,
-                      decoration: const InputDecoration(
-                        border: UnderlineInputBorder(),
-                        labelText: 'Email',
+
+
+          if (is_logged_in.$ == false)
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Container(
+                margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
+                child: Card(
+                  elevation: 10,
+                  child: Column(
+                    children: [
+                      Container(
+                          margin: const EdgeInsets.fromLTRB(5, 16, 0, 0),
+                          child: const Align(
+                            alignment: Alignment.topLeft,
+                            child: Text("User Details",
+                                style: TextStyle(fontSize: 14,
+                                    color: Color.fromARGB(255, 0, 0, 0))),
+                          )
                       ),
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(5, 12, 0, 0),
-                    child: TextField(
-                      controller: _PassWord,
-                      autofocus: false,
-                      obscureText: true,
-                      enableSuggestions: false,
-                      autocorrect: false,
-                      decoration: const InputDecoration(
-                        border: UnderlineInputBorder(),
-                        labelText: 'Your Password',
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(5, 12, 0, 0),
+                        child: TextField(
+                          controller: _EmailID,
+                          autofocus: false,
+                          enableSuggestions: false,
+                          autocorrect: false,
+                          decoration: const InputDecoration(
+                            border: UnderlineInputBorder(),
+                            labelText: 'Email',
+                          ),
+                        ),
                       ),
-                    ),
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(5, 12, 0, 0),
+                        child: TextField(
+                          controller: _PassWord,
+                          autofocus: false,
+                          obscureText: true,
+                          enableSuggestions: false,
+                          autocorrect: false,
+                          decoration: const InputDecoration(
+                            border: UnderlineInputBorder(),
+                            labelText: 'Your Password',
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
+              Padding(
+                padding:  EdgeInsets.only(top: 20.0,right:16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      "Don't have an account ?",
+                      style: TextStyle(color: MyTheme.font_grey, fontSize: 12),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    InkWell(
+                      child: Text(
+                        AppLocalizations.of(context).sign_up_ucf,
+                        style: TextStyle(
+                            color: MyTheme.accent_color,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                              return Registration();
+                            }));
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
 
-          Padding(
+      /*    Padding(
             padding:  EdgeInsets.only(top: 20.0,right:16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -505,7 +543,7 @@ class _placeadState extends State<placead> {
                 ),
               ],
             ),
-          ),
+          ),*/
 
           Padding(
             padding: const EdgeInsets.only(top: 20.0,left: 16),

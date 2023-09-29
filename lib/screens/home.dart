@@ -29,6 +29,7 @@ import '../helpers/auth_helper.dart';
 import '../ui_sections/drawer.dart';
 import 'New_Home_Screen/Allnewads_Screen.dart';
 import 'InProfileScreen/commisssion_history_screen.dart';
+import 'New_Home_Screen/Feature_Ad_Package_Screen.dart';
 import 'drawermenu/Aboutus.dart';
 import 'drawermenu/ContactInf.dart';
 import 'drawermenu/privacy_policy.dart';
@@ -433,7 +434,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                             ),
 
                                             onPressed: (){
-                                              //Navigator.push(context,MaterialPageRoute(builder: (context)=>Allnewads_Screen()));
+                                              Navigator.push(context,MaterialPageRoute(builder: (context)=>Feature_ad_package_Screen()));
                                             },
                                             child:Text(
                                               "Get Featured On Home Page",
@@ -486,44 +487,42 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                   children: [
                                     buildHomeAllProducts2(context, homeData),
                                 SizedBox(height: 10,),
-                                    Align(
-                                      alignment: Alignment.centerRight,
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        // height: 60,
-                                        width: DeviceInfo(context).width/1,
-                                        child:
-                                        SizedBox(
-                                          height: 30,
-                                          width:double.infinity,
-                                          child: ElevatedButton(
+                                    Container(
+                                      padding: EdgeInsets.only(left: 18,right: 18),
+                                      alignment: Alignment.center,
+                                      // height: 60,
+                                      width: DeviceInfo(context).width/1,
+                                      child:
+                                      SizedBox(
+                                        height: 30,
+                                        width:double.infinity,
+                                        child: ElevatedButton(
 
-                                            style: ButtonStyle(
-                                                backgroundColor: MaterialStateProperty.all<Color>(MyTheme.accent_color),
+                                          style: ButtonStyle(
+                                              backgroundColor: MaterialStateProperty.all<Color>(MyTheme.accent_color),
 
-                                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                    RoundedRectangleBorder(
+                                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                  RoundedRectangleBorder(
 
-                                                        borderRadius: BorderRadius.circular(12.0),
-                                                        side: BorderSide(color:MyTheme.accent_color)
-                                                    )
-                                                )
-                                            ),
+                                                      borderRadius: BorderRadius.circular(12.0),
+                                                      side: BorderSide(color:MyTheme.accent_color)
+                                                  )
+                                              )
+                                          ),
 
-                                            onPressed: (){
-                                              Navigator.push(context,MaterialPageRoute(builder: (context)=>Allnewads_Screen()));
-                                            },
-                                            child:Text(
-                                              "View All",
-                                              // AppLocalizations.of(context).update_profile_ucf,
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w600),
-                                            ),),
-                                        ),
-
+                                          onPressed: (){
+                                            Navigator.push(context,MaterialPageRoute(builder: (context)=>Allnewads_Screen()));
+                                          },
+                                          child:Text(
+                                            "View All",
+                                            // AppLocalizations.of(context).update_profile_ucf,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600),
+                                          ),),
                                       ),
+
                                     ),
                                   ],
                                 ),

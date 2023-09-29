@@ -396,7 +396,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                             //border: Border.all(color: MyTheme.accent_color)
 
                                           ),
-                                          child: Text(snapshot.data.data[index].paymentType.toString().substring(12),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+                                          child:
+                                          Text(snapshot.data.data[index].paymentType.toString().substring(12),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))
+                      ),
 
 
                                       SizedBox(height: 4,),
