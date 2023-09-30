@@ -21,11 +21,11 @@ import '../data_model/state_response.dart';
 import '../helpers/response_check.dart';
 import '../helpers/shared_value_helper.dart';
 import '../helpers/system_config.dart';
-
+//monday recheck
 class AddressRepository {
   Future<dynamic> getAddressList() async {
     Uri url =
-        Uri.parse("${AppConfig.BASE_URL}/user/shipping/address");
+        Uri.parse("${AppConfig.BASE_URL}/user/shipping/address/163");
     final response = await http.get(
       url,
       headers: {
@@ -37,6 +37,8 @@ class AddressRepository {
     bool checkResult = ResponseCheck.apply(response.body);
     if(!checkResult)
       return responseCheckModelFromJson(response.body);
+    print("AAAAAAAAAAAAAAAAAAAAAA${response.body}");
+
 
 
     return addressResponseFromJson(response.body);
