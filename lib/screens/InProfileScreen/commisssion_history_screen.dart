@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../Models/Commission_History_Model.dart';
 import '../../Models/payment_model.dart';
 import '../../app_config.dart';
+import '../../helpers/shared_value_helper.dart';
 
 class CommissionHistoryScreen extends StatefulWidget {
 
@@ -247,7 +248,7 @@ class _CommissionHistoryScreenState extends State<CommissionHistoryScreen> {
     };
 
     // Define the API endpoint
-    String url = "${AppConfig.BASE_URL}/commission-history/138";
+    String url = "${AppConfig.BASE_URL}/commission-history/${user_id.$}";
     //String url = "https://webcluestechnology.com/demo/erp/umonda/api/v2/commission-history/138";
 
     try {

@@ -25,7 +25,7 @@ import '../helpers/system_config.dart';
 class AddressRepository {
   Future<dynamic> getAddressList() async {
     Uri url =
-        Uri.parse("${AppConfig.BASE_URL}/user/shipping/address/163");
+        Uri.parse("${AppConfig.BASE_URL}/user/shipping/address/${user_id.$}");
     final response = await http.get(
       url,
       headers: {
@@ -38,8 +38,6 @@ class AddressRepository {
     if(!checkResult)
       return responseCheckModelFromJson(response.body);
     print("AAAAAAAAAAAAAAAAAAAAAA${response.body}");
-
-
 
     return addressResponseFromJson(response.body);
   }

@@ -334,7 +334,7 @@ class _SelectAddressState extends State<SelectAddress> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         buildShippingInfoItemAddress(index),
-        buildShippingInfoItemCity(index),
+       // buildShippingInfoItemCity(index),
         buildShippingInfoItemState(index),
         buildShippingInfoItemCountry(index),
         buildShippingInfoItemPostalCode(index),
@@ -459,7 +459,7 @@ class _SelectAddressState extends State<SelectAddress> {
     );
   }
 
-  Padding buildShippingInfoItemCity(index) {
+  /*Padding buildShippingInfoItemCity(index) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Row(
@@ -486,7 +486,7 @@ class _SelectAddressState extends State<SelectAddress> {
         ],
       ),
     );
-  }
+  }*/
 
   Padding buildShippingInfoItemAddress(index) {
     return Padding(

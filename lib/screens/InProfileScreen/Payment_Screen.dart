@@ -397,7 +397,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
                                           ),
                                           child:
-                                          Text(snapshot.data.data[index].paymentType.toString().substring(12),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))
+                                         // // Text("AED " + (snapshot.data[0].adminToPay ?? "").toString(), style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
+                                         //
+                                          //Text("Govind"),
+                                           Text(snapshot.data.data[index].paymentType.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))
                       ),
 
 
@@ -548,7 +551,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                             //border: Border.all(color: MyTheme.accent_color)
 
                                           ),
-                                          child: Text(snapshot.data.data[index].date.toString().substring(9),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+                                          child:
+                                         // Text("Date"),
+                                          Text(snapshot.data.data[index].date ??"00/00/0000".toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))
+
+                                      ),
 
 
 
@@ -592,8 +599,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
     };
 
     // Define the API endpoint
-    //String url = "https://umonda.com/api/v2/payment-history/${user_id.$}";
-    String url = "https://umonda.com/api/v2/payment-history/138";
+    String url = "https://umonda.com/api/v2/payment-history/${user_id.$}";
+   // String url = "https://umonda.com/api/v2/payment-history/138";
 
     try {
       // Make the API call
@@ -607,9 +614,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
         //print(response.data);
       }
 
-     else if(response.statusCode == 500){
+     else if(response.statusCode == 401){
 
         print("500 Internal Server Error........... ");
+        print(response.data);
       }
 
       else {

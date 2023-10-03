@@ -124,7 +124,7 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       SizedBox(height:4),
-                      Text("AED "+snapshot.data[0].adminToPay.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700)),
+                      Text("AED " + (snapshot.data[0].adminToPay ?? "").toString(), style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
                       SizedBox(height:4),
                       Text("Pending Balance", style: TextStyle(fontSize: 15,)),
                     ],
@@ -250,6 +250,7 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
 
   Future<List<Withdrawalamount>> withdrawalaccount() async {
     var url = Uri.parse('${AppConfig.BASE_URL}/money-withdraw-requests/${user_id.$}');
+   // var url = Uri.parse('${AppConfig.BASE_URL}/money-withdraw-requests/138');
 
     final response = await http.get(url);
 
