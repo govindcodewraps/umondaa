@@ -27,6 +27,7 @@ import '../custom/device_info.dart';
 import '../custom/toast_component.dart';
 import '../helpers/auth_helper.dart';
 import '../ui_sections/drawer.dart';
+import 'New_Home_Screen/All_Feature_Ads_Screen.dart';
 import 'New_Home_Screen/Allnewads_Screen.dart';
 import 'InProfileScreen/commisssion_history_screen.dart';
 import 'New_Home_Screen/Feature_Ad_Package_Screen.dart';
@@ -577,7 +578,45 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                             ),
                                           ),
                                           buildHomeFeatureProductHorizontalList(
-                                              homeData)
+                                              homeData),
+
+                                          Container(
+                                            padding: EdgeInsets.only(left: 18,right: 18),
+                                            alignment: Alignment.center,
+                                            // height: 60,
+                                            width: DeviceInfo(context).width/1,
+                                            child:
+                                            SizedBox(
+                                              height: 30,
+                                              width:double.infinity,
+                                              child: ElevatedButton(
+
+                                                style: ButtonStyle(
+                                                    backgroundColor: MaterialStateProperty.all<Color>(MyTheme.accent_color),
+
+                                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                        RoundedRectangleBorder(
+
+                                                            borderRadius: BorderRadius.circular(12.0),
+                                                            side: BorderSide(color:MyTheme.accent_color)
+                                                        )
+                                                    )
+                                                ),
+
+                                                onPressed: (){
+                                                  Navigator.push(context,MaterialPageRoute(builder: (context)=>All_feature_ads_Screen()));
+                                                },
+                                                child:Text(
+                                                  "View All",
+                                                  // AppLocalizations.of(context).update_profile_ucf,
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 16,
+                                                      fontWeight: FontWeight.w600),
+                                                ),),
+                                            ),
+
+                                          ),
                                         ],
                                       ),
                                     ],

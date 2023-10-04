@@ -8,6 +8,7 @@ import 'package:hardware_lo/custom/useful_elements.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hardware_lo/repositories/brand_repository.dart';
 import '../custom/btn.dart';
+import '../data_model/AllCategoryResponse.dart';
 import '../data_model/brand_response.dart';
 import '../app_config.dart';
 import '../helpers/shared_value_helper.dart';
@@ -31,6 +32,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 class placead extends StatefulWidget {
   // const placead({super.key});
+
+  // final List<allcategoryModel> itemList; // Note the "?" to indicate it can be null
+  //
+  // MyDropdown({required this.itemList});
 
   @override
   State<placead> createState() => _placeadState();
@@ -56,6 +61,8 @@ class _placeadState extends State<placead> {
   List<File> selectedImages = []; // List to hold selected image files
   List<String> imageUrls = [];
   List<String> base64Urls = [];
+  String selectedValue = '';
+
 
 
   TextEditingController _ProductName = TextEditingController();
@@ -72,9 +79,12 @@ class _placeadState extends State<placead> {
   void initState() {
     fetch_Brands();
     fetch_Category();
+    fetchData();
     //fetchFilteredBrands();
     super.initState();
   }
+
+
 
   fetch_Brands() async {
     var filteredBrandResponse = await BrandRepository().getFilterPageBrands();
@@ -83,6 +93,14 @@ class _placeadState extends State<placead> {
     _filteredBrandsCalled = true;
     setState(() {});
   }
+
+  // fetch_Category() async {
+  //   var categoryResponse = await CategoryRepository().getAllCategories();
+  //   categoryList.addAll(categoryResponse);
+  //   print("Category list : ${categoryResponse}");
+  //   _filteredcategoryCalled = true;
+  //   setState(() {});
+  // }
 
   fetch_Category() async {
     var categoryResponse = await CategoryRepository().getCategories();
@@ -158,6 +176,7 @@ class _placeadState extends State<placead> {
               elevation: 10,
               child: Column(
                 children: [
+                 // listview(),
                   Container(
                       margin: const EdgeInsets.fromLTRB(5, 20, 0, 0),
                       child: const Align(
@@ -197,6 +216,8 @@ class _placeadState extends State<placead> {
                     child: CategoryDropdown(),
 
                   ),
+
+
 
                   Container(
                       margin: const EdgeInsets.fromLTRB(5, 16, 0, 0),
@@ -262,8 +283,8 @@ class _placeadState extends State<placead> {
                           ),
 
                           SizedBox(
-                            height: 300,
-                            width: 300,
+                            height: 150,
+                            //width: 20,
                             child: selectedImages.isEmpty
                                 ?  Center(child: Text('Sorry nothing selected!!'))
                                 : GridView.builder(
@@ -282,8 +303,8 @@ class _placeadState extends State<placead> {
                                   child: Stack(
                                     children: [
                                       Container(
-                                        width: 200,
-                                        height: 200,
+                                       // width: 200,
+                                        height: 150,
                                         alignment: Alignment.center,
                                         child: Image.file(selectedImages[index],fit: BoxFit.cover,),
                                       ),
@@ -939,6 +960,64 @@ class _placeadState extends State<placead> {
       print('Error: $e');
     }
   }
+
+  Widget listview() {
+    return
+      FutureBuilder(
+          future: fetchData(),
+          builder: (context, snapshot) {
+
+            if (snapshot.hasData) {
+              return
+                Container(
+                  //padding: EdgeInsets.only(top: 23),
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    //physics:  NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, int index) {
+                      return  Column(
+                        children: [
+                          Text(snapshot.data[index].category_translations[index].name.toString()),
+                          //Text(snapshot.data[index].children_categories[index].name.toString()),
+                        ],
+                      );
+                    },
+                    //itemCount: 17,
+                    itemCount: snapshot.data.length,
+                  ),
+                );
+            }
+            else{
+              return
+                Container(
+                    child: Center(child: CircularProgressIndicator()));
+            }
+          }
+      );
+  }
+
+  Future<List<allcategoryModel>> fetchData() async {
+    var url = Uri.parse('${AppConfig.BASE_URL}/all-categories');
+//https://webcluestechnology.com/demo/erp/umonda/api/v2/all-categories
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+
+      List<dynamic> jsonList = json.decode(response.body);
+
+      List<allcategoryModel> itemList = jsonList.map((json) => allcategoryModel.fromJson(json)).toList();
+
+      print("allcategoryModel Response >${response.body}");
+      //print(response.body);
+
+      return itemList;
+
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
+
 
 }
 
