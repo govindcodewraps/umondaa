@@ -50,6 +50,7 @@ class _placeadState extends State<placead> {
   List<File> basee = [];
   List<dynamic> brandsList = [];
   List<dynamic> categoryList = [];
+  List<dynamic> ALLcategoryList = [];
   final picker = ImagePicker();
   String imageurl;
   String dropdownBrands = "Select Select_Brand";
@@ -62,6 +63,8 @@ class _placeadState extends State<placead> {
   List<String> imageUrls = [];
   List<String> base64Urls = [];
   String selectedValue = '';
+  //String globalResponseBody;
+  List<String> globalResponseBody = [];
 
 
 
@@ -176,7 +179,8 @@ class _placeadState extends State<placead> {
               elevation: 10,
               child: Column(
                 children: [
-                 // listview(),
+                  // Text(globalResponseBody.toString()),
+                  // listview(),
                   Container(
                       margin: const EdgeInsets.fromLTRB(5, 20, 0, 0),
                       child: const Align(
@@ -791,7 +795,8 @@ class _placeadState extends State<placead> {
       },
       items: categoryList.map((categories) {
         print("Brands List${dropdownCategory}");
-        print("brands ID ${categories.id}");
+        print("brands IDDD ${categories}");
+       // print("brands IDDD ${[0].children_categoriecategoriess}");
         return DropdownMenuItem(
           value: "${categories.id.toString()+" "+categories.name.toString()}",
           child: Text(categories.name.toString(), style: TextStyle(fontSize: 14),),
@@ -977,7 +982,7 @@ class _placeadState extends State<placead> {
                     itemBuilder: (context, int index) {
                       return  Column(
                         children: [
-                          Text(snapshot.data[index].category_translations[index].name.toString()),
+                          Text(snapshot.data[index].name.toString()),
                           //Text(snapshot.data[index].children_categories[index].name.toString()),
                         ],
                       );
@@ -1016,6 +1021,10 @@ class _placeadState extends State<placead> {
       throw Exception('Failed to load data');
     }
   }
+
+
+
+
 
 
 

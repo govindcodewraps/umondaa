@@ -7,6 +7,7 @@ import '../../helpers/shared_value_helper.dart';
 import '../../helpers/shimmer_helper.dart';
 import '../../my_theme.dart';
 import '../../presenter/home_presenter.dart';
+import '../../ui_elements/all_mini_product_card.dart';
 import '../../ui_elements/mini_product_card.dart';
 import '../../ui_elements/product_card.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -172,7 +173,7 @@ class _All_feature_ads_ScreenState extends State<All_feature_ads_Screen> {
                     );
                   },
                 )
-                    : MiniProductCard(
+                    : AllMiniProductCard(
                   id: homeData.featuredProductList[index].id,
                   image:
                   homeData.featuredProductList[index].thumbnail_image,

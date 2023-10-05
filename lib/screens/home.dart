@@ -544,83 +544,88 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           if(homeData.featuredProductList.length > 0)
                             SliverList(
                               delegate: SliverChildListDelegate([
-                                Container(
-                                  color: MyTheme.accent_color,
-                                  child: Stack(
-                                    children: [
-                                      Container(
-                                        height: 180,
-                                        width: double.infinity,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.end,
-                                          children: [
-                                            Image.asset("assets/background_1.png")
-                                          ],
-                                        ),
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                Column(
+                                  children: [
+                                    Container(
+                                      color: MyTheme.accent_color,
+                                      child: Stack(
                                         children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 10.0,
-                                                right: 18.0,
-                                                left: 18.0),
-                                            child: Text(
-                                              AppLocalizations.of(context)
-                                                  .featured_products_ucf,
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w700),
+                                          Container(
+                                            height: 180,
+                                            width: double.infinity,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                              children: [
+                                                Image.asset("assets/background_1.png")
+                                              ],
                                             ),
                                           ),
-                                          buildHomeFeatureProductHorizontalList(
-                                              homeData),
-
-                                          Container(
-                                            padding: EdgeInsets.only(left: 18,right: 18),
-                                            alignment: Alignment.center,
-                                            // height: 60,
-                                            width: DeviceInfo(context).width/1,
-                                            child:
-                                            SizedBox(
-                                              height: 30,
-                                              width:double.infinity,
-                                              child: ElevatedButton(
-
-                                                style: ButtonStyle(
-                                                    backgroundColor: MaterialStateProperty.all<Color>(MyTheme.accent_color),
-
-                                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                        RoundedRectangleBorder(
-
-                                                            borderRadius: BorderRadius.circular(12.0),
-                                                            side: BorderSide(color:MyTheme.accent_color)
-                                                        )
-                                                    )
-                                                ),
-
-                                                onPressed: (){
-                                                  Navigator.push(context,MaterialPageRoute(builder: (context)=>All_feature_ads_Screen()));
-                                                },
-                                                child:Text(
-                                                  "View All",
-                                                  // AppLocalizations.of(context).update_profile_ucf,
+                                          Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 10.0,
+                                                    right: 18.0,
+                                                    left: 18.0),
+                                                child: Text(
+                                                  AppLocalizations.of(context)
+                                                      .featured_products_ucf,
                                                   style: TextStyle(
                                                       color: Colors.white,
-                                                      fontSize: 16,
-                                                      fontWeight: FontWeight.w600),
-                                                ),),
-                                            ),
+                                                      fontSize: 18,
+                                                      fontWeight: FontWeight.w700),
+                                                ),
+                                              ),
+                                              buildHomeFeatureProductHorizontalList(
+                                                  homeData),
 
+                                            ],
                                           ),
                                         ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    SizedBox(height: 10,),
+                                    Container(
+                                      padding: EdgeInsets.only(left: 18,right: 18),
+                                      alignment: Alignment.center,
+                                      // height: 60,
+                                      width: DeviceInfo(context).width/1,
+                                      child:
+                                      SizedBox(
+                                        height: 30,
+                                        width:double.infinity,
+                                        child: ElevatedButton(
+
+                                          style: ButtonStyle(
+                                              backgroundColor: MaterialStateProperty.all<Color>(MyTheme.accent_color),
+
+                                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                  RoundedRectangleBorder(
+
+                                                      borderRadius: BorderRadius.circular(12.0),
+                                                      side: BorderSide(color:MyTheme.accent_color)
+                                                  )
+                                              )
+                                          ),
+
+                                          onPressed: (){
+                                            Navigator.push(context,MaterialPageRoute(builder: (context)=>All_feature_ads_Screen()));
+                                          },
+                                          child:Text(
+                                            "View All",
+                                            // AppLocalizations.of(context).update_profile_ucf,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600),
+                                          ),),
+                                      ),
+
+                                    ),
+                                  ],
                                 ),
                               ]),
                             ),
