@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_multi_select_items/flutter_multi_select_items.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:hardware_lo/custom/device_info.dart';
 import 'package:hardware_lo/my_theme.dart';
@@ -64,7 +65,9 @@ class _placeadState extends State<placead> {
   List<String> base64Urls = [];
   String selectedValue = '';
   //String globalResponseBody;
-  List<String> globalResponseBody = [];
+  //List<String> globalResponseBody = [];
+  bool _customeIcon = false;
+  String globalResponseBody;
 
 
 
@@ -180,7 +183,7 @@ class _placeadState extends State<placead> {
               child: Column(
                 children: [
                   // Text(globalResponseBody.toString()),
-                  // listview(),
+                 // listview(),
                   Container(
                       margin: const EdgeInsets.fromLTRB(5, 20, 0, 0),
                       child: const Align(
@@ -204,6 +207,44 @@ class _placeadState extends State<placead> {
                       style: TextStyle(fontSize: 14),
                     ),
                   ),
+
+
+
+
+
+
+
+
+
+
+
+    ExpansionTile(title: Text("Category"),
+                    // trailing: Icon(
+                    //   _customeIcon ? Icons.arrow_drop_down_circle : Icons.arrow_drop_down,
+                    // ),
+                    children: [
+                      // ListTile(
+                      //   title: Text("This is tile number 2"),
+                      // ),
+                      ListTile(
+                        title: InkWell(onTap: (){
+                          // print("Hellooooo${globalResponseBody}");
+                        },
+                            child:
+
+                            listview(),
+
+                        ),
+                      )
+                    ],
+
+                    onExpansionChanged: (bool expanded){
+                      // setState(() => _customeIcon = expanded);
+                    },
+
+                  ),
+
+
 
                   Container(
                       margin: const EdgeInsets.fromLTRB(5, 16, 0, 0),
@@ -966,30 +1007,103 @@ class _placeadState extends State<placead> {
     }
   }
 
+
+
   Widget listview() {
     return
       FutureBuilder(
           future: fetchData(),
+
           builder: (context, snapshot) {
 
             if (snapshot.hasData) {
               return
                 Container(
                   //padding: EdgeInsets.only(top: 23),
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    //physics:  NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, int index) {
-                      return  Column(
+                  child:
+
+                  Column(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(snapshot.data[index].name.toString()),
-                          //Text(snapshot.data[index].children_categories[index].name.toString()),
+
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context , int index){
+                              return MultiSelectContainer(items: [
+                                MultiSelectCard(value: snapshot.data[index].id.toString(), label:snapshot.data[index].name.toString(),),
+                              ], onChange: (allSelectedItems, selectedItem) {
+                                print(allSelectedItems);
+                                print(selectedItem);
+                              });
+
+                            },
+                            //itemCount: 5,
+                            itemCount: snapshot.data.length,
+                          ),
+
+
+                          // GridView.count(
+                          //   crossAxisCount: 3,
+                          //   crossAxisSpacing: 4.0,
+                          //   mainAxisSpacing: 8.0,
+                          //   children: List.generate(snapshot.data.length, (index) {
+                          //     return Center(
+                          //       child: Text(snapshot.data[index].id.toString()) ,
+                          //     );
+                          //   }
+                          //   )
+                          // )
+
+
+                            // GridView.builder(
+                  //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  //     crossAxisCount: 2, // Number of columns
+                  //     // crossAxisSpacing: 10.0, // Spacing between columns
+                  //     // mainAxisSpacing: 10.0, // Spacing between rows
+                  //   ),
+                  //   itemCount: snapshot.data.length, // Number of items in the grid
+                  //   itemBuilder: (BuildContext context, int index) {
+                  //     return MultiSelectContainer(items: [
+                  //       MultiSelectCard(value: snapshot.data[index].id.toString(), label:snapshot.data[index].name.toString(),),
+                  //     ], onChange: (allSelectedItems, selectedItem) {
+                  //       print(allSelectedItems);
+                  //       print(selectedItem);
+                  //     });
+                  //   },
+                  // ),
+
+
+
+
+
+
                         ],
-                      );
-                    },
-                    //itemCount: 17,
-                    itemCount: snapshot.data.length,
+                      ),
+
+
+                    ],
                   ),
+
+
+                  // ListView.builder(
+                  //
+                  //   shrinkWrap: true,
+                  //   //physics:  NeverScrollableScrollPhysics(),
+                  //   itemBuilder: (context, int index) {
+                  //     return  Column(
+                  //       children: [
+                  //         Text(snapshot.data[index].name.toString()),
+                  //         //Text(snapshot.data[index].children_categories[0].name.toString()),
+                  //         //Text(snapshot.data[index].children_categories[index].name.toString()),
+                  //       ],
+                  //     );
+                  //   },
+                  //   //itemCount: 17,
+                  //   itemCount: snapshot.data.length,
+                  // ),
                 );
             }
             else{
@@ -1003,24 +1117,24 @@ class _placeadState extends State<placead> {
 
   Future<List<allcategoryModel>> fetchData() async {
     var url = Uri.parse('${AppConfig.BASE_URL}/all-categories');
-//https://webcluestechnology.com/demo/erp/umonda/api/v2/all-categories
+
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
+      globalResponseBody = response.body; // Assign the response body to the global variable
 
-      List<dynamic> jsonList = json.decode(response.body);
+      List<dynamic> jsonList = json.decode(globalResponseBody);
 
       List<allcategoryModel> itemList = jsonList.map((json) => allcategoryModel.fromJson(json)).toList();
 
-      print("allcategoryModel Response >${response.body}");
-      //print(response.body);
+      print("allcategoryModel Response > $globalResponseBody[0]");
 
       return itemList;
-
     } else {
       throw Exception('Failed to load data');
     }
   }
+
 
 
 
