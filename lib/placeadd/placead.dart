@@ -68,6 +68,7 @@ class _placeadState extends State<placead> {
   //List<String> globalResponseBody = [];
   bool _customeIcon = false;
   String globalResponseBody;
+  String globalResponseBo;
 
 
 
@@ -218,7 +219,7 @@ class _placeadState extends State<placead> {
 
 
 
-    ExpansionTile(title: Text("Category"),
+                  ExpansionTile(title: Text("Category"),
                     // trailing: Icon(
                     //   _customeIcon ? Icons.arrow_drop_down_circle : Icons.arrow_drop_down,
                     // ),
@@ -234,6 +235,13 @@ class _placeadState extends State<placead> {
 
                             listview(),
 
+
+
+
+
+
+
+
                         ),
                       )
                     ],
@@ -243,6 +251,32 @@ class _placeadState extends State<placead> {
                     },
 
                   ),
+
+                 /* ExpansionTile(title: Text("Sub Category"),
+                    // trailing: Icon(
+                    //   _customeIcon ? Icons.arrow_drop_down_circle : Icons.arrow_drop_down,
+                    // ),
+                    children: [
+                      // ListTile(
+                      //   title: Text("This is tile number 2"),
+                      // ),
+                      ListTile(
+                        title: InkWell(onTap: (){
+                          // print("Hellooooo${globalResponseBody}");
+                        },
+                          child:
+
+                          childrenCategories(),
+
+                        ),
+                      )
+                    ],
+
+                    onExpansionChanged: (bool expanded){
+                      // setState(() => _customeIcon = expanded);
+                    },
+
+                  ),*/
 
 
 
@@ -845,8 +879,6 @@ class _placeadState extends State<placead> {
       }).toList(),
     );
   }
-
-
   BrandDropdown() {
     print("placead.dart, BrandDropdown(), dropdownBrands : ${dropdownBrands}");
     return DropdownButton2<dynamic>(
@@ -880,8 +912,6 @@ class _placeadState extends State<placead> {
       }).toList(),
     );
   }
-
-
 
   Future<void> getImages() async {
     final pickedFiles = await picker.pickMultiImage(
@@ -928,8 +958,6 @@ class _placeadState extends State<placead> {
 
     });
   }
-
-
 
   // import 'package:http/http.dart' as http;
 //place_ad_upload(ProdName,userid,category,brand,description,offer,amount,offerstatus,email,password);
@@ -1006,112 +1034,450 @@ class _placeadState extends State<placead> {
       print('Error: $e');
     }
   }
-
-
-
   Widget listview() {
     return
-      FutureBuilder(
-          future: fetchData(),
+      Column(
+        children: [
+          ExpansionTile(title: Text("Sub Category"),
+            // trailing: Icon(
+            //   _customeIcon ? Icons.arrow_drop_down_circle : Icons.arrow_drop_down,
+            // ),
+            children: [
+              // ListTile(
+              //   title: Text("This is tile number 2"),
+              // ),
+              ExpansionTile(title: Text("Sub child Category"),
+                // trailing: Icon(
+                //   _customeIcon ? Icons.arrow_drop_down_circle : Icons.arrow_drop_down,
+                // ),
+                children: [
+                  // ListTile(
+                  //   title: Text("This is tile number 2"),
+                  // ),
+                  ListTile(
+                    title: InkWell(onTap: (){
+                      // print("Hellooooo${globalResponseBody}");
+                    },
+                      child:
 
-          builder: (context, snapshot) {
+                      childCategories(),
 
-            if (snapshot.hasData) {
-              return
-                Container(
-                  //padding: EdgeInsets.only(top: 23),
+                    ),
+                  )
+                ],
+
+                onExpansionChanged: (bool expanded){
+                  // setState(() => _customeIcon = expanded);
+                },
+
+              ),
+
+              ListTile(
+                title: InkWell(onTap: (){
+                  // print("Hellooooo${globalResponseBody}");
+                },
                   child:
 
-                  Column(
-                    children: [
+                  childrenCategories(),
+
+                ),
+              )
+            ],
+
+            onExpansionChanged: (bool expanded){
+              // setState(() => _customeIcon = expanded);
+            },
+
+          ),
+
+          FutureBuilder(
+              future: fetchData(),
+
+              builder: (context, snapshot) {
+
+                if (snapshot.hasData) {
+                  return
+                    Container(
+                      //padding: EdgeInsets.only(top: 23),
+                      child:
+
                       Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
 
-                          ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (context , int index){
-                              return MultiSelectContainer(items: [
-                                MultiSelectCard(value: snapshot.data[index].id.toString(), label:snapshot.data[index].name.toString(),),
-                              ], onChange: (allSelectedItems, selectedItem) {
-                                print(allSelectedItems);
-                                print(selectedItem);
-                              });
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemBuilder: (context , int index){
+                                  return Column(
+                                    children: [
+                                     // Text(snapshot.data[index].childrenCategories[0].name.toString()),
 
-                            },
-                            //itemCount: 5,
-                            itemCount: snapshot.data.length,
+
+                                      MultiSelectContainer(items: [
+                                        MultiSelectCard(value: snapshot.data[index].id.toString(), label:snapshot.data[index].name.toString(),),
+                                      ], onChange: (allSelectedItems, selectedItem) {
+                                        print("ALL Categories>>>>>>>>>>>${allSelectedItems}");
+                                        print(selectedItem);
+                                      }),
+
+
+                                      // MultiSelectContainer(items: [
+                                      //   //MultiSelectCard(value: snapshot.data[index].childrenCategories[0].categories.length.toString(), label:snapshot.data[index].childrenCategories[0].categories.length.toString()),
+                                      //   MultiSelectCard(value: snapshot.data[index].childrenCategories[index].name.toString(), label:snapshot.data[index].childrenCategories[index].name.toString()),
+                                      // ], onChange: (allSelectedItems, selectedItem) {
+                                      //   print(allSelectedItems);
+                                      //   print(selectedItem);
+                                      // }),
+
+
+                                      // MultiSelectContainer(items: [
+                                      //   //MultiSelectCard(value: snapshot.data[index].childrenCategories[0].categories.length.toString(), label:snapshot.data[index].childrenCategories[0].categories.length.toString()),
+                                      //   MultiSelectCard(value: snapshot.data[index].childrenCategories[0].categories[index].name.toString(), label:snapshot.data[index].childrenCategories[0].categories[index].name.toString()),
+                                      //   //MultiSelectCard(value: snapshot.data[index].childrenCategories[0].categories[index].name.toString(), label:snapshot.data[index].childrenCategories[0].categories[index].name.toString()),
+                                      // ], onChange: (allSelectedItems, selectedItem) {
+                                      //   print(allSelectedItems);
+                                      //   print(selectedItem);
+                                      // }),
+
+                                    ],
+
+                                  );
+
+                                },
+                                //itemCount: 2,
+                                itemCount: snapshot.data.length,
+                               // itemCount: snapshot.data.childrenCategories[0].categories.length,
+                              ),
+
+
+                             /* ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemBuilder: (context , int index){
+                                  return Column(
+                                    children: [
+                                      MultiSelectContainer(items: [
+                                        MultiSelectCard(value: snapshot.data[index].childrenCategories[0].name.toString(), label:snapshot.data[index].childrenCategories[0].name.toString(),),
+                                        MultiSelectCard(value: snapshot.data[index].childrenCategories[0].name.toString(), label:snapshot.data[index].childrenCategories[0].name.toString(),),
+                                      ], onChange: (allSelectedItems, selectedItem) {
+                                        print(allSelectedItems);
+                                        print(selectedItem);
+                                      }),
+
+
+                                    ],
+
+                                  );
+                                  //Text(snapshot.data[index].childrenCategories[1].name.toString()),
+                                },
+                                itemCount: 5,
+                                //itemCount: snapshot.data.length,
+                              ),*/
+
+
+                              // GridView.count(
+                              //   crossAxisCount: 3,
+                              //   crossAxisSpacing: 4.0,
+                              //   mainAxisSpacing: 8.0,
+                              //   children: List.generate(snapshot.data.length, (index) {
+                              //     return Center(
+                              //       child: Text(snapshot.data[index].id.toString()) ,
+                              //     );
+                              //   }
+                              //   )
+                              // )
+
+
+                                // GridView.builder(
+                      //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      //     crossAxisCount: 2, // Number of columns
+                      //     // crossAxisSpacing: 10.0, // Spacing between columns
+                      //     // mainAxisSpacing: 10.0, // Spacing between rows
+                      //   ),
+                      //   itemCount: snapshot.data.length, // Number of items in the grid
+                      //   itemBuilder: (BuildContext context, int index) {
+                      //     return MultiSelectContainer(items: [
+                      //       MultiSelectCard(value: snapshot.data[index].id.toString(), label:snapshot.data[index].name.toString(),),
+                      //     ], onChange: (allSelectedItems, selectedItem) {
+                      //       print(allSelectedItems);
+                      //       print(selectedItem);
+                      //     });
+                      //   },
+                      // ),
+
+
+
+
+
+
+                            ],
                           ),
-
-
-                          // GridView.count(
-                          //   crossAxisCount: 3,
-                          //   crossAxisSpacing: 4.0,
-                          //   mainAxisSpacing: 8.0,
-                          //   children: List.generate(snapshot.data.length, (index) {
-                          //     return Center(
-                          //       child: Text(snapshot.data[index].id.toString()) ,
-                          //     );
-                          //   }
-                          //   )
-                          // )
-
-
-                            // GridView.builder(
-                  //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  //     crossAxisCount: 2, // Number of columns
-                  //     // crossAxisSpacing: 10.0, // Spacing between columns
-                  //     // mainAxisSpacing: 10.0, // Spacing between rows
-                  //   ),
-                  //   itemCount: snapshot.data.length, // Number of items in the grid
-                  //   itemBuilder: (BuildContext context, int index) {
-                  //     return MultiSelectContainer(items: [
-                  //       MultiSelectCard(value: snapshot.data[index].id.toString(), label:snapshot.data[index].name.toString(),),
-                  //     ], onChange: (allSelectedItems, selectedItem) {
-                  //       print(allSelectedItems);
-                  //       print(selectedItem);
-                  //     });
-                  //   },
-                  // ),
-
-
-
-
 
 
                         ],
                       ),
 
 
-                    ],
-                  ),
+                      // ListView.builder(
+                      //
+                      //   shrinkWrap: true,
+                      //   //physics:  NeverScrollableScrollPhysics(),
+                      //   itemBuilder: (context, int index) {
+                      //     return  Column(
+                      //       children: [
+                      //         Text(snapshot.data[index].name.toString()),
+                      //         //Text(snapshot.data[index].children_categories[0].name.toString()),
+                      //         //Text(snapshot.data[index].children_categories[index].name.toString()),
+                      //       ],
+                      //     );
+                      //   },
+                      //   //itemCount: 17,
+                      //   itemCount: snapshot.data.length,
+                      // ),
+                    );
+                }
+                else{
+                  return
+                    Container(
+                        child: Center(child: CircularProgressIndicator()));
+                }
+              }
+          ),
 
 
-                  // ListView.builder(
-                  //
-                  //   shrinkWrap: true,
-                  //   //physics:  NeverScrollableScrollPhysics(),
-                  //   itemBuilder: (context, int index) {
-                  //     return  Column(
-                  //       children: [
-                  //         Text(snapshot.data[index].name.toString()),
-                  //         //Text(snapshot.data[index].children_categories[0].name.toString()),
-                  //         //Text(snapshot.data[index].children_categories[index].name.toString()),
-                  //       ],
-                  //     );
-                  //   },
-                  //   //itemCount: 17,
-                  //   itemCount: snapshot.data.length,
-                  // ),
-                );
-            }
-            else{
-              return
-                Container(
-                    child: Center(child: CircularProgressIndicator()));
-            }
-          }
+        ],
+      );
+  }
+
+  Widget childrenCategories() {
+    return
+      Column(
+        children: [
+
+          FutureBuilder(
+              future: fetchData(),
+
+              builder: (context, snapshot) {
+
+                if (snapshot.hasData) {
+                  return
+                    Container(
+                      //padding: EdgeInsets.only(top: 23),
+                      child:
+
+                      Column(
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemBuilder: (context , int index){
+                                  return Column(
+                                    children: [
+                                      // Text(snapshot.data[index].childrenCategories[0].name.toString()),
+
+
+                                      // MultiSelectContainer(items: [
+                                      //   MultiSelectCard(value: snapshot.data[index].id.toString(), label:snapshot.data[index].name.toString(),),
+                                      // ], onChange: (allSelectedItems, selectedItem) {
+                                      //   print(allSelectedItems);
+                                      //   print(selectedItem);
+                                      // }),
+
+                                      MultiSelectContainer(items: [
+                                        //MultiSelectCard(value: snapshot.data[index].childrenCategories[0].categories.length.toString(), label:snapshot.data[index].childrenCategories[0].categories.length.toString()),
+                                        MultiSelectCard(value: snapshot.data[index].childrenCategories[index].id.toString(), label:snapshot.data[index].childrenCategories[index].name.toString()),
+                                      ], onChange: (allSelectedItems, selectedItem) {
+                                        print("childrenCategories>>>>>>>>>>>${allSelectedItems}");
+                                        print(selectedItem);
+                                      }),
+
+
+                                      // MultiSelectContainer(items: [
+                                      //   //MultiSelectCard(value: snapshot.data[index].childrenCategories[0].categories.length.toString(), label:snapshot.data[index].childrenCategories[0].categories.length.toString()),
+                                      //   MultiSelectCard(value: snapshot.data[index].childrenCategories[0].categories[index].name.toString(), label:snapshot.data[index].childrenCategories[0].categories[index].name.toString()),
+                                      //   //MultiSelectCard(value: snapshot.data[index].childrenCategories[0].categories[index].name.toString(), label:snapshot.data[index].childrenCategories[0].categories[index].name.toString()),
+                                      // ], onChange: (allSelectedItems, selectedItem) {
+                                      //   print(allSelectedItems);
+                                      //   print(selectedItem);
+                                      // }),
+
+                                    ],
+
+                                  );
+
+                                },
+                                itemCount: 2,
+                                //itemCount: snapshot.data.length,
+                                // itemCount: snapshot.data.childrenCategories[0].categories.length,
+                              ),
+
+
+                              /* ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemBuilder: (context , int index){
+                                  return Column(
+                                    children: [
+                                      MultiSelectContainer(items: [
+                                        MultiSelectCard(value: snapshot.data[index].childrenCategories[0].name.toString(), label:snapshot.data[index].childrenCategories[0].name.toString(),),
+                                        MultiSelectCard(value: snapshot.data[index].childrenCategories[0].name.toString(), label:snapshot.data[index].childrenCategories[0].name.toString(),),
+                                      ], onChange: (allSelectedItems, selectedItem) {
+                                        print(allSelectedItems);
+                                        print(selectedItem);
+                                      }),
+
+
+                                    ],
+
+                                  );
+                                  //Text(snapshot.data[index].childrenCategories[1].name.toString()),
+                                },
+                                itemCount: 5,
+                                //itemCount: snapshot.data.length,
+                              ),*/
+
+
+                              // GridView.count(
+                              //   crossAxisCount: 3,
+                              //   crossAxisSpacing: 4.0,
+                              //   mainAxisSpacing: 8.0,
+                              //   children: List.generate(snapshot.data.length, (index) {
+                              //     return Center(
+                              //       child: Text(snapshot.data[index].id.toString()) ,
+                              //     );
+                              //   }
+                              //   )
+                              // )
+
+
+                              // GridView.builder(
+                              //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              //     crossAxisCount: 2, // Number of columns
+                              //     // crossAxisSpacing: 10.0, // Spacing between columns
+                              //     // mainAxisSpacing: 10.0, // Spacing between rows
+                              //   ),
+                              //   itemCount: snapshot.data.length, // Number of items in the grid
+                              //   itemBuilder: (BuildContext context, int index) {
+                              //     return MultiSelectContainer(items: [
+                              //       MultiSelectCard(value: snapshot.data[index].id.toString(), label:snapshot.data[index].name.toString(),),
+                              //     ], onChange: (allSelectedItems, selectedItem) {
+                              //       print(allSelectedItems);
+                              //       print(selectedItem);
+                              //     });
+                              //   },
+                              // ),
+
+
+
+
+
+
+                            ],
+                          ),
+
+
+                        ],
+                      ),
+
+
+                      // ListView.builder(
+                      //
+                      //   shrinkWrap: true,
+                      //   //physics:  NeverScrollableScrollPhysics(),
+                      //   itemBuilder: (context, int index) {
+                      //     return  Column(
+                      //       children: [
+                      //         Text(snapshot.data[index].name.toString()),
+                      //         //Text(snapshot.data[index].children_categories[0].name.toString()),
+                      //         //Text(snapshot.data[index].children_categories[index].name.toString()),
+                      //       ],
+                      //     );
+                      //   },
+                      //   //itemCount: 17,
+                      //   itemCount: snapshot.data.length,
+                      // ),
+                    );
+                }
+                else{
+                  return
+                    Container(
+                        child: Center(child: CircularProgressIndicator()));
+                }
+              }
+          ),
+
+        ],
+      );
+  }
+  Widget childCategories() {
+    return
+      Column(
+        children: [
+
+          FutureBuilder(
+              future: fetchData(),
+
+              builder: (context, snapshot) {
+
+                if (snapshot.hasData) {
+                  return
+                    Container(
+                      //padding: EdgeInsets.only(top: 23),
+                      child:
+
+                      Column(
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemBuilder: (context , int index){
+                                  return Column(
+                                    children: [
+
+                                      MultiSelectContainer(items: [
+                                        //MultiSelectCard(value: snapshot.data[index].childrenCategories[0].categories.length.toString(), label:snapshot.data[index].childrenCategories[0].categories.length.toString()),
+                                        MultiSelectCard(value: snapshot.data[index].childrenCategories[index].categories[index].id.toString(), label:snapshot.data[index].childrenCategories[index].categories[index].name.toString()),
+                                      ], onChange: (allSelectedItems, selectedItem) {
+                                        print("categoriesCategories>>>>>>>>>>>${allSelectedItems}");
+                                        print(selectedItem);
+                                      }),
+
+
+                                    ],
+
+                                  );
+                                },
+                                itemCount: 2,
+                               // itemCount: snapshot.data.childrenCategories.categories.length,
+                                // itemCount: snapshot.data.childrenCategories[0].categories.length,
+                              ),
+
+                            ],
+                          ),
+                        ],
+                      ),
+
+                    );
+                }
+                else{
+                  return
+                    Container(
+                        child: Center(child: CircularProgressIndicator()));
+                }
+              }
+          ),
+        ],
       );
   }
 
@@ -1122,12 +1488,9 @@ class _placeadState extends State<placead> {
 
     if (response.statusCode == 200) {
       globalResponseBody = response.body; // Assign the response body to the global variable
-
       List<dynamic> jsonList = json.decode(globalResponseBody);
-
       List<allcategoryModel> itemList = jsonList.map((json) => allcategoryModel.fromJson(json)).toList();
-
-      print("allcategoryModel Response > $globalResponseBody[0]");
+      print("allcategoryModel Response > $globalResponseBody");
 
       return itemList;
     } else {
@@ -1135,12 +1498,4 @@ class _placeadState extends State<placead> {
     }
   }
 
-
-
-
-
-
-
-
 }
-
