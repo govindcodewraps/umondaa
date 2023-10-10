@@ -20,6 +20,7 @@ import 'package:hardware_lo/repositories/place_ad_repository.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
 import '../repositories/category_repository.dart';
+import '../screens/PlaceAddScreen/checkboxplaceadd.dart';
 import '../screens/common_webview_screen.dart';
 import '../screens/registration.dart';
 import 'dart:convert';
@@ -81,6 +82,7 @@ class _placeadState extends State<placead> {
   TextEditingController _EmailID = TextEditingController();
   TextEditingController _PassWord = TextEditingController();
   TextEditingController _offerControler = TextEditingController();
+
 
   @override
   void initState() {
@@ -212,35 +214,18 @@ class _placeadState extends State<placead> {
 
 
 
-
-
-
-
-
-
-
                   ExpansionTile(title: Text("Category"),
-                    // trailing: Icon(
-                    //   _customeIcon ? Icons.arrow_drop_down_circle : Icons.arrow_drop_down,
-                    // ),
+
                     children: [
-                      // ListTile(
-                      //   title: Text("This is tile number 2"),
-                      // ),
+
                       ListTile(
                         title: InkWell(onTap: (){
-                          // print("Hellooooo${globalResponseBody}");
                         },
-                            child:
-
-                            listview(),
-
-
-
-
-
-
-
+                          child:
+                          Container(
+                              height: 500,
+                              padding: EdgeInsets.only(left: 16,right: 16),
+                              child: CheckboxListScreen()),
 
                         ),
                       )
@@ -251,6 +236,44 @@ class _placeadState extends State<placead> {
                     },
 
                   ),
+
+
+
+
+
+
+
+
+
+                  // ExpansionTile(title: Text("Category"),
+                  //   // trailing: Icon(
+                  //   //   _customeIcon ? Icons.arrow_drop_down_circle : Icons.arrow_drop_down,
+                  //   // ),
+                  //   children: [
+                  //     // ListTile(
+                  //     //   title: Text("This is tile number 2"),
+                  //     // ),
+                  //     ListTile(
+                  //       title: InkWell(onTap: (){
+                  //         // print("Hellooooo${globalResponseBody}");
+                  //       },
+                  //           child:
+                  //
+                  //           listview(),
+                  //
+                  //       ),
+                  //     )
+                  //   ],
+                  //
+                  //   onExpansionChanged: (bool expanded){
+                  //     // setState(() => _customeIcon = expanded);
+                  //   },
+                  //
+                  // ),
+
+
+
+
 
                  /* ExpansionTile(title: Text("Sub Category"),
                     // trailing: Icon(
@@ -1497,5 +1520,8 @@ class _placeadState extends State<placead> {
       throw Exception('Failed to load data');
     }
   }
+
+
+
 
 }
