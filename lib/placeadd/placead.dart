@@ -186,7 +186,7 @@ class _placeadState extends State<placead> {
               child: Column(
                 children: [
                   // Text(globalResponseBody.toString()),
-                 // listview(),
+                  // listview(),
                   Container(
                       margin: const EdgeInsets.fromLTRB(5, 20, 0, 0),
                       child: const Align(
@@ -275,7 +275,7 @@ class _placeadState extends State<placead> {
 
 
 
-                 /* ExpansionTile(title: Text("Sub Category"),
+                  /* ExpansionTile(title: Text("Sub Category"),
                     // trailing: Icon(
                     //   _customeIcon ? Icons.arrow_drop_down_circle : Icons.arrow_drop_down,
                     // ),
@@ -405,7 +405,7 @@ class _placeadState extends State<placead> {
                                   child: Stack(
                                     children: [
                                       Container(
-                                       // width: 200,
+                                        // width: 200,
                                         height: 150,
                                         alignment: Alignment.center,
                                         child: Image.file(selectedImages[index],fit: BoxFit.cover,),
@@ -555,89 +555,89 @@ class _placeadState extends State<placead> {
 
 
           if (is_logged_in.$ == false)
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Container(
-                margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
-                child: Card(
-                  elevation: 10,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Container(
+                  margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
+                  child: Card(
+                    elevation: 10,
+                    child: Column(
+                      children: [
+                        Container(
+                            margin: const EdgeInsets.fromLTRB(5, 16, 0, 0),
+                            child: const Align(
+                              alignment: Alignment.topLeft,
+                              child: Text("User Details",
+                                  style: TextStyle(fontSize: 14,
+                                      color: Color.fromARGB(255, 0, 0, 0))),
+                            )
+                        ),
+                        Container(
+                          margin: const EdgeInsets.fromLTRB(5, 12, 0, 0),
+                          child: TextField(
+                            controller: _EmailID,
+                            autofocus: false,
+                            enableSuggestions: false,
+                            autocorrect: false,
+                            decoration: const InputDecoration(
+                              border: UnderlineInputBorder(),
+                              labelText: 'Email',
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.fromLTRB(5, 12, 0, 0),
+                          child: TextField(
+                            controller: _PassWord,
+                            autofocus: false,
+                            obscureText: true,
+                            enableSuggestions: false,
+                            autocorrect: false,
+                            decoration: const InputDecoration(
+                              border: UnderlineInputBorder(),
+                              labelText: 'Your Password',
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding:  EdgeInsets.only(top: 20.0,right:16),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Container(
-                          margin: const EdgeInsets.fromLTRB(5, 16, 0, 0),
-                          child: const Align(
-                            alignment: Alignment.topLeft,
-                            child: Text("User Details",
-                                style: TextStyle(fontSize: 14,
-                                    color: Color.fromARGB(255, 0, 0, 0))),
-                          )
+                      Text(
+                        "Don't have an account ?",
+                        style: TextStyle(color: MyTheme.font_grey, fontSize: 12),
                       ),
-                      Container(
-                        margin: const EdgeInsets.fromLTRB(5, 12, 0, 0),
-                        child: TextField(
-                          controller: _EmailID,
-                          autofocus: false,
-                          enableSuggestions: false,
-                          autocorrect: false,
-                          decoration: const InputDecoration(
-                            border: UnderlineInputBorder(),
-                            labelText: 'Email',
-                          ),
-                        ),
+                      SizedBox(
+                        width: 10,
                       ),
-                      Container(
-                        margin: const EdgeInsets.fromLTRB(5, 12, 0, 0),
-                        child: TextField(
-                          controller: _PassWord,
-                          autofocus: false,
-                          obscureText: true,
-                          enableSuggestions: false,
-                          autocorrect: false,
-                          decoration: const InputDecoration(
-                            border: UnderlineInputBorder(),
-                            labelText: 'Your Password',
-                          ),
+                      InkWell(
+                        child: Text(
+                          AppLocalizations.of(context).sign_up_ucf,
+                          style: TextStyle(
+                              color: MyTheme.accent_color,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600),
                         ),
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                                return Registration();
+                              }));
+                        },
                       ),
                     ],
                   ),
                 ),
-              ),
-              Padding(
-                padding:  EdgeInsets.only(top: 20.0,right:16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      "Don't have an account ?",
-                      style: TextStyle(color: MyTheme.font_grey, fontSize: 12),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    InkWell(
-                      child: Text(
-                        AppLocalizations.of(context).sign_up_ucf,
-                        style: TextStyle(
-                            color: MyTheme.accent_color,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                              return Registration();
-                            }));
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+              ],
+            ),
 
-      /*    Padding(
+          /*    Padding(
             padding:  EdgeInsets.only(top: 20.0,right:16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -894,7 +894,7 @@ class _placeadState extends State<placead> {
       items: categoryList.map((categories) {
         print("Brands List${dropdownCategory}");
         print("brands IDDD ${categories}");
-       // print("brands IDDD ${[0].children_categoriecategoriess}");
+        // print("brands IDDD ${[0].children_categoriecategoriess}");
         return DropdownMenuItem(
           value: "${categories.id.toString()+" "+categories.name.toString()}",
           child: Text(categories.name.toString(), style: TextStyle(fontSize: 14),),
@@ -1136,7 +1136,7 @@ class _placeadState extends State<placead> {
                                 itemBuilder: (context , int index){
                                   return Column(
                                     children: [
-                                     // Text(snapshot.data[index].childrenCategories[0].name.toString()),
+                                      // Text(snapshot.data[index].childrenCategories[0].name.toString()),
 
 
                                       MultiSelectContainer(items: [
@@ -1172,11 +1172,11 @@ class _placeadState extends State<placead> {
                                 },
                                 //itemCount: 2,
                                 itemCount: snapshot.data.length,
-                               // itemCount: snapshot.data.childrenCategories[0].categories.length,
+                                // itemCount: snapshot.data.childrenCategories[0].categories.length,
                               ),
 
 
-                             /* ListView.builder(
+                              /* ListView.builder(
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
                                 itemBuilder: (context , int index){
@@ -1214,22 +1214,22 @@ class _placeadState extends State<placead> {
                               // )
 
 
-                                // GridView.builder(
-                      //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      //     crossAxisCount: 2, // Number of columns
-                      //     // crossAxisSpacing: 10.0, // Spacing between columns
-                      //     // mainAxisSpacing: 10.0, // Spacing between rows
-                      //   ),
-                      //   itemCount: snapshot.data.length, // Number of items in the grid
-                      //   itemBuilder: (BuildContext context, int index) {
-                      //     return MultiSelectContainer(items: [
-                      //       MultiSelectCard(value: snapshot.data[index].id.toString(), label:snapshot.data[index].name.toString(),),
-                      //     ], onChange: (allSelectedItems, selectedItem) {
-                      //       print(allSelectedItems);
-                      //       print(selectedItem);
-                      //     });
-                      //   },
-                      // ),
+                              // GridView.builder(
+                              //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              //     crossAxisCount: 2, // Number of columns
+                              //     // crossAxisSpacing: 10.0, // Spacing between columns
+                              //     // mainAxisSpacing: 10.0, // Spacing between rows
+                              //   ),
+                              //   itemCount: snapshot.data.length, // Number of items in the grid
+                              //   itemBuilder: (BuildContext context, int index) {
+                              //     return MultiSelectContainer(items: [
+                              //       MultiSelectCard(value: snapshot.data[index].id.toString(), label:snapshot.data[index].name.toString(),),
+                              //     ], onChange: (allSelectedItems, selectedItem) {
+                              //       print(allSelectedItems);
+                              //       print(selectedItem);
+                              //     });
+                              //   },
+                              // ),
 
 
 
@@ -1482,7 +1482,7 @@ class _placeadState extends State<placead> {
                                   );
                                 },
                                 itemCount: 2,
-                               // itemCount: snapshot.data.childrenCategories.categories.length,
+                                // itemCount: snapshot.data.childrenCategories.categories.length,
                                 // itemCount: snapshot.data.childrenCategories[0].categories.length,
                               ),
 
