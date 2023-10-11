@@ -213,7 +213,7 @@ class _CheckboxListScreenState extends State<CheckboxListScreen> {
     else {
       throw Exception('Failed to load data');
     }
-  }
+} 
 
 
   void printSelectedItems() {
