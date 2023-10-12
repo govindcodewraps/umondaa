@@ -2506,13 +2506,29 @@ class _placeadState extends State<placead> {
             ),
           ),
 
-/*ElevatedButton(onPressed: (){
-  var category = dropdownCategory.split(" ")[0].toString();
-  print("category.....: ${category}");
-  var category2 = selectedProductIDs;
-  print("category check box.....: ${category2}");
 
-}, child: Text("DATAAA")),*/
+
+          //TESTING BUTTON
+       /*   ElevatedButton(onPressed: (){
+            var category = dropdownCategory.split(" ")[0].toString();
+            print("category.....: ${category}");
+            var category2 = selectedProductIDs;
+            //selectedProductIDs=', '.join(map(str, my_list));
+            print("category check box.....: ${category2}");
+            String result = selectedProductIDs.map((item) => item.toString()).join(', ');
+
+            print("category  remove square.....: ${result}");
+
+
+            String selectedProduct = selectedProductIDs.map((item) => item.toString()).join(',').replaceAll(', ', ',');
+
+            print("category  remove square renove space....:${selectedProduct}");
+
+
+
+          }, child: Text("DATAAA")),*/
+
+
 
           Padding(
             padding: const EdgeInsets.only(top: 30.0,left: 16,right: 16),
@@ -2559,9 +2575,14 @@ class _placeadState extends State<placead> {
                       fontSize: 16.0,
                     );
                   } else {
+                    String selectedProduct = selectedProductIDs.map((item) => item.toString()).join(',').replaceAll(', ', ',');
+
+                    print("category  remove square renove space....:${selectedProduct}");
+
                     var ProdName = _ProductName.text.toString();
                     // var category = dropdownCategory.split(" ")[0].toString();
-                    var category = selectedProductIDs;
+                   // var category = selectedProductIDs;
+                    var category = selectedProduct;
                     var brand = dropdownBrands.split(" ")[0].toString();
                     var description = _Description.text.toString();
                     var amount = _PriceAED.text.toString();
@@ -2572,6 +2593,7 @@ class _placeadState extends State<placead> {
                     var imagebase = allurlss;
                     var userid = user_id.$;
                     //var imagebase = allurlss;
+
 
                     print("Product name.: ${ProdName}");
                     print("category.....: ${category}");
@@ -2595,7 +2617,7 @@ class _placeadState extends State<placead> {
                     print("Select Images  .....: ${selectedImages}");
 
 
-                    //place_ad_upload(ProdName,category,brand,description,offer,amount,offerstatus,email,password);
+                    place_ad_upload(ProdName,category,brand,description,offer,amount,offerstatus,email,password);
 ///////////
 
                     _ProductName.clear();
@@ -2825,6 +2847,15 @@ class _placeadState extends State<placead> {
       else {
         print('HTTP Error: ${response.statusCode}');
         print(await response.stream.bytesToString());
+        Fluttertoast.showToast(
+          msg: "Unauthorized fields",
+          //toastLength:LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM, // You can change the position
+          timeInSecForIosWeb: 1, // Duration in seconds the toast should be visible on iOS and web
+          backgroundColor: Colors.black, // Background color of the toast
+          textColor: Colors.red, // Text color of the toast message
+          fontSize: 16.0, // Font size of the toast message
+        );
       }
     } catch (e) {
       print('Error: $e');

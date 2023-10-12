@@ -51,6 +51,7 @@ class _StripeScreenState extends State<StripeScreen> {
   stripe() {
     String _initial_url =
         "${AppConfig.BASE_URL}/stripe?payment_type=${widget.payment_type}&combined_order_id=${_combined_order_id}&amount=${widget.amount}&user_id=${user_id.$}&package_id=${widget.package_id}";
+        //"https://umonda.com/api/v2/stripe?payment_type=${widget.payment_type}&combined_order_id=${_combined_order_id}&amount=${widget.amount}&user_id=${user_id.$}&package_id=${widget.package_id}";
 
     _webViewController
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
