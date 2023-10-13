@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:hardware_lo/my_theme.dart';
 import 'package:http/http.dart' as http;
 
@@ -149,8 +150,7 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
       FutureBuilder(
           future: fetchData(),
           builder: (context, snapshot) {
-            if (snapshot.hasData) {
-
+          if (snapshot.hasData) {
               return
                 Container(
                   padding: EdgeInsets.only(bottom: 60),
@@ -239,8 +239,6 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
             else{
               return
                 Container(
-
-
                     child: Center(child: CircularProgressIndicator()));
             }
           }
@@ -283,6 +281,7 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
       List<amountlistmodel> itemList = jsonList.map((json) => amountlistmodel.fromJson(json)).toList();
 
       print("HHHHHHHH${response.body}");
+      print("user iddddd${user_id.$}");
       //print(response.body);
 
       return itemList;

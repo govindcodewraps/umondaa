@@ -4,6 +4,8 @@ import 'package:hardware_lo/helpers/shared_value_helper.dart';
 import 'package:hardware_lo/my_theme.dart';
 import 'package:flutter/material.dart';
 
+import '../main.dart';
+
 class AuthScreen{
   static Widget buildScreen(BuildContext context,String headerText,Widget child){
     return Directionality(
@@ -15,6 +17,7 @@ class AuthScreen{
         //appBar: buildAppBar(context),
         body:Stack(
           children: [
+
             Container(
                 height: DeviceInfo(context).height / 3,
                 width: DeviceInfo(context).width,
@@ -71,6 +74,20 @@ class AuthScreen{
                   ),
                 )
               ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(13.0),
+              child: InkWell(
+                  onTap: (){
+
+                    Navigator.pop(context);
+
+                    // Navigator.push(context,
+                    //     MaterialPageRoute(builder: (context) {
+                    //       return MyApp();
+                    //     }));
+                  },
+                  child: Icon(Icons.arrow_back)),
             ),
           ],
         ),

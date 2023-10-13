@@ -608,6 +608,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
       // Handle the response
       if (response.statusCode == 200) {
+        print("user iddddd${user_id.$}");
         return PaymenthistoryModel.fromJson(response.data);
 
         // API call successful
@@ -617,6 +618,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
      else if(response.statusCode == 401){
 
         print("500 Internal Server Error........... ");
+        print("user iddddd${user_id.$}");
         print(response.data);
       }
 

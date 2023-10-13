@@ -445,18 +445,18 @@ class _WalletState extends State<Wallet> {
                 ),
               ),
               Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 16.0),
-                child: Text(
-                  "${ AppLocalizations.of(context).last_recharged} : ${_balanceDetails.last_recharged}",
-                  style: TextStyle(
-                    color: MyTheme.light_grey,
-                    fontSize: 10,
-
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(bottom: 16.0),
+              //   child: Text(
+              //     "${ AppLocalizations.of(context).last_recharged} : ${_balanceDetails.last_recharged}",
+              //     style: TextStyle(
+              //       color: MyTheme.light_grey,
+              //       fontSize: 10,
+              //
+              //     ),
+              //     textAlign: TextAlign.center,
+              //   ),
+              // ),
             ],
           ),
         ),

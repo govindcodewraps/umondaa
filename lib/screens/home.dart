@@ -435,7 +435,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                             ),
 
                                             onPressed: (){
-                                              Navigator.push(context,MaterialPageRoute(builder: (context)=>Feature_ad_package_Screen()));
+                                              //Navigator.push(context,MaterialPageRoute(builder: (context)=>Feature_ad_package_Screen()));
                                             },
                                             child:Text(
                                               "Get Featured On Home Page",

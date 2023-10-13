@@ -41,6 +41,7 @@ import 'package:toast/toast.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../repositories/auth_repository.dart';
+import 'InProfileScreen/My_Ads.dart';
 import 'InProfileScreen/Payment_Screen.dart';
 import 'InProfileScreen/commisssion_history_screen.dart';
 import 'InProfileScreen/money_withdrawal.dart';
@@ -600,6 +601,11 @@ class _ProfileState extends State<Profile> {
           //     ],
           //   ),
           // ),
+
+
+
+
+
           buildHorizontalSettingItem(
               is_logged_in.$,
               "assets/edit.png",
@@ -630,6 +636,21 @@ class _ProfileState extends State<Profile> {
                       );
                     }
                   : () => showLoginWarning()),
+
+
+          buildHorizontalSettingItem(true, "assets/language.png",
+              "My ads", () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)
+                {
+                  return My_adsScreen();
+                  },
+                  ),
+                );
+
+
+
+              }),
+
         ],
       ),
     );

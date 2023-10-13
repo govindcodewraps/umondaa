@@ -1,4 +1,6 @@
 
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/foundation.dart';
@@ -118,8 +120,20 @@ class AuthRepository {
         },
         body: post_body);
     print(response.body);
+    // if (response.statusCode == 201)
+    //   {
+    //     Fluttertoast.showToast(
+    //       msg: "User Already Registered",
+    //       // toastLength: Toast.LENGTH_SHORT,
+    //       gravity: ToastGravity.BOTTOM,
+    //       timeInSecForIosWeb: 1,
+    //       backgroundColor: Colors.green,
+    //       textColor: Colors.white,
+    //       fontSize: 16.0,
+    //     );
+    //   }
+      return signupResponseFromJson(response.body);
 
-    return signupResponseFromJson(response.body);
   }
 
   Future<ResendCodeResponse> getResendCodeResponse(

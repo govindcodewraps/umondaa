@@ -313,10 +313,17 @@ class _ProductDetailsState extends State<ProductDetails>
       _isInWishList = false;
       setState(() {});
       removeFromWishList();
+      print("remove to wish list");
+      ToastComponent.showDialog("Remove to wish list",
+          gravity: Toast.center, duration: Toast.lengthLong);
+
     } else {
       _isInWishList = true;
       setState(() {});
       addToWishList();
+      print("Add to wish list");
+      ToastComponent.showDialog("Add to wish list",
+          gravity: Toast.center, duration: Toast.lengthLong);
     }
   }
 
@@ -2934,6 +2941,7 @@ class _ProductDetailsState extends State<ProductDetails>
                 ),
                 child: Text("Submit",),
                 onPressed: () {
+
                   makeanofferapi(pricecontroller.text);
                   print("Your Price ${pricecontroller.text}");
                   Navigator.pop(context);
@@ -2980,6 +2988,7 @@ class _ProductDetailsState extends State<ProductDetails>
       if (response.statusCode == 200) {
         Toast.show("Product added to cart successfully",textStyle: TextStyle(color:Colors.green), duration: Toast.lengthShort, gravity:  Toast.bottom);
         print(json.encode(json.decode(response.body)));
+
         print("ADD money ");
       }
       else if(response.statusCode == 401) {
