@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import '../my_theme.dart';
 
 class InputDecorations {
-  static InputDecoration buildInputDecoration_1({hint_text = ""}) {
-    return InputDecoration(
+  static InputDecoration buildInputDecoration_1({hint_text = "", GestureDetector suffixIcon}) {
+    return
+
+      InputDecoration(
         hintText: hint_text,
         filled: true,
         fillColor: MyTheme.white,
@@ -25,7 +27,8 @@ class InputDecorations {
             const Radius.circular(6.0),
           ),
         ),
-        contentPadding: EdgeInsets.symmetric(horizontal: 16.0));
+        contentPadding: EdgeInsets.symmetric(horizontal: 16.0)
+    );
   }
 
   static InputDecoration buildInputDecoration_phone({hint_text = ""}) {

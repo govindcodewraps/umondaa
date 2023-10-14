@@ -40,6 +40,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  bool _obscureText = true;
   String _login_by = "email"; //phone or email
   String initialCountry = 'US';
 
@@ -462,16 +463,81 @@ class _LoginState extends State<Login> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
+                    // Container(
+                    //   height: 36,
+                    //   child: TextField(
+                    //     controller: _passwordController,
+                    //     autofocus: false,
+                    //     obscureText: true,
+                    //     enableSuggestions: false,
+                    //     autocorrect: false,
+                    //     decoration: InputDecorations.buildInputDecoration_1(
+                    //         suffixIcon: GestureDetector(
+                    //           onTap: () {
+                    //             setState(() {
+                    //               _obscureText = !_obscureText;
+                    //             });
+                    //           },
+                    //           child: _obscureText
+                    //               ? Icon(Icons.visibility
+                    //             // Feather.eye_off, // Use Feather for Flutter icons
+                    //           )
+                    //               : Icon(
+                    //               Icons.visibility_off
+                    //           ),
+                    //         ),
+                    //         hint_text: "• • • • • • • •"
+                    //     ),
+                    //   ),
+                    // ),
+
+
                     Container(
-                      height: 36,
-                      child: TextField(
+                      height: 40,
+                      margin: const EdgeInsets.fromLTRB(5, 12, 0, 0),
+                      child:
+                      TextFormField(
                         controller: _passwordController,
-                        autofocus: false,
-                        obscureText: true,
-                        enableSuggestions: false,
-                        autocorrect: false,
-                        decoration: InputDecorations.buildInputDecoration_1(
-                            hint_text: "• • • • • • • •"),
+                        obscureText: _obscureText,
+                        decoration:
+                        InputDecoration(
+                            hintText: "• • • • • • • •",
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _obscureText = !_obscureText;
+                                });
+                              },
+                              child: _obscureText
+                                  ? Icon(Icons.visibility,color: MyTheme.accent_color
+                                // Feather.eye_off, // Use Feather for Flutter icons
+                              )
+                                  : Icon(
+                                  Icons.visibility_off,color: Colors.grey,
+                              ),
+                            ),
+                            filled: true,
+                            fillColor: MyTheme.white,
+                            hintStyle: TextStyle(fontSize: 12.0, color: MyTheme.textfield_grey),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: MyTheme.noColor,
+                                  width: 0.2),
+                              borderRadius: const BorderRadius.all(
+                                const Radius.circular(6.0),
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: MyTheme.accent_color,
+                                  width: 0.5),
+                              borderRadius: const BorderRadius.all(
+                                const Radius.circular(6.0),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.symmetric(horizontal: 16.0)
+                        ),
+
                       ),
                     ),
                     GestureDetector(

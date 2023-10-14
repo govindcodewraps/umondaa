@@ -120,18 +120,18 @@ class AuthRepository {
         },
         body: post_body);
     print(response.body);
-    // if (response.statusCode == 201)
-    //   {
-    //     Fluttertoast.showToast(
-    //       msg: "User Already Registered",
-    //       // toastLength: Toast.LENGTH_SHORT,
-    //       gravity: ToastGravity.BOTTOM,
-    //       timeInSecForIosWeb: 1,
-    //       backgroundColor: Colors.green,
-    //       textColor: Colors.white,
-    //       fontSize: 16.0,
-    //     );
-    //   }
+    if (response.statusCode == 201)
+      {
+        Fluttertoast.showToast(
+          msg: "User Already Registered",
+          // toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+      }
       return signupResponseFromJson(response.body);
 
   }

@@ -638,19 +638,15 @@ class _ProfileState extends State<Profile> {
                   : () => showLoginWarning()),
 
 
-          buildHorizontalSettingItem(true, "assets/language.png",
+          buildHorizontalSettingItem(true, "assets/adplace.png",
               "My ads", () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)
-                {
-                  return My_adsScreen();
-                  },
-                  ),
-                );
-
-
-
+                // Navigator.push(context, MaterialPageRoute(builder: (context)
+                // {
+                //   return My_adsScreen();
+                //   },
+                //   ),
+                // );
               }),
-
         ],
       ),
     );
@@ -846,9 +842,14 @@ class _ProfileState extends State<Profile> {
 
               child: buildSettingAndAddonsHorizontalMenuItem("assets/wallet.png",
                   AppLocalizations.of(context).my_wallet_ucf, () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return Wallet();
-                }));
+
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      return Moneywithdrawal();
+                    }));
+
+                // Navigator.push(context, MaterialPageRoute(builder: (context) {
+                //   return Wallet();
+                // }));
               }),
             ),
           buildSettingAndAddonsHorizontalMenuItem(

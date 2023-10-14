@@ -738,7 +738,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
                                             onTap: () {
                                               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                                return TopBrands();
+                                                 return TopBrands(
+                                                  selected_filter: "brands",
+                                                );
                                               }));
                                             },
                                           ),

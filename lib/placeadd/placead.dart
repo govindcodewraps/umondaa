@@ -1593,6 +1593,8 @@ class placead extends StatefulWidget {
 }
 
 class _placeadState extends State<placead> {
+  bool _obscureText = true;
+
   bool _isAgree = false;
   bool light = false, isChecked = true;
   bool _filteredBrandsCalled = false;
@@ -1739,6 +1741,7 @@ class _placeadState extends State<placead> {
   }
 
   Widget buildAppBarTitleOption(BuildContext context) {
+
     print("Govind>>>>> ${ProductID}");
 
     print("Selected ProductIDs>>>>>>>>>>>>: $selectedProductIDs");
@@ -2348,20 +2351,34 @@ class _placeadState extends State<placead> {
                             ),
                           ),
                         ),
+
                         Container(
                           margin: const EdgeInsets.fromLTRB(5, 12, 0, 0),
-                          child: TextField(
+                          child:
+                          TextFormField(
                             controller: _PassWord,
-                            autofocus: false,
-                            obscureText: true,
-                            enableSuggestions: false,
-                            autocorrect: false,
-                            decoration: const InputDecoration(
-                              border: UnderlineInputBorder(),
-                              labelText: 'Your Password',
+                            obscureText: _obscureText,
+                            decoration: InputDecoration(
+                              labelText: 'Password',
+                              suffixIcon: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _obscureText = !_obscureText;
+                                  });
+                                },
+                                child: _obscureText
+                                    ? Icon(Icons.visibility
+                                  // Feather.eye_off, // Use Feather for Flutter icons
+                                )
+                                    : Icon(
+                                    Icons.visibility_off
+                                ),
+                              ),
                             ),
                           ),
                         ),
+
+
                       ],
                     ),
                   ),

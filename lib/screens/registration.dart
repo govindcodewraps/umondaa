@@ -27,6 +27,8 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
+  bool _obscureText = true;
+  bool _obscureText2 = true;
   String _register_by = "email"; //phone or email
   String initialCountry = 'US';
 
@@ -320,11 +322,50 @@ class _RegistrationState extends State<Registration> {
                       child: TextField(
                         controller: _passwordController,
                         autofocus: false,
-                        obscureText: true,
+                        obscureText: _obscureText,
                         enableSuggestions: false,
                         autocorrect: false,
-                        decoration: InputDecorations.buildInputDecoration_1(
-                            hint_text: "• • • • • • • •"),
+                        decoration:
+
+                        // InputDecorations.buildInputDecoration_1(
+                        //     hint_text: "• • • • • • • •"),
+                        InputDecoration(
+                            hintText: "• • • • • • • •",
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _obscureText = !_obscureText;
+                                });
+                              },
+                              child: _obscureText
+                                  ? Icon(Icons.visibility,color: MyTheme.accent_color
+                                // Feather.eye_off, // Use Feather for Flutter icons
+                              )
+                                  : Icon(
+                                Icons.visibility_off,color: Colors.grey,
+                              ),
+                            ),
+                            filled: true,
+                            fillColor: MyTheme.white,
+                            hintStyle: TextStyle(fontSize: 12.0, color: MyTheme.textfield_grey),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: MyTheme.noColor,
+                                  width: 0.2),
+                              borderRadius: const BorderRadius.all(
+                                const Radius.circular(6.0),
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: MyTheme.accent_color,
+                                  width: 0.5),
+                              borderRadius: const BorderRadius.all(
+                                const Radius.circular(6.0),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.symmetric(horizontal: 16.0)
+                        ),
                       ),
                     ),
                     Text(
@@ -353,11 +394,51 @@ class _RegistrationState extends State<Registration> {
                   child: TextField(
                     controller: _passwordConfirmController,
                     autofocus: false,
-                    obscureText: true,
+                    obscureText: _obscureText2,
                     enableSuggestions: false,
                     autocorrect: false,
-                    decoration: InputDecorations.buildInputDecoration_1(
-                        hint_text: "• • • • • • • •"),
+
+                    decoration:
+                    // InputDecorations.buildInputDecoration_1(
+                    //     hint_text: "• • • • • • • •"),
+                    InputDecoration(
+                        hintText: "• • • • • • • •",
+                        suffixIcon: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _obscureText2 = !_obscureText2;
+                            });
+                          },
+                          child: _obscureText2
+                              ? Icon(Icons.visibility,color: MyTheme.accent_color
+                            // Feather.eye_off, // Use Feather for Flutter icons
+                          )
+                              : Icon(
+                            Icons.visibility_off,color: Colors.grey,
+                          ),
+                        ),
+                        filled: true,
+                        fillColor: MyTheme.white,
+                        hintStyle: TextStyle(fontSize: 12.0, color: MyTheme.textfield_grey),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: MyTheme.noColor,
+                              width: 0.2),
+                          borderRadius: const BorderRadius.all(
+                            const Radius.circular(6.0),
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: MyTheme.accent_color,
+                              width: 0.5),
+                          borderRadius: const BorderRadius.all(
+                            const Radius.circular(6.0),
+                          ),
+                        ),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 16.0)
+                    ),
+
                   ),
                 ),
               ),

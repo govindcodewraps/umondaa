@@ -2946,6 +2946,11 @@ class _ProductDetailsState extends State<ProductDetails>
                   print("Your Price ${pricecontroller.text}");
                   Navigator.pop(context);
                   pricecontroller.clear();
+
+                  //Navigator.pop(context);
+                  // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+                  //   return ProductDetails();
+                  // }));
                   // Your code for submitting the form.
                 },
               ),
