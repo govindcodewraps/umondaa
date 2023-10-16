@@ -2947,7 +2947,7 @@ class _ProductDetailsState extends State<ProductDetails>
                   Navigator.pop(context);
                   pricecontroller.clear();
 
-                  //Navigator.pop(context);
+
                   // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
                   //   return ProductDetails();
                   // }));
@@ -2991,18 +2991,31 @@ class _ProductDetailsState extends State<ProductDetails>
       );
 
       if (response.statusCode == 200) {
-        Toast.show("Product added to cart successfully",textStyle: TextStyle(color:Colors.green), duration: Toast.lengthShort, gravity:  Toast.bottom);
+        ToastComponent.showDialog(
+            "Product added to cart successfully",
+            gravity: Toast.center,
+            duration: Toast.lengthLong);
+       // Toast.show("Product added to cart successfully",textStyle: TextStyle(color:Colors.green), duration: Toast.lengthShort, gravity:  Toast.bottom);
         print(json.encode(json.decode(response.body)));
+        Provider.of<CartCounter>(context, listen: false).getCount();
 
         print("ADD money ");
       }
       else if(response.statusCode == 401) {
-        Toast.show("Product not added to cart",textStyle: TextStyle(color:Colors.red), duration: Toast.lengthShort, gravity:  Toast.bottom);
+        ToastComponent.showDialog(
+            "Product not added to cart",
+            gravity: Toast.center,
+            duration: Toast.lengthLong);
+       // Toast.show("Product not added to cart",textStyle: TextStyle(color:Colors.red), duration: Toast.lengthShort, gravity:  Toast.bottom);
         print(json.encode(json.decode(response.body)));
         print("401 Unauthorized ");
       }
 
       else {
+        ToastComponent.showDialog(
+            "Product not added to cart",
+            gravity: Toast.center,
+            duration: Toast.lengthLong);
         print('Request failed with status: ${response.statusCode}');
         print(response.body);
       }

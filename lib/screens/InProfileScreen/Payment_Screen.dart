@@ -303,7 +303,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
                                           ),
 
-                                          child: Text("Tax : ",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+                                          child: Text("UMONDA FEES : ",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
 
                                       SizedBox(height: 4,),
 

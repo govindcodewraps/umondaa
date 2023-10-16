@@ -1538,7 +1538,6 @@ class _placeadState extends State<placead> {
 
 
 
-
 import 'dart:io';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -2959,7 +2958,6 @@ class _placeadState extends State<placead> {
                                     children: [
                                       // Text(snapshot.data[index].childrenCategories[0].name.toString()),
 
-
                                       MultiSelectContainer(items: [
                                         MultiSelectCard(value: snapshot.data[index].id.toString(), label:snapshot.data[index].name.toString(),),
                                       ], onChange: (allSelectedItems, selectedItem) {
@@ -2994,7 +2992,6 @@ class _placeadState extends State<placead> {
                 }
               }
           ),
-
 
         ],
       );
@@ -3092,6 +3089,7 @@ class _placeadState extends State<placead> {
         children: [
 
           FutureBuilder(
+
               future: fetchData(),
 
               builder: (context, snapshot) {
@@ -3213,7 +3211,6 @@ class _placeadState extends State<placead> {
     }
   }
 
-
   Future<void> SubchildListt() async {
     print("sub child ${subchildproductID}");
     var url = Uri.parse('${AppConfig.BASE_URL}/sub-category-list/$subchildproductID');
@@ -3232,7 +3229,6 @@ class _placeadState extends State<placead> {
       throw Exception('Failed to load data');
     }
   }
-
 
   void subCatList(int id,List list){
     //subCatMap["$id"]=list;
@@ -3268,9 +3264,4 @@ class _placeadState extends State<placead> {
       }
     }
   }
-
-
-
-
-
 }
