@@ -16,8 +16,10 @@ import '../helpers/shared_value_helper.dart';
 import '../helpers/system_config.dart';
 
 class ProductRepository {
+  //https://webcluestechnology.com/demo/erp/umonda/api/v2/products/seller/138?page=1
   Future<ProductMiniResponse> getFeaturedProducts({page = 1}) async {
-    Uri url = Uri.parse("${AppConfig.BASE_URL}/products/featured?page=${page}");
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/products/seller/1?page=1");
+    //Uri url = Uri.parse("${AppConfig.BASE_URL}/products/featured?page=${page}");
     final response = await http.get(url, headers: {
       "App-Language": app_language.$,
       "Currency-Code": SystemConfig.systemCurrency?.code,

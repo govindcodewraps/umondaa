@@ -1722,7 +1722,10 @@ class _placeadState extends State<placead> {
         backgroundColor: Colors.white,
         appBar: buildAppBar(context),
 
-        body: buildBody()
+        body:
+
+
+        buildBody()
     );
   }
 
@@ -1768,7 +1771,8 @@ class _placeadState extends State<placead> {
 
   Widget buildBody() {
     bool light = false;
-    return ListView(
+    return
+      ListView(
         children: [
           Container(
             margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
@@ -2319,6 +2323,7 @@ class _placeadState extends State<placead> {
 
 
           if (is_logged_in.$ == false)
+
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [

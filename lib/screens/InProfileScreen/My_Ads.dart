@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 import '../../custom/useful_elements.dart';
+import '../../data_model/My_ads_list_model.dart';
+import '../../data_model/flash_deal_response.dart';
 class My_adsScreen extends StatefulWidget {
   //const My_adsScreen({super.key});
 
@@ -9,6 +14,44 @@ class My_adsScreen extends StatefulWidget {
 }
 
 class _My_adsScreenState extends State<My_adsScreen> {
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   myadsapicall();
+  // }
+
+
+
+  List<Product> products = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchDataaa();
+  }
+
+  Future<void> fetchDataaa() async {
+    final response = await http.get(
+      Uri.parse('https://webcluestechnology.com/demo/erp/umonda/api/v2/products/seller/163?page=1'),
+    );
+
+    if (response.statusCode == 200) {
+      final List<dynamic> data = json.decode(response.body)['data'];
+      products = data.map((item) => Product.fromJson(item)).toList();
+
+      setState(() {}); // Update the UI with the fetched data
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
+
+
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -28,7 +71,50 @@ class _My_adsScreenState extends State<My_adsScreen> {
 
 
   Widget listview(){
-    return  Container(
+    return
+
+      // ListView.builder(
+      //   itemCount: products.length,
+      //   itemBuilder: (context, index) {
+      //     return ListTile(
+      //       title: Text(products[index].name.toString()),
+      //       //subtitle: Text(products[index].mainPrice.toString()),
+      //     );
+      //   },
+      // );
+
+
+
+      FutureBuilder(
+          future: fetchDataaa(),
+
+          builder: (context, snapshot) {
+
+            if (snapshot.hasData) {
+              print("AAAAAAAAAAAAAA ${snapshot.data[0].name.toString()}");
+              return
+                ListView.builder(
+                  itemCount: snapshot.data.products.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(snapshot.data[1].products[1].name.toString()),
+                      //subtitle: Text(products[index].mainPrice.toString()),
+                    );
+                  },
+                );
+            }
+            else{
+              return
+                Container(
+                    child: Center(child: CircularProgressIndicator()));
+            }
+          }
+      );
+
+
+
+
+      /*Container(
       //padding: EdgeInsets.only(top: 23),
       child: ListView.separated(
         separatorBuilder: (context, index) {
@@ -81,7 +167,7 @@ class _My_adsScreenState extends State<My_adsScreen> {
         },
         itemCount: 51,
       ),
-    );
+    );*/
   }
 
   AppBar buildAppBar(BuildContext context) {
@@ -120,6 +206,27 @@ class _My_adsScreenState extends State<My_adsScreen> {
     );
   }
 
+  Future<MyAdsListModel> myadsapicall()  async {
+    var headers = {
+      'Cookie':
+      'XSRF-TOKEN=eyJpdiI6IkpzZEJucwT1iZDRmYzQzATEwNDYwNmE4Njg5MGNiNzcxM2RiIiwidGFnIjoiIn0%3D; umonda_online_marketplace_session=eyJpdiI6IkFFM0M0RHVaZ3RDN25sbGFqd0VES3c9PSIsInZhbHVlIjoiNjZzQ1g0djlhcVhnM0ZWb1QzaCtpQ3U1Yk1oKzB4Z3ZZaTc5SzJRNk1MWmpWb2N6ek1oTDNMcUN6V2FlSVQ3Z0ZQNE03UzNBdEVWUnVxc3T1iLCJtYWMiOiI2NjlkNTBiOWRiOTNiYTQ2Yjk1ZjQ1MmFlZGEyMTRlMDE3MWY2YjczYjQ1YjgwNjEwODQ3ABcQzOGJlZTgyNjE1IiwidGFnIjoiIn0%3D',
+    };
 
+    try {
+      var response = await http.get(
+        Uri.parse('https://webcluestechnology.com/demo/erp/umonda/api/v2/products/seller/163?page=1'),
+        headers: headers,
+      );
+
+      if (response.statusCode == 200) {
+        print(jsonEncode(response.body));
+        print("Govind My Ads list ${jsonEncode(response.body)}");
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('An error occurred: $e');
+    }
+  }
 
 }
