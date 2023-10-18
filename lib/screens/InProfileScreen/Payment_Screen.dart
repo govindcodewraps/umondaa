@@ -599,8 +599,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
     };
 
     // Define the API endpoint
-     String url = "https://umonda.com/api/v2/payment-history/${user_id.$}";
-    //String url = "https://umonda.com/api/v2/payment-history/138";
+     //String url = "https://umonda.com/api/v2/payment-history/${user_id.$}";
+    String url = "https://umonda.com/api/v2/payment-history/138";
 
     try {
       // Make the API call
@@ -609,6 +609,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
       // Handle the response
       if (response.statusCode == 200) {
         print("user iddddd${user_id.$}");
+        print("Payments screen data ${response.data}");
         return PaymenthistoryModel.fromJson(response.data);
 
         // API call successful

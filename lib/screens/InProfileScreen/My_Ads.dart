@@ -1,11 +1,17 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
+import '../../custom/toast_component.dart';
 import '../../custom/useful_elements.dart';
 import '../../data_model/My_ads_list_model.dart';
 import '../../data_model/flash_deal_response.dart';
+import '../../helpers/shared_value_helper.dart';
+import 'package:dio/dio.dart';
+
+import '../Edit_My_Ads_Screen.dart';
 class My_adsScreen extends StatefulWidget {
   //const My_adsScreen({super.key});
 
@@ -23,27 +29,35 @@ class _My_adsScreenState extends State<My_adsScreen> {
 
 
   List<Product> products = [];
+  String product_Id;
 
   @override
   void initState() {
     super.initState();
-    fetchDataaa();
+    //fetchDataaa();
+    myadsapicall();
+  }
+  @override
+  void setState(VoidCallback fn) {
+    // TODO: implement setState
+    myadsapicall();
+    super.setState(fn);
   }
 
-  Future<void> fetchDataaa() async {
-    final response = await http.get(
-      Uri.parse('https://webcluestechnology.com/demo/erp/umonda/api/v2/products/seller/163?page=1'),
-    );
-
-    if (response.statusCode == 200) {
-      final List<dynamic> data = json.decode(response.body)['data'];
-      products = data.map((item) => Product.fromJson(item)).toList();
-
-      setState(() {}); // Update the UI with the fetched data
-    } else {
-      throw Exception('Failed to load data');
-    }
-  }
+  // Future<void> fetchDataaa() async {
+  //   final response = await http.get(
+  //     Uri.parse('https://webcluestechnology.com/demo/erp/umonda/api/v2/products/seller/163?page=1'),
+  //   );
+  //
+  //   if (response.statusCode == 200) {
+  //     final List<dynamic> data = json.decode(response.body)['data'];
+  //     products = data.map((item) => Product.fromJson(item)).toList();
+  //
+  //     setState(() {}); // Update the UI with the fetched data
+  //   } else {
+  //     throw Exception('Failed to load data');
+  //   }
+  // }
 
 
 
@@ -72,35 +86,164 @@ class _My_adsScreenState extends State<My_adsScreen> {
 
   Widget listview(){
     return
-
-      // ListView.builder(
-      //   itemCount: products.length,
-      //   itemBuilder: (context, index) {
-      //     return ListTile(
-      //       title: Text(products[index].name.toString()),
-      //       //subtitle: Text(products[index].mainPrice.toString()),
-      //     );
-      //   },
-      // );
-
-
-
       FutureBuilder(
-          future: fetchDataaa(),
-
+          future: myadsapicall(),
           builder: (context, snapshot) {
 
             if (snapshot.hasData) {
-              print("AAAAAAAAAAAAAA ${snapshot.data[0].name.toString()}");
+             // final thumbnailImage = snapshot.data.data[index].thumbnailImage;
               return
-                ListView.builder(
-                  itemCount: snapshot.data.products.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(snapshot.data[1].products[1].name.toString()),
-                      //subtitle: Text(products[index].mainPrice.toString()),
-                    );
-                  },
+
+                SingleChildScrollView(
+                  child: Container(
+                    height: 1200,
+                    padding: EdgeInsets.only(bottom: 77),
+                    child:
+                    GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, // You can change this number based on the number of columns you want
+                      ),
+                      itemCount: snapshot.data.data.length,
+                      itemBuilder: (context, index) {
+                        final thumbnailImage = snapshot.data.data[index].thumbnailImage;
+                        return InkWell(
+                          onTap: () {
+
+
+                             // Navigator.push(context, MaterialPageRoute(builder: (context)=>Edit_placead()));
+
+
+
+                            product_Id = snapshot.data.data[index].id.toString();
+                            print("print product id ${product_Id}");
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(10),
+                            child: Card(
+                              elevation: 5,
+                              child: Column(
+                                children: [
+                                  //Icon(Icons.delete),
+                                  Align(
+                                    alignment: Alignment.bottomRight, // Adjust alignment as needed
+                                    child: InkWell(
+                                        onTap: (){
+                                          product_Id = snapshot.data.data[index].id.toString();
+                                          print("print product id in delete button ${product_Id}");
+                                          deleteapicall(product_Id);
+                                        },
+                                        child: Icon(Icons.delete)),
+                                  ),
+                                  Container(
+                                    height: 100,
+                                    width: MediaQuery.of(context).size.width * 0.3,
+                                    child: thumbnailImage == null
+                                        ? Image.asset("assets/silver.png", fit: BoxFit.fill)
+                                        : Image.network(thumbnailImage, fit: BoxFit.fill),
+                                  ),
+                                  SizedBox(height: 10),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        snapshot.data.data[index].name.toString(),
+                                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+                                      ),
+                                      SizedBox(height: 5),
+                                      Text(
+                                        snapshot.data.data[index].mainPrice.toString(),
+                                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    )
+
+
+
+
+                  /*  ListView.separated(
+                      separatorBuilder: (context, index) {
+                        // Your separator builder logic here
+                        return Divider(); // Example: Using a Divider as the separator
+                      },
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context , int index){
+                        final thumbnailImage = snapshot.data.data[index].thumbnailImage;
+                        return Column(children: [
+                          // Text("Govind"),
+                          InkWell(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Edit_placead()));
+                              //print("print product id")
+                              product_Id=snapshot.data.data[index].id.toString();
+                             // print("print product id ${snapshot.data.data[index].id.toString()}");
+                              print("print produc ${product_Id}");
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width *1,
+                              padding: EdgeInsets.only(left: 10,right: 10),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.black,
+                                        borderRadius: BorderRadius.circular(12),
+                                        //border: Border.all(color: MyTheme.accent_color),
+                                        boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,offset: Offset(1,3))]
+
+                                    ),
+
+                                    height: 100,
+                                    width: MediaQuery.of(context).size.width *0.3,
+                                    //child: Image.asset("assets/silver.png",fit: BoxFit.fill,),
+
+
+                     child:   thumbnailImage == null
+                                           ? Image.asset("assets/silver.png",fit: BoxFit.fill,)
+                                             : Image.network(thumbnailImage, fit: BoxFit.fill),
+
+                                  ),
+                                  SizedBox(width: 10,),
+                                  Container(
+                                    padding: EdgeInsets.only(left: 16,top: 16),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(12),
+                                        //border: Border.all(color: MyTheme.accent_color),
+                                        boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,offset: Offset(1,3))]
+                                    ),
+
+                                    height: 100,
+                                    width: MediaQuery.of(context).size.width *0.6,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(snapshot.data.data[index].name.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500)),
+                                      SizedBox(height: 5,),
+                                        Text(snapshot.data.data[index].mainPrice.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500)),
+                                        //Text(snapshot.data.data[index].links[0].details.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500)),
+                                      ],),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],);
+
+                      },
+                      //itemCount: 51,
+                      itemCount: snapshot.data.data.length,
+                    ),*/
+
+
+                  ),
                 );
             }
             else{
@@ -112,62 +255,6 @@ class _My_adsScreenState extends State<My_adsScreen> {
       );
 
 
-
-
-      /*Container(
-      //padding: EdgeInsets.only(top: 23),
-      child: ListView.separated(
-        separatorBuilder: (context, index) {
-          // Your separator builder logic here
-          return Divider(); // Example: Using a Divider as the separator
-        },
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemBuilder: (context , int index){
-          return Column(children: [
-           // Text("Govind"),
-            Container(
-              width: MediaQuery.of(context).size.width *1,
-              padding: EdgeInsets.only(left: 10,right: 10),
-              child: Row(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(12),
-                        //border: Border.all(color: MyTheme.accent_color),
-                        boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,offset: Offset(1,3))]
-                    ),
-
-                    height: 100,
-                    width: MediaQuery.of(context).size.width *0.3,
-                  ),
-                SizedBox(width: 10,),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(12),
-                        //border: Border.all(color: MyTheme.accent_color),
-                        boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,offset: Offset(1,3))]
-                    ),
-
-                    height: 100,
-                    width: MediaQuery.of(context).size.width *0.6,
-                    child: Column(children: [
-                      Text("data"),
-                      Text("data"),
-                      Text("data"),
-                    ],),
-                  ),
-                ],
-              ),
-            )
-          ],);
-
-        },
-        itemCount: 51,
-      ),
-    );*/
   }
 
   AppBar buildAppBar(BuildContext context) {
@@ -206,27 +293,131 @@ class _My_adsScreenState extends State<My_adsScreen> {
     );
   }
 
-  Future<MyAdsListModel> myadsapicall()  async {
-    var headers = {
+
+
+
+  Future<MyAdsListModel> myadsapicall() async {
+    // Create Dio instance
+    Dio dio = Dio();
+
+    // Define the headers
+    Map<String, String> headers = {
+      // 'Authorization': 'Bearer 131|V1SPLBTs7BaNNUwZth5gTGjZfC1nc2qQ1EB6fpTs',
+      // 'Authorization': access_token.$,
       'Cookie':
       'XSRF-TOKEN=eyJpdiI6IkpzZEJucwT1iZDRmYzQzATEwNDYwNmE4Njg5MGNiNzcxM2RiIiwidGFnIjoiIn0%3D; umonda_online_marketplace_session=eyJpdiI6IkFFM0M0RHVaZ3RDN25sbGFqd0VES3c9PSIsInZhbHVlIjoiNjZzQ1g0djlhcVhnM0ZWb1QzaCtpQ3U1Yk1oKzB4Z3ZZaTc5SzJRNk1MWmpWb2N6ek1oTDNMcUN6V2FlSVQ3Z0ZQNE03UzNBdEVWUnVxc3T1iLCJtYWMiOiI2NjlkNTBiOWRiOTNiYTQ2Yjk1ZjQ1MmFlZGEyMTRlMDE3MWY2YjczYjQ1YjgwNjEwODQ3ABcQzOGJlZTgyNjE1IiwidGFnIjoiIn0%3D',
+
+      //'Authorization': 'Bearer 272|zOSOR7ks4vioa05Rp8YwM61GTFAIpybBUSiX3WYv',
     };
 
+    // Define the API endpoint
+    String url = 'https://webcluestechnology.com/demo/erp/umonda/api/v2/products/seller/163?page=1';
+    //String url = "https://umonda.com/api/v2/payment-history/138";
+
     try {
-      var response = await http.get(
-        Uri.parse('https://webcluestechnology.com/demo/erp/umonda/api/v2/products/seller/163?page=1'),
-        headers: headers,
+      // Make the API call
+      Response response = await dio.get(url, options: Options(headers: headers));
+
+      // Handle the response
+      if (response.statusCode == 200) {
+        print("user iddddd${user_id.$}");
+        //print("Govind My Ads list ${jsonEncode(response.data)}");
+        print("Govind My Ads list ${response.data}");
+        return MyAdsListModel.fromJson(response.data);
+
+        // API call successful
+        //print(response.data);
+      }
+
+      else if(response.statusCode == 401){
+
+        print("500 Internal Server Error........... ");
+        print("user iddddd${user_id.$}");
+        print(response.data);
+      }
+
+      else {
+        // API call failed
+        print('API call failed with status code ${response.statusCode}');
+      }
+    } catch (error) {
+      // Handle any errors
+      print('An error occurred: $error');
+    }
+  }
+
+
+
+  // Future<MyAdsListModel> myadsapicall()  async {
+  //   var headers = {
+  //     'Cookie':
+  //     'XSRF-TOKEN=eyJpdiI6IkpzZEJucwT1iZDRmYzQzATEwNDYwNmE4Njg5MGNiNzcxM2RiIiwidGFnIjoiIn0%3D; umonda_online_marketplace_session=eyJpdiI6IkFFM0M0RHVaZ3RDN25sbGFqd0VES3c9PSIsInZhbHVlIjoiNjZzQ1g0djlhcVhnM0ZWb1QzaCtpQ3U1Yk1oKzB4Z3ZZaTc5SzJRNk1MWmpWb2N6ek1oTDNMcUN6V2FlSVQ3Z0ZQNE03UzNBdEVWUnVxc3T1iLCJtYWMiOiI2NjlkNTBiOWRiOTNiYTQ2Yjk1ZjQ1MmFlZGEyMTRlMDE3MWY2YjczYjQ1YjgwNjEwODQ3ABcQzOGJlZTgyNjE1IiwidGFnIjoiIn0%3D',
+  //   };
+  //
+  //   try {
+  //     var response = await http.get(
+  //       Uri.parse('https://webcluestechnology.com/demo/erp/umonda/api/v2/products/seller/163?page=1'),
+  //       headers: headers,
+  //     );
+  //
+  //     if (response.statusCode == 200) {
+  //       print(jsonEncode(response.body));
+  //       print("Govind My Ads list ${jsonEncode(response.body)}");
+  //     } else {
+  //       print('Request failed with status: ${response.statusCode}');
+  //     }
+  //   } catch (e) {
+  //     print('An error occurred: $e');
+  //   }
+  // }
+
+
+  // import 'package:dio/dio.dart';
+  // import 'dart:convert';
+
+  Future<void> deleteapicall(prductid) async {
+    try {
+      var headers = {
+        'Content-Type': 'application/json'
+      };
+
+      var data = json.encode({
+        "user_id": user_id.$,
+        "product_id": prductid
+      });
+
+      var dio = Dio();
+
+      var response = await dio.request(
+        'https://webcluestechnology.com/demo/erp/umonda/api/v2/product/delete',
+        options: Options(
+          method: 'POST',
+          headers: headers,
+        ),
+        data: data,
       );
 
       if (response.statusCode == 200) {
-        print(jsonEncode(response.body));
-        print("Govind My Ads list ${jsonEncode(response.body)}");
+        print(json.encode(response.data));
+        print("deleted product message ${response.data}");
+        Fluttertoast.showToast(
+          msg: "Product deleted successfully",
+          // toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+       // myadsapicall();
       } else {
-        print('Request failed with status: ${response.statusCode}');
+        print('Request failed with status code: ${response.statusCode}');
       }
     } catch (e) {
       print('An error occurred: $e');
     }
   }
+
+
 
 }

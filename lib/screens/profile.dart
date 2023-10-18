@@ -644,7 +644,7 @@ class _ProfileState extends State<Profile> {
           buildHorizontalSettingItem(true, "assets/adplace.png",
               "My ads", () {
 
-                myadsapicall();
+               // myadsapicall();
 
 
                 Navigator.push(context, MaterialPageRoute(builder: (context)
@@ -1511,7 +1511,7 @@ class _ProfileState extends State<Profile> {
   // import 'dart:convert';
   // import 'package:http/http.dart' as http;
 
-  Future<MyAdsListModel> myadsapicall()  async {
+ /* Future<MyAdsListModel> myadsapicall()  async {
     var headers = {
       'Cookie':
       'XSRF-TOKEN=eyJpdiI6IkpzZEJucwT1iZDRmYzQzATEwNDYwNmE4Njg5MGNiNzcxM2RiIiwidGFnIjoiIn0%3D; umonda_online_marketplace_session=eyJpdiI6IkFFM0M0RHVaZ3RDN25sbGFqd0VES3c9PSIsInZhbHVlIjoiNjZzQ1g0djlhcVhnM0ZWb1QzaCtpQ3U1Yk1oKzB4Z3ZZaTc5SzJRNk1MWmpWb2N6ek1oTDNMcUN6V2FlSVQ3Z0ZQNE03UzNBdEVWUnVxc3T1iLCJtYWMiOiI2NjlkNTBiOWRiOTNiYTQ2Yjk1ZjQ1MmFlZGEyMTRlMDE3MWY2YjczYjQ1YjgwNjEwODQ3ABcQzOGJlZTgyNjE1IiwidGFnIjoiIn0%3D',
@@ -1532,7 +1532,7 @@ class _ProfileState extends State<Profile> {
     } catch (e) {
       print('An error occurred: $e');
     }
-  }
+  }*/
 
 
 }

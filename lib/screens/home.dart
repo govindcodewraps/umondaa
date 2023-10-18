@@ -1024,7 +1024,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     } else if (homeData.allProductList.length > 0) {
       //snapshot.hasData
 
-      return GridView.builder(
+      return
+        GridView.builder(
         // 2
         //addAutomaticKeepAlives: true,
         itemCount: homeData.allProductList.length,

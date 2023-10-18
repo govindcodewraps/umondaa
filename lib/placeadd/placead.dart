@@ -1562,6 +1562,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import '../repositories/category_repository.dart';
 import '../screens/PlaceAddScreen/checkboxplaceadd.dart';
 import '../screens/common_webview_screen.dart';
+import '../screens/login.dart';
 import '../screens/registration.dart';
 import 'dart:convert';
 import 'package:image/image.dart' as img;
@@ -1671,10 +1672,20 @@ class _placeadState extends State<placead> {
     fetch_Brands();
     fetch_Category();
     fetchData();
-    //fetchFilteredBrands();
     fetchDataa();
+
+
+    //fetchFilteredBrands();
     //SubchildListt();
     //subcategorylist();
+ /*   if (is_logged_in.$ == true) {
+      fetchData();
+      fetchDataa();
+      fetch_Brands();
+      fetch_Category();
+      buildBody();
+    }*/
+
     printSelectedItems();
     super.initState();
   }
@@ -1722,10 +1733,7 @@ class _placeadState extends State<placead> {
         backgroundColor: Colors.white,
         appBar: buildAppBar(context),
 
-        body:
-
-
-        buildBody()
+        body: buildBody()
     );
   }
 
@@ -1772,6 +1780,9 @@ class _placeadState extends State<placead> {
   Widget buildBody() {
     bool light = false;
     return
+      // is_logged_in.$ == false?
+      // Navigator.push(context, MaterialPageRoute(builder: (context)=>Login())):
+
       ListView(
         children: [
           Container(
@@ -2115,7 +2126,6 @@ class _placeadState extends State<placead> {
               ),
             ),
           ),
-
           //-------------------
           Container(
             margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
@@ -2322,103 +2332,109 @@ class _placeadState extends State<placead> {
           //---------------------
 
 
-          if (is_logged_in.$ == false)
+          // if (is_logged_in.$ == false)
+          //
+          //   Column(
+          //     crossAxisAlignment: CrossAxisAlignment.end,
+          //     children: [
+          //       Container(
+          //         margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
+          //         child: Card(
+          //           elevation: 10,
+          //           child: Column(
+          //             children: [
+          //               Container(
+          //                   margin: const EdgeInsets.fromLTRB(5, 16, 0, 0),
+          //                   child: const Align(
+          //                     alignment: Alignment.topLeft,
+          //                     child: Text("User Details",
+          //                         style: TextStyle(fontSize: 14,
+          //                             color: Color.fromARGB(255, 0, 0, 0))),
+          //                   )
+          //               ),
+          //               Container(
+          //                 margin: const EdgeInsets.fromLTRB(5, 12, 0, 0),
+          //                 child: TextField(
+          //                   controller: _EmailID,
+          //                   autofocus: false,
+          //                   enableSuggestions: false,
+          //                   autocorrect: false,
+          //                   decoration: const InputDecoration(
+          //                     border: UnderlineInputBorder(),
+          //                     labelText: 'Email',
+          //                   ),
+          //                 ),
+          //               ),
+          //
+          //               Container(
+          //                 margin: const EdgeInsets.fromLTRB(5, 12, 0, 0),
+          //                 child:
+          //                 TextFormField(
+          //                   controller: _PassWord,
+          //                   obscureText: _obscureText,
+          //                   decoration: InputDecoration(
+          //                     labelText: 'Password',
+          //                     suffixIcon: GestureDetector(
+          //                       onTap: () {
+          //                         setState(() {
+          //                           _obscureText = !_obscureText;
+          //                         });
+          //                       },
+          //                       child: _obscureText
+          //                           ? Icon(Icons.visibility
+          //                         // Feather.eye_off, // Use Feather for Flutter icons
+          //                       )
+          //                           : Icon(
+          //                           Icons.visibility_off
+          //                       ),
+          //                     ),
+          //                   ),
+          //                 ),
+          //               ),
+          //
+          //
+          //             ],
+          //           ),
+          //         ),
+          //       ),
+          //       Padding(
+          //         padding:  EdgeInsets.only(top: 20.0,right:16),
+          //         child: Column(
+          //           crossAxisAlignment: CrossAxisAlignment.end,
+          //           children: [
+          //             Text(
+          //               "Don't have an account ?",
+          //               style: TextStyle(color: MyTheme.font_grey, fontSize: 12),
+          //             ),
+          //             SizedBox(
+          //               width: 10,
+          //             ),
+          //             InkWell(
+          //               child: Text(
+          //                 AppLocalizations.of(context).sign_up_ucf,
+          //                 style: TextStyle(
+          //                     color: MyTheme.accent_color,
+          //                     fontSize: 14,
+          //                     fontWeight: FontWeight.w600),
+          //               ),
+          //               onTap: () {
+          //                 Navigator.push(context,
+          //                     MaterialPageRoute(builder: (context) {
+          //                       return Registration();
+          //                     }));
+          //               },
+          //             ),
+          //           ],
+          //         ),
+          //       ),
+          //     ],
+          //   ),
 
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Container(
-                  margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
-                  child: Card(
-                    elevation: 10,
-                    child: Column(
-                      children: [
-                        Container(
-                            margin: const EdgeInsets.fromLTRB(5, 16, 0, 0),
-                            child: const Align(
-                              alignment: Alignment.topLeft,
-                              child: Text("User Details",
-                                  style: TextStyle(fontSize: 14,
-                                      color: Color.fromARGB(255, 0, 0, 0))),
-                            )
-                        ),
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(5, 12, 0, 0),
-                          child: TextField(
-                            controller: _EmailID,
-                            autofocus: false,
-                            enableSuggestions: false,
-                            autocorrect: false,
-                            decoration: const InputDecoration(
-                              border: UnderlineInputBorder(),
-                              labelText: 'Email',
-                            ),
-                          ),
-                        ),
-
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(5, 12, 0, 0),
-                          child:
-                          TextFormField(
-                            controller: _PassWord,
-                            obscureText: _obscureText,
-                            decoration: InputDecoration(
-                              labelText: 'Password',
-                              suffixIcon: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    _obscureText = !_obscureText;
-                                  });
-                                },
-                                child: _obscureText
-                                    ? Icon(Icons.visibility
-                                  // Feather.eye_off, // Use Feather for Flutter icons
-                                )
-                                    : Icon(
-                                    Icons.visibility_off
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
 
 
-                      ],
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding:  EdgeInsets.only(top: 20.0,right:16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        "Don't have an account ?",
-                        style: TextStyle(color: MyTheme.font_grey, fontSize: 12),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      InkWell(
-                        child: Text(
-                          AppLocalizations.of(context).sign_up_ucf,
-                          style: TextStyle(
-                              color: MyTheme.accent_color,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        onTap: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                                return Registration();
-                              }));
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+
+
+
 
           /*    Padding(
             padding:  EdgeInsets.only(top: 20.0,right:16),
