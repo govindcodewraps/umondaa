@@ -53,6 +53,7 @@ class _placeadState extends State<placead> {
   bool isEnabled = false;
   String offerstatus="0";
   String allurlss;
+  String image;
   List<File> selectedImages = []; // List to hold selected image files
   List<String> imageUrls = [];
   List<String> base64Urls = [];
@@ -331,6 +332,7 @@ class _placeadState extends State<placead> {
                     margin: const EdgeInsets.fromLTRB(5, 0, 0, 0),
                     child: TextField(
                       controller: _PriceAED,
+                      keyboardType: TextInputType.number,
                       autofocus: false,
                       enableSuggestions: false,
                       autocorrect: false,
@@ -376,11 +378,12 @@ class _placeadState extends State<placead> {
                         Container(
                           child: TextField(
                             controller: _offerControler,
+
                             decoration: const InputDecoration(
                               border: UnderlineInputBorder(),
                               labelText: 'Offer',
                             ),
-                            keyboardType: TextInputType.multiline,
+                            keyboardType: TextInputType.number,
                             minLines: 1,
                             maxLines: 11,
                           ),
@@ -580,11 +583,6 @@ class _placeadState extends State<placead> {
               ],
             ),
           ),
-          ElevatedButton(onPressed: (){
-
-            print("URLLLLLLLL  .....: ${base64Urls}");
-            print("IMAGE_URLLLLL  .....: ${imageUrls}");
-          }, child: Text("Button")),
 
 
 
@@ -614,8 +612,8 @@ class _placeadState extends State<placead> {
                       dropdownCategory.isEmpty ||
                       dropdownBrands.isEmpty ||
                       _Description.text.isEmpty ||
-                      _PriceAED.text.isEmpty ||
-                      imageurl.isEmpty
+                      _PriceAED.text.isEmpty
+                  //allurlss.isEmpty
 
                   ) {
                    print("images url${imageurl}");
@@ -629,7 +627,6 @@ class _placeadState extends State<placead> {
                       fontSize: 16.0,
                     );
                   } else {
-
                     var ProdName = _ProductName.text.toString();
                     var category = dropdownCategory.split(" ")[0].toString();
                     var brand = dropdownBrands.split(" ")[0].toString();
@@ -638,7 +635,9 @@ class _placeadState extends State<placead> {
                     var email = _EmailID.text.toString();
                     var password = _PassWord.text.toString();
                     var offer = _offerControler.text.toString();
-                    var imagebase = imageurl;
+                   // var imagebase = imageurl;
+                    var imagebase = allurlss;
+                    var userid = user_id.$;
                     //var imagebase = allurlss;
 
                     print("Product name.: ${ProdName}");
@@ -648,24 +647,30 @@ class _placeadState extends State<placead> {
                     print("Amount.......: ${amount}");
                     print("Email........: ${email}");
                     print("password.....: ${password}");
-                    //print("Base 64 url....: ${imagebase}");
+                    print("****************************************************************");
+
+                    print("Base 64 url....: ${imagebase}");
+                    print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+
                     print("Base 64 url....: ${allurlss}");
+                    print("****************************************************************");
                     print("User id  .....: ${user_id.$}");
                     print("Offer price  .....: ${offer}");
                     print("Offer Status  .....: ${offerstatus}");
                     print("URLLLLLLLL  .....: ${base64Urls}");
                     print("IMAGE_URLLLLL  .....: ${imageUrls}");
+                    print("Select Images  .....: ${selectedImages}");
 
 
-                    place_ad_upload(ProdName,category,brand,imagebase,description,offer,amount,offerstatus,email,password);
+                    place_ad_upload(ProdName,category,brand,description,offer,amount,offerstatus,email,password);
 ///////////
 
-//                     _ProductName.clear();
-//                     _Description.clear();
-//                     _PriceAED.clear();
-//                     _EmailID.clear();
-//                     _PassWord.clear();
-//                     _offerControler.clear();
+                    _ProductName.clear();
+                    _Description.clear();
+                    _PriceAED.clear();
+                    _EmailID.clear();
+                    _PassWord.clear();
+                    _offerControler.clear();
 
                   }
                 }
@@ -773,92 +778,8 @@ class _placeadState extends State<placead> {
   }
 
 
-/*  Future<void> getImages() async {
-    final pickedFiles = await picker.pickMultiImage(
-      imageQuality: 100,
-      maxHeight: 1000,
-      maxWidth: 1000,
-    );
-    List<XFile> xfilePick = pickedFiles;
 
-    setState(() {
-      if (xfilePick.isNotEmpty) {
-        // Create a list to store base64 URLs
-        List<String> base64Urls = [];
-
-        for (var i = 0; i < xfilePick.length; i++) {
-          selectedImages.add(File(xfilePick[i].path));
-
-          // Convert the selected image to base64
-          final bytes = File(xfilePick[i].path).readAsBytesSync();
-          final base64String = base64Encode(bytes);
-          base64Urls.add(base64String);
-
-          // Print the base64 URL to the console
-          print('Base64 URL for Image $i: data:image/jpeg;base64,$base64String');
-        }
-
-        // Concatenate the base64Urls into a single string, separated by a delimiter (e.g., comma)
-       // imageurl = base64Urls.join(',');
-        imageurl = base64Urls as String;
-
-        // Now, baseall contains all the base64 URLs of selected images as a single string
-        print('All Base64 URLs: $imageurl');
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Nothing is selected')),
-        );
-      }
-    });
-  }*/
-
-
-
-
-
-  //List<String> base64Urls = []; // List to store base64 URLs
-
-  // Future<void> getImages() async {
-  //   final pickedFiles = await picker.pickMultiImage(
-  //     imageQuality: 100,
-  //     maxHeight: 1000,
-  //     maxWidth: 1000,
-  //   );
-  //
-  //   setState(() {
-  //     if (pickedFiles.isNotEmpty) {
-  //       for (var i = 0; i < pickedFiles.length; i++) {
-  //         selectedImages.add(File(pickedFiles[i].path));
-  //
-  //         // Convert the image to base64
-  //         List<int> imageBytes = File(pickedFiles[i].path).readAsBytesSync();
-  //         String base64Url = base64Encode(imageBytes);
-  //         base64Urls.add(base64Url); // Store base64 URL in the list
-  //       }
-  //       print("allll${base64Urls}");
-  //     } else {
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //         const SnackBar(content: Text('Nothing is selected')),
-  //       );
-  //     }
-  //   });
-  // }
-
-// Now, base64Urls contains the base64 representations of the selected images.
-
-
-
-
-  // import 'dart:convert';
-  // import 'dart:io';
-  // import 'package:flutter/material.dart';
-  // import 'package:image_picker/image_picker.dart';
-  //
-  // List<File> selectedImages = []; // Store selected images as Files
-  // List<String> base64Urls = []; // Store base64 URLs as strings
-
-/*  Future<void> getImages() async {
-    final picker = ImagePicker();
+  Future<void> getImages() async {
     final pickedFiles = await picker.pickMultiImage(
       imageQuality: 100,
       maxHeight: 1000,
@@ -868,143 +789,34 @@ class _placeadState extends State<placead> {
     setState(() {
       if (pickedFiles.isNotEmpty) {
         for (var i = 0; i < pickedFiles.length; i++) {
-          final XFile xfile = pickedFiles[i];
-          selectedImages.add(File(xfile.path));
-
-          // Convert the selected image to base64
-          final bytes = File(xfile.path).readAsBytesSync();
-          final base64String = base64Encode(bytes);
-
-          // Add the base64 URL to the list
-          base64Urls.add(base64String);
+          selectedImages.add(File(pickedFiles[i].path));
+          print("Select images${selectedImages}");
         }
 
-        // Print the list of base64 URLs
-        print('Base64 URLs for selected images:');
-        for (var i = 0; i < base64Urls.length; i++) {
-          //print('Image $i: ${base64Urls[i]}');
-         // print(base64Urls[i]);
-          allurlss="${base64Urls[i]}";
+        // Create a list to store image paths in the desired format
+        List<String> imagePaths = [];
 
-          print("GGGGGGGG${allurlss+","+allurlss}");
+        // Append selected image paths to the list
+        for (var image in selectedImages) {
+          String imagePath = image.path.replaceAll('\\', '/');
+          imagePaths.add(imagePath);
+          imageUrls=imagePaths;
+         // print('Selected Image Path: $imagePath');
+
         }
+             // Convert the list to a comma-separated string
+        // String formattedPaths = imagePaths.join(',');
+        // allurlss = formattedPaths;
+
+
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Nothing is selected')),
         );
       }
     });
-  }*/
-
-
-
-
-   Future<void> getImages() async {
-    final pickedFile = await picker.pickMultiImage(
-      imageQuality: 100,
-      maxHeight: 1000,
-      maxWidth: 1000,
-    );
-    List<XFile> xfilePick = pickedFile;
-
-    setState(
-          () {
-        if (xfilePick.isNotEmpty) {
-
-          for (var i = 0; i < xfilePick.length; i++) {
-            selectedImages.add(File(xfilePick[i].path));
-
-            // Convert the selected image to base64
-           // final bytes = File(xfilePick[i].path).readAsBytesSync();
-            final bytes = File(xfilePick[i].path).readAsBytesSync();
-            final base64String = base64Encode(bytes);
-            imageurl= base64String;
-
-            // Print the base64 URL to the console
-           // print('Base64 URL for Image $i: data:image/jpeg;base64,$base64String');
-            print('Base64 URL for Image ${base64String}');
-          }
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Nothing is selected')),
-          );
-        }
-      },
-    );
   }
 
-
-//   Future getImages() async {
-//     final pickedFile = await picker.pickMultiImage(
-//         imageQuality: 100, maxHeight: 1000, maxWidth: 1000);
-//     List<XFile> xfilePick = pickedFile;
-//
-//
-//     setState(
-//           () {
-//         if (xfilePick.isNotEmpty) {
-//           for (var i = 0; i < xfilePick.length; i++) {
-//             selectedImages.add(File(xfilePick[i].path));
-//           }
-//
-//
-//         } else {
-//           ScaffoldMessenger.of(context).showSnackBar(
-//               const SnackBar(content: Text('Nothing is selected')));
-//         }
-//       },
-//     );
-//
-//
-//
-//
-//   }
-
-//
-//
-//
-// ----------------
-//   _getFromGallery() async {
-//     PickedFile pickedFile = await ImagePicker().getImage(
-//       source: ImageSource.gallery,
-//       maxWidth: 1800,
-//       maxHeight: 1800,
-//     );
-//     if (pickedFile != null) {
-//       setState(() {
-//         imageFile = File(pickedFile.path);
-//       });
-//     }
-//   }
-// -----------------------
-//
-//
-//
-//
-//   onPressedUploadAd() async {
-//     var ProdName = _ProductName.text.toString();
-//     var Catg = _Category.text.toString();
-//     var Brd = _Brand.text.toString();
-//     var PriAED = _PriceAED.text.toString();
-//     var MinOP = _MinOfferPrice.text.toString();
-//     var Desc = _Description.text.toString();
-//     var Email = _EmailID.text.toString();
-//     var Pw = _PassWord.text.toString();
-//     print("placead.dart, onPressedUploadAd(), Email : ${Email}");
-//     var PAResponse = await PLACEADREPOSITORY()
-//         .getPADResponse(ProdName, Catg, Brd, PriAED, MinOP, Desc,
-//         Email, Pw);
-//     print("placead.dart, onPressedUploadAd(), PAResponse : ${PAResponse}");
-//     if (PAResponse.result == false) {
-//       ToastComponent.showDialog(PAResponse.message,
-//           gravity: Toast.center, duration: Toast.lengthLong);
-//     } else {
-//       print("placead.dart, onPressedUploadAd(), response : ${PAResponse.message}");
-//       ToastComponent.showDialog(PAResponse.message,
-//           gravity: Toast.center, duration: Toast.lengthLong);
-//     }
-//   }
-// -----------------------------
   void delete(int index){
     setState(() {
       selectedImages.removeAt(index);
@@ -1013,39 +825,65 @@ class _placeadState extends State<placead> {
     });
   }
 
-   place_ad_upload(name,Category,Brand,baseurl,description,offer,amount,offerstatus,email,password) async {
-    var url = Uri.parse('https://webcluestechnology.com/demo/erp/umonda/api/v2/product/add');
 
+
+ // import 'package:http/http.dart' as http;
+//place_ad_upload(ProdName,userid,category,brand,description,offer,amount,offerstatus,email,password);
+  place_ad_upload(name,Category,Brand,description,offer,amount,offerstatus,email,password) async {
     var headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer 119|3aq0ANr2yFIptxxF62C5ndsuJZDAENLnDWk2bdsy'
+      'Authorization': 'Bearer your_access_token_here', // Replace with your actual token
     };
 
-    var data = json.encode({
-      "name": name,
-      "user_id": user_id.$,
-      "category_id":Category,
-      "brand_id":Brand,
-     // "thumbnail_img":"/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAB4AMADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD7VSNKspHT4YEqykddvMeXykP2epkgqylTJ0o5g5SslrUyWtWU61NRzBylZIKspHT46fQaBTqbTqkAp9MpfM96AJvLpeaj8yjz6AJ6KZzSeZQAvNI9M8yh5KCytNH5lC/cqWmvQQQ1C/WpnqF+tADPkqtNsp71WeSqArJVlKzUno+11IGxUySViJfVNDdeZQBt+ZT99ZsM9TJPQBf8yjzKp+ZR5lAF/wAyjzKp/aKPtFAFl5/LSqE2peXU3meZVO5tfMoAY+sUxNYrNutNl30+zsZY3qgOqs7rzEqbz0krHT9392jzH30AbFM8yqcM/wAlP8+gCz5lMqHzKY89AD361WeSh56heSgBj0x6Y89Vpp6AKf8ABVOajzH9aYknmUEak0Mb1ftt9VoZKvpQGozz3p6XVMf95ULx1JZfS+/26m+1JWJsf+/U0Mbx/wAdAGr9qo8/zKpvIkdVptc0+xdIp723tXf7iTXCJQBsedT/ADqzYdSt7pN8EsU/+42+n+fQBf8AOo+0JVDz/kqt/rH+/VEamx5lP8ysfzH9aEunjoA2PMp/me9ZST1MklAal/zPemPJVPzKPMoDUs+ZULyVD5lQvJQGo9+lVpKe9VnoDUzUjepkjqmmuWX/AD1WrMOq2X/PWn74uaBchqyklUE1Wy/56rVlNStP+eq/990BzQJnko/1lM+3W/8AeT/vuj7XF/fX/vqjlDmiD1zEPxG8NSeIX0SLXrN9VTfvtkl+5/7JUPxR8TJ4c+HviTU1u4rWa3spvKmm+dEfZ8nyJ/t1+SN58WLi68Q22pxaetrqVpLve5/5bSzOnzu7/wBz/Y+5WcvcN6Uec/XS/wDiF4ctEuf+JxbzzQq/7mGX77/3N/3N9fFvxO+IXiCDXpn1zU/7O1ib50TzdnlJ/c3/ACJs/wCB18eTfErxBHqUztrt+8M3+ttr/wD0uF0/64v8lP8AGHjyLxNDpUst2r3OmWr2aJ9n8n5Hf+D5/n++9RzHVGhyHqOm/tSax4R8Woi+K9UutKR3S6Sz2Tf98edX1F+yL+0fq3xU+IqeH4NS1TV7P7FNNdJqVvEn2fZ/Gjp/t/Js/wBuvi34deFdH8R6VDqF9cWFqkzvstoYk875P77/AMFfSHhKTTPgnpqXHhPba+JNWi+zfabN9jrD/wCz/wAFGpnI/Qu8nisbZ7i5lWCFE3u715jqvx30qC58rTLdrr/ps77Ef/gFfM03iqW10R0n1OW9vLh/3t5c3DzTS/7e964zxn4qfTfB+t3cFx5cyWr7H3/c/wButDHlPZviV+35ongWSW0tlh1bVYv+XHS4vO2P/wBNnd9iV8o+MP8AgoH8W/EeqvLZ6xFoNnv/AHVtZ26fIn+27pXlemyP5MMUDtZJ9/5037/9t3/v1D4t0q01jR7m7WJYNSsfv7PuSpS/wB7WlCXJyn3h+xV+1141+M3i2bwr4l0+LV/JtXvH1uzi8n7On9yZPuPv/gr7SSTzK/IP9hv42L8JfjNbW+obU0TxIi6bdTf88n3/ALl/++/k/wCB1+tUN0n9/wCet4+/Ezr+5I0npKqfakpj3yUcszm9qXKZJVP+0UqF75KOUPalyaSqzz1We+Sqz3yUcoe1Pk5PHEsf/Lw3/fdWf+E8l/huJa8Nh+PGsbPm+ESv/wBtZf8A4irkPx31XZ/yR/8A74ll/wDiKz+vRNvqMj2yHx9cR/8ALVt/+/V+H4lXcafNcN/33XhsPxw1idPl+Dm//t6l/wDiKvv8W9dtbN7uf4KMlsnzvN9ol2J/45U/XIh9Rke5f8LCu44d/wBrb/vumQ/Eq9k+7cN/31Xz9pv7Qv8Aav8Ax5/CprpP+mNxK/8A7JWlD8fruxf5vhJdJ/21l/8AiKPrkC/qNQ9L+Knia78TfC7xJZNqctr/AKL5zun+x8+z/gezZ/wOvz9mjmurb7bKjI8zvN8/9z+5X1pc/H6y1yzudKufhvdad9uie2+0vLK/lb02b9myvmbVY0tNKtrdnX7Tbpsf5vv/ACVzyr+2l7p3YelKjH3zhvP8u/R2rNv5/Pv7l/73z1Zv5P33y/36zXk/0l/9tKRsaWj65cWKbFl8tK7nSviVeyJ5rXDPND8iV5p9ll/55M//AACrNhHcSOlvBbyvM/ybER3d/wDgFPm5APb7b4sS3Vsm6Zt9Q638QvtWj3luz/JMmx68ZttSeFnt2fY6P9x/v1fttS/fIkvzpv8AnSo5gOhh8QJ5P2dk3/3HSmXmq+fZ6ltRk329Zr+Gb3/W2KfarP8AgdHT5P8AYepr/wD4lWlP5/8Arpn+fZ/6BW3NynFKlzzOY8xo5neN9jp9zZ/fr9VtP+LesWum2CTv+++zp5v+/sr84/gzommzeLrPVte0+8vdB0yVJbuGwTe8r/O6J/ub0/8AHK+xX+P3gTUn3xeCvFE7v/cp0q8aQV6Eqvwnrs3xm1DZ99qpv8ZtV/hdq8om+M3g/wD6ETxgn/AKhT4zeCpP+ZK8Yf8AfFb/AFyJyfUZHrr/ABi1WOHdvaoZvjZqEf3nryKb42eAoP8AX+FPFUH++tUJv2hfhfO/zaLryf8AbVKj65Ef1GR7T/wuy9kT77VC/wAbL3Z/FXi0nx6+F+z/AJBXiD/vtKZ/wv74WSfJ/ZniD/xyq+vUg/s6qfWL+IPC+/ZbS/2vMn8Fhbvcv/45U0M+oT/JY+GmgT/ntqsqQ/8Ajib3rqoZFj+7s+X7mxKm3rUHUcxN4Y17Uv8Aj51tdOT+5pVvsf8A77m31Zf4e6PP5L3yS6pMn3Hv5Xm/8c37K6RP9XUyRr/E9QBlTaGsieVE+z/cfZUyaHF8n8exKNY8VaP4cs5ri+vYrWFPvu7145qvxw1jx5ePpngDR5br+B9Vuf8AUp/uf36yCMeY9C8Z+JtC8AaPNqGtXdvp1mn8cz7N/wDuV8c/Gn/hGvjTs13TPCmraDfu+z7ekqJ9rT+/9nm2f99/JX0npvwdtdNWbXfEd3L4o8SInyXmpfOlv/1xT+CvPdSgl+0zM3lT79/30+5Uy5jeJ8Yal8E5bq/eLSr66k/uf2lbwp/6BM9Ymt/BPXbXyfK+y3rzPs/cvX2rp/hXT97+baWqI/3/AN19+rN54f8ADkb7P7HiutiffRNlY6nV7h8T2fwr1WO2dLnRIEmRPnd5X3/98b67/wCDPw18UWvjC2t9I1X+wdSdP9HvPKSbZ/4/8le8XOh289+nkaZLBvTZ/wAArV0rwHd6bfpfL+4dNnzw/JRIDeh/Zv8AEuq3PleL/HWl63Zy/JdQ3OmpvlT+NN+/5K+afit+y9oPhH4ivoUHi2LQba4+eyub+3ea2f8A2HdPnR/+APX0/f2N3qXzrqdxvd/uPK/yVw3iT4V3viCF7e+8q9hd/ld3fej/AN9KuPLEw94+Y7z4F614Vuv9G8ceF72H/pjdXEP/ALRrntY+GWqyXPmy3q3u99m9JfO2f5/4BX0n4b8OWmm3L+HPEcP2XVd/+i6kjuiS/wC/VzxJ8Pb2xuXRYrp0/g2XT7KvmLOh/Yt/Z9uPCut/8JRL4o02e2mt3tn0qwuEuXuP+u39zZX2SnhnT5/+XeLf/sfJXyF+zfHceGfG2+e3aSF4tnz/AD/+h19h22y6hR1tFraPwnFU+IrTeHEj+SC4igT+5Mm9KrTQS2v+t0RbpP79tcb/APxx9lbCWqR/8ulv/v7KmSetCDibnxV4SjuUtLy4i0u5d9iQ6lE9s7v/ALG/79Tal4D8NeIId9zo9rqMP997dHrpNSsbTUrZ7e8t4rqF/vpMm9K5J/hlolrM8ulJcaDN/wBQq4eH/wAc+5R7gHH69+zD8L9YR/tPhKz3v/HbI9s//jmyuAvP2H/hvvfyItWgT+59qd//AEOvYLzQ/GGm730zxKt6n8Carb/+zpVP/hOPEejbE1nwuzps/wCPnTZfO/8AHKz9lEvmmdD53+xWVealewfw/JTNY8VWWlQ72lXfXj/jP49LA72mn7p5n/gSnqPlPSLzxxd2v71pYoET79cH4n/aMeNH0/Rom1S/+5vT7iV57p/h/wAR/EK436hcNBZv/wAsUr2PwZ8J9H8Pwptt131mbe6cH4b+F+u/Eq/TUPF+oSvD99LNH2Iv/AK+hPDfhy38P2ENpY28VrCn9yn2elJAn7r5K1YY/LStNTCUin4n3/2JNt++iV896h9ourl9r7Pnr6K1j95Zujf3K8Zv/Bcs9+7q61oI5ibQ7jZva7b/AL7qtDpt7HNvZ2nh/wB+u2fw/wDIiM9QvB5CbNi0uUfMY9npsuz7lX/7DuJE/wBa1H72OtjSp5t9RymnMZX/AAjl7H8+9qhh0e7875rhv++67zy/MT7i1iX9r5b/AC1HKHMcx4q+Gdp4m03ZO/8ApKfOk38aPXMaH4xvfD839ha8/wA8PyW9z/fSu/f7RH9165Xxt4RXxNZ72T98n8aVnKJfOdnoNjFPNDdxbf8AgFewaJdJ9jRN/wBz+/Xyp8PfGNx4cvP7M1V22J8iO9fQmg6lDPbI8EvmVpEzlE7nzqHnrHSd6f8Abv4K3MS+8lQvdVWeaoXnoAmmn8yqbyPTHnqF53oA+P0j8R+OLn968sEP9xK9I8GfCS3sUR5Yvn/jd6KKyudR6dpWjxWKbIkVK2I43jooouZ3NKznetJJ6KKLmZWv38xK5u4j+eiii4FOaCsq6sfnoorUCH+za0rDTaKKCTVkh+Ssq/tXkoooKKf2X+9VmHTUkoorORpE4zx58OYtStvtECbJk+5srH+Hvj+48OXP9n6n8mx9ib6KKVwue62HiO31KFHV/v1Mknz0UVqYlzzlqGaSiigCnNJUP2iiigo//9k=",
-      "thumbnail_img":baseurl,
-      "filename": "5R5nQsgc0QyOw8XRFm7ZjCazPzGLNbHazHGWxQDO.jpg",
-      "description":description,
-      "min_offer_price": offer,
-      "unit_price":amount,
-      "moffer":offerstatus,
-      "email":email,
-      "password": password
+    var request = http.MultipartRequest(
+      'POST',
+      Uri.parse('https://webcluestechnology.com/demo/erp/umonda/api/v2/product/add'),
+    );
+
+    request.fields.addAll({
+
+      'name': name,
+      'user_id': user_id.$.toString(),
+      'category_id':Category,
+      'brand_id':Brand,
+      'filename': 'welcome',
+      'description': description,
+      'min_offer_price':offer,
+      'unit_price': amount,
+      'moffer': offerstatus,
+      'email':email,
+      'password':password
+
+      // 'name': name,
+      // 'user_id':userid,
+      // 'category_id':Category,
+      // 'brand_id':Brand,
+      // 'filename': 'products images',
+      // 'description': description,
+      // 'min_offer_price':offer,
+      // 'unit_price':amount,
+      // 'moffer': offerstatus,
+      // 'email':email,
+      // 'password':password,
     });
 
+    for(var i=0;i<imageUrls.length;i++)
+    {
+      request.files.add(await http.MultipartFile.fromPath('thumbnail_img[]', imageUrls[i],));
+
+
+    }
+    // Add files to the request
+    //uest.files.add(await http.MultipartFile.fromPath('thumbnail_img[]', '/C:/Users/hp/Pictures/Screenshots/Screenshot 2023-06-13 005720.png'));
+
+    request.headers.addAll(headers);
+
     try {
-      var response = await http.post(
-        url,
-        headers: headers,
-        body: data,
-      );
-        print("Print respone ad place ${response}");
+      http.StreamedResponse response = await request.send();
+
       if (response.statusCode == 200) {
-        print(json.encode(json.decode(response.body)));
+        print(await response.stream.bytesToString());
+
         Fluttertoast.showToast(
           msg: "Product Add successfully",
           //toastLength:LENGTH_SHORT,
@@ -1056,21 +894,22 @@ class _placeadState extends State<placead> {
           fontSize: 16.0, // Font size of the toast message
         );
       }
-      else if (response.statusCode == 401) {
-        print("Unauthorized user");
-        Fluttertoast.showToast(
-          msg: "Unauthorized user",
-          //toastLength:LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM, // You can change the position
-          timeInSecForIosWeb: 1, // Duration in seconds the toast should be visible on iOS and web
-          backgroundColor: Colors.black, // Background color of the toast
-          textColor: Colors.red, // Text color of the toast message
-          fontSize: 16.0, // Font size of the toast message
-        );
-      }
-
+      else if(response.statusCode == 401)
+        {
+          print("Unauthorized user");
+          Fluttertoast.showToast(
+            msg: "Unauthorized user",
+            //toastLength:LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM, // You can change the position
+            timeInSecForIosWeb: 1, // Duration in seconds the toast should be visible on iOS and web
+            backgroundColor: Colors.black, // Background color of the toast
+            textColor: Colors.red, // Text color of the toast message
+            fontSize: 16.0, // Font size of the toast message
+          );
+        }
       else {
-        print('Request failed with status: ${response.statusCode}');
+        print('HTTP Error: ${response.statusCode}');
+        print(await response.stream.bytesToString());
       }
     } catch (e) {
       print('Error: $e');
