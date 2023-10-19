@@ -30,7 +30,7 @@ class _My_adsScreenState extends State<My_adsScreen> {
 
   List<Product> products = [];
   String product_Id;
-
+  //
   @override
   void initState() {
     super.initState();
@@ -96,9 +96,10 @@ class _My_adsScreenState extends State<My_adsScreen> {
 
                 SingleChildScrollView(
                   child: Container(
-                    height: 1200,
-                    padding: EdgeInsets.only(bottom: 77),
-                    child:
+                    //height: 600,
+                    height: MediaQuery.of(context).size.height*1,
+                    padding: EdgeInsets.only(bottom: 20),
+                    child: 
                     GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2, // You can change this number based on the number of columns you want
@@ -108,56 +109,130 @@ class _My_adsScreenState extends State<My_adsScreen> {
                         final thumbnailImage = snapshot.data.data[index].thumbnailImage;
                         return InkWell(
                           onTap: () {
-
-
-                             // Navigator.push(context, MaterialPageRoute(builder: (context)=>Edit_placead()));
-
-
-
-                            product_Id = snapshot.data.data[index].id.toString();
-                            print("print product id ${product_Id}");
+                            //Navigator.push(context, MaterialPageRoute(builder: (context)=>Edit_placead()));
+                            print("Govind >>>>>>>>>>>>>>");
+                            // product_Id = snapshot.data.data[index].id.toString();
+                            // print("print product id ${product_Id}");
                           },
                           child: Container(
-                            padding: EdgeInsets.all(10),
-                            child: Card(
-                              elevation: 5,
-                              child: Column(
-                                children: [
-                                  //Icon(Icons.delete),
-                                  Align(
-                                    alignment: Alignment.bottomRight, // Adjust alignment as needed
-                                    child: InkWell(
-                                        onTap: (){
-                                          product_Id = snapshot.data.data[index].id.toString();
-                                          print("print product id in delete button ${product_Id}");
-                                          deleteapicall(product_Id);
-                                        },
-                                        child: Icon(Icons.delete)),
-                                  ),
-                                  Container(
-                                    height: 100,
-                                    width: MediaQuery.of(context).size.width * 0.3,
-                                    child: thumbnailImage == null
-                                        ? Image.asset("assets/silver.png", fit: BoxFit.fill)
-                                        : Image.network(thumbnailImage, fit: BoxFit.fill),
-                                  ),
-                                  SizedBox(height: 10),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                            //padding: EdgeInsets.all(10),
+                            child: Stack(
+                              children: [
+                                Card(
+                                  elevation: 20,
+                                  child: Column(
                                     children: [
-                                      Text(
-                                        snapshot.data.data[index].name.toString(),
-                                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+                                      Container(
+                                        height: MediaQuery.of(context).size.height * 0.19,
+                                        width: MediaQuery.of(context).size.width * 0.5,
+                                        child: thumbnailImage == null
+                                            ? Image.asset("assets/silver.png", fit: BoxFit.fill)
+                                            : Image.network(thumbnailImage, fit: BoxFit.fill),
                                       ),
-                                      SizedBox(height: 5),
-                                      Text(
-                                        snapshot.data.data[index].mainPrice.toString(),
-                                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+                                      SizedBox(height: 10),
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            snapshot.data.data[index].name.toString(),
+                                            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+                                          ),
+                                          SizedBox(height: 5),
+                                          Text(
+                                            snapshot.data.data[index].mainPrice.toString(),
+                                            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
-                                ],
-                              ),
+                                ),
+
+                                Positioned(
+                                  right: 1,
+                                  child: GestureDetector(
+                                    onTap: (){
+                                      product_Id = snapshot.data.data[index].id.toString();
+                                     print("print product iddddddd ${product_Id}");
+                                    },
+                                    child:
+
+                                    PopupMenuButton<int>(
+                                      itemBuilder: (context) {
+                                        return [
+                                          PopupMenuItem<int>(
+                                            value: 0,
+                                            child: Icon(Icons.edit,color: Colors.green,),
+                                          ),
+                                          PopupMenuItem<int>(
+                                            value: 1,
+                                            child: Icon(Icons.delete,color: Colors.red,),
+                                          ),
+                                        ];
+                                      },
+                                      onSelected: (value) {
+                                        if (value == 0) {
+                                          product_Id = snapshot.data.data[index].id.toString();
+                                          print("print product id Edit ${product_Id}");
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => Edit_placead(Product_ID:product_Id,),));
+                                          print("Edit  menu is selected.");
+                                          // Handle edit action
+                                        } else if (value == 1) {
+                                          product_Id = snapshot.data.data[index].id.toString();
+                                          print("print product id Delete ${product_Id}");
+                                          deleteapicall(product_Id);
+                                          // Handle delete action
+                                        }
+                                      },
+                                      child: Icon(Icons.more_vert), // Add an icon to trigger the popup
+                                      offset: Offset(0, 20), // Optional: Adjust the position of the popup
+                                      color: Colors.transparent, // Set the background color to transparent
+                                      elevation: 0,
+                                      //padding: EdgeInsets.only(left: 10),
+                                     // Optional: Remove the shadow
+                                    )
+
+
+
+
+                                    /*PopupMenuButton(
+                                      // add icon, by default "3 dot" icon
+                                      // icon: Icon(Icons.book)
+                                        itemBuilder: (context){
+                                          return [
+                                            PopupMenuItem<int>(
+                                              value:0,
+                                              child: Icon(Icons.edit),
+                                            ),
+
+                                            PopupMenuItem<int>(
+                                              value: 1,
+                                              child: Icon(Icons.delete),
+                                            ),
+
+                                            // PopupMenuItem<int>(
+                                            //   value: 2,
+                                            //   child: Text("Logout"),
+                                            // ),
+                                          ];
+                                        },
+                                        onSelected:(value){
+                                          if(value == 0){
+                                            product_Id = snapshot.data.data[index].id.toString();
+                                            print("print product id Edit ${product_Id}");
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => Edit_placead(Product_ID:product_Id,),));
+                                            print("My account menu is selected.");
+                                          }else if(value == 1){
+                                            product_Id = snapshot.data.data[index].id.toString();
+                                            print("print product iddddddd delete ${product_Id}");
+
+                                            print("Settings menu is selected.");
+                                           }
+                                        }
+                                    ),*/
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         );
@@ -167,7 +242,7 @@ class _My_adsScreenState extends State<My_adsScreen> {
 
 
 
-                  /*  ListView.separated(
+                 /*   ListView.separated(
                       separatorBuilder: (context, index) {
                         // Your separator builder logic here
                         return Divider(); // Example: Using a Divider as the separator
@@ -180,8 +255,8 @@ class _My_adsScreenState extends State<My_adsScreen> {
                           // Text("Govind"),
                           InkWell(
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Edit_placead()));
-                              //print("print product id")
+                             // Navigator.push(context, MaterialPageRoute(builder: (context)=>Edit_placead()));
+                              print("print product id");
                               product_Id=snapshot.data.data[index].id.toString();
                              // print("print product id ${snapshot.data.data[index].id.toString()}");
                               print("print produc ${product_Id}");
@@ -311,7 +386,7 @@ class _My_adsScreenState extends State<My_adsScreen> {
     };
 
     // Define the API endpoint
-    String url = 'https://webcluestechnology.com/demo/erp/umonda/api/v2/products/seller/163?page=1';
+    String url = 'https://webcluestechnology.com/demo/erp/umonda/api/v2/products/seller/138?page=1';
     //String url = "https://umonda.com/api/v2/payment-history/138";
 
     try {
@@ -409,6 +484,7 @@ class _My_adsScreenState extends State<My_adsScreen> {
           textColor: Colors.white,
           fontSize: 16.0,
         );
+        myadsapicall();
        // myadsapicall();
       } else {
         print('Request failed with status code: ${response.statusCode}');

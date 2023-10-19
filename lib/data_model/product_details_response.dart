@@ -267,6 +267,13 @@
 //
 //     final productDetailsResponse = productDetailsResponseFromJson(jsonString);
 // https://app.quicktype.io/
+
+
+
+
+
+
+//working code
 import 'dart:convert';
 
 ProductDetailsResponse productDetailsResponseFromJson(String str) =>
@@ -300,6 +307,7 @@ class ProductDetailsResponse {
         "status": status,
       };
 }
+
 
 class DetailedProduct {
   DetailedProduct({
@@ -529,4 +537,16 @@ class Wholesale {
         "price": price,
       };
 }
+
+
+//end
+
+
+
+
+
+
+
+
+
 

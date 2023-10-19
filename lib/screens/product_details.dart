@@ -1033,6 +1033,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                 ? Text(
                              //"product name",
                               _productDetails.name.toString(),
+                              //_productDetails.categoryId.toString(),
                                     style: TextStyles.smallTitleTexStyle(),
                                     maxLines: 2,
                                   )

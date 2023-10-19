@@ -54,6 +54,11 @@ class Datum {
   String currencySymbol;
   int currentStock;
   String unit;
+  String categoryId;
+  int dismantlingStatus;
+  String dismantlingFees;
+  int brandId;
+  int minOfferPrice;
   int minoffer;
   int rating;
   int ratingCount;
@@ -86,6 +91,11 @@ class Datum {
     this.currencySymbol,
     this.currentStock,
     this.unit,
+    this.categoryId,
+    this.dismantlingStatus,
+    this.dismantlingFees,
+    this.brandId,
+    this.minOfferPrice,
     this.minoffer,
     this.rating,
     this.ratingCount,
@@ -119,6 +129,11 @@ class Datum {
     currencySymbol: json["currency_symbol"],
     currentStock: json["current_stock"],
     unit: json["unit"],
+    categoryId: json["category_id"],
+    dismantlingStatus: json["dismantling_status"],
+    dismantlingFees: json["dismantling_fees"],
+    brandId: json["brand_id"],
+    minOfferPrice: json["min_offer_price"],
     minoffer: json["minoffer"],
     rating: json["rating"],
     ratingCount: json["rating_count"],
@@ -152,6 +167,11 @@ class Datum {
     "currency_symbol": currencySymbol,
     "current_stock": currentStock,
     "unit": unit,
+    "category_id": categoryId,
+    "dismantling_status": dismantlingStatus,
+    "dismantling_fees": dismantlingFees,
+    "brand_id": brandId,
+    "min_offer_price": minOfferPrice,
     "minoffer": minoffer,
     "rating": rating,
     "rating_count": ratingCount,
