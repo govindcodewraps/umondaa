@@ -81,6 +81,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
   var _choiceString = "";
   var _variant = "";
   int _quantity = 1;
+  int dismantling_fees= 10;
 
   double opacity = 0;
 
@@ -274,7 +275,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
     // print(_quantity);
 
     var cartAddResponse = await CartRepository()
-        .getCartAddResponse(widget.id, _variant, user_id.$, _quantity);
+        .getCartAddResponse(widget.id, _variant, user_id.$, _quantity,dismantling_fees);
 
     if (cartAddResponse.result == false) {
       ToastComponent.showDialog(cartAddResponse.message,

@@ -58,11 +58,13 @@ class PaymentRepository {
         body: post_body);
 
     bool checkResult = ResponseCheck.apply(response.body);
+    print("order details 1 ${response.body}");
 
     if(!checkResult)
       return responseCheckModelFromJson(response.body);
-
+    print("order details 2 ${response.body}");
     return orderCreateResponseFromJson(response.body);
+
   }
 
   Future<PaypalUrlResponse> getPaypalUrlResponse(@required String payment_type,

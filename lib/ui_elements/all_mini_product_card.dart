@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../helpers/shared_value_helper.dart';
 
-class MiniProductCard extends StatefulWidget {
+class AllMiniProductCard extends StatefulWidget {
   int id;
   String image;
   String name;
@@ -15,7 +15,7 @@ class MiniProductCard extends StatefulWidget {
   bool has_discount;
   bool is_wholesale;
   var discount;
-  MiniProductCard({
+  AllMiniProductCard({
     Key key,
     this.id,
     this.image,
@@ -28,10 +28,10 @@ class MiniProductCard extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _MiniProductCardState createState() => _MiniProductCardState();
+  _AllMiniProductCardState createState() => _AllMiniProductCardState();
 }
 
-class _MiniProductCardState extends State<MiniProductCard> {
+class _AllMiniProductCardState extends State<AllMiniProductCard> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -44,15 +44,17 @@ class _MiniProductCardState extends State<MiniProductCard> {
       },
       child: Container(
         width: 135,
+       // height:250,
         decoration: BoxDecorations.buildBoxDecoration_1(),
         child: Stack(children: [
           Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 AspectRatio(
-                  aspectRatio: 1,
+                  aspectRatio: 2.2,
                   child: Container(
                       width: double.infinity,
+                     // height: 100,
                       child: ClipRRect(
                           borderRadius: BorderRadius.vertical(
                               top: Radius.circular(6), bottom: Radius.zero),
@@ -63,9 +65,10 @@ class _MiniProductCardState extends State<MiniProductCard> {
                           ))),
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(8, 4, 8, 6),
+                  //padding: EdgeInsets.fromLTRB(8, 4, 8, 6),
+                  padding: EdgeInsets.only(left: 8,top: 10),
                   child: Text(
-                     widget.name,
+                    widget.name,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                     style: TextStyle(
@@ -77,29 +80,29 @@ class _MiniProductCardState extends State<MiniProductCard> {
                 ),
                 widget.has_discount
                     ? Padding(
-                        padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
-                        child: Text(
-                          SystemConfig.systemCurrency != null
-                              ? widget.stroked_price.replaceAll(
-                                  SystemConfig.systemCurrency.code,
-                                  SystemConfig.systemCurrency.symbol)
-                              : widget.stroked_price,
-                          maxLines: 1,
-                          style: TextStyle(
-                              decoration: TextDecoration.lineThrough,
-                              color: MyTheme.medium_grey,
-                              fontSize: 13,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      )
+                  padding: EdgeInsets.only(left: 8,top: 10),
+                  child: Text(
+                    SystemConfig.systemCurrency != null
+                        ? widget.stroked_price.replaceAll(
+                        SystemConfig.systemCurrency.code,
+                        SystemConfig.systemCurrency.symbol)
+                        : widget.stroked_price,
+                    maxLines: 1,
+                    style: TextStyle(
+                        decoration: TextDecoration.lineThrough,
+                        color: MyTheme.medium_grey,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600),
+                  ),
+                )
                     : Container(),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                  padding: EdgeInsets.only(left: 8,top: 10,bottom: 10),
                   child: Text(
                     SystemConfig.systemCurrency != null
                         ? widget.main_price.replaceAll(
-                            SystemConfig.systemCurrency.code,
-                            SystemConfig.systemCurrency.symbol)
+                        SystemConfig.systemCurrency.code,
+                        SystemConfig.systemCurrency.symbol)
                         : widget.main_price,
                     maxLines: 1,
                     style: TextStyle(
@@ -120,7 +123,7 @@ class _MiniProductCardState extends State<MiniProductCard> {
                   if (widget.has_discount)
                     Container(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                      EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                       margin: EdgeInsets.only(bottom: 5),
                       decoration: BoxDecoration(
                         color: const Color(0xffe62e04),
@@ -145,7 +148,7 @@ class _MiniProductCardState extends State<MiniProductCard> {
                           height: 1.8,
                         ),
                         textHeightBehavior:
-                            TextHeightBehavior(applyHeightToFirstAscent: false),
+                        TextHeightBehavior(applyHeightToFirstAscent: false),
                         softWrap: false,
                       ),
                     ),
@@ -153,37 +156,37 @@ class _MiniProductCardState extends State<MiniProductCard> {
                     visible: whole_sale_addon_installed.$,
                     child:  widget.is_wholesale
                         ? Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 4),
-                            decoration: BoxDecoration(
-                              color: Colors.blueGrey,
-                              borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(6.0),
-                                bottomLeft: Radius.circular(6.0),
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: const Color(0x14000000),
-                                  offset: Offset(-1, 1),
-                                  blurRadius: 1,
-                                ),
-                              ],
-                            ),
-                            child: Text(
-                              "Wholesale",
-                              style: TextStyle(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Colors.blueGrey,
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(6.0),
+                          bottomLeft: Radius.circular(6.0),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0x14000000),
+                            offset: Offset(-1, 1),
+                            blurRadius: 1,
+                          ),
+                        ],
+                      ),
+                      child: Text(
+                        "Wholesale",
+                        style: TextStyle(
 
 
-                                fontSize: 10,
-                                color: const Color(0xffffffff),
-                                fontWeight: FontWeight.w700,
-                                height: 1.8,
-                              ),
-                              textHeightBehavior: TextHeightBehavior(
-                                  applyHeightToFirstAscent: false),
-                              softWrap: false,
-                            ),
-                          )
+                          fontSize: 10,
+                          color: const Color(0xffffffff),
+                          fontWeight: FontWeight.w700,
+                          height: 1.8,
+                        ),
+                        textHeightBehavior: TextHeightBehavior(
+                            applyHeightToFirstAscent: false),
+                        softWrap: false,
+                      ),
+                    )
                         : SizedBox.shrink(),
                   )
                 ],

@@ -99,8 +99,8 @@ class _AddressState extends State<Address> {
             .add(TextEditingController(text: address.country_name));
         _stateControllerListForUpdate
             .add(TextEditingController(text: address.state_name));
-        _cityControllerListForUpdate
-            .add(TextEditingController(text: address.city_name));
+        // _cityControllerListForUpdate
+        //     .add(TextEditingController(text: address.city_name));
         _selected_country_list_for_update
             .add(Country(id: address.country_id, name: address.country_name));
         _selected_state_list_for_update
@@ -272,19 +272,19 @@ class _AddressState extends State<Address> {
       return;
     }
 
-    if (_selected_city == null) {
-      ToastComponent.showDialog(
-          AppLocalizations.of(context).select_a_city,
-          gravity: Toast.center,
-          duration: Toast.lengthLong);
-      return;
-    }
+    // if (_selected_city == null) {
+    //   ToastComponent.showDialog(
+    //       AppLocalizations.of(context).select_a_city,
+    //       gravity: Toast.center,
+    //       duration: Toast.lengthLong);
+    //   return;
+    // }
 
     var addressAddResponse = await AddressRepository().getAddressAddResponse(
         address: address,
         country_id: _selected_country.id,
         state_id: _selected_state.id,
-        city_id: _selected_city.id,
+       // city_id: _selected_city.id,
         postal_code: postal_code,
         phone: phone);
 
@@ -728,14 +728,15 @@ class _AddressState extends State<Address> {
                           ),
                         ),
                       ),
-                      Padding(
+                /*      Padding(
                         padding: const EdgeInsets.only(bottom: 8.0),
                         child: Text(
                             "${AppLocalizations.of(context).city_ucf} *",
                             style: TextStyle(
                                 color: MyTheme.font_grey, fontSize: 12)),
-                      ),
-                      Padding(
+                      ),*/
+
+                     /* Padding(
                         padding: const EdgeInsets.only(bottom: 16.0),
                         child: Container(
                           height: 40,
@@ -798,7 +799,8 @@ class _AddressState extends State<Address> {
                             ),
                           ),
                         ),
-                      ),
+                      ),*/
+
                       Padding(
                         padding: const EdgeInsets.only(bottom: 8.0),
                         child: Text(
@@ -1107,14 +1109,16 @@ class _AddressState extends State<Address> {
                           ),
                         ),
                       ),
-                      Padding(
+
+                      /*Padding(
                         padding: const EdgeInsets.only(bottom: 8.0),
                         child: Text(
                             "${AppLocalizations.of(context).city_ucf} *",
                             style: TextStyle(
                                 color: MyTheme.font_grey, fontSize: 12)),
-                      ),
-                      Padding(
+                      ),*/
+
+                   /*   Padding(
                         padding: const EdgeInsets.only(bottom: 16.0),
                         child: Container(
                           height: 40,
@@ -1182,7 +1186,9 @@ class _AddressState extends State<Address> {
                             ),
                           ),
                         ),
-                      ),
+                      ),*/
+
+
                       Padding(
                         padding: const EdgeInsets.only(bottom: 8.0),
                         child: Text(
@@ -1411,7 +1417,7 @@ class _AddressState extends State<Address> {
                       ],
                     ),
                   ),
-                  Padding(
+                 /* Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1437,7 +1443,7 @@ class _AddressState extends State<Address> {
                         ),
                       ],
                     ),
-                  ),
+                  ),*/
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: Row(
@@ -1492,6 +1498,7 @@ class _AddressState extends State<Address> {
                       ],
                     ),
                   ),
+                  //if(_shippingAddressList[index] != _shippingAddressList[index].postal_code)
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: Row(

@@ -1,4 +1,5 @@
 ﻿import 'dart:async';
+import 'dart:convert';
 
 import 'package:hardware_lo/custom/box_decorations.dart';
 import 'package:hardware_lo/custom/btn.dart';
@@ -40,10 +41,13 @@ import 'package:route_transitions/route_transitions.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../data_model/My_ads_list_model.dart';
 import '../repositories/auth_repository.dart';
+import 'InProfileScreen/My_Ads.dart';
 import 'InProfileScreen/Payment_Screen.dart';
 import 'InProfileScreen/commisssion_history_screen.dart';
 import 'InProfileScreen/money_withdrawal.dart';
+import 'package:http/http.dart' as http;
 
 class Profile extends StatefulWidget {
   Profile({Key key, this.show_back_button = false}) : super(key: key);
@@ -600,6 +604,11 @@ class _ProfileState extends State<Profile> {
           //     ],
           //   ),
           // ),
+
+
+
+
+
           buildHorizontalSettingItem(
               is_logged_in.$,
               "assets/edit.png",
@@ -630,6 +639,24 @@ class _ProfileState extends State<Profile> {
                       );
                     }
                   : () => showLoginWarning()),
+
+          buildHorizontalSettingItem(
+              is_logged_in.$,
+              "assets/adplace.png",
+              "My ads",
+              is_logged_in.$
+                  ? () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)
+                {
+                  return My_adsScreen();
+                },
+                ),
+                );
+              }
+                  : () => showLoginWarning()),
+
+
+
         ],
       ),
     );
@@ -825,9 +852,14 @@ class _ProfileState extends State<Profile> {
 
               child: buildSettingAndAddonsHorizontalMenuItem("assets/wallet.png",
                   AppLocalizations.of(context).my_wallet_ucf, () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return Wallet();
-                }));
+
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      return Moneywithdrawal();
+                    }));
+
+                // Navigator.push(context, MaterialPageRoute(builder: (context) {
+                //   return Wallet();
+                // }));
               }),
             ),
           buildSettingAndAddonsHorizontalMenuItem(
@@ -1477,4 +1509,33 @@ class _ProfileState extends State<Profile> {
               ));
         });
   }
+
+
+  // import 'dart:convert';
+  // import 'package:http/http.dart' as http;
+
+ /* Future<MyAdsListModel> myadsapicall()  async {
+    var headers = {
+      'Cookie':
+      'XSRF-TOKEN=eyJpdiI6IkpzZEJucwT1iZDRmYzQzATEwNDYwNmE4Njg5MGNiNzcxM2RiIiwidGFnIjoiIn0%3D; umonda_online_marketplace_session=eyJpdiI6IkFFM0M0RHVaZ3RDN25sbGFqd0VES3c9PSIsInZhbHVlIjoiNjZzQ1g0djlhcVhnM0ZWb1QzaCtpQ3U1Yk1oKzB4Z3ZZaTc5SzJRNk1MWmpWb2N6ek1oTDNMcUN6V2FlSVQ3Z0ZQNE03UzNBdEVWUnVxc3T1iLCJtYWMiOiI2NjlkNTBiOWRiOTNiYTQ2Yjk1ZjQ1MmFlZGEyMTRlMDE3MWY2YjczYjQ1YjgwNjEwODQ3ABcQzOGJlZTgyNjE1IiwidGFnIjoiIn0%3D',
+    };
+
+    try {
+      var response = await http.get(
+        Uri.parse('https://webcluestechnology.com/demo/erp/umonda/api/v2/products/seller/163?page=1'),
+        headers: headers,
+      );
+
+      if (response.statusCode == 200) {
+        print(jsonEncode(response.body));
+        print("Govind My Ads list ${jsonEncode(response.body)}");
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('An error occurred: $e');
+    }
+  }*/
+
+
 }

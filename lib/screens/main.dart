@@ -77,8 +77,13 @@ class _MainState extends State<Main> {
       CategoryList(
         is_base_category: true,
       ),
-      placead(),
-      Cart(
+
+      is_logged_in.$ == false ?
+      Login(): placead(),
+
+
+      is_logged_in.$ == false ?
+      Login(): Cart(
         has_bottomnav: true,
         from_navigation: true,
         counter: counter,

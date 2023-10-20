@@ -47,7 +47,7 @@ import '../data_model/product_details_response.dart';
 
 class ProductDetails extends StatefulWidget {
   int id;
-
+  int dismantling ;
   ProductDetails({Key key, this.id}) : super(key: key);
 
   @override
@@ -60,6 +60,7 @@ class _ProductDetailsState extends State<ProductDetails>
 
   bool isLoading = true; // Initially set to true as data is loading
   ProductDetailsResponse productDetails;
+  bool isChecked = false;
 
   //
   // @override
@@ -125,6 +126,8 @@ class _ProductDetailsState extends State<ProductDetails>
   var _singlePrice;
   var _singlePriceString;
   int _quantity = 1;
+  int dismantlingfee=120;
+  String dismantlfee="";
   int _stock = 0;
   var _stock_txt;
 
@@ -137,6 +140,10 @@ class _ProductDetailsState extends State<ProductDetails>
 
   @override
   void initState() {
+
+
+
+
 
     loadProductDetails();
 
@@ -175,6 +182,9 @@ class _ProductDetailsState extends State<ProductDetails>
 
     fetchAll();
     super.initState();
+
+
+
   }
 
   @override
@@ -313,10 +323,17 @@ class _ProductDetailsState extends State<ProductDetails>
       _isInWishList = false;
       setState(() {});
       removeFromWishList();
+      print("remove to wish list");
+      ToastComponent.showDialog("Remove to wish list",
+          gravity: Toast.center, duration: Toast.lengthLong);
+
     } else {
       _isInWishList = true;
       setState(() {});
       addToWishList();
+      print("Add to wish list");
+      ToastComponent.showDialog("Add to wish list",
+          gravity: Toast.center, duration: Toast.lengthLong);
     }
   }
 
@@ -439,9 +456,20 @@ class _ProductDetailsState extends State<ProductDetails>
     // print(user_id.$);
     // print(_quantity);
 
-    var cartAddResponse = await CartRepository()
-        .getCartAddResponse(widget.id, _variant, user_id.$, _quantity);
+      isChecked==true ?dismantlfee=_productDetails.dismantling_fees.toString():dismantlfee="0";
+      //isChecked==true ?dismantlfee="120":dismantlfee="0";
 
+     print("100 AEDDDDD  ${_productDetails.dismantling_fees.toString()}");
+//dismantlingfee
+    //dismantlfee=_productDetails.dismantling_fees.toString();
+    print("100 dismantlfee with check box  ${dismantlfee}");
+
+
+
+
+    var cartAddResponse = await CartRepository()
+        .getCartAddResponse(widget.id, _variant, user_id.$, _quantity,dismantlfee);
+    print("100 AEDDDDD  ${_productDetails.dismantling_fees.toString()}");
     if (cartAddResponse.result == false) {
       ToastComponent.showDialog(cartAddResponse.message,
           gravity: Toast.center, duration: Toast.lengthLong);
@@ -853,6 +881,7 @@ class _ProductDetailsState extends State<ProductDetails>
     );
 
     return Directionality(
+
       textDirection: app_language_rtl.$ ? TextDirection.rtl : TextDirection.ltr,
       child: SafeArea(
         child: Scaffold(
@@ -1005,6 +1034,12 @@ class _ProductDetailsState extends State<ProductDetails>
                       background: buildProductSliderImageSection(),
                     ),
                   ),
+
+
+                  SliverToBoxAdapter(
+                    child:SizedBox(height: 23,)
+                  ),
+
                   SliverToBoxAdapter(
                     child: Container(
                       //padding: EdgeInsets.symmetric(horizontal: 14),
@@ -1020,6 +1055,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                 ? Text(
                              //"product name",
                               _productDetails.name.toString(),
+                              //_productDetails.dismantling_status.toString(),
                                     style: TextStyles.smallTitleTexStyle(),
                                     maxLines: 2,
                                   )
@@ -1066,23 +1102,50 @@ class _ProductDetailsState extends State<ProductDetails>
                                     height: 50.0,
                                   ),
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 14),
-                            child: _productDetails != null
-                                ? buildSellerRow(context)
-                                : ShimmerHelper().buildBasicShimmer(
-                                    height: 50.0,
-                                  ),
-                          ),
+                          // Padding(
+                          //   padding: EdgeInsets.only(top: 14),
+                          //   child: _productDetails != null
+                          //       ? buildSellerRow(context)
+                          //       : ShimmerHelper().buildBasicShimmer(
+                          //           height: 50.0,
+                          //         ),
+                          // ),
+
                           Padding(
                             padding: EdgeInsets.only(
-                                top: 14,
+                               // top: 14,
                                 left: app_language_rtl.$ ? 0 : 14,
                                 right: app_language_rtl.$ ? 14 : 0),
                             child: _productDetails != null
                                 ? buildChoiceOptionList()
                                 : buildVariantShimmers(),
                           ),
+
+
+                          if(_productDetails != null)
+                          if (_productDetails.dismantling_status==1)
+
+                         Padding(
+                           padding: const EdgeInsets.only(bottom: 10),
+                           child: Row(children: [
+            Checkbox(
+            value: isChecked,
+            onChanged: (value) {
+              setState(() {
+                isChecked = value;
+                print("Checked box value::: ${isChecked ? '1' : '0'}");
+                print("print check box value  ${value}");
+              });}),
+
+                             Text("Assembly & Dismantling Charges (AED 100.00)")
+
+                           ]),
+                         ),
+
+
+
+
+
                           // Padding(
                           //   padding:
                           //       EdgeInsets.only(top: 14, left: 14, right: 14),
@@ -1277,7 +1340,7 @@ class _ProductDetailsState extends State<ProductDetails>
                         child: buildTopSellingProductList(),
                       ),
                       Container(
-                        height: 83,
+                        height: 20,
                       )
                     ]),
                   ),
@@ -1380,7 +1443,7 @@ class _ProductDetailsState extends State<ProductDetails>
                               ),
                             ),
                           ),
-                          // divider(),
+                          divider(),
                           // InkWell(
                           //   onTap: () {
                           //     Navigator.push(context,
@@ -1424,7 +1487,7 @@ class _ProductDetailsState extends State<ProductDetails>
                           //     ),
                           //   ),
                           // ),
-                          divider(),
+                      /*    divider(),
                           InkWell(
                             onTap: () {
                               Navigator.push(context,
@@ -1512,8 +1575,8 @@ class _ProductDetailsState extends State<ProductDetails>
                               ),
                             ),
                           ),
-                          divider(),
-                          SizedBox(height: 75,)
+                          divider(),*/
+                          SizedBox(height: 95,)
                         ]),
                   ),
 
@@ -2138,7 +2201,7 @@ class _ProductDetailsState extends State<ProductDetails>
             padding: EdgeInsets.only(left: 8.0),
             child: Text(
                 SystemConfig.systemCurrency != null
-                    ? _productDetails.stroked_price.replaceAll(
+                    ?_productDetails.stroked_price.replaceAll(
                         SystemConfig.systemCurrency.code,
                         SystemConfig.systemCurrency.symbol)
                     : _productDetails.stroked_price,
@@ -2217,7 +2280,7 @@ class _ProductDetailsState extends State<ProductDetails>
             },
             child: Container(
               margin: EdgeInsets.only(
-                left: 18,
+                left: 10,
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6.0),
@@ -2237,7 +2300,7 @@ class _ProductDetailsState extends State<ProductDetails>
                   AppLocalizations.of(context).add_to_cart_ucf,
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: 16,
+                      fontSize: 15,
                       fontWeight: FontWeight.w600),
                 ),
               ),
@@ -2251,7 +2314,7 @@ class _ProductDetailsState extends State<ProductDetails>
               onPressBuyNow(context);
             },
             child: Container(
-              margin: EdgeInsets.only(left: 18,),
+              margin: EdgeInsets.only(left: 10,right: 10),
               height: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6.0),
@@ -2270,7 +2333,7 @@ class _ProductDetailsState extends State<ProductDetails>
                   AppLocalizations.of(context).buy_now_ucf,
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: 16,
+                      fontSize: 15,
                       fontWeight: FontWeight.w600),
                 ),
               ),
@@ -2278,6 +2341,7 @@ class _ProductDetailsState extends State<ProductDetails>
           ),
         ),
         //productDetailsResponse.detailed_products.length > 0
+
         if (_productDetails !=null)
           if(_productDetails.minoffer == 1)
           BottomNavigationBarItem(
@@ -2289,9 +2353,8 @@ class _ProductDetailsState extends State<ProductDetails>
                 alertDialog(context);
               },
               child: Container(
-                margin: EdgeInsets.only(
-                  left: 18,
-                ),
+                margin: EdgeInsets.only(right: 10),
+               // padding:EdgeInsets.only(left: 15,right: 15),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6.0),
                   color: MyTheme.accent_color,
@@ -2307,11 +2370,11 @@ class _ProductDetailsState extends State<ProductDetails>
                 height: 50,
                 child: Center(
                   child: Text(
-                    // AppLocalizations.of(context).add_to_cart_ucf,
-                    "Make an offer ",
+                     //AppLocalizations.of(context).add_to_cart_ucf,
+                    "Make an Offer",
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 16,
+                        fontSize: 15,
                         fontWeight: FontWeight.w600),
                   ),
                 ),
@@ -2441,8 +2504,8 @@ class _ProductDetailsState extends State<ProductDetails>
                   return Btn.basic(
                     child: Text(
                       !controller.expanded
-                          ? AppLocalizations.of(context).view_more_ucf
-                          : AppLocalizations.of(context).show_less_ucf,
+                          ? AppLocalizations.of(context).show_less_ucf
+                          : AppLocalizations.of(context).view_more_ucf,
                       style: TextStyle(color: MyTheme.font_grey, fontSize: 11),
                     ),
                     onPressed: () {
@@ -2923,10 +2986,16 @@ class _ProductDetailsState extends State<ProductDetails>
                 ),
                 child: Text("Submit",),
                 onPressed: () {
+
                   makeanofferapi(pricecontroller.text);
                   print("Your Price ${pricecontroller.text}");
                   Navigator.pop(context);
                   pricecontroller.clear();
+
+
+                  // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+                  //   return ProductDetails();
+                  // }));
                   // Your code for submitting the form.
                 },
               ),
@@ -2961,23 +3030,37 @@ class _ProductDetailsState extends State<ProductDetails>
 
     try {
       var response = await http.post(
-        Uri.parse('https://webcluestechnology.com/demo/erp/umonda/api/v2/carts/make-offer'),
+        Uri.parse('${AppConfig.BASE_URL}/carts/make-offer'),
         headers: headers,
         body: data,
       );
 
       if (response.statusCode == 200) {
-        Toast.show("Product added to cart successfully",textStyle: TextStyle(color:Colors.green), duration: Toast.lengthShort, gravity:  Toast.bottom);
+        ToastComponent.showDialog(
+            "Product added to cart successfully",
+            gravity: Toast.center,
+            duration: Toast.lengthLong);
+       // Toast.show("Product added to cart successfully",textStyle: TextStyle(color:Colors.green), duration: Toast.lengthShort, gravity:  Toast.bottom);
         print(json.encode(json.decode(response.body)));
+        Provider.of<CartCounter>(context, listen: false).getCount();
+
         print("ADD money ");
       }
       else if(response.statusCode == 401) {
-        Toast.show("Product not added to cart",textStyle: TextStyle(color:Colors.red), duration: Toast.lengthShort, gravity:  Toast.bottom);
+        ToastComponent.showDialog(
+            "Product not added to cart",
+            gravity: Toast.center,
+            duration: Toast.lengthLong);
+       // Toast.show("Product not added to cart",textStyle: TextStyle(color:Colors.red), duration: Toast.lengthShort, gravity:  Toast.bottom);
         print(json.encode(json.decode(response.body)));
         print("401 Unauthorized ");
       }
 
       else {
+        ToastComponent.showDialog(
+            "Product not added to cart",
+            gravity: Toast.center,
+            duration: Toast.lengthLong);
         print('Request failed with status: ${response.statusCode}');
         print(response.body);
       }

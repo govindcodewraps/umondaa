@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:hardware_lo/my_theme.dart';
 import 'package:http/http.dart' as http;
 
@@ -59,7 +60,7 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
   Widget Body(){
     return  SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.only(top: 15,bottom: 20),
+        padding:  EdgeInsets.only(top: 15,bottom: 20),
         child: Column(
           children: [
             Row(
@@ -85,7 +86,7 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
                   child: Column(
                     children: [
                       Icon(Icons.add,size: 57,color: MyTheme.accent_color,),
-                      Text("Send Withdraw Request",style: TextStyle(fontSize: 15),),
+                      Text("Send Withdrawal Request",style: TextStyle(fontSize: 15),),
                     ],
                   ),
                 ),
@@ -124,7 +125,7 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       SizedBox(height:4),
-                      Text("AED "+snapshot.data[0].adminToPay.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700)),
+                      Text("AED " + (snapshot.data[0].adminToPay ?? "").toString(), style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
                       SizedBox(height:4),
                       Text("Pending Balance", style: TextStyle(fontSize: 15,)),
                     ],
@@ -149,8 +150,7 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
       FutureBuilder(
           future: fetchData(),
           builder: (context, snapshot) {
-            if (snapshot.hasData) {
-
+          if (snapshot.hasData) {
               return
                 Container(
                   padding: EdgeInsets.only(bottom: 60),
@@ -239,8 +239,6 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
             else{
               return
                 Container(
-
-
                     child: Center(child: CircularProgressIndicator()));
             }
           }
@@ -250,6 +248,7 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
 
   Future<List<Withdrawalamount>> withdrawalaccount() async {
     var url = Uri.parse('${AppConfig.BASE_URL}/money-withdraw-requests/${user_id.$}');
+   // var url = Uri.parse('${AppConfig.BASE_URL}/money-withdraw-requests/138');
 
     final response = await http.get(url);
 
@@ -282,6 +281,7 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
       List<amountlistmodel> itemList = jsonList.map((json) => amountlistmodel.fromJson(json)).toList();
 
       print("HHHHHHHH${response.body}");
+      print("user iddddd${user_id.$}");
       //print(response.body);
 
       return itemList;

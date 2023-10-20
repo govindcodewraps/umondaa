@@ -23,10 +23,14 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 import 'package:toast/toast.dart';
 
+import '../custom/device_info.dart';
 import '../custom/toast_component.dart';
 import '../helpers/auth_helper.dart';
 import '../ui_sections/drawer.dart';
+import 'New_Home_Screen/All_Feature_Ads_Screen.dart';
+import 'New_Home_Screen/Allnewads_Screen.dart';
 import 'InProfileScreen/commisssion_history_screen.dart';
+import 'New_Home_Screen/Feature_Ad_Package_Screen.dart';
 import 'drawermenu/Aboutus.dart';
 import 'drawermenu/ContactInf.dart';
 import 'drawermenu/privacy_policy.dart';
@@ -131,8 +135,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                   return;
                                 },
                                 child: Icon(Icons.search)),
+                            SizedBox(width: 10,),
                             Icon(Icons.notifications),
-
+                            SizedBox(width: 10,),
                             InkWell(
                                 onTap: (){
                                   Navigator.push(context,
@@ -392,6 +397,70 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           //     ),
                           //   ]),
                           // ),
+
+                          SliverList(
+                            delegate: SliverChildListDelegate([
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(
+                                  18.0,
+                                  18.0,
+                                  20.0,
+                                  0.0,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.centerRight,
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        // height: 60,
+                                        width: DeviceInfo(context).width/1,
+                                        child:
+                                        SizedBox(
+                                          height: 30,
+                                          width:double.infinity,
+                                          child: ElevatedButton(
+
+                                            style: ButtonStyle(
+                                                backgroundColor: MaterialStateProperty.all<Color>(MyTheme.accent_color),
+
+                                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                    RoundedRectangleBorder(
+
+                                                        borderRadius: BorderRadius.circular(12.0),
+                                                        side: BorderSide(color:MyTheme.accent_color)
+                                                    )
+                                                )
+                                            ),
+
+                                            onPressed: (){
+                                              Navigator.push(context,MaterialPageRoute(builder: (context)=>Feature_ad_package_Screen()));
+                                            },
+                                            child:Text(
+                                              "Get Featured On Home Page",
+                                              // AppLocalizations.of(context).update_profile_ucf,
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600),
+                                            ),),
+                                        ),
+
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ]),
+                          ),
+
+
+
+
+
+
+
                           SliverList(
                             delegate: SliverChildListDelegate([
                               Padding(
@@ -418,6 +487,44 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                 child: Column(
                                   children: [
                                     buildHomeAllProducts2(context, homeData),
+                                SizedBox(height: 10,),
+                                    Container(
+                                      padding: EdgeInsets.only(left: 18,right: 18),
+                                      alignment: Alignment.center,
+                                      // height: 60,
+                                      width: DeviceInfo(context).width/1,
+                                      child:
+                                      SizedBox(
+                                        height: 30,
+                                        width:double.infinity,
+                                        child: ElevatedButton(
+
+                                          style: ButtonStyle(
+                                              backgroundColor: MaterialStateProperty.all<Color>(MyTheme.accent_color),
+
+                                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                  RoundedRectangleBorder(
+
+                                                      borderRadius: BorderRadius.circular(12.0),
+                                                      side: BorderSide(color:MyTheme.accent_color)
+                                                  )
+                                              )
+                                          ),
+
+                                          onPressed: (){
+                                            Navigator.push(context,MaterialPageRoute(builder: (context)=>Allnewads_Screen()));
+                                          },
+                                          child:Text(
+                                            "View All",
+                                            // AppLocalizations.of(context).update_profile_ucf,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600),
+                                          ),),
+                                      ),
+
+                                    ),
                                   ],
                                 ),
                               ),
@@ -437,45 +544,88 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           if(homeData.featuredProductList.length > 0)
                             SliverList(
                               delegate: SliverChildListDelegate([
-                                Container(
-                                  color: MyTheme.accent_color,
-                                  child: Stack(
-                                    children: [
-                                      Container(
-                                        height: 180,
-                                        width: double.infinity,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.end,
-                                          children: [
-                                            Image.asset("assets/background_1.png")
-                                          ],
-                                        ),
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                Column(
+                                  children: [
+                                    Container(
+                                      color: MyTheme.accent_color,
+                                      child: Stack(
                                         children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 10.0,
-                                                right: 18.0,
-                                                left: 18.0),
-                                            child: Text(
-                                              AppLocalizations.of(context)
-                                                  .featured_products_ucf,
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w700),
+                                          Container(
+                                            height: 180,
+                                            width: double.infinity,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                              children: [
+                                                Image.asset("assets/background_1.png")
+                                              ],
                                             ),
                                           ),
-                                          buildHomeFeatureProductHorizontalList(
-                                              homeData)
+                                          Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 10.0,
+                                                    right: 18.0,
+                                                    left: 18.0),
+                                                child: Text(
+                                                  AppLocalizations.of(context)
+                                                      .featured_products_ucf,
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 18,
+                                                      fontWeight: FontWeight.w700),
+                                                ),
+                                              ),
+                                              buildHomeFeatureProductHorizontalList(
+                                                  homeData),
+
+                                            ],
+                                          ),
                                         ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    SizedBox(height: 10,),
+                                    Container(
+                                      padding: EdgeInsets.only(left: 18,right: 18),
+                                      alignment: Alignment.center,
+                                      // height: 60,
+                                      width: DeviceInfo(context).width/1,
+                                      child:
+                                      SizedBox(
+                                        height: 30,
+                                        width:double.infinity,
+                                        child: ElevatedButton(
+
+                                          style: ButtonStyle(
+                                              backgroundColor: MaterialStateProperty.all<Color>(MyTheme.accent_color),
+
+                                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                  RoundedRectangleBorder(
+
+                                                      borderRadius: BorderRadius.circular(12.0),
+                                                      side: BorderSide(color:MyTheme.accent_color)
+                                                  )
+                                              )
+                                          ),
+
+                                          onPressed: (){
+                                            Navigator.push(context,MaterialPageRoute(builder: (context)=>All_feature_ads_Screen()));
+                                          },
+                                          child:Text(
+                                            "View All",
+                                            // AppLocalizations.of(context).update_profile_ucf,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600),
+                                          ),),
+                                      ),
+
+                                    ),
+                                  ],
                                 ),
                               ]),
                             ),
@@ -588,7 +738,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
                                             onTap: () {
                                               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                                return TopBrands();
+                                                 return TopBrands(
+                                                  selected_filter: "brands",
+                                                );
                                               }));
                                             },
                                           ),
@@ -872,7 +1024,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     } else if (homeData.allProductList.length > 0) {
       //snapshot.hasData
 
-      return GridView.builder(
+      return
+        GridView.builder(
         // 2
         //addAutomaticKeepAlives: true,
         itemCount: homeData.allProductList.length,
@@ -916,13 +1069,19 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           crossAxisCount: 2,
           mainAxisSpacing: 14,
           crossAxisSpacing: 14,
-          itemCount: homeData.allProductList.length,
+          itemCount: homeData.allProductList.length =4,
           shrinkWrap: true,
           padding: EdgeInsets.only(top: 20.0, bottom: 1, left: 18, right: 18),
           physics: NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
-            return SizedBox(
-               height: 270,
+            return Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  //border: Border.all(color: MyTheme.accent_color),
+                  boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,offset: Offset(1,3))]
+              ),
+               //height: 270,
               child: ProductCard(
                 id: homeData.allProductList[index].id,
                 image: homeData.allProductList[index].thumbnail_image,

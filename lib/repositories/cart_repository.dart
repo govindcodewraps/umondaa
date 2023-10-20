@@ -104,12 +104,14 @@ class CartRepository {
   }
 
   Future<dynamic> getCartAddResponse(@required int id, @required String variant,
-      @required int user_id, @required int quantity) async {
+      @required int user_id, @required int quantity,  dismantling_fees) async {
     var post_body = jsonEncode({
       "id": "${id}",
       "variant": variant,
       "user_id": "$user_id",
       "quantity": "$quantity",
+      "dismantling_fees": "$dismantling_fees",
+
       "cost_matrix": AppConfig.purchase_code
     });
 
@@ -123,10 +125,11 @@ class CartRepository {
         body: post_body);
 
     bool checkResult = ResponseCheck.apply(response.body);
-
+    print("dismantling_fees responsecheck....${response.body}");
     if (!checkResult) return responseCheckModelFromJson(response.body);
     Provider.of<CartCounter>(OneContext().context, listen: false).getCount();
     return cartAddResponseFromJson(response.body);
+
   }
 
   Future<dynamic> getCartSummaryResponse() async {

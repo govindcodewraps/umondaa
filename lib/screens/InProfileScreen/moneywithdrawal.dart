@@ -2,12 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hardware_lo/my_theme.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../app_config.dart';
 import '../../helpers/shared_value_helper.dart';
+import 'money_withdrawal.dart';
 
 
 class Moneywithdrawalrewuest extends StatefulWidget {
@@ -77,6 +79,7 @@ class _MoneywithdrawalrewuestState extends State<Moneywithdrawalrewuest> {
               height: 50,
               //width: 250,
               child: TextField(
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 controller: _amountController,
                 keyboardType: TextInputType.number,
                 obscureText: false,
@@ -141,6 +144,11 @@ class _MoneywithdrawalrewuestState extends State<Moneywithdrawalrewuest> {
                           _amountController.clear();
                           _messageController.clear();
 
+                          Navigator.pop(context);
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+                            return Moneywithdrawal();
+                          }));
+
                         }
 
 
@@ -201,7 +209,7 @@ class _MoneywithdrawalrewuestState extends State<Moneywithdrawalrewuest> {
 
     if (response.statusCode == 200) {
       Fluttertoast.showToast(
-        msg: "Request sending",
+        msg: "Request sent successfully",
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM, // You can change the position
         timeInSecForIosWeb: 1, // Duration in seconds the toast should be visible on iOS and web

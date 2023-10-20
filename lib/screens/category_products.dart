@@ -357,7 +357,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
             },
           ),
         ),
-      );
+    );
     } else if (_totalData == 0) {
       return Center(
           child: Text(AppLocalizations.of(context).no_data_is_available));

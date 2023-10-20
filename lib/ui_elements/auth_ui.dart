@@ -1,11 +1,10 @@
-
-
-
 import 'package:hardware_lo/custom/box_decorations.dart';
 import 'package:hardware_lo/custom/device_info.dart';
 import 'package:hardware_lo/helpers/shared_value_helper.dart';
 import 'package:hardware_lo/my_theme.dart';
 import 'package:flutter/material.dart';
+
+import '../main.dart';
 
 class AuthScreen{
   static Widget buildScreen(BuildContext context,String headerText,Widget child){
@@ -18,6 +17,7 @@ class AuthScreen{
         //appBar: buildAppBar(context),
         body:Stack(
           children: [
+
             Container(
                 height: DeviceInfo(context).height / 3,
                 width: DeviceInfo(context).width,
@@ -56,7 +56,6 @@ class AuthScreen{
                       padding: const EdgeInsets.only(bottom: 20.0,top: 10),
                       child: Text(
                         headerText,
-
                         style: TextStyle(
                             color: MyTheme.white,
                             fontSize: 18,
@@ -71,10 +70,24 @@ class AuthScreen{
                           decoration: BoxDecorations.buildBoxDecoration_1(radius: 16),
                           child: child,),
                     ),
-                  ],
+                    ],
                   ),
                 )
               ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(13.0),
+              child: InkWell(
+                  onTap: (){
+
+                    Navigator.pop(context);
+
+                    // Navigator.push(context,
+                    //     MaterialPageRoute(builder: (context) {
+                    //       return MyApp();
+                    //     }));
+                  },
+                  child: Icon(Icons.arrow_back)),
             ),
           ],
         ),
