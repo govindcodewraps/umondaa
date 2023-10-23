@@ -134,7 +134,7 @@ class _My_adsScreenState extends State<My_adsScreen> {
                     Column(
                       children: [
 
-                        
+
                         Expanded(
                           child: GridView.builder(
                             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -164,7 +164,7 @@ class _My_adsScreenState extends State<My_adsScreen> {
                                               // height: MediaQuery.of(context).size.height * 0.11,
                                               // width: MediaQuery.of(context).size.width * 0.5,
 
-                                              height: MediaQuery.of(context).size.height * 0.13,
+                                              height: MediaQuery.of(context).size.height * 0.11,
                                               width: MediaQuery.of(context).size.width * 0.5,
                                               child: thumbnailImage == null
                                                   ? Image.asset("assets/silver.png", fit: BoxFit.fill)
@@ -210,7 +210,12 @@ class _My_adsScreenState extends State<My_adsScreen> {
                                               },
                                               child: Padding(
                                                 padding: const EdgeInsets.all(8.0),
-                                                child: Icon(Icons.delete,color: Colors.red,),
+                                                child: Container(
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.grey,
+                                                      borderRadius: BorderRadius.circular(100)
+                                                    ),
+                                                    child: Icon(Icons.delete,color: Colors.black,)),
                                               ))
 
                                           /*PopupMenuButton<int>(

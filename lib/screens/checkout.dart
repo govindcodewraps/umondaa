@@ -232,7 +232,8 @@ class _CheckoutState extends State<Checkout> {
       })).then((value) {
         onPopped(value);
       });
-    } else if (_selected_payment_method == "paypal_payment") {
+    }
+    else if (_selected_payment_method == "paypal_payment") {
 
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return PaypalScreen(
@@ -245,7 +246,8 @@ class _CheckoutState extends State<Checkout> {
         onPopped(value);
       });
       ;
-    } else if (_selected_payment_method == "razorpay") {
+    }
+    else if (_selected_payment_method == "razorpay") {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return RazorpayScreen(
           amount: _grandTotalValue,
