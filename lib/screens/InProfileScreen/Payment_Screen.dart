@@ -569,8 +569,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
                         ],);
                     },
-                    //itemCount: 17,
-                    itemCount: snapshot.data.data.length,
+                    itemCount: 7,
+                   // itemCount: snapshot.data.data.length,
                   ),
                 );
             }
@@ -599,8 +599,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
     };
 
     // Define the API endpoint
-     //String url = "https://umonda.com/api/v2/payment-history/${user_id.$}";
-    String url = "https://umonda.com/api/v2/payment-history/138";
+     String url = "https://umonda.com/api/v2/payment-history/${user_id.$}";
+    //String url = "https://umonda.com/api/v2/payment-history/138";
 
     try {
       // Make the API call

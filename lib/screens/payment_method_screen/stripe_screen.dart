@@ -45,6 +45,10 @@ class _StripeScreenState extends State<StripeScreen> {
     if (widget.payment_type == "cart_payment") {
       createOrder();
     }
+    print("Amountt : ${widget.amount}");
+    print("payment_typee :  ${widget.payment_type}");
+    print("payment_method_keyy :  ${widget.payment_method_key}");
+    print("package_idd : ${widget.package_id}");
     stripe();
   }
 

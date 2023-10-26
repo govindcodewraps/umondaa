@@ -85,6 +85,16 @@ class _CheckoutState extends State<Checkout> {
     print(user_id.$);
     print(user_name.$);*/
 
+    //       amount: _grandTotalValue,
+    //           payment_type: payment_type,
+    //           payment_method_key: _selected_payment_method_key,
+    //           package_id: widget.packageId.toString(),
+
+    print("Amount : ${_grandTotalValue}");
+    print("payment_type :  ${payment_type}");
+    print("payment_method_key :  ${_selected_payment_method_key}");
+    print("package_id : ${widget.packageId.toString()}");
+
     fetchAll();
   }
 
