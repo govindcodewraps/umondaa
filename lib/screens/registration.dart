@@ -499,7 +499,8 @@ class _RegistrationState extends State<Registration> {
                                                       page_name:
                                                           "Terms Conditions",
                                                       url:
-                                                          "${AppConfig.RAW_BASE_URL}/mobile-page/terms",
+                                                         //"https://umonm.com/",
+                                                      "${AppConfig.RAW_BASE_URL}/mobile-page/terms",
                                                     )));
                                       },
                                     style:
@@ -529,10 +530,12 @@ class _RegistrationState extends State<Registration> {
                                   )
                                 ])),
                       ),
-                    )
+                    ),
+
                   ],
                 ),
               ),
+
               Padding(
                 padding: const EdgeInsets.only(top: 30.0),
                 child: Container(
@@ -565,6 +568,8 @@ class _RegistrationState extends State<Registration> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+
+
                     Center(
                         child: Text(
                       AppLocalizations.of(context)

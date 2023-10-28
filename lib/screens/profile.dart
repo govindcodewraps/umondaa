@@ -463,15 +463,6 @@ class _ProfileState extends State<Profile> {
               ],
             ),
 
-
-
-
-
-
-
-
-
-
           if(is_logged_in.$)
           Column(
             children: [
