@@ -110,40 +110,39 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                           ),
 
 
-
                                           child: Text("Id :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500),)),
 
-                                      SizedBox(height: 4,),
+                                      //SizedBox(height: 4,),
 
-                                      Container(
-                                          padding: EdgeInsets.only(left: 7),
-                                          width:MediaQuery.of(context).size.width*0.43,
+                                      // Container(
+                                      //     padding: EdgeInsets.only(left: 7),
+                                      //     width:MediaQuery.of(context).size.width*0.43,
+                                      //
+                                      //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      //
+                                      //       //color: Colors.grey[300],
+                                      //
+                                      //       // border: Border.all(color: MyTheme.accent_color)
+                                      //
+                                      //     ),
+                                      //
+                                      //     child: Text("Code :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
 
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                     // SizedBox(height: 4,),
 
-                                            //color: Colors.grey[300],
-
-                                            // border: Border.all(color: MyTheme.accent_color)
-
-                                          ),
-
-                                          child: Text("Code :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                      SizedBox(height: 4,),
-
-                                      Container(
-                                          padding: EdgeInsets.only(left: 7),
-                                          width:MediaQuery.of(context).size.width*0.43,
-
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                            //color: Colors.grey[300],
-
-                                            //border: Border.all(color: MyTheme.accent_color)
-
-                                          ),
-
-                                          child: Text("User_ID :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+                                      // Container(
+                                      //     padding: EdgeInsets.only(left: 7),
+                                      //     width:MediaQuery.of(context).size.width*0.43,
+                                      //
+                                      //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      //
+                                      //       //color: Colors.grey[300],
+                                      //
+                                      //       //border: Border.all(color: MyTheme.accent_color)
+                                      //
+                                      //     ),
+                                      //
+                                      //     child: Text("User_ID :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
 
                                       SizedBox(height: 4,),
 
@@ -161,85 +160,53 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
                                           child: Text("Payment_type :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
 
-                                      SizedBox(height: 4,),
+                                     // SizedBox(height: 4,),
 
-                                      Container(
-                                          padding: EdgeInsets.only(left: 7),
-                                          width:MediaQuery.of(context).size.width*0.43,
+                                      // Container(
+                                      //     padding: EdgeInsets.only(left: 7),
+                                      //     width:MediaQuery.of(context).size.width*0.43,
+                                      //
+                                      //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      //
+                                      //       //color: Colors.grey[300],
+                                      //
+                                      //       //border: Border.all(color: MyTheme.accent_color)
+                                      //
+                                      //     ),
+                                      //
+                                      //     child: Text("Payment_status :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
 
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                     // SizedBox(height: 4,),
 
-                                            //color: Colors.grey[300],
+                                      // Container(
+                                      //     padding: EdgeInsets.only(left: 7),
+                                      //     width:MediaQuery.of(context).size.width*0.43,
+                                      //
+                                      //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      //
+                                      //       //color: Colors.grey[300],
+                                      //
+                                      //       //border: Border.all(color: MyTheme.accent_color)
+                                      //
+                                      //     ),
+                                      //
+                                      //     child: Text("Payment status string :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
 
-                                            //border: Border.all(color: MyTheme.accent_color)
+                                     // SizedBox(height: 4,),
 
-                                          ),
-
-                                          child: Text("Payment_status :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                      SizedBox(height: 4,),
-
-                                      Container(
-                                          padding: EdgeInsets.only(left: 7),
-                                          width:MediaQuery.of(context).size.width*0.43,
-
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                            //color: Colors.grey[300],
-
-                                            //border: Border.all(color: MyTheme.accent_color)
-
-                                          ),
-
-                                          child: Text("Payment status string :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                      SizedBox(height: 4,),
-
-                                      Container(
-                                          padding: EdgeInsets.only(left: 7),
-                                          width:MediaQuery.of(context).size.width*0.43,
-
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                            //color: Colors.grey[300],
-
-                                            // border: Border.all(color: MyTheme.accent_color)
-
-                                          ),
-
-                                          child: Text("Delivery Status :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                      SizedBox(height: 4,),
-
-                                      Container(
-                                          padding: EdgeInsets.only(left: 7),
-                                          width:MediaQuery.of(context).size.width*0.43,
-
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                            //color: Colors.grey[300],
-
-                                            //border: Border.all(color: MyTheme.accent_color)
-
-                                          ),
-
-                                          child: Text("Grand Total :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                      SizedBox(height: 4,),
-
-                                      Container(
-                                          padding: EdgeInsets.only(left: 7),
-                                          width:MediaQuery.of(context).size.width*0.43,
-
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                            //color: Colors.grey[300],
-
-                                            // border: Border.all(color: MyTheme.accent_color)
-
-                                          ),
-
-                                          child: Text("Plane Grand Total :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+                                      // Container(
+                                      //     padding: EdgeInsets.only(left: 7),
+                                      //     width:MediaQuery.of(context).size.width*0.43,
+                                      //
+                                      //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      //
+                                      //       //color: Colors.grey[300],
+                                      //
+                                      //       // border: Border.all(color: MyTheme.accent_color)
+                                      //
+                                      //     ),
+                                      //
+                                      //     child: Text("Delivery Status :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
 
                                       SizedBox(height: 4,),
 
@@ -255,55 +222,87 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
                                           ),
 
-                                          child: Text("Coupon Discount :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+                                          child: Text("Amount:",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
 
-                                      SizedBox(height: 4,),
+                                     // SizedBox(height: 4,),
 
-                                      Container(
+                                      // Container(
+                                      //     padding: EdgeInsets.only(left: 7),
+                                      //     width:MediaQuery.of(context).size.width*0.43,
+                                      //
+                                      //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      //
+                                      //       //color: Colors.grey[300],
+                                      //
+                                      //       // border: Border.all(color: MyTheme.accent_color)
+                                      //
+                                      //     ),
+                                      //
+                                      //     child: Text("Plane Grand Total :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
 
+                                     // SizedBox(height: 4,),
 
-                                          padding: EdgeInsets.only(left: 7),
-                                          width:MediaQuery.of(context).size.width*0.43,
+                                      // Container(
+                                      //     padding: EdgeInsets.only(left: 7),
+                                      //     width:MediaQuery.of(context).size.width*0.43,
+                                      //
+                                      //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      //
+                                      //       //color: Colors.grey[300],
+                                      //
+                                      //       //border: Border.all(color: MyTheme.accent_color)
+                                      //
+                                      //     ),
+                                      //
+                                      //     child: Text("Coupon Discount :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
 
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      //SizedBox(height: 4,),
 
-                                            //color: Colors.grey[300],
+                                      // Container(
+                                      //
+                                      //
+                                      //     padding: EdgeInsets.only(left: 7),
+                                      //     width:MediaQuery.of(context).size.width*0.43,
+                                      //
+                                      //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      //
+                                      //       //color: Colors.grey[300],
+                                      //
+                                      //       //border: Border.all(color: MyTheme.accent_color)
+                                      //
+                                      //     ),child: Text("Shipping Cost :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
 
-                                            //border: Border.all(color: MyTheme.accent_color)
+                                      //SizedBox(height: 4,),
 
-                                          ),child: Text("Shipping Cost :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+                                      // Container(
+                                      //     padding: EdgeInsets.only(left: 7),
+                                      //     width:MediaQuery.of(context).size.width*0.43,
+                                      //
+                                      //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      //
+                                      //       //color: Colors.grey[300],
+                                      //
+                                      //       //border: Border.all(color: MyTheme.accent_color)
+                                      //
+                                      //     ),
+                                      //
+                                      //     child: Text("Sub Total :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
 
-                                      SizedBox(height: 4,),
+                                      //SizedBox(height: 4,),
 
-                                      Container(
-                                          padding: EdgeInsets.only(left: 7),
-                                          width:MediaQuery.of(context).size.width*0.43,
-
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                            //color: Colors.grey[300],
-
-                                            //border: Border.all(color: MyTheme.accent_color)
-
-                                          ),
-
-                                          child: Text("Sub Total :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                      SizedBox(height: 4,),
-
-                                      Container(
-                                          padding: EdgeInsets.only(left: 7),
-                                          width:MediaQuery.of(context).size.width*0.43,
-
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                            //color: Colors.grey[300],
-
-                                            // border: Border.all(color: MyTheme.accent_color)
-
-                                          ),
-
-                                          child: Text("UMONDA FEES : ",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+                                      // Container(
+                                      //     padding: EdgeInsets.only(left: 7),
+                                      //     width:MediaQuery.of(context).size.width*0.43,
+                                      //
+                                      //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      //
+                                      //       //color: Colors.grey[300],
+                                      //
+                                      //       // border: Border.all(color: MyTheme.accent_color)
+                                      //
+                                      //     ),
+                                      //
+                                      //     child: Text("UMONDA FEES : ",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
 
                                       SizedBox(height: 4,),
 
@@ -356,32 +355,32 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                           child: Text(snapshot.data.data[index].id.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
 
 
-                                      SizedBox(height: 4,),
-                                      Container(
-                                          padding: EdgeInsets.only(left: 6),
-                                          width:MediaQuery.of(context).size.width*0.4,
-
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                            //color: Colors.grey[300],
-
-                                            //border: Border.all(color: MyTheme.accent_color)
-
-                                          ),
-                                          child: Text(snapshot.data.data[index].code.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-                                      SizedBox(height: 4,),
-                                      Container(
-                                          padding: EdgeInsets.only(left: 10),
-                                          width:MediaQuery.of(context).size.width*0.4,
-
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                            //color: Colors.grey[300],
-
-                                            //border: Border.all(color: MyTheme.accent_color)
-
-                                          ),
-                                          child: Text(snapshot.data.data[index].userId.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+                                     // SizedBox(height: 4,),
+                                      // Container(
+                                      //     padding: EdgeInsets.only(left: 6),
+                                      //     width:MediaQuery.of(context).size.width*0.4,
+                                      //
+                                      //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      //
+                                      //       //color: Colors.grey[300],
+                                      //
+                                      //       //border: Border.all(color: MyTheme.accent_color)
+                                      //
+                                      //     ),
+                                      //     child: Text(snapshot.data.data[index].code.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+                                      // SizedBox(height: 4,),
+                                      // Container(
+                                      //     padding: EdgeInsets.only(left: 10),
+                                      //     width:MediaQuery.of(context).size.width*0.4,
+                                      //
+                                      //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      //
+                                      //       //color: Colors.grey[300],
+                                      //
+                                      //       //border: Border.all(color: MyTheme.accent_color)
+                                      //
+                                      //     ),
+                                      //     child: Text(snapshot.data.data[index].userId.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
 
 
                                       SizedBox(height: 4,),
@@ -404,49 +403,49 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       ),
 
 
-                                      SizedBox(height: 4,),
-                                      Container(
-                                          padding: EdgeInsets.only(left: 10),
-                                          width:MediaQuery.of(context).size.width*0.4,
-
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                            //color: Colors.grey[300],
-
-                                            //border: Border.all(color: MyTheme.accent_color)
-
-                                          ),
-                                          child: Text(snapshot.data.data[index].paymentStatus.toString().substring(14),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                      SizedBox(height: 4,),
-                                      Container(
-                                          padding: EdgeInsets.only(left: 10),
-                                          width:MediaQuery.of(context).size.width*0.4,
-
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                            //color: Colors.grey[300],
-
-                                            //border: Border.all(color: MyTheme.accent_color)
-
-                                          ),
-                                          child: Text(snapshot.data.data[index].paymentStatusString.toString().substring(20),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+                                      //SizedBox(height: 4,),
+                                      // Container(
+                                      //     padding: EdgeInsets.only(left: 10),
+                                      //     width:MediaQuery.of(context).size.width*0.4,
+                                      //
+                                      //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      //
+                                      //       //color: Colors.grey[300],
+                                      //
+                                      //       //border: Border.all(color: MyTheme.accent_color)
+                                      //
+                                      //     ),
+                                      //     child: Text(snapshot.data.data[index].paymentStatus.toString().substring(14),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
 
 
-                                      SizedBox(height: 4,),
-                                      Container(
-                                          padding: EdgeInsets.only(left: 10),
-                                          width:MediaQuery.of(context).size.width*0.4,
+                                     // SizedBox(height: 4,),
+                                      // Container(
+                                      //     padding: EdgeInsets.only(left: 10),
+                                      //     width:MediaQuery.of(context).size.width*0.4,
+                                      //
+                                      //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      //
+                                      //       //color: Colors.grey[300],
+                                      //
+                                      //       //border: Border.all(color: MyTheme.accent_color)
+                                      //
+                                      //     ),
+                                      //     child: Text(snapshot.data.data[index].paymentStatusString.toString().substring(20),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
 
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
 
-                                            //color: Colors.grey[300],
-
-                                            //border: Border.all(color: MyTheme.accent_color)
-
-                                          ),
-                                          child: Text(snapshot.data.data[index].deliveryStatus.toString().substring(15),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+                                     // SizedBox(height: 4,),
+                                      // Container(
+                                      //     padding: EdgeInsets.only(left: 10),
+                                      //     width:MediaQuery.of(context).size.width*0.4,
+                                      //
+                                      //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      //
+                                      //       //color: Colors.grey[300],
+                                      //
+                                      //       //border: Border.all(color: MyTheme.accent_color)
+                                      //
+                                      //     ),
+                                      //     child: Text(snapshot.data.data[index].deliveryStatus.toString().substring(15),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
 
 
                                       SizedBox(height: 4,),
@@ -464,96 +463,93 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                           child: Text(snapshot.data.data[index].grandTotal.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
 
 
-                                      SizedBox(height: 4,),
-                                      Container(
+                                     // SizedBox(height: 4,),
+                                      // Container(
+                                      //     padding: EdgeInsets.only(left: 10),
+                                      //     width:MediaQuery.of(context).size.width*0.4,
+                                      //
+                                      //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      //
+                                      //       //color: Colors.grey[300],
+                                      //
+                                      //       //border: Border.all(color: MyTheme.accent_color)
+                                      //
+                                      //     ),
+                                      //     child: Text(snapshot.data.data[index].planeGrandTotal.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+
+                                      //SizedBox(height: 4,),
+                                      // Container(
+                                      //     padding: EdgeInsets.only(left: 10),
+                                      //     width:MediaQuery.of(context).size.width*0.4,
+                                      //
+                                      //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      //
+                                      //       //color: Colors.grey[300],
+                                      //
+                                      //       //border: Border.all(color: MyTheme.accent_color)
+                                      //
+                                      //     ),
+                                      //     child: Text(snapshot.data.data[index].couponDiscount.toString().substring(15),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+
+                                      //SizedBox(height: 4,),
+                                      // Container(
+                                      //     padding: EdgeInsets.only(left: 10),
+                                      //     width:MediaQuery.of(context).size.width*0.4,
+                                      //
+                                      //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      //
+                                      //       //color: Colors.grey[300],
+                                      //
+                                      //       //border: Border.all(color: MyTheme.accent_color)
+                                      //
+                                      //     ),
+                                      //     child: Text(snapshot.data.data[index].shippingCost.toString().substring(15),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+
+                                      //SizedBox(height: 4,),
+                                      // Container(
+                                      //     padding: EdgeInsets.only(left: 10),
+                                      //     width:MediaQuery.of(context).size.width*0.4,
+                                      //
+                                      //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      //
+                                      //       //color: Colors.grey[300],
+                                      //
+                                      //       //border: Border.all(color: MyTheme.accent_color)
+                                      //
+                                      //     ),
+                                      //     child: Text(snapshot.data.data[index].subtotal.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+
+                                      //SizedBox(height: 4,),
+                                      // Container(
+                                      //     padding: EdgeInsets.only(left: 10),
+                                      //     width:MediaQuery.of(context).size.width*0.4,
+                                      //
+                                      //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                      //
+                                      //       //color: Colors.grey[300],
+                                      //
+                                      //       //border: Border.all(color: MyTheme.accent_color)
+                                      //
+                                      //     ),
+                                      //     child: Text(snapshot.data.data[index].tax.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
+
+
+                                     SizedBox(height: 4,),
+
+
+
+                      Container(
                                           padding: EdgeInsets.only(left: 10),
                                           width:MediaQuery.of(context).size.width*0.4,
-
                                           decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                            //color: Colors.grey[300],
-
-                                            //border: Border.all(color: MyTheme.accent_color)
-
-                                          ),
-                                          child: Text(snapshot.data.data[index].planeGrandTotal.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                      SizedBox(height: 4,),
-                                      Container(
-                                          padding: EdgeInsets.only(left: 10),
-                                          width:MediaQuery.of(context).size.width*0.4,
-
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                            //color: Colors.grey[300],
-
-                                            //border: Border.all(color: MyTheme.accent_color)
-
-                                          ),
-                                          child: Text(snapshot.data.data[index].couponDiscount.toString().substring(15),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                      SizedBox(height: 4,),
-                                      Container(
-                                          padding: EdgeInsets.only(left: 10),
-                                          width:MediaQuery.of(context).size.width*0.4,
-
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                            //color: Colors.grey[300],
-
-                                            //border: Border.all(color: MyTheme.accent_color)
-
-                                          ),
-                                          child: Text(snapshot.data.data[index].shippingCost.toString().substring(15),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                      SizedBox(height: 4,),
-                                      Container(
-                                          padding: EdgeInsets.only(left: 10),
-                                          width:MediaQuery.of(context).size.width*0.4,
-
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                            //color: Colors.grey[300],
-
-                                            //border: Border.all(color: MyTheme.accent_color)
-
-                                          ),
-                                          child: Text(snapshot.data.data[index].subtotal.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                      SizedBox(height: 4,),
-                                      Container(
-                                          padding: EdgeInsets.only(left: 10),
-                                          width:MediaQuery.of(context).size.width*0.4,
-
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                            //color: Colors.grey[300],
-
-                                            //border: Border.all(color: MyTheme.accent_color)
-
-                                          ),
-                                          child: Text(snapshot.data.data[index].tax.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                      SizedBox(height: 4,),
-                                      Container(
-                                          padding: EdgeInsets.only(left: 10),
-                                          width:MediaQuery.of(context).size.width*0.4,
-
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                            //color: Colors.grey[300],
-
-                                            //border: Border.all(color: MyTheme.accent_color)
-
                                           ),
                                           child:
                                          // Text("Date"),
-                                          Text(snapshot.data.data[index].date ??"00/00/0000".toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))
+                                          Text(snapshot.data.data[index].date ??"".toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))
 
                                       ),
 
@@ -569,8 +565,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
                         ],);
                     },
-                    //itemCount: 17,
-                    itemCount: snapshot.data.data.length,
+                    //itemCount: 7,
+                     itemCount: snapshot.data.data.length,
                   ),
                 );
             }
@@ -599,8 +595,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
     };
 
     // Define the API endpoint
-     //String url = "https://umonda.com/api/v2/payment-history/${user_id.$}";
-    String url = "https://umonda.com/api/v2/payment-history/138";
+     String url = "https://umonda.com/api/v2/payment-history/${user_id.$}";
+    //String url = "https://umonda.com/api/v2/payment-history/138";
 
     try {
       // Make the API call
@@ -632,14 +628,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
       print('An error occurred: $error');
     }
   }
-
-
-
-
-
-
-
 }
+
 
 
 

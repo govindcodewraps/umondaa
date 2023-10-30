@@ -17,23 +17,30 @@ class CommonWebviewScreen extends StatefulWidget {
 }
 
 class _CommonWebviewScreenState extends State<CommonWebviewScreen> {
-  WebViewController _webViewController = WebViewController();
+  WebViewController _webViewController;
+
+  bool _isLoading = true;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     webView();
   }
 
   webView() {
+    _webViewController = WebViewController();
+
     _webViewController
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0x00000000))
       ..setNavigationDelegate(
         NavigationDelegate(
           onWebResourceError: (error) {},
-          onPageFinished: (page) {},
+          onPageFinished: (page) {
+            setState(() {
+              _isLoading = false;
+            });
+          },
         ),
       )
       ..loadRequest(Uri.parse(widget.url));
@@ -46,12 +53,18 @@ class _CommonWebviewScreenState extends State<CommonWebviewScreen> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: buildAppBar(context),
-        body: buildBody(),
+        body: _isLoading ? buildLoadingIndicator() : buildBody(),
       ),
     );
   }
 
-  buildBody() {
+  Widget buildLoadingIndicator() {
+    return Center(
+      child: CircularProgressIndicator(),
+    );
+  }
+
+  Widget buildBody() {
     return SizedBox.expand(
       child: Container(
         child: WebViewWidget(controller: _webViewController),

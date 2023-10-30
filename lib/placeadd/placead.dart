@@ -1594,7 +1594,7 @@ class placead extends StatefulWidget {
 
 class _placeadState extends State<placead> {
   bool _obscureText = true;
-
+  bool _isUploading = false;
   bool _isAgree = false;
   bool light = false, isChecked = true;
   bool _filteredBrandsCalled = false;
@@ -2126,6 +2126,13 @@ class _placeadState extends State<placead> {
               ),
             ),
           ),
+
+
+
+
+
+
+
           //-------------------
           Container(
             margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
@@ -2167,7 +2174,8 @@ class _placeadState extends State<placead> {
                             //width: 20,
                             child: selectedImages.isEmpty
                                 ?  Center(child: Text('Sorry nothing selected!!'))
-                                : GridView.builder(
+                                :
+                            GridView.builder(
                               itemCount: selectedImages.length,
                               gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
@@ -2213,6 +2221,11 @@ class _placeadState extends State<placead> {
             ),
           ),
           //---------------------
+          if (_isUploading)
+            Center(
+              child: CircularProgressIndicator(),
+            ),
+
           Container(
             margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
             child: Card(
@@ -2297,6 +2310,11 @@ class _placeadState extends State<placead> {
             ),
           ),
           //---------------------
+
+          //listcategori(),
+
+
+
           Container(
             margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
             child: Card(
@@ -2588,6 +2606,11 @@ class _placeadState extends State<placead> {
                 onPressed: _isAgree
                     ? () {
 
+                  // Uncheck all checked items when the "Upload" button is pressed
+
+
+
+
 
                   if (_ProductName.text.isEmpty ||
                       dropdownCategory.isEmpty ||
@@ -2656,13 +2679,6 @@ class _placeadState extends State<placead> {
 
                     place_ad_upload(ProdName,category,brand,description,offer,amount,offerstatus,email,password);
 ///////////
-
-                    _ProductName.clear();
-                    _Description.clear();
-                    _PriceAED.clear();
-                    _EmailID.clear();
-                    _PassWord.clear();
-                    _offerControler.clear();
 
                   }
                 }
@@ -2735,6 +2751,7 @@ class _placeadState extends State<placead> {
     );
   }
   BrandDropdown() {
+
     print("placead.dart, BrandDropdown(), dropdownBrands : ${dropdownBrands}");
     return DropdownButton2<dynamic>(
       hint: Text(dropdownBrands.split(" ")[1],style: TextStyle(color: Colors.black),),
@@ -2817,6 +2834,11 @@ class _placeadState extends State<placead> {
   // import 'package:http/http.dart' as http;
 //place_ad_upload(ProdName,userid,category,brand,description,offer,amount,offerstatus,email,password);
   place_ad_upload(name,Category,Brand,description,offer,amount,offerstatus,email,password) async {
+
+    setState(() {
+      _isUploading = true;
+    });
+
     var headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer your_access_token_here', // Replace with your actual token
@@ -2867,6 +2889,26 @@ class _placeadState extends State<placead> {
           textColor: Colors.green, // Text color of the toast message
           fontSize: 16.0, // Font size of the toast message
         );
+
+        _ProductName.clear();
+        _Description.clear();
+        _PriceAED.clear();
+        _EmailID.clear();
+        _PassWord.clear();
+        _offerControler.clear();
+
+        for (int i = 0; i < isCheckedList.length; i++) {
+          isCheckedList[i] = false;
+        }
+        setState(() {
+          printSelectedItems();
+          _isAgree = false;
+          isEnabled = false;
+          selectedImages.clear();
+          dropdownBrands =  dropdownBrands="Select Select_Brand";
+        });
+
+
       }
       else if(response.statusCode == 401)
       {
@@ -2897,6 +2939,9 @@ class _placeadState extends State<placead> {
     } catch (e) {
       print('Error: $e');
     }
+    setState(() {
+      _isUploading = false;
+    });
   }
   Widget listview() {
     return
@@ -3208,6 +3253,47 @@ class _placeadState extends State<placead> {
     }
   }
 
+
+
+
+  Widget listcategori() {
+    return
+      FutureBuilder(
+          future: fetchDataa(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return
+                Container(
+
+                  //padding: EdgeInsets.only(top: 23),
+                  child:
+
+                  ListView.builder(
+
+                    shrinkWrap: true,
+                    //physics:  NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, int index) {
+                      return
+
+                        Column(children: [
+                            Text(itemList[index].name.toString()),
+                        ],);
+
+                    },
+                    itemCount: itemList.length,
+                  ),
+                );
+            }
+            else{
+              return
+                Container(
+                    child: Center(child: CircularProgressIndicator()));
+            }
+          }
+      );
+  }
+
+
   Future<void> subcategorylist() async {
     print("Govind ${ProductID}");
     var url = Uri.parse('${AppConfig.BASE_URL}/sub-category-list/$ProductID');
@@ -3285,4 +3371,7 @@ class _placeadState extends State<placead> {
       }
     }
   }
+
+
+
 }

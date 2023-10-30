@@ -11,6 +11,7 @@ import '../../data_model/flash_deal_response.dart';
 import '../../helpers/shared_value_helper.dart';
 import 'package:dio/dio.dart';
 
+import '../../my_theme.dart';
 import '../Edit_My_Ads_Screen.dart';
 class My_adsScreen extends StatefulWidget {
   //const My_adsScreen({super.key});
@@ -37,6 +38,11 @@ class _My_adsScreenState extends State<My_adsScreen> {
     //fetchDataaa();
     myadsapicall();
   }
+  Future<void> _onPageRefresh() async {
+    //reset();
+    myadsapicall();
+  }
+
   @override
   void setState(VoidCallback fn) {
     // TODO: implement setState
@@ -72,13 +78,38 @@ class _My_adsScreenState extends State<My_adsScreen> {
       child: Scaffold(
 
         appBar: buildAppBar(context),
-        body: SingleChildScrollView(
-          child: Column(
+        body:
+        buildBody()
+
+
+      //   SingleChildScrollView(
+      //     child: Column(
+      //     children: [
+      //       listview(),
+      //
+      //     ],
+      // ),
+      //   ),
+
+      ),
+    );
+  }
+
+
+  RefreshIndicator buildBody() {
+    return RefreshIndicator(
+      color: MyTheme.accent_color,
+      backgroundColor: Colors.red,
+      onRefresh: _onPageRefresh,
+      displacement: 10,
+      child:      SingleChildScrollView(
+        child: Column(
           children: [
             listview(),
+
           ],
+        ),
       ),
-        ),),
     );
   }
 
@@ -98,145 +129,142 @@ class _My_adsScreenState extends State<My_adsScreen> {
                   child: Container(
                     //height: 600,
                     height: MediaQuery.of(context).size.height*1,
-                    padding: EdgeInsets.only(bottom: 20),
+                    padding: EdgeInsets.only(bottom: 90),
                     child: 
-                    GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, // You can change this number based on the number of columns you want
-                      ),
-                      itemCount: snapshot.data.data.length,
-                      itemBuilder: (context, index) {
-                        final thumbnailImage = snapshot.data.data[index].thumbnailImage;
-                        return InkWell(
-                          onTap: () {
-                            //Navigator.push(context, MaterialPageRoute(builder: (context)=>Edit_placead()));
-                            print("Govind >>>>>>>>>>>>>>");
-                            // product_Id = snapshot.data.data[index].id.toString();
-                            // print("print product id ${product_Id}");
-                          },
-                          child: Container(
-                            //padding: EdgeInsets.all(10),
-                            child: Stack(
-                              children: [
-                                Card(
-                                  elevation: 20,
-                                  child: Column(
+                    Column(
+                      children: [
+
+
+                        Expanded(
+                          child: GridView.builder(
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2, // You can change this number based on the number of columns you want
+                            ),
+                            itemCount: snapshot.data.data.length,
+                            itemBuilder: (context, index) {
+                              final thumbnailImage = snapshot.data.data[index].thumbnailImage;
+                              return InkWell(
+                                onTap: () {
+                                  //Navigator.push(context, MaterialPageRoute(builder: (context)=>Edit_placead()));
+                                  print("Govind >>>>>>>>>>>>>>");
+                                  // product_Id = snapshot.data.data[index].id.toString();
+                                  // print("print product id ${product_Id}");
+                                },
+                                child: Container(
+
+                                  padding: EdgeInsets.all(10),
+                                  child: Stack(
                                     children: [
-                                      Container(
-                                        height: MediaQuery.of(context).size.height * 0.19,
-                                        width: MediaQuery.of(context).size.width * 0.5,
-                                        child: thumbnailImage == null
-                                            ? Image.asset("assets/silver.png", fit: BoxFit.fill)
-                                            : Image.network(thumbnailImage, fit: BoxFit.fill),
+                                      Card(
+                                        elevation: 20,
+                                        child: Column(
+                                          children: [
+                                            Container(
+
+                                              // height: MediaQuery.of(context).size.height * 0.11,
+                                              // width: MediaQuery.of(context).size.width * 0.5,
+
+                                              height: MediaQuery.of(context).size.height * 0.11,
+                                              width: MediaQuery.of(context).size.width * 0.5,
+                                              child: thumbnailImage == null
+                                                  ? Image.asset("assets/silver.png", fit: BoxFit.fill)
+                                                  : Image.network(
+                                                thumbnailImage,
+                                                fit: BoxFit.fill,
+                                              ),
+
+                                            ),
+                                            SizedBox(height: 10),
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  snapshot.data.data[index].name.toString(),
+                                                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+                                                ),
+                                                SizedBox(height: 5),
+                                                Text(
+                                                  snapshot.data.data[index].mainPrice.toString(),
+                                                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+
+                                        ),
                                       ),
-                                      SizedBox(height: 10),
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            snapshot.data.data[index].name.toString(),
-                                            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
-                                          ),
-                                          SizedBox(height: 5),
-                                          Text(
-                                            snapshot.data.data[index].mainPrice.toString(),
-                                            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
-                                          ),
-                                        ],
+
+                                      Positioned(
+                                        right: 1,
+                                        child: GestureDetector(
+                                          onTap: (){
+                                            product_Id = snapshot.data.data[index].id.toString();
+                                           print("print product iddddddd ${product_Id}");
+                                          },
+                                          child:  InkWell(
+                                              onTap: (){
+                                                product_Id = snapshot.data.data[index].id.toString();
+                                                print("print product id Delete ${product_Id}");
+                                                deleteapicall(product_Id);
+
+                                              },
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: Container(
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.grey,
+                                                      borderRadius: BorderRadius.circular(100)
+                                                    ),
+                                                    child: Icon(Icons.delete,color: Colors.black,)),
+                                              ))
+
+                                          /*PopupMenuButton<int>(
+                                            itemBuilder: (context) {
+                                              return [
+                                                PopupMenuItem<int>(
+                                                  value: 0,
+                                                  child: Icon(Icons.edit,color: Colors.green,),
+                                                ),
+                                                PopupMenuItem<int>(
+                                                  value: 1,
+                                                  child: Icon(Icons.delete,color: Colors.red,),
+                                                ),
+                                              ];
+                                            },
+                                            onSelected: (value) {
+                                              if (value == 0) {
+                                                product_Id = snapshot.data.data[index].id.toString();
+                                                print("print product id Edit ${product_Id}");
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => Edit_placead(Product_ID:product_Id,),));
+                                                print("Edit  menu is selected.");
+                                                // Handle edit action
+                                              } else if (value == 1) {
+                                                product_Id = snapshot.data.data[index].id.toString();
+                                                print("print product id Delete ${product_Id}");
+                                                deleteapicall(product_Id);
+                                                // Handle delete action
+                                              }
+                                            },
+                                            child: Icon(Icons.more_vert), // Add an icon to trigger the popup
+                                            offset: Offset(0, 20), // Optional: Adjust the position of the popup
+                                            color: Colors.transparent, // Set the background color to transparent
+                                            elevation: 0,
+                                            //padding: EdgeInsets.only(left: 10),
+                                           // Optional: Remove the shadow
+                                          )*/
+
+
+                                        ),
                                       ),
                                     ],
                                   ),
                                 ),
-
-                                Positioned(
-                                  right: 1,
-                                  child: GestureDetector(
-                                    onTap: (){
-                                      product_Id = snapshot.data.data[index].id.toString();
-                                     print("print product iddddddd ${product_Id}");
-                                    },
-                                    child:
-
-                                    PopupMenuButton<int>(
-                                      itemBuilder: (context) {
-                                        return [
-                                          PopupMenuItem<int>(
-                                            value: 0,
-                                            child: Icon(Icons.edit,color: Colors.green,),
-                                          ),
-                                          PopupMenuItem<int>(
-                                            value: 1,
-                                            child: Icon(Icons.delete,color: Colors.red,),
-                                          ),
-                                        ];
-                                      },
-                                      onSelected: (value) {
-                                        if (value == 0) {
-                                          product_Id = snapshot.data.data[index].id.toString();
-                                          print("print product id Edit ${product_Id}");
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => Edit_placead(Product_ID:product_Id,),));
-                                          print("Edit  menu is selected.");
-                                          // Handle edit action
-                                        } else if (value == 1) {
-                                          product_Id = snapshot.data.data[index].id.toString();
-                                          print("print product id Delete ${product_Id}");
-                                          deleteapicall(product_Id);
-                                          // Handle delete action
-                                        }
-                                      },
-                                      child: Icon(Icons.more_vert), // Add an icon to trigger the popup
-                                      offset: Offset(0, 20), // Optional: Adjust the position of the popup
-                                      color: Colors.transparent, // Set the background color to transparent
-                                      elevation: 0,
-                                      //padding: EdgeInsets.only(left: 10),
-                                     // Optional: Remove the shadow
-                                    )
-
-
-
-
-                                    /*PopupMenuButton(
-                                      // add icon, by default "3 dot" icon
-                                      // icon: Icon(Icons.book)
-                                        itemBuilder: (context){
-                                          return [
-                                            PopupMenuItem<int>(
-                                              value:0,
-                                              child: Icon(Icons.edit),
-                                            ),
-
-                                            PopupMenuItem<int>(
-                                              value: 1,
-                                              child: Icon(Icons.delete),
-                                            ),
-
-                                            // PopupMenuItem<int>(
-                                            //   value: 2,
-                                            //   child: Text("Logout"),
-                                            // ),
-                                          ];
-                                        },
-                                        onSelected:(value){
-                                          if(value == 0){
-                                            product_Id = snapshot.data.data[index].id.toString();
-                                            print("print product id Edit ${product_Id}");
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) => Edit_placead(Product_ID:product_Id,),));
-                                            print("My account menu is selected.");
-                                          }else if(value == 1){
-                                            product_Id = snapshot.data.data[index].id.toString();
-                                            print("print product iddddddd delete ${product_Id}");
-
-                                            print("Settings menu is selected.");
-                                           }
-                                        }
-                                    ),*/
-                                  ),
-                                ),
-                              ],
-                            ),
+                              );
+                            },
                           ),
-                        );
-                      },
+                        ),
+
+                      ],
                     )
 
 

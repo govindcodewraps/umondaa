@@ -316,7 +316,7 @@
   "unpaid_ucf": "Unpaid",
   "confirmed_ucf": "Confirmed",
   "on_delivery_ucf": "Shipped",
-  "cash_on_delivery_ucf": "Cash on delivery",
+  "cash_on_delivery_ucf": "Pay Later",
   "delivered_ucf": "Delivered",
   "no_more_orders_ucf": "No More Orders",
   "loading_more_orders_ucf": "Loading More order...",

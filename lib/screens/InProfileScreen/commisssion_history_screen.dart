@@ -70,7 +70,10 @@ class _CommissionHistoryScreenState extends State<CommissionHistoryScreen> {
                     shrinkWrap: true,
                     //physics:  NeverScrollableScrollPhysics(),
                     itemBuilder: (context, int index) {
-                      return Column(
+                      return
+
+
+                        Column(
                         //crossAxisAlignment: CrossAxisAlignment.end,
                         //mainAxisAlignment: MainAxisAlignment.start,
                         children: [

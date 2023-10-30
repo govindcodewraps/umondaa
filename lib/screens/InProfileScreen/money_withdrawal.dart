@@ -86,7 +86,7 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
                   child: Column(
                     children: [
                       Icon(Icons.add,size: 57,color: MyTheme.accent_color,),
-                      Text("Send Withdraw Request",style: TextStyle(fontSize: 15),),
+                      Text("Send Withdrawal Request",style: TextStyle(fontSize: 15),),
                     ],
                   ),
                 ),

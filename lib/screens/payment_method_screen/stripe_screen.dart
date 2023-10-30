@@ -45,6 +45,13 @@ class _StripeScreenState extends State<StripeScreen> {
     if (widget.payment_type == "cart_payment") {
       createOrder();
     }
+    print(":::::::::::::::::::::::::::::::::::::::::::::::::::::");
+    print("Amountt : ${widget.amount}");
+    print("payment_typee :  ${widget.payment_type}");
+    print("payment_method_keyy :  ${widget.payment_method_key}");
+    print("package_idd : ${widget.package_id}");
+    print(":::::::::::::::::::::::::::::::::::::::::::::::::::::");
+
     stripe();
   }
 
@@ -52,7 +59,7 @@ class _StripeScreenState extends State<StripeScreen> {
     String _initial_url =
         "${AppConfig.BASE_URL}/stripe?payment_type=${widget.payment_type}&combined_order_id=${_combined_order_id}&amount=${widget.amount}&user_id=${user_id.$}&package_id=${widget.package_id}";
         //"https://umonda.com/api/v2/stripe?payment_type=${widget.payment_type}&combined_order_id=${_combined_order_id}&amount=${widget.amount}&user_id=${user_id.$}&package_id=${widget.package_id}";
-
+        "https://umonda.com/api/v2/stripe?payment_type=cart_payment&order_id=1147&amount=23.50&user_id=198";
     _webViewController
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0x00000000))

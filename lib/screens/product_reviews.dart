@@ -175,6 +175,16 @@ class _ProductReviewsState extends State<ProductReviews> {
               Align(
                   alignment: Alignment.bottomCenter,
                   child: buildLoadingContainer()),
+              //widget.id, _my_rating.toInt(), myReviewText
+              // Positioned(
+              //     left: 20,
+              //     child: Text(widget.id.toString())),
+              //
+              // Positioned(
+              //     left: 60,
+              //     child: Text(_myReviewTextController.text)),
+              //
+              // Text(_my_rating.toInt().toString()),
             ],
           )),
     );

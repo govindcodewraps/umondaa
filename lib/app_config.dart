@@ -5,7 +5,7 @@ var this_year = DateTime.now().year.toString();
 class AppConfig {
   static String copyright_text =
       "@ ActiveItZone " + this_year; //this shows in the splash screen
-  static String app_name = "Umonda"; //this shows in the splash screen
+  static String app_name = "UMONDA"; //this shows in the splash screen
   //static String purchase_code = "ad293f46-417c-4357-a54e-fd3ac9d22ff8";
 
 
@@ -26,7 +26,7 @@ class AppConfig {
 
 
        static const DOMAIN_PATH = "https://umonda.com"; //localhost
-       //static const DOMAIN_PATH = "https://webcluestechnology.com/demo/erp/umonda"; //localhost
+      //static const DOMAIN_PATH = "https://webcluestechnology.com/demo/erp/umonda"; //localhost
 
 // directly inside the public folder
 

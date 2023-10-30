@@ -58,11 +58,13 @@ class PaymentRepository {
         body: post_body);
 
     bool checkResult = ResponseCheck.apply(response.body);
+    print("order details 1 ${response.body}");
 
     if(!checkResult)
       return responseCheckModelFromJson(response.body);
-
+    print("order details 2 ${response.body}");
     return orderCreateResponseFromJson(response.body);
+
   }
 
   Future<PaypalUrlResponse> getPaypalUrlResponse(@required String payment_type,
@@ -84,14 +86,15 @@ class PaymentRepository {
       @required var package_id,
       @required double amount) async {
     Uri url = Uri.parse(
-        "${AppConfig.BASE_URL}/flutterwave/payment/url?payment_type=${payment_type}&combined_order_id=${combined_order_id}&amount=${amount}&user_id=${user_id.$}&package_id=$package_id");
+        "${AppConfig.BASE_URL}/flutterwave/payment/url?payment_type=${payment_type}&combined_order_id=${combined_order_id}&amount=${amount}&user_id=${user_id.$}");
+       // "${AppConfig.BASE_URL}/flutterwave/payment/url?payment_type=${payment_type}&combined_order_id=${combined_order_id}&amount=${amount}&user_id=${user_id.$}&package_id=$package_id");
 
     final response = await http.get(url, headers: {
       "App-Language": app_language.$,
     });
 
-    //print(url);
-    //print(response.body.toString());
+    print(url);
+    print("payment url ${response.body.toString()}");
     return flutterwaveUrlResponseFromJson(response.body);
   }
 

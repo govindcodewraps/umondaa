@@ -47,7 +47,7 @@ import '../data_model/product_details_response.dart';
 
 class ProductDetails extends StatefulWidget {
   int id;
-
+  int dismantling ;
   ProductDetails({Key key, this.id}) : super(key: key);
 
   @override
@@ -60,6 +60,7 @@ class _ProductDetailsState extends State<ProductDetails>
 
   bool isLoading = true; // Initially set to true as data is loading
   ProductDetailsResponse productDetails;
+  bool isChecked = false;
 
   //
   // @override
@@ -125,6 +126,8 @@ class _ProductDetailsState extends State<ProductDetails>
   var _singlePrice;
   var _singlePriceString;
   int _quantity = 1;
+  int dismantlingfee=120;
+  String dismantlfee="";
   int _stock = 0;
   var _stock_txt;
 
@@ -137,6 +140,10 @@ class _ProductDetailsState extends State<ProductDetails>
 
   @override
   void initState() {
+
+
+
+
 
     loadProductDetails();
 
@@ -175,6 +182,9 @@ class _ProductDetailsState extends State<ProductDetails>
 
     fetchAll();
     super.initState();
+
+
+
   }
 
   @override
@@ -446,9 +456,20 @@ class _ProductDetailsState extends State<ProductDetails>
     // print(user_id.$);
     // print(_quantity);
 
-    var cartAddResponse = await CartRepository()
-        .getCartAddResponse(widget.id, _variant, user_id.$, _quantity);
+      isChecked==true ?dismantlfee=_productDetails.dismantling_fees.toString():dismantlfee="0";
+      //isChecked==true ?dismantlfee="120":dismantlfee="0";
 
+     print("100 AEDDDDD  ${_productDetails.dismantling_fees.toString()}");
+//dismantlingfee
+    //dismantlfee=_productDetails.dismantling_fees.toString();
+    print("100 dismantlfee with check box  ${dismantlfee}");
+
+
+
+
+    var cartAddResponse = await CartRepository()
+        .getCartAddResponse(widget.id, _variant, user_id.$, _quantity,dismantlfee);
+    print("100 AEDDDDD  ${_productDetails.dismantling_fees.toString()}");
     if (cartAddResponse.result == false) {
       ToastComponent.showDialog(cartAddResponse.message,
           gravity: Toast.center, duration: Toast.lengthLong);
@@ -860,6 +881,7 @@ class _ProductDetailsState extends State<ProductDetails>
     );
 
     return Directionality(
+
       textDirection: app_language_rtl.$ ? TextDirection.rtl : TextDirection.ltr,
       child: SafeArea(
         child: Scaffold(
@@ -1033,7 +1055,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                 ? Text(
                              //"product name",
                               _productDetails.name.toString(),
-                              //_productDetails.categoryId.toString(),
+                              //_productDetails.dismantling_status.toString(),
                                     style: TextStyles.smallTitleTexStyle(),
                                     maxLines: 2,
                                   )
@@ -1091,13 +1113,35 @@ class _ProductDetailsState extends State<ProductDetails>
 
                           Padding(
                             padding: EdgeInsets.only(
-                                top: 14,
+                               // top: 14,
                                 left: app_language_rtl.$ ? 0 : 14,
                                 right: app_language_rtl.$ ? 14 : 0),
                             child: _productDetails != null
                                 ? buildChoiceOptionList()
                                 : buildVariantShimmers(),
                           ),
+
+
+                          if(_productDetails != null)
+                          if (_productDetails.dismantling_status==1)
+
+                         Padding(
+                           padding: const EdgeInsets.only(bottom: 10),
+                           child: Row(children: [
+            Checkbox(
+            value: isChecked,
+            onChanged: (value) {
+              setState(() {
+                isChecked = value;
+                print("Checked box value::: ${isChecked ? '1' : '0'}");
+                print("print check box value  ${value}");
+              });}),
+
+                             Text("Assembly & Dismantling Charges (AED 100.00)")
+
+                           ]),
+                         ),
+
 
 
 
@@ -2157,7 +2201,7 @@ class _ProductDetailsState extends State<ProductDetails>
             padding: EdgeInsets.only(left: 8.0),
             child: Text(
                 SystemConfig.systemCurrency != null
-                    ? _productDetails.stroked_price.replaceAll(
+                    ?_productDetails.stroked_price.replaceAll(
                         SystemConfig.systemCurrency.code,
                         SystemConfig.systemCurrency.symbol)
                     : _productDetails.stroked_price,

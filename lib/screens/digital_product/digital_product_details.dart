@@ -83,6 +83,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
   var _singlePrice;
   var _singlePriceString;
   int _quantity = 1;
+  int dismantling_fees =20;
   int _stock = 0;
 
   double opacity = 0;
@@ -375,7 +376,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
     // print(_quantity);
 
     var cartAddResponse = await CartRepository()
-        .getCartAddResponse(widget.id, _variant, user_id.$, _quantity);
+        .getCartAddResponse(widget.id, _variant, user_id.$, _quantity,dismantling_fees);
 
     if (cartAddResponse.result == false) {
       ToastComponent.showDialog(cartAddResponse.message,
