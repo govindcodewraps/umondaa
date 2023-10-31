@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/gestures.dart';
 import 'package:hardware_lo/app_config.dart';
 import 'package:hardware_lo/custom/toast_component.dart';
 import 'package:hardware_lo/helpers/shared_value_helper.dart';
@@ -12,6 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:toast/toast.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
+import '../common_webview_screen.dart';
 
 class StripeScreen extends StatefulWidget {
   double amount;
@@ -57,17 +60,17 @@ class _StripeScreenState extends State<StripeScreen> {
 
   stripe() {
     String _initial_url =
-        "${AppConfig.BASE_URL}/stripe?payment_type=${widget.payment_type}&combined_order_id=${_combined_order_id}&amount=${widget.amount}&user_id=${user_id.$}&package_id=${widget.package_id}";
+       "${AppConfig.BASE_URL}/stripe?payment_type=${widget.payment_type}&combined_order_id=${_combined_order_id}&amount=${widget.amount}&user_id=${user_id.$}&package_id=${widget.package_id}";
         //"https://umonda.com/api/v2/stripe?payment_type=${widget.payment_type}&combined_order_id=${_combined_order_id}&amount=${widget.amount}&user_id=${user_id.$}&package_id=${widget.package_id}";
-        "https://umonda.com/api/v2/stripe?payment_type=cart_payment&order_id=1147&amount=23.50&user_id=198";
+        //"${AppConfig.BASE_URL}/stripe?payment_type=cart_payment&order_id=${_combined_order_id}&amount=${widget.amount}&user_id=${user_id.$}";
     _webViewController
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0x00000000))
       ..setNavigationDelegate(
         NavigationDelegate(
-          // onPageStarted: (controller) {
-          //   _webViewController.loadRequest(Uri.parse(_initial_url));
-          // },
+          onPageStarted: (controller) {
+            _webViewController.loadRequest(Uri.parse(_initial_url));
+          },
           onWebResourceError: (error) {},
           onPageFinished: (page) {
             if (page.contains("/stripe/success")) {
@@ -89,7 +92,9 @@ class _StripeScreenState extends State<StripeScreen> {
   createOrder() async {
     var orderCreateResponse = await PaymentRepository()
         .getOrderCreateResponse(widget.payment_method_key);
-
+//  "owner_id":176,
+//     "user_id":198,
+//     "payment_type": "stripe"
     if (orderCreateResponse.result == false) {
       ToastComponent.showDialog(orderCreateResponse.message,
           gravity: Toast.center, duration: Toast.lengthLong);
@@ -99,7 +104,9 @@ class _StripeScreenState extends State<StripeScreen> {
 
     _combined_order_id = orderCreateResponse.combined_order_id;
     _order_init = true;
-    setState(() {});
+    setState(() {
+      print("Done Done Done ");
+    });
   }
 
   @override
@@ -158,9 +165,56 @@ class _StripeScreenState extends State<StripeScreen> {
       );
     } else {
       return SingleChildScrollView(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+        child:
+            // Column(
+            //   children: [
+            //     Text("data"),
+            //     Text("data"),
+            //     Text("data"),
+            //     Text("data"),
+            //     Text("data"),
+            //   ],
+            // )
+
+
+
+
+        // RichText(
+        //   maxLines: 2,
+        //   text:
+        //   TextSpan(
+        //     recognizer: TapGestureRecognizer()
+        //       ..onTap = () {
+        //         Navigator.push(
+        //             context,
+        //             MaterialPageRoute(
+        //                 builder: (context) =>
+        //                     CommonWebviewScreen(
+        //                       page_name:
+        //                       "Shipping & Delivery",
+        //                       url:
+        //                       //"https://umonm.com/",
+        //
+        //                       "${AppConfig.RAW_BASE_URL}/mobile-page/terms",
+        //                     )));
+        //       },
+        //     style:
+        //     TextStyle(color: MyTheme.accent_color),
+        //     text: " Shipping & Delivery",
+        //   ),
+        // ),
+
+
+
+
+
+
+        Container(
+         // width: MediaQuery.of(context).size.width,
+          //height: MediaQuery.of(context).size.height,
+
+          width: 500,
+          height: 500,
           child: WebViewWidget(
             controller: _webViewController,
           ),

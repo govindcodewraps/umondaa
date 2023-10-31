@@ -46,8 +46,12 @@ class PaymentRepository {
 
   Future<dynamic> getOrderCreateResponse(
       @required payment_method) async {
-    var post_body = jsonEncode({"payment_type": "${payment_method}"});
+    var post_body = jsonEncode({"payment_type": "${payment_method}","user_id":user_id.$});
 
+
+    //  "owner_id":176,
+    //     "user_id":198,
+    //     "payment_type": "stripe"
     Uri url = Uri.parse("${AppConfig.BASE_URL}/order/store");
     final response = await http.post(url,
         headers: {

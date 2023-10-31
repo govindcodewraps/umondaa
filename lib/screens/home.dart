@@ -3185,7 +3185,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             ),
             ListTile(
               leading:Image.asset("assets/truck.png",height: 20,width: 20,color: Colors.grey,),
-              title:  RichText(
+              title:
+
+              RichText(
                 maxLines: 2,
                 text:
                 TextSpan(
@@ -3309,7 +3311,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                     "About Us",
                                     url:
                                     //"https://umonm.com/",
-                                    "${AppConfig.RAW_BASE_URL}/mobile-page/about-us",
+                                    //"${AppConfig.RAW_BASE_URL}/mobile-page/about-us",
+                                    "https://umonda.com/about-us",
                                   )));
                     },
                   style:

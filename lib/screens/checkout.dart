@@ -1332,24 +1332,24 @@ class _CheckoutState extends State<Checkout> {
     } else if (_selected_payment_method == "paypal_payment") {
 
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return PaypalScreen(
-          amount: _grandTotalValue,
-          payment_type: payment_type,
-          payment_method_key: _selected_payment_method_key,
-          package_id: widget.packageId.toString(),
-        );
+        // return PaypalScreen(
+        //   amount: _grandTotalValue,
+        //   payment_type: payment_type,
+        //   payment_method_key: _selected_payment_method_key,
+        //   package_id: widget.packageId.toString(),
+        // );
       })).then((value) {
         onPopped(value);
       });
       ;
     } else if (_selected_payment_method == "razorpay") {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return RazorpayScreen(
-          amount: _grandTotalValue,
-          payment_type: payment_type,
-          payment_method_key: _selected_payment_method_key,
-          package_id:widget.packageId.toString(),
-        );
+        // return RazorpayScreen(
+        //   amount: _grandTotalValue,
+        //   payment_type: payment_type,
+        //   payment_method_key: _selected_payment_method_key,
+        //   package_id:widget.packageId.toString(),
+        // );
       })).then((value) {
         onPopped(value);
       });
@@ -1357,12 +1357,12 @@ class _CheckoutState extends State<Checkout> {
 
 
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return PaystackScreen(
-          amount: _grandTotalValue,
-          payment_type: payment_type,
-          payment_method_key: _selected_payment_method_key,
-          package_id: widget.packageId.toString(),
-        );
+        // return PaystackScreen(
+        //   amount: _grandTotalValue,
+        //   payment_type: payment_type,
+        //   payment_method_key: _selected_payment_method_key,
+        //   package_id: widget.packageId.toString(),
+        // );
       })).then((value) {
         onPopped(value);
       });
@@ -1370,12 +1370,12 @@ class _CheckoutState extends State<Checkout> {
 
 
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return IyzicoScreen(
-          amount: _grandTotalValue,
-          payment_type: payment_type,
-          payment_method_key: _selected_payment_method_key,
-          package_id: widget.packageId.toString(),
-        );
+        // return IyzicoScreen(
+        //   amount: _grandTotalValue,
+        //   payment_type: payment_type,
+        //   payment_method_key: _selected_payment_method_key,
+        //   package_id: widget.packageId.toString(),
+        // );
       })).then((value) {
         onPopped(value);
       });
@@ -1383,12 +1383,12 @@ class _CheckoutState extends State<Checkout> {
 
 
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return BkashScreen(
-          amount: _grandTotalValue,
-          payment_type: payment_type,
-          payment_method_key: _selected_payment_method_key,
-          package_id: widget.packageId.toString(),
-        );
+        // return BkashScreen(
+        //   amount: _grandTotalValue,
+        //   payment_type: payment_type,
+        //   payment_method_key: _selected_payment_method_key,
+        //   package_id: widget.packageId.toString(),
+        // );
       })).then((value) {
         onPopped(value);
       });
@@ -1396,12 +1396,12 @@ class _CheckoutState extends State<Checkout> {
 
 
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return NagadScreen(
-          amount: _grandTotalValue,
-          payment_type: payment_type,
-          payment_method_key: _selected_payment_method_key,
-          package_id: widget.packageId.toString(),
-        );
+        // return NagadScreen(
+        //   amount: _grandTotalValue,
+        //   payment_type: payment_type,
+        //   payment_method_key: _selected_payment_method_key,
+        //   package_id: widget.packageId.toString(),
+        // );
       })).then((value) {
         onPopped(value);
       });
@@ -1409,12 +1409,12 @@ class _CheckoutState extends State<Checkout> {
 
 
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return SslCommerzScreen(
-          amount: _grandTotalValue,
-          payment_type: payment_type,
-          payment_method_key: _selected_payment_method_key,
-          package_id: widget.packageId.toString(),
-        );
+        // return SslCommerzScreen(
+        //   amount: _grandTotalValue,
+        //   payment_type: payment_type,
+        //   payment_method_key: _selected_payment_method_key,
+        //   package_id: widget.packageId.toString(),
+        // );
       })).then((value) {
         onPopped(value);
       });
@@ -1422,12 +1422,12 @@ class _CheckoutState extends State<Checkout> {
 
 
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return FlutterwaveScreen(
-          amount: _grandTotalValue,
-          payment_type: payment_type,
-          payment_method_key: _selected_payment_method_key,
-          package_id: widget.packageId.toString(),
-        );
+        // return FlutterwaveScreen(
+        //   amount: _grandTotalValue,
+        //   payment_type: payment_type,
+        //   payment_method_key: _selected_payment_method_key,
+        //   package_id: widget.packageId.toString(),
+        // );
       })).then((value) {
         onPopped(value);
       });
@@ -1436,12 +1436,12 @@ class _CheckoutState extends State<Checkout> {
 
 
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return PaytmScreen(
-          amount: _grandTotalValue,
-          payment_type: payment_type,
-          payment_method_key: _selected_payment_method_key,
-          package_id: widget.packageId.toString(),
-        );
+        // return PaytmScreen(
+        //   amount: _grandTotalValue,
+        //   payment_type: payment_type,
+        //   payment_method_key: _selected_payment_method_key,
+        //   package_id: widget.packageId.toString(),
+        // );
       })).then((value) {
         onPopped(value);
       });
@@ -1450,12 +1450,12 @@ class _CheckoutState extends State<Checkout> {
 
 
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return KhaltiScreen(
-          amount: _grandTotalValue,
-          payment_type: payment_type,
-          payment_method_key: _selected_payment_method_key,
-          package_id: widget.packageId.toString(),
-        );
+        // return KhaltiScreen(
+        //   amount: _grandTotalValue,
+        //   payment_type: payment_type,
+        //   payment_method_key: _selected_payment_method_key,
+        //   package_id: widget.packageId.toString(),
+        // );
       })).then((value) {
         onPopped(value);
       });
