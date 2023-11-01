@@ -260,7 +260,8 @@ class _OrderListState extends State<OrderList> {
             width: MediaQuery.of(context).size.width * .4,
             child: new DropdownButton<PaymentStatus>(
               icon: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+               // padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                padding: const EdgeInsets.only(left: 39.0),
                 child: Icon(Icons.expand_more, color: Colors.black54),
               ),
               hint: Text(
@@ -291,7 +292,9 @@ class _OrderListState extends State<OrderList> {
             width: MediaQuery.of(context).size.width * .4,
             child: new DropdownButton<DeliveryStatus>(
               icon: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                //padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                padding: const EdgeInsets.only(left: 25.0),
+
                 child: Icon(Icons.expand_more, color: Colors.black54),
               ),
               hint: Text(
