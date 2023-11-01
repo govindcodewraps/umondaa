@@ -145,10 +145,10 @@ class _My_adsScreenState extends State<My_adsScreen> {
                               final thumbnailImage = snapshot.data.data[index].thumbnailImage;
                               return InkWell(
                                 onTap: () {
-                                  //Navigator.push(context, MaterialPageRoute(builder: (context)=>Edit_placead()));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Edit_placead(Product_ID:product_Id,)));
                                   print("Govind >>>>>>>>>>>>>>");
-                                  // product_Id = snapshot.data.data[index].id.toString();
-                                  // print("print product id ${product_Id}");
+                                   product_Id = snapshot.data.data[index].id.toString();
+                                   print("print product id ${product_Id}");
                                 },
                                 child: Container(
 
@@ -414,7 +414,7 @@ class _My_adsScreenState extends State<My_adsScreen> {
     };
 
     // Define the API endpoint
-    String url = 'https://webcluestechnology.com/demo/erp/umonda/api/v2/products/seller/138?page=1';
+    String url = 'https://webcluestechnology.com/demo/erp/umonda/api/v2/products/seller/${user_id.$}?page=1';
     //String url = "https://umonda.com/api/v2/payment-history/138";
 
     try {
