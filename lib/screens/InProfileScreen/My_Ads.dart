@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
+import '../../app_config.dart';
 import '../../custom/toast_component.dart';
 import '../../custom/useful_elements.dart';
 import '../../data_model/My_ads_list_model.dart';
@@ -145,10 +146,10 @@ class _My_adsScreenState extends State<My_adsScreen> {
                               final thumbnailImage = snapshot.data.data[index].thumbnailImage;
                               return InkWell(
                                 onTap: () {
-                                  //Navigator.push(context, MaterialPageRoute(builder: (context)=>Edit_placead()));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Edit_placead(Product_ID:product_Id,)));
                                   print("Govind >>>>>>>>>>>>>>");
-                                  // product_Id = snapshot.data.data[index].id.toString();
-                                  // print("print product id ${product_Id}");
+                                   product_Id = snapshot.data.data[index].id.toString();
+                                   print("print product id ${product_Id}");
                                 },
                                 child: Container(
 
@@ -414,7 +415,8 @@ class _My_adsScreenState extends State<My_adsScreen> {
     };
 
     // Define the API endpoint
-    String url = 'https://webcluestechnology.com/demo/erp/umonda/api/v2/products/seller/138?page=1';
+      String url = '${AppConfig.BASE_URL}/products/seller/${user_id.$}?page=1';
+     //String url = 'https://webcluestechnology.com/demo/erp/umonda/api/v2/products/seller/${user_id.$}?page=1';
     //String url = "https://umonda.com/api/v2/payment-history/138";
 
     try {
@@ -492,7 +494,9 @@ class _My_adsScreenState extends State<My_adsScreen> {
       var dio = Dio();
 
       var response = await dio.request(
-        'https://webcluestechnology.com/demo/erp/umonda/api/v2/product/delete',
+      //  '${AppConfig.BASE_URL}/api/v2/product/delete',
+        '${AppConfig.BASE_URL}/product/delete',
+      //  'https://webcluestechnology.com/demo/erp/umonda/api/v2/product/delete',
         options: Options(
           method: 'POST',
           headers: headers,

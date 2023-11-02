@@ -2173,8 +2173,8 @@ class _Edit_placeadState extends State<Edit_placead> {
                 child: Column(
                   children: [
 
-                    Text(widget.Product_ID),
-                    Text("GOVIND KUMAR"),
+                    // Text(widget.Product_ID),
+                    // Text("GOVIND KUMAR"),
 
                     // Text(globalResponseBody.toString()),
                     // listview(),
@@ -3461,8 +3461,11 @@ class _Edit_placeadState extends State<Edit_placead> {
                           elevation: 10,
                           child: Column(
                             children: [
-                              Text(widget.Product_ID),
-                              Text("GOVIND KUMAR"),
+                              // Text(widget.Product_ID),
+                              // Text("GOVIND KUMAR"),
+
+
+
                               // Text(globalResponseBody.toString()),
                               // listview(),
 
@@ -4000,59 +4003,61 @@ class _Edit_placeadState extends State<Edit_placead> {
 
 
                       //TESTING BUTTON
-                         ElevatedButton(onPressed: (){
-                           String selectedProduct = selectedProductIDs.map((item) => item.toString()).join(',').replaceAll(', ', ',');
 
 
-                           //product name
-                           var ProdName = _ProductName.text.toString().isEmpty ? snapshot.data.data[0].name.toString():_ProductName.text.toString();
-                           //categories
-                           var category = selectedProduct.isEmpty ? snapshot.data.data[0].categoryId.toString():selectedProduct;
-                           //brandId
-                           var brand = dropdownBrands.split(" ")[0].toString() == "Select" ?snapshot.data.data[0].brandId.toString():dropdownBrands.split(" ")[0].toString();
-                           //description
-                           var description = _Description.text.toString().isEmpty?snapshot.data.data[0].description.toString():_Description.text.toString();
-                          //mainPrice
-                           var amount = _PriceAED.text.toString() ==null ?snapshot.data.data[0].mainPrice.toString():_PriceAED.text.toString();
-                           //
-                           var email = _EmailID.text.toString();
-                           var password = _PassWord.text.toString();
-//minoffer
-                           var offer = _offerControler.text.toString().isEmpty?snapshot.data.data[0].minOfferPrice.toString():_offerControler.text.toString();
-                           // product images thumbnailImage
-                           var imagebase = allurlss ==null ? snapshot.data.data[0].thumbnailImage.toString():allurlss;
-                           var offerstatu= offerstatus.isEmpty? snapshot.data.data[0].minoffer.toString():offerstatus;
-
-
-                           var userid = user_id.$;
-                           //var imagebase = allurlss;
-
-
-                           print("Product name.: ${ProdName}");
-                           print("category.....: ${category}");
-                           print("Brandd........: ${brand}");
-                           print("Description..: ${description}");
-                           print("Amount.......: ${amount}");
-                           print("Email........: ${email}");
-                           print("password.....: ${password}");
-                           print("****************************************************************");
-
-                           print("Base 64 urlll....: ${imagebase}");
-                           print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
-
-                           //print("Base 64 url....: ${allurlss}");
-                           print("****************************************************************");
-                           print("User id  .....: ${user_id.$}");
-                           print("Offer price  .....: ${offer}");
-                           print("Offer Status  .....: ${offerstatu}");
-                           print("URLLLLLLLL  .....: ${base64Urls}");
-                           print("IMAGE_URLLLLL  .....: ${imageUrls}");
-                           print("Select Images  .....: ${selectedImages}");
-
-                           // place_ad_upload(ProdName,category,brand,description,offer,amount,offerstatus,email,password);
-
-
-          }, child: Text("DATAAA")),
+//                          ElevatedButton(onPressed: (){
+//                            String selectedProduct = selectedProductIDs.map((item) => item.toString()).join(',').replaceAll(', ', ',');
+//
+//
+//                            //product name
+//                            var ProdName = _ProductName.text.toString().isEmpty ? snapshot.data.data[0].name.toString():_ProductName.text.toString();
+//                            //categories
+//                            var category = selectedProduct.isEmpty ? snapshot.data.data[0].categoryId.toString():selectedProduct;
+//                            //brandId
+//                            var brand = dropdownBrands.split(" ")[0].toString() == "Select" ?snapshot.data.data[0].brandId.toString():dropdownBrands.split(" ")[0].toString();
+//                            //description
+//                            var description = _Description.text.toString().isEmpty?snapshot.data.data[0].description.toString():_Description.text.toString();
+//                           //mainPrice
+//                            var amount = _PriceAED.text.toString() ==null ?snapshot.data.data[0].mainPrice.toString():_PriceAED.text.toString();
+//                            //
+//                            var email = _EmailID.text.toString();
+//                            var password = _PassWord.text.toString();
+// //minoffer
+//                            var offer = _offerControler.text.toString().isEmpty?snapshot.data.data[0].minOfferPrice.toString():_offerControler.text.toString();
+//                            // product images thumbnailImage
+//                            var imagebase = allurlss ==null ? snapshot.data.data[0].thumbnailImage.toString():allurlss;
+//                            var offerstatu= offerstatus.isEmpty? snapshot.data.data[0].minoffer.toString():offerstatus;
+//
+//
+//                            var userid = user_id.$;
+//                            //var imagebase = allurlss;
+//
+//
+//                            print("Product name.: ${ProdName}");
+//                            print("category.....: ${category}");
+//                            print("Brandd........: ${brand}");
+//                            print("Description..: ${description}");
+//                            print("Amount.......: ${amount}");
+//                            print("Email........: ${email}");
+//                            print("password.....: ${password}");
+//                            print("****************************************************************");
+//
+//                            print("Base 64 urlll....: ${imagebase}");
+//                            print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+//
+//                            //print("Base 64 url....: ${allurlss}");
+//                            print("****************************************************************");
+//                            print("User id  .....: ${user_id.$}");
+//                            print("Offer price  .....: ${offer}");
+//                            print("Offer Status  .....: ${offerstatu}");
+//                            print("URLLLLLLLL  .....: ${base64Urls}");
+//                            print("IMAGE_URLLLLL  .....: ${imageUrls}");
+//                            print("Select Images  .....: ${selectedImages}");
+//
+//                            // place_ad_upload(ProdName,category,brand,description,offer,amount,offerstatus,email,password);
+//
+//
+//           }, child: Text("DATAAA")),
 
 
 
@@ -4294,7 +4299,8 @@ class _Edit_placeadState extends State<Edit_placead> {
     };
 
     // Define the API endpoint
-    String url = 'https://webcluestechnology.com/demo/erp/umonda/api/v2/products/${widget.Product_ID}';
+   // String url = 'https://webcluestechnology.com/demo/erp/umonda/api/v2/products/${widget.Product_ID}';
+    String url = '${AppConfig.BASE_URL}/products/${widget.Product_ID}';
     //String url = "https://umonda.com/api/v2/payment-history/138";
 
     try {

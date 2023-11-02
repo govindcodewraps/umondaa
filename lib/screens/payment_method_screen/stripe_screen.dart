@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/gestures.dart';
 import 'package:hardware_lo/app_config.dart';
 import 'package:hardware_lo/custom/toast_component.dart';
 import 'package:hardware_lo/helpers/shared_value_helper.dart';
@@ -13,11 +14,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:toast/toast.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../common_webview_screen.dart';
+
 class StripeScreen extends StatefulWidget {
   double amount;
   String payment_type;
   String payment_method_key;
   String package_id;
+
 
   StripeScreen(
       {Key key,
@@ -34,6 +38,7 @@ class StripeScreen extends StatefulWidget {
 class _StripeScreenState extends State<StripeScreen> {
   int _combined_order_id = 0;
   bool _order_init = false;
+  //String initial_url;
 
   WebViewController _webViewController = WebViewController();
 
@@ -45,48 +50,69 @@ class _StripeScreenState extends State<StripeScreen> {
     if (widget.payment_type == "cart_payment") {
       createOrder();
     }
+      stripe();
+
+    print(":::::::::::::::::::::::::::::::::::::::::::::::::::::");
     print("Amountt : ${widget.amount}");
     print("payment_typee :  ${widget.payment_type}");
     print("payment_method_keyy :  ${widget.payment_method_key}");
     print("package_idd : ${widget.package_id}");
-    stripe();
+    print("_combined_order_id : ${_combined_order_id}");
+    print(":::::::::::::::::::::::::::::::::::::::::::::::::::::");
+   // print(initial_url);
+    print(":::::::::::::::::::::::::::::::::::::::::::::::::::::");
+
+
   }
 
   stripe() {
-    String _initial_url =
-        "${AppConfig.BASE_URL}/stripe?payment_type=${widget.payment_type}&combined_order_id=${_combined_order_id}&amount=${widget.amount}&user_id=${user_id.$}&package_id=${widget.package_id}";
+    String  _initial_url =
+    //https://webcluestechnology.com/demo/erp/umonda
+    //"https://webcluestechnology.com/demo/erp/umonda/api/v2/stripe?payment_type=cart_payment&order_id=444&amount=1200&user_id=198";
+
+       //"https://webcluestechnology.com/demo/erp/umonda/api/v2/stripe?payment_type=${widget.payment_type}&combined_order_id=${_combined_order_id}&amount=${widget.amount}&user_id=${user_id.$}";
+       //"${AppConfig.BASE_URL}/stripe?payment_type=${widget.payment_type}&combined_order_id=${_combined_order_id}&amount=${widget.amount}&user_id=${user_id.$}";
         //"https://umonda.com/api/v2/stripe?payment_type=${widget.payment_type}&combined_order_id=${_combined_order_id}&amount=${widget.amount}&user_id=${user_id.$}&package_id=${widget.package_id}";
+       // "https://webcluestechnology.com/demo/erp/umonda/api/v2/stripe?payment_type=cart_payment&order_id=444&amount=1200&user_id=198";
+        "${AppConfig.BASE_URL}/stripe?payment_type=cart_payment&order_id=${_combined_order_id}&amount=${widget.amount}&user_id=${user_id.$}";
+        //"https://webcluestechnology.com/demo/erp/umonda/api/v2/stripe?payment_type=cart_payment&order_id=${_combined_order_id}&amount=${widget.amount}&user_id=${user_id.$}";
+    //"https://fictivebox.com/";
+
+      //"${AppConfig.BASE_URL}/stripe?payment_type=cart_payment&order_id=${_combined_order_id}&amount=${widget.amount}&user_id=${user_id.$}";
 
     _webViewController
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0x00000000))
-      ..setNavigationDelegate(
-        NavigationDelegate(
-          // onPageStarted: (controller) {
-          //   _webViewController.loadRequest(Uri.parse(_initial_url));
-          // },
-          onWebResourceError: (error) {},
-          onPageFinished: (page) {
-            if (page.contains("/stripe/success")) {
-              getData();
-            } else if (page.contains("/stripe/cancel")) {
-              ToastComponent.showDialog(
-                  AppLocalizations.of(context).payment_cancelled_ucf,
-                  gravity: Toast.center,
-                  duration: Toast.lengthLong);
-              Navigator.of(context).pop();
-              return;
-            }
-          },
-        ),
-      )
-      ..loadRequest(Uri.parse(_initial_url));
+      // ..setNavigationDelegate(
+      //   NavigationDelegate(
+      //     onPageStarted: (controller) {
+      //       _webViewController.loadRequest(Uri.parse(_initial_url));
+      //     },
+      //     onWebResourceError: (error) {},
+      //     onPageFinished: (page) {
+      //       if (page.contains("/stripe/success")) {
+      //         getData();
+      //       } else if (page.contains("/stripe/cancel")) {
+      //         ToastComponent.showDialog(
+      //             AppLocalizations.of(context).payment_cancelled_ucf,
+      //             gravity: Toast.center,
+      //             duration: Toast.lengthLong);
+      //         Navigator.of(context).pop();
+      //         return;
+      //       }
+      //     },
+      //   ),
+      // );
+      ..loadRequest(Uri.parse(_initial_url)
+      );
   }
 
   createOrder() async {
     var orderCreateResponse = await PaymentRepository()
         .getOrderCreateResponse(widget.payment_method_key);
-
+//  "owner_id":176,
+//     "user_id":198,
+//     "payment_type": "stripe"
     if (orderCreateResponse.result == false) {
       ToastComponent.showDialog(orderCreateResponse.message,
           gravity: Toast.center, duration: Toast.lengthLong);
@@ -96,7 +122,10 @@ class _StripeScreenState extends State<StripeScreen> {
 
     _combined_order_id = orderCreateResponse.combined_order_id;
     _order_init = true;
-    setState(() {});
+    setState(() {
+      print("Done Done Done ");
+      stripe();
+    });
   }
 
   @override
@@ -143,7 +172,7 @@ class _StripeScreenState extends State<StripeScreen> {
 
   buildBody() {
     //print("init url");
-    //print(initial_url);
+    //print(_initial_url);
 
     if (_order_init == false &&
         _combined_order_id == 0 &&
@@ -155,9 +184,56 @@ class _StripeScreenState extends State<StripeScreen> {
       );
     } else {
       return SingleChildScrollView(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+        child:
+            // Column(
+            //   children: [
+            //     Text("data"),
+            //     Text("data"),
+            //     Text("data"),
+            //     Text("data"),
+            //     Text("data"),
+            //   ],
+            // )
+
+
+
+
+        // RichText(
+        //   maxLines: 2,
+        //   text:
+        //   TextSpan(
+        //     recognizer: TapGestureRecognizer()
+        //       ..onTap = () {
+        //         Navigator.push(
+        //             context,
+        //             MaterialPageRoute(
+        //                 builder: (context) =>
+        //                     CommonWebviewScreen(
+        //                       page_name:
+        //                       "Shipping & Delivery",
+        //                       url:
+        //                       //"https://umonm.com/",
+        //
+        //                       "${AppConfig.RAW_BASE_URL}/mobile-page/terms",
+        //                     )));
+        //       },
+        //     style:
+        //     TextStyle(color: MyTheme.accent_color),
+        //     text: " Shipping & Delivery",
+        //   ),
+        // ),
+
+
+
+
+
+
+        Container(
+           width: MediaQuery.of(context).size.width,
+           height: MediaQuery.of(context).size.height,
+
+         // width: 500,
+          //height: 500,
           child: WebViewWidget(
             controller: _webViewController,
           ),

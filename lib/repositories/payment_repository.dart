@@ -46,8 +46,12 @@ class PaymentRepository {
 
   Future<dynamic> getOrderCreateResponse(
       @required payment_method) async {
-    var post_body = jsonEncode({"payment_type": "${payment_method}"});
+    var post_body = jsonEncode({"payment_type": "${payment_method}","user_id":user_id.$});
 
+
+    //  "owner_id":176,
+    //     "user_id":198,
+    //     "payment_type": "stripe"
     Uri url = Uri.parse("${AppConfig.BASE_URL}/order/store");
     final response = await http.post(url,
         headers: {
@@ -86,14 +90,15 @@ class PaymentRepository {
       @required var package_id,
       @required double amount) async {
     Uri url = Uri.parse(
-        "${AppConfig.BASE_URL}/flutterwave/payment/url?payment_type=${payment_type}&combined_order_id=${combined_order_id}&amount=${amount}&user_id=${user_id.$}&package_id=$package_id");
+        "${AppConfig.BASE_URL}/flutterwave/payment/url?payment_type=${payment_type}&combined_order_id=${combined_order_id}&amount=${amount}&user_id=${user_id.$}");
+       // "${AppConfig.BASE_URL}/flutterwave/payment/url?payment_type=${payment_type}&combined_order_id=${combined_order_id}&amount=${amount}&user_id=${user_id.$}&package_id=$package_id");
 
     final response = await http.get(url, headers: {
       "App-Language": app_language.$,
     });
 
-    //print(url);
-    //print(response.body.toString());
+    print(url);
+    print("payment url ${response.body.toString()}");
     return flutterwaveUrlResponseFromJson(response.body);
   }
 

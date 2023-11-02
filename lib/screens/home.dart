@@ -2258,6 +2258,7 @@ import 'package:hardware_lo/presenter/home_presenter.dart';
 import 'package:hardware_lo/screens/category_products.dart';
 import 'package:hardware_lo/screens/filter.dart';
 import 'package:hardware_lo/screens/flash_deal_list.dart';
+import 'package:hardware_lo/screens/payment_method_screen/stripe_screen.dart';
 import 'package:hardware_lo/screens/todays_deal_products.dart';
 import 'package:hardware_lo/screens/top_brands.dart';
 import 'package:hardware_lo/screens/top_selling_products.dart';
@@ -3170,6 +3171,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               onTap: () {
                 // Navigator.pop(context);
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>Wishlist()));
+               // Navigator.push(context, MaterialPageRoute(builder: (context)=>StripeScreen()));
               },
             ),
             ListTile(
@@ -3185,7 +3187,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             ),
             ListTile(
               leading:Image.asset("assets/truck.png",height: 20,width: 20,color: Colors.grey,),
-              title:  RichText(
+              title:
+
+              RichText(
                 maxLines: 2,
                 text:
                 TextSpan(
@@ -3310,6 +3314,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                     url:
                                     //"https://umonm.com/",
                                     "${AppConfig.RAW_BASE_URL}/mobile-page/about-us",
+                                    //"https://webcluestechnology.com/demo/erp/umonda/api/v2/stripe?payment_type=cart_payment&order_id=444&amount=1200&user_id=198",
+
+                                    //"https://umonda.com/about-us",
                                   )));
                     },
                   style:
