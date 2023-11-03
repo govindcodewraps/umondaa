@@ -1806,10 +1806,10 @@ class _CheckoutState extends State<Checkout> {
                             child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Please initiate the payment within 3 days via bank transfer on the below mentioned account details."),
+                                Text("Please initiate the payment within 3 days via bank transfer on the below mentioned account details.",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600),),
 
                                SizedBox(height: 10,),
-                                Text("Account Details"),
+                                Text("Account Details",style: TextStyle(fontWeight: FontWeight.w600),),
                                 Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(12.0),
@@ -1847,6 +1847,7 @@ class _CheckoutState extends State<Checkout> {
                                     ],),
                                   ],),
                                 ),
+                                SizedBox(height: 40,),
                               ],
                             ),
                           ),
@@ -1874,7 +1875,7 @@ class _CheckoutState extends State<Checkout> {
                     )*/
                   ),
                   height:
-                  widget.paymentFor == PaymentFor.ManualPayment ? 80 : 140,
+                  widget.paymentFor == PaymentFor.ManualPayment ? 80 : 160,
                   //color: Colors.white,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 16,right: 16),
@@ -1967,34 +1968,6 @@ class _CheckoutState extends State<Checkout> {
                             ],
                           ),
                         ),
-
-                       /* Padding(
-                          padding: const EdgeInsets.only(top: 30.0),
-                          child: Container(
-                            height: 45,
-                            child: Btn.minWidthFixHeight(
-                              minWidth: MediaQuery.of(context).size.width,
-                              height: 50,
-                              color: MyTheme.accent_color,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                  const BorderRadius.all(Radius.circular(6.0))),
-                              child: Text(
-                                AppLocalizations.of(context)
-                                    .login_screen_log_in,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              onPressed: _isAgree
-                                  ? () {
-                                onPressedLogin();
-                              }
-                                  : null,
-                            ),
-                          ),
-                        ),*/
 
                       ],
                     ),

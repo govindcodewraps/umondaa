@@ -146,7 +146,7 @@ class _My_adsScreenState extends State<My_adsScreen> {
                               final thumbnailImage = snapshot.data.data[index].thumbnailImage;
                               return InkWell(
                                 onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Edit_placead(Product_ID:product_Id,)));
+                                 // Navigator.push(context, MaterialPageRoute(builder: (context)=>Edit_placead(Product_ID:product_Id,)));
                                   print("Govind >>>>>>>>>>>>>>");
                                    product_Id = snapshot.data.data[index].id.toString();
                                    print("print product id ${product_Id}");

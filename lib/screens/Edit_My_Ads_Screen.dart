@@ -920,7 +920,7 @@ class _Edit_placeadState extends State<Edit_placead> {
                                                                               shrinkWrap: true,
                                                                               physics: const NeverScrollableScrollPhysics(),
                                                                               itemBuilder: (context, index) {
-                                                                                if ([1,120,2].contains(SubchildList[index].id)) {
+                                                                                if ([120].contains(SubchildList[index].id)) {
                                                                                   isCheckedSubchildList[index] = true;
                                                                                 } else {
                                                                                   //isCheckedList[index] = false;
