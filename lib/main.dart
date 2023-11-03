@@ -1,4 +1,4 @@
-  import 'package:hardware_lo/other_config.dart';
+import 'package:hardware_lo/other_config.dart';
 import 'package:hardware_lo/presenter/cart_counter.dart';
 import 'package:hardware_lo/presenter/currency_presenter.dart';
 import 'package:hardware_lo/presenter/home_presenter.dart';
@@ -39,7 +39,6 @@ import 'package:provider/provider.dart';
 import 'package:hardware_lo/providers/locale_provider.dart';
 import 'lang_config.dart';
 import 'package:firebase_core/firebase_core.dart';
-
 import 'screens/auction_products.dart';
 import 'screens/auction_products_details.dart';
 import 'screens/brand_products.dart';

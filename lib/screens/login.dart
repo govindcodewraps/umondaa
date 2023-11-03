@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:hardware_lo/app_config.dart';
 import 'package:hardware_lo/custom/btn.dart';
 import 'package:hardware_lo/my_theme.dart';
@@ -32,7 +33,9 @@ import 'package:crypto/crypto.dart';
 import 'dart:convert';
 import 'dart:io' show Platform;
 
+import '../custom/device_info.dart';
 import '../repositories/address_repository.dart';
+import 'common_webview_screen.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -46,7 +49,7 @@ class _LoginState extends State<Login> {
 
   // PhoneNumber phoneCode = PhoneNumber(isoCode: 'US', dialCode: "+1");
   var countries_code = <String>[];
-
+  bool _isAgree = false;
   String _phone = "";
 
   //controllers
@@ -559,35 +562,144 @@ class _LoginState extends State<Login> {
                   ],
                 ),
               ),
+
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: 15,
+                      width: 15,
+                      child: Checkbox(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6)),
+                          value: _isAgree,
+                          onChanged: (newValue) {
+                            _isAgree = newValue;
+                            setState(() {});
+                          }),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Container(
+                        width: DeviceInfo(context).width - 130,
+                        child: RichText(
+                            maxLines: 2,
+                            text: TextSpan(
+                                style: TextStyle(
+                                    color: MyTheme.font_grey, fontSize: 12),
+                                children: [
+                                  TextSpan(
+                                    text: "I agree to the",
+                                  ),
+                                  TextSpan(
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    CommonWebviewScreen(
+                                                      page_name:
+                                                      "Terms Conditions",
+                                                      url:
+                                                      //"https://umonm.com/",
+                                                      "${AppConfig.RAW_BASE_URL}/mobile-page/terms",
+                                                    )));
+                                      },
+                                    style:
+                                    TextStyle(color: MyTheme.accent_color),
+                                    text: " Terms Conditions",
+                                  ),
+                                  TextSpan(
+                                    text: " &",
+                                  ),
+                                  TextSpan(
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    CommonWebviewScreen(
+                                                      page_name:
+                                                      "Privacy Policy",
+                                                      url:
+                                                      "${AppConfig.RAW_BASE_URL}/mobile-page/privacy-policy",
+                                                    )));
+                                      },
+                                    text: " Privacy Policy",
+                                    style:
+                                    TextStyle(color: MyTheme.accent_color),
+                                  )
+                                ])),
+                      ),
+                    ),
+
+                  ],
+                ),
+              ),
+
               Padding(
                 padding: const EdgeInsets.only(top: 30.0),
                 child: Container(
                   height: 45,
-                  decoration: BoxDecoration(
-                      border:
-                          Border.all(color: MyTheme.textfield_grey, width: 1),
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(12.0))),
                   child: Btn.minWidthFixHeight(
                     minWidth: MediaQuery.of(context).size.width,
                     height: 50,
                     color: MyTheme.accent_color,
                     shape: RoundedRectangleBorder(
                         borderRadius:
-                            const BorderRadius.all(Radius.circular(6.0))),
+                        const BorderRadius.all(Radius.circular(6.0))),
                     child: Text(
-                      AppLocalizations.of(context).login_screen_log_in,
+                      AppLocalizations.of(context)
+                          .login_screen_log_in,
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 13,
+                          fontSize: 14,
                           fontWeight: FontWeight.w600),
                     ),
-                    onPressed: () {
+                    onPressed: _isAgree
+                        ? () {
                       onPressedLogin();
-                    },
+                    }
+                        : null,
                   ),
                 ),
               ),
+
+
+
+              // Padding(
+              //   padding: const EdgeInsets.only(top: 30.0),
+              //   child: Container(
+              //     height: 45,
+              //     decoration: BoxDecoration(
+              //         border:
+              //             Border.all(color: MyTheme.textfield_grey, width: 1),
+              //         borderRadius:
+              //             const BorderRadius.all(Radius.circular(12.0))),
+              //     child: Btn.minWidthFixHeight(
+              //       minWidth: MediaQuery.of(context).size.width,
+              //       height: 50,
+              //       color: MyTheme.accent_color,
+              //       shape: RoundedRectangleBorder(
+              //           borderRadius:
+              //               const BorderRadius.all(Radius.circular(6.0))),
+              //       child: Text(
+              //         AppLocalizations.of(context).login_screen_log_in,
+              //         style: TextStyle(
+              //             color: Colors.white,
+              //             fontSize: 13,
+              //             fontWeight: FontWeight.w600),
+              //       ),
+              //       onPressed: () {
+              //         onPressedLogin();
+              //       },
+              //     ),
+              //   ),
+              // ),
               Padding(
                 padding: const EdgeInsets.only(top: 15.0, bottom: 15),
                 child: Center(

@@ -1093,6 +1093,9 @@ Navigator.pop(loadingcontext);
 
 
 
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:flutter/gestures.dart';
 import 'package:hardware_lo/custom/box_decorations.dart';
 import 'package:hardware_lo/custom/btn.dart';
 import 'package:hardware_lo/custom/enum_classes.dart';
@@ -1124,6 +1127,10 @@ import 'package:hardware_lo/screens/payment_method_screen/offline_screen.dart';
 import 'package:hardware_lo/screens/payment_method_screen/paytm_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../Models/withdwawalamountmodel.dart';
+import '../custom/device_info.dart';
+import 'common_webview_screen.dart';
+
 class Checkout extends StatefulWidget {
   int order_id; // only need when making manual payment from order details
   String list;
@@ -1132,6 +1139,7 @@ class Checkout extends StatefulWidget {
   final double rechargeAmount;
   final String title;
   var packageId;
+
 
 
 
@@ -1171,6 +1179,7 @@ class _CheckoutState extends State<Checkout> {
   BuildContext loadingcontext;
   String payment_type = "cart_payment";
   String _title;
+  bool _isAgree = false;
 
   @override
   void initState() {
@@ -1727,6 +1736,9 @@ class _CheckoutState extends State<Checkout> {
 
   @override
   Widget build(BuildContext context) {
+
+
+
     return Directionality(
       textDirection: app_language_rtl.$ ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
@@ -1735,6 +1747,8 @@ class _CheckoutState extends State<Checkout> {
           bottomNavigationBar: buildBottomAppBar(context),
           body: Stack(
             children: [
+
+
               RefreshIndicator(
                 color: MyTheme.accent_color,
                 backgroundColor: Colors.white,
@@ -1751,9 +1765,95 @@ class _CheckoutState extends State<Checkout> {
                           padding: const EdgeInsets.all(16.0),
                           child: buildPaymentMethodList(),
                         ),
+                       if (_selected_payment_method == "wallet_system")
+
+                         withdrawalaccount_widget(),
+
+                      //    Padding(
+                      //     padding: const EdgeInsets.only(left: 35,right: 35),
+                      //     child: Container(
+                      //         decoration: BoxDecoration(
+                      //           borderRadius: BorderRadius.circular(12.0),
+                      //           border: Border.all(color: Colors.black38),
+                      //           // color:Color(0xffFEE572),
+                      //           // boxShadow:const [
+                      //           //   BoxShadow(
+                      //           //     color: Colors.black,
+                      //           //     blurRadius: 2.0,
+                      //           //     spreadRadius: 0.0,
+                      //           //     offset: Offset(2.0, 2.0,), // shadow direction: bottom right
+                      //           //   )
+                      //           // ],
+                      //         ),
+                      //         padding: EdgeInsets.only(left: 16,right: 16,top: 18,bottom: 18),
+                      //         child:
+                      //         Row(
+                      //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      //           children: [
+                      //             Text("Your wallet balance:",style: TextStyle(color: Colors.grey),),
+                      //             Text("AED 0.00"),
+                      //
+                      // ],)
+                      //     ),
+                      //   ),
+
+
+
+                        if (_selected_payment_method == "cash_payment")
+                         // Text("Account Details"),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 36,right: 36),
+                            child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Please initiate the payment within 3 days via bank transfer on the below mentioned account details."),
+
+                               SizedBox(height: 10,),
+                                Text("Account Details"),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    border: Border.all(color: Colors.black38),
+                                   // color:Color(0xffFEE572),
+                                    // boxShadow:const [
+                                    //   BoxShadow(
+                                    //     color: Colors.black,
+                                    //     blurRadius: 2.0,
+                                    //     spreadRadius: 0.0,
+                                    //     offset: Offset(2.0, 2.0,), // shadow direction: bottom right
+                                    //   )
+                                    // ],
+                                  ),
+                                  padding: const EdgeInsets.only(left: 20,right: 10,bottom: 10,top: 10),
+                                  child: Column(children: [
+                                    Row(children: [
+                                      Text("Name:"),
+                                      SizedBox(width: 7,),
+                                      Text("UMONDA LLC"),
+                                    ],),
+                                    Divider(),
+                                    SizedBox(height: 2,),
+                                    Row(children: [
+                                      Text("IBAN:"),
+                                      SizedBox(width: 7,),
+                                      Text("AE3 2086 0000009914678051"),
+                                    ],),
+                                    Divider(),
+                                    SizedBox(height: 2,),
+                                    Row(children: [
+                                      Text("BIC:"),
+                                      SizedBox(width: 7,),
+                                      Text("WIOBAEADXXX"),
+                                    ],),
+                                  ],),
+                                ),
+                              ],
+                            ),
+                          ),
                         Container(
                           height: 140,
                         )
+
                       ]),
                     )
                   ],
@@ -1777,9 +1877,10 @@ class _CheckoutState extends State<Checkout> {
                   widget.paymentFor == PaymentFor.ManualPayment ? 80 : 140,
                   //color: Colors.white,
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.only(left: 16,right: 16),
                     child: Column(
                       children: [
+
                         widget.paymentFor == PaymentFor.Order
                             ? Padding(
                           padding:
@@ -1788,12 +1889,122 @@ class _CheckoutState extends State<Checkout> {
                         )
                             : Container(),
                         grandTotalSection(),
+                        //Text("data"),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: 15,
+                                width: 15,
+                                child: Checkbox(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(6)),
+                                    value: _isAgree,
+                                    onChanged: (newValue) {
+                                      _isAgree = newValue;
+                                      setState(() {});
+                                    }),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: Container(
+                                  width: DeviceInfo(context).width - 130,
+                                  child: RichText(
+                                      maxLines: 2,
+                                      text: TextSpan(
+                                          style: TextStyle(
+                                              color: MyTheme.font_grey, fontSize: 12),
+                                          children: [
+                                            TextSpan(
+                                              text: "I agree to the",
+                                            ),
+                                            TextSpan(
+                                              recognizer: TapGestureRecognizer()
+                                                ..onTap = () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              CommonWebviewScreen(
+                                                                page_name:
+                                                                "Terms Conditions",
+                                                                url:
+                                                                //"https://umonm.com/",
+                                                                "${AppConfig.RAW_BASE_URL}/mobile-page/terms",
+                                                              )));
+                                                },
+                                              style:
+                                              TextStyle(color: MyTheme.accent_color),
+                                              text: " Terms Conditions",
+                                            ),
+                                            TextSpan(
+                                              text: " &",
+                                            ),
+                                            TextSpan(
+                                              recognizer: TapGestureRecognizer()
+                                                ..onTap = () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              CommonWebviewScreen(
+                                                                page_name:
+                                                                "Privacy Policy",
+                                                                url:
+                                                                "${AppConfig.RAW_BASE_URL}/mobile-page/privacy-policy",
+                                                              )));
+                                                },
+                                              text: " Privacy Policy",
+                                              style:
+                                              TextStyle(color: MyTheme.accent_color),
+                                            )
+                                          ])),
+                                ),
+                              ),
+
+                            ],
+                          ),
+                        ),
+
+                       /* Padding(
+                          padding: const EdgeInsets.only(top: 30.0),
+                          child: Container(
+                            height: 45,
+                            child: Btn.minWidthFixHeight(
+                              minWidth: MediaQuery.of(context).size.width,
+                              height: 50,
+                              color: MyTheme.accent_color,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  const BorderRadius.all(Radius.circular(6.0))),
+                              child: Text(
+                                AppLocalizations.of(context)
+                                    .login_screen_log_in,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              onPressed: _isAgree
+                                  ? () {
+                                onPressedLogin();
+                              }
+                                  : null,
+                            ),
+                          ),
+                        ),*/
 
                       ],
                     ),
                   ),
                 ),
-              )
+              ),
+
+
+
+
             ],
           )),
     );
@@ -2040,7 +2251,13 @@ class _CheckoutState extends State<Checkout> {
         ),
       ),
     );*/
+
+
+
   }
+
+
+
 
   BottomAppBar buildBottomAppBar(BuildContext context) {
     return BottomAppBar(
@@ -2074,9 +2291,16 @@ class _CheckoutState extends State<Checkout> {
                     fontSize: 16,
                     fontWeight: FontWeight.w600),
               ),
-              onPressed: () {
+              // onPressed: () {
+              //   onPressPlaceOrderOrProceed();
+              // },
+
+              onPressed: _isAgree
+                  ? () {
                 onPressPlaceOrderOrProceed();
-              },
+              }
+                  : null,
+
             )
           ],
         ),
@@ -2164,5 +2388,70 @@ class _CheckoutState extends State<Checkout> {
               ));
         });
   }
+
+  Widget withdrawalaccount_widget() {
+    return
+      FutureBuilder(
+          future: withdrawalaccount(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+
+              return
+                Container(
+                  padding: EdgeInsets.only(top: 27,left: 10,right: 10),
+                  height: 150,
+                  // width: MediaQuery.of(context).size.width*0.4,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      //border: Border.all(color: MyTheme.accent_color),
+                      boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,offset: Offset(1,3))]
+                  ),
+                  child:Column(
+                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SizedBox(height:4),
+                      Text("AED " + (snapshot.data[0].adminToPay ?? "").toString(), style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
+                      SizedBox(height:4),
+                      Text("Pending Balance", style: TextStyle(fontSize: 15,)),
+                    ],
+                  ),
+                );
+
+
+            }
+            else{
+              return
+                Container(
+
+
+                    child: Center(child: CircularProgressIndicator()));
+            }
+          }
+      );
+  }
+
+  Future<List<Withdrawalamount>> withdrawalaccount() async {
+    var url = Uri.parse('${AppConfig.BASE_URL}/money-withdraw-requests/${user_id.$}');
+    // var url = Uri.parse('${AppConfig.BASE_URL}/money-withdraw-requests/138');
+
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+
+      List<dynamic> jsonList = json.decode(response.body);
+
+      List<Withdrawalamount> itemList = jsonList.map((json) => Withdrawalamount.fromJson(json)).toList();
+
+      print("Withdrawalamount${response.body}");
+      //print(response.body);
+
+      return itemList;
+
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
 }
 
