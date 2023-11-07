@@ -408,259 +408,266 @@ class _ProfileState extends State<Profile> {
               ],
             ),
 
-
+          if (is_logged_in.$)
           Column(
             children: [
-              if (is_logged_in.$) // Check if the user is logged in
-                buildBottomVerticalCardListItem(
-                  "assets/shop.png",
-                  LangText(context).local.browse_all_sellers_ucf,
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
-                      return Moneywithdrawal();
-                    }));
-                  },
-                )
-              else
-                Material(
-                  child: InkWell(
-                    // Disabled button
-                    child: ColorFiltered(
-                      colorFilter: ColorFilter.mode(
-                        Colors.white, // Specify the disabled color
-                        BlendMode.color, // Adjust blend mode as needed
-                      ),
-                      child:
-
-                      Container(
-                        height: 20,
-                        child: TextButton(
-                          // onPressed: onPressed,
-                          style: TextButton.styleFrom(
-                              splashFactory: NoSplash.splashFactory,
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.zero),
-                          child:
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                "assets/shop.png",
-                                color: Colors.grey, // Image color set to grey
-                              ),
-                              SizedBox(width: 20,),
-                              Text(
-                                LangText(context).local.browse_all_sellers_ucf,
-                                style: TextStyle(color: Colors.grey), // Text color set to grey
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-
+              Column(
+                children: [
+                  if (is_logged_in.$) // Check if the user is logged in
+                    buildBottomVerticalCardListItem(
+                      "assets/shop.png",
+                      LangText(context).local.browse_all_sellers_ucf,
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) {
+                          return Moneywithdrawal();
+                        }));
+                      },
                     ),
-                    onTap: () {
-                      showLoginWarning();
-                      // Add any custom action when the disabled button is tapped
-                    },
+                  // else
+                  //   Material(
+                  //     child: InkWell(
+                  //       // Disabled button
+                  //       child: ColorFiltered(
+                  //         colorFilter: ColorFilter.mode(
+                  //           Colors.white, // Specify the disabled color
+                  //           BlendMode.color, // Adjust blend mode as needed
+                  //         ),
+                  //         child:
+                  //
+                  //         Container(
+                  //           height: 20,
+                  //           child: TextButton(
+                  //             // onPressed: onPressed,
+                  //             style: TextButton.styleFrom(
+                  //                 splashFactory: NoSplash.splashFactory,
+                  //                 alignment: Alignment.center,
+                  //                 padding: EdgeInsets.zero),
+                  //             child:
+                  //             Row(
+                  //               crossAxisAlignment: CrossAxisAlignment.center,
+                  //               children: [
+                  //                 Image.asset(
+                  //                   "assets/shop.png",
+                  //                   color: Colors.grey, // Image color set to grey
+                  //                 ),
+                  //                 SizedBox(width: 20,),
+                  //                 Text(
+                  //                   LangText(context).local.browse_all_sellers_ucf,
+                  //                   style: TextStyle(color: Colors.grey), // Text color set to grey
+                  //                 ),
+                  //               ],
+                  //             ),
+                  //           ),
+                  //         ),
+                  //
+                  //       ),
+                  //       onTap: () {
+                  //         showLoginWarning();
+                  //         // Add any custom action when the disabled button is tapped
+                  //       },
+                  //     ),
+                  //   ),
+
+
+                  Divider(
+                    thickness: 1,
+                    color: MyTheme.light_grey,
                   ),
-                ),
-              Divider(
-                thickness: 1,
-                color: MyTheme.light_grey,
+                ],
+              ),
+              Column(
+                children: [
+                  if (is_logged_in.$) // Check if the user is logged in
+                    buildBottomVerticalCardListItem(
+                      "assets/download.png",
+                      LangText(context).local.all_digital_products_ucf,
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) {
+                          return PaymentScreen();
+                        }));
+                      },
+                    ),
+                  // else
+                  //   Material(
+                  //     child: InkWell(
+                  //       // Disabled button
+                  //       child: ColorFiltered(
+                  //         colorFilter: ColorFilter.mode(
+                  //           Colors.white, // Specify the disabled color
+                  //           BlendMode.color, // Adjust blend mode as needed
+                  //         ),
+                  //         child:
+                  //
+                  //         Container(
+                  //           height: 20,
+                  //           child: TextButton(
+                  //             // onPressed: onPressed,
+                  //             style: TextButton.styleFrom(
+                  //                 splashFactory: NoSplash.splashFactory,
+                  //                 alignment: Alignment.center,
+                  //                 padding: EdgeInsets.zero),
+                  //             child:
+                  //             Row(
+                  //               crossAxisAlignment: CrossAxisAlignment.center,
+                  //               children: [
+                  //                 Image.asset(
+                  //                   "assets/download.png",
+                  //                    color: Colors.grey, // Image color set to grey
+                  //                 ),
+                  //                 SizedBox(width: 20,),
+                  //                 Text(
+                  //                   LangText(context).local.all_digital_products_ucf,
+                  //                   style: TextStyle(color: Colors.grey), // Text color set to grey
+                  //                 ),
+                  //               ],
+                  //             ),
+                  //           ),
+                  //         ),
+                  //
+                  //       ),
+                  //       onTap: () {
+                  //         showLoginWarning();
+                  //         // Add any custom action when the disabled button is tapped
+                  //       },
+                  //     ),
+                  //   ),
+
+                  Divider(
+                    thickness: 1,
+                    color: MyTheme.light_grey,
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  if (is_logged_in.$) // Check if the user is logged in
+                    buildBottomVerticalCardListItem(
+                      "assets/shop.png",
+                      LangText(context).local.followed_sellers_ucf,
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) {
+                          return CommissionHistoryScreen();
+                        }));
+                      },
+                    ),
+
+                  // else
+                  //   Material(
+                  //     child: InkWell(
+                  //       // Disabled button
+                  //       child: ColorFiltered(
+                  //         colorFilter: ColorFilter.mode(
+                  //           Colors.white, // Specify the disabled color
+                  //           BlendMode.color, // Adjust blend mode as needed
+                  //         ),
+                  //         child:
+                  //
+                  //         Container(
+                  //           height: 20,
+                  //           child: TextButton(
+                  //             // onPressed: onPressed,
+                  //             style: TextButton.styleFrom(
+                  //                 splashFactory: NoSplash.splashFactory,
+                  //                 alignment: Alignment.center,
+                  //                 padding: EdgeInsets.zero),
+                  //             child:
+                  //             Row(
+                  //               crossAxisAlignment: CrossAxisAlignment.center,
+                  //               children: [
+                  //                 Image.asset(
+                  //                   "assets/shop.png",
+                  //                   color: Colors.grey, // Image color set to grey
+                  //                 ),
+                  //                 SizedBox(width: 20,),
+                  //                 Text(
+                  //                   LangText(context).local.followed_sellers_ucf,
+                  //                   style: TextStyle(color: Colors.grey), // Text color set to grey
+                  //                 ),
+                  //               ],
+                  //             ),
+                  //           ),
+                  //         ),
+                  //
+                  //       ),
+                  //       onTap: () {
+                  //         showLoginWarning();
+                  //         // Add any custom action when the disabled button is tapped
+                  //       },
+                  //     ),
+                  //   ),
+
+                  Divider(
+                    thickness: 1,
+                    color: MyTheme.light_grey,
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  if (is_logged_in.$) // Check if the user is logged in
+                    buildBottomVerticalCardListItem(
+                      "assets/delete.png",
+                      //"DDDDDA",
+                      LangText(context).local.delete_my_account,
+                      onPressed: () {
+                        deleteWarningDialog();
+                      },
+                    ),
+                  // else
+                  //   Material(
+                  //     child: InkWell(
+                  //       // Disabled button
+                  //       child: ColorFiltered(
+                  //         colorFilter: ColorFilter.mode(
+                  //           Colors.white, // Specify the disabled color
+                  //           BlendMode.color, // Adjust blend mode as needed
+                  //         ),
+                  //         child:
+                  //
+                  //         Container(
+                  //           height: 20,
+                  //           child: TextButton(
+                  //             // onPressed: onPressed,
+                  //             style: TextButton.styleFrom(
+                  //                 splashFactory: NoSplash.splashFactory,
+                  //                 alignment: Alignment.center,
+                  //                 padding: EdgeInsets.zero),
+                  //             child:
+                  //             Row(
+                  //               crossAxisAlignment: CrossAxisAlignment.center,
+                  //               children: [
+                  //                 Image.asset(
+                  //                   "assets/delete.png",
+                  //                   color: Colors.grey, // Image color set to grey
+                  //                 ),
+                  //                 SizedBox(width: 20,),
+                  //                 Text(
+                  //                   "DD",
+                  //                   // LangText(context).local.delete_my_account,
+                  //                   style: TextStyle(color: Colors.grey), // Text color set to grey
+                  //                 ),
+                  //               ],
+                  //             ),
+                  //           ),
+                  //         ),
+                  //
+                  //       ),
+                  //       onTap: () {
+                  //         showLoginWarning();
+                  //         // Add any custom action when the disabled button is tapped
+                  //       },
+                  //     ),
+                  //   ),
+
+                  Divider(
+                    thickness: 1,
+                    color: MyTheme.light_grey,
+                  ),
+                ],
               ),
             ],
           ),
 
-
-          Column(
-            children: [
-              if (is_logged_in.$) // Check if the user is logged in
-                buildBottomVerticalCardListItem(
-                  "assets/download.png",
-                  LangText(context).local.all_digital_products_ucf,
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
-                      return PaymentScreen();
-                    }));
-                  },
-                )
-              else
-                Material(
-                  child: InkWell(
-                    // Disabled button
-                    child: ColorFiltered(
-                      colorFilter: ColorFilter.mode(
-                        Colors.white, // Specify the disabled color
-                        BlendMode.color, // Adjust blend mode as needed
-                      ),
-                      child:
-
-                      Container(
-                        height: 20,
-                        child: TextButton(
-                          // onPressed: onPressed,
-                          style: TextButton.styleFrom(
-                              splashFactory: NoSplash.splashFactory,
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.zero),
-                          child:
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                "assets/download.png",
-                                 color: Colors.grey, // Image color set to grey
-                              ),
-                              SizedBox(width: 20,),
-                              Text(
-                                LangText(context).local.all_digital_products_ucf,
-                                style: TextStyle(color: Colors.grey), // Text color set to grey
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-
-                    ),
-                    onTap: () {
-                      showLoginWarning();
-                      // Add any custom action when the disabled button is tapped
-                    },
-                  ),
-                ),
-              Divider(
-                thickness: 1,
-                color: MyTheme.light_grey,
-              ),
-            ],
-          ),
-
-
-          Column(
-            children: [
-              if (is_logged_in.$) // Check if the user is logged in
-                buildBottomVerticalCardListItem(
-                  "assets/shop.png",
-                  LangText(context).local.followed_sellers_ucf,
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
-                      return CommissionHistoryScreen();
-                    }));
-                  },
-                )
-              else
-                Material(
-                  child: InkWell(
-                    // Disabled button
-                    child: ColorFiltered(
-                      colorFilter: ColorFilter.mode(
-                        Colors.white, // Specify the disabled color
-                        BlendMode.color, // Adjust blend mode as needed
-                      ),
-                      child:
-
-                      Container(
-                        height: 20,
-                        child: TextButton(
-                          // onPressed: onPressed,
-                          style: TextButton.styleFrom(
-                              splashFactory: NoSplash.splashFactory,
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.zero),
-                          child:
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                "assets/shop.png",
-                                color: Colors.grey, // Image color set to grey
-                              ),
-                              SizedBox(width: 20,),
-                              Text(
-                                LangText(context).local.followed_sellers_ucf,
-                                style: TextStyle(color: Colors.grey), // Text color set to grey
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-
-                    ),
-                    onTap: () {
-                      showLoginWarning();
-                      // Add any custom action when the disabled button is tapped
-                    },
-                  ),
-                ),
-              Divider(
-                thickness: 1,
-                color: MyTheme.light_grey,
-              ),
-            ],
-          ),
-
-
-          Column(
-            children: [
-              if (is_logged_in.$) // Check if the user is logged in
-                buildBottomVerticalCardListItem(
-                  "assets/delete.png",
-                  LangText(context).local.delete_my_account,
-                  onPressed: () {
-                    deleteWarningDialog();
-                  },
-                )
-              else
-                Material(
-                  child: InkWell(
-                    // Disabled button
-                    child: ColorFiltered(
-                      colorFilter: ColorFilter.mode(
-                        Colors.white, // Specify the disabled color
-                        BlendMode.color, // Adjust blend mode as needed
-                      ),
-                      child:
-
-                      Container(
-                        height: 20,
-                        child: TextButton(
-                          // onPressed: onPressed,
-                          style: TextButton.styleFrom(
-                              splashFactory: NoSplash.splashFactory,
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.zero),
-                          child:
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                "assets/delete.png",
-                                color: Colors.grey, // Image color set to grey
-                              ),
-                              SizedBox(width: 20,),
-                              Text(
-                                LangText(context).local.delete_my_account,
-                                style: TextStyle(color: Colors.grey), // Text color set to grey
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-
-                    ),
-                    onTap: () {
-                      showLoginWarning();
-                      // Add any custom action when the disabled button is tapped
-                    },
-                  ),
-                ),
-              Divider(
-                thickness: 1,
-                color: MyTheme.light_grey,
-              ),
-            ],
-          ),
 
 
           if(false)

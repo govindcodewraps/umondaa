@@ -116,6 +116,7 @@ class _My_adsScreenState extends State<My_adsScreen> {
 
 
 
+
   Widget listview(){
     return
       FutureBuilder(
@@ -123,19 +124,16 @@ class _My_adsScreenState extends State<My_adsScreen> {
           builder: (context, snapshot) {
 
             if (snapshot.hasData) {
-             // final thumbnailImage = snapshot.data.data[index].thumbnailImage;
               return
-
                 SingleChildScrollView(
-                  child: Container(
+                  child:
+                  Container(
                     //height: 600,
                     height: MediaQuery.of(context).size.height*1,
                     padding: EdgeInsets.only(bottom: 90),
                     child: 
                     Column(
                       children: [
-
-
                         Expanded(
                           child: GridView.builder(
                             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -183,6 +181,7 @@ class _My_adsScreenState extends State<My_adsScreen> {
                                                   snapshot.data.data[index].name.toString(),
                                                   style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
                                                 ),
+
                                                 SizedBox(height: 5),
                                                 Text(
                                                   snapshot.data.data[index].mainPrice.toString(),
@@ -268,85 +267,6 @@ class _My_adsScreenState extends State<My_adsScreen> {
                       ],
                     )
 
-
-
-
-                 /*   ListView.separated(
-                      separatorBuilder: (context, index) {
-                        // Your separator builder logic here
-                        return Divider(); // Example: Using a Divider as the separator
-                      },
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context , int index){
-                        final thumbnailImage = snapshot.data.data[index].thumbnailImage;
-                        return Column(children: [
-                          // Text("Govind"),
-                          InkWell(
-                            onTap: (){
-                             // Navigator.push(context, MaterialPageRoute(builder: (context)=>Edit_placead()));
-                              print("print product id");
-                              product_Id=snapshot.data.data[index].id.toString();
-                             // print("print product id ${snapshot.data.data[index].id.toString()}");
-                              print("print produc ${product_Id}");
-                            },
-                            child: Container(
-                              width: MediaQuery.of(context).size.width *1,
-                              padding: EdgeInsets.only(left: 10,right: 10),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.black,
-                                        borderRadius: BorderRadius.circular(12),
-                                        //border: Border.all(color: MyTheme.accent_color),
-                                        boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,offset: Offset(1,3))]
-
-                                    ),
-
-                                    height: 100,
-                                    width: MediaQuery.of(context).size.width *0.3,
-                                    //child: Image.asset("assets/silver.png",fit: BoxFit.fill,),
-
-
-                     child:   thumbnailImage == null
-                                           ? Image.asset("assets/silver.png",fit: BoxFit.fill,)
-                                             : Image.network(thumbnailImage, fit: BoxFit.fill),
-
-                                  ),
-                                  SizedBox(width: 10,),
-                                  Container(
-                                    padding: EdgeInsets.only(left: 16,top: 16),
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(12),
-                                        //border: Border.all(color: MyTheme.accent_color),
-                                        boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,offset: Offset(1,3))]
-                                    ),
-
-                                    height: 100,
-                                    width: MediaQuery.of(context).size.width *0.6,
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(snapshot.data.data[index].name.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500)),
-                                      SizedBox(height: 5,),
-                                        Text(snapshot.data.data[index].mainPrice.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500)),
-                                        //Text(snapshot.data.data[index].links[0].details.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500)),
-                                      ],),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
-                        ],);
-
-                      },
-                      //itemCount: 51,
-                      itemCount: snapshot.data.data.length,
-                    ),*/
-
-
                   ),
                 );
             }
@@ -357,8 +277,6 @@ class _My_adsScreenState extends State<My_adsScreen> {
             }
           }
       );
-
-
   }
 
   AppBar buildAppBar(BuildContext context) {

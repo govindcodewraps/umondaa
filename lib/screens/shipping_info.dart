@@ -1224,13 +1224,13 @@ class _ShippingInfoState extends State<ShippingInfo> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(bottom: 12.0),
-                child: Text(
-                  _deliveryInfoList[index].name,
-                  style: TextStyle(
-                      color: MyTheme.accent_color,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 16),
-                ),
+                // child: Text(
+                //   _deliveryInfoList[index].name,
+                //   style: TextStyle(
+                //       color: MyTheme.accent_color,
+                //       fontWeight: FontWeight.w700,
+                //       fontSize: 16),
+                // ),
               ),
               buildCartSellerItemList(index),
 

@@ -1,4 +1,3 @@
-
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/gestures.dart';
@@ -32,6 +31,8 @@ import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+
 import '../../data_model/Sub_Category_List_Model.dart';
 
 
@@ -43,7 +44,11 @@ class Edit_placead extends StatefulWidget {
   //final String? mobile,namee;
 
   Edit_placead({Key key,this.Product_ID}) : super(key: key);
+  // const placead({super.key});
 
+  // final List<allcategoryModel> itemList; // Note the "?" to indicate it can be null
+  //
+  // MyDropdown({required this.itemList});
 
   @override
   State<Edit_placead> createState() => _Edit_placeadState();
@@ -77,7 +82,10 @@ class _Edit_placeadState extends State<Edit_placead> {
   //List<String> globalResponseBody = [];
   bool _customeIcon = false;
   String globalResponseBody;
-  String globalResponseBo;
+  String globalcategoryId ="0";
+
+
+
 
 
 
@@ -110,6 +118,15 @@ class _Edit_placeadState extends State<Edit_placead> {
 
 
 
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   fetchData();
+  //   //SubchildListt();
+  //   //subcategorylist();
+  //   printSelectedItems();
+  // }
+
 
 
   @override
@@ -120,6 +137,17 @@ class _Edit_placeadState extends State<Edit_placead> {
     fetchDataa();
     editmyadsapicall();
 
+
+    //fetchFilteredBrands();
+    //SubchildListt();
+    //subcategorylist();
+    /*   if (is_logged_in.$ == true) {
+      fetchData();
+      fetchDataa();
+      fetch_Brands();
+      fetch_Category();
+      buildBody();
+    }*/
 
     printSelectedItems();
     super.initState();
@@ -134,6 +162,14 @@ class _Edit_placeadState extends State<Edit_placead> {
     _filteredBrandsCalled = true;
     setState(() {});
   }
+
+  // fetch_Category() async {
+  //   var categoryResponse = await CategoryRepository().getAllCategories();
+  //   categoryList.addAll(categoryResponse);
+  //   print("Category list : ${categoryResponse}");
+  //   _filteredcategoryCalled = true;
+  //   setState(() {});
+  // }
 
   fetch_Category() async {
     var categoryResponse = await CategoryRepository().getCategories();
@@ -204,7 +240,6 @@ class _Edit_placeadState extends State<Edit_placead> {
       ),
     );
   }
-
 
 //------------------------
   _CheckState () {
@@ -430,115 +465,6 @@ class _Edit_placeadState extends State<Edit_placead> {
       print('Error: $e');
     }
   }
-  Widget listview() {
-    return
-      Column(
-        children: [
-          ExpansionTile(title: Text("Sub Category"),
-            // trailing: Icon(
-            //   _customeIcon ? Icons.arrow_drop_down_circle : Icons.arrow_drop_down,
-            // ),
-            children: [
-              // ListTile(
-              //   title: Text("This is tile number 2"),
-              // ),
-              ExpansionTile(title: Text("Sub child Category"),
-                // trailing: Icon(
-                //   _customeIcon ? Icons.arrow_drop_down_circle : Icons.arrow_drop_down,
-                // ),
-                children: [
-                  // ListTile(
-                  //   title: Text("This is tile number 2"),
-                  // ),
-                  ListTile(
-                    title: InkWell(onTap: (){
-                      // print("Hellooooo${globalResponseBody}");
-                    },
-                      child:
-
-                      childCategories(),
-                    ),
-                  )
-                ],
-
-                onExpansionChanged: (bool expanded){
-                  // setState(() => _customeIcon = expanded);
-                },
-              ),
-
-              ListTile(
-                title: InkWell(onTap: (){
-                  // print("Hellooooo${globalResponseBody}");
-                },
-                  child:
-                  childrenCategories(),
-                ),
-              )
-            ],
-
-            onExpansionChanged: (bool expanded){
-              // setState(() => _customeIcon = expanded);
-            },
-
-          ),
-
-          FutureBuilder(
-              future: fetchData(),
-
-              builder: (context, snapshot) {
-
-                if (snapshot.hasData) {
-                  return
-                    Container(
-                      //padding: EdgeInsets.only(top: 23),
-                      child:
-
-                      Column(
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-
-                              ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemBuilder: (context , int index){
-                                  return Column(
-                                    children: [
-                                      // Text(snapshot.data[index].childrenCategories[0].name.toString()),
-                                      MultiSelectContainer(items: [
-                                        MultiSelectCard(value: snapshot.data[index].id.toString(), label:snapshot.data[index].name.toString(),),
-                                      ], onChange: (allSelectedItems, selectedItem) {
-                                        print("ALL Categories>>>>>>>>>>>${allSelectedItems}");
-                                        print(selectedItem);
-                                      }),
-                                    ],
-                                  );
-                                },
-                                //itemCount: 2,
-                                itemCount: snapshot.data.length,
-                                // itemCount: snapshot.data.childrenCategories[0].categories.length,
-                              ),
-
-                            ],
-                          ),
-
-                        ],
-                      ),
-
-                    );
-                }
-                else{
-                  return
-                    Container(
-                        child: Center(child: CircularProgressIndicator()));
-                }
-              }
-          ),
-
-        ],
-      );
-  }
 
   Widget childrenCategories() {
     return
@@ -568,6 +494,16 @@ class _Edit_placeadState extends State<Edit_placead> {
                                 itemBuilder: (context , int index){
                                   return Column(
                                     children: [
+                                      // Text(snapshot.data[index].childrenCategories[0].name.toString()),
+
+
+                                      // MultiSelectContainer(items: [
+                                      //   MultiSelectCard(value: snapshot.data[index].id.toString(), label:snapshot.data[index].name.toString(),),
+                                      // ], onChange: (allSelectedItems, selectedItem) {
+                                      //   print(allSelectedItems);
+                                      //   print(selectedItem);
+                                      // }),
+
                                       MultiSelectContainer(items: [
                                         //MultiSelectCard(value: snapshot.data[index].childrenCategories[0].categories.length.toString(), label:snapshot.data[index].childrenCategories[0].categories.length.toString()),
                                         MultiSelectCard(value: snapshot.data[index].childrenCategories[index].id.toString(), label:snapshot.data[index].childrenCategories[index].name.toString()),
@@ -575,6 +511,17 @@ class _Edit_placeadState extends State<Edit_placead> {
                                         print("childrenCategories>>>>>>>>>>>${allSelectedItems}");
                                         print(selectedItem);
                                       }),
+
+
+                                      // MultiSelectContainer(items: [
+                                      //   //MultiSelectCard(value: snapshot.data[index].childrenCategories[0].categories.length.toString(), label:snapshot.data[index].childrenCategories[0].categories.length.toString()),
+                                      //   MultiSelectCard(value: snapshot.data[index].childrenCategories[0].categories[index].name.toString(), label:snapshot.data[index].childrenCategories[0].categories[index].name.toString()),
+                                      //   //MultiSelectCard(value: snapshot.data[index].childrenCategories[0].categories[index].name.toString(), label:snapshot.data[index].childrenCategories[0].categories[index].name.toString()),
+                                      // ], onChange: (allSelectedItems, selectedItem) {
+                                      //   print(allSelectedItems);
+                                      //   print(selectedItem);
+                                      // }),
+
                                     ],
 
                                   );
@@ -809,8 +756,13 @@ class _Edit_placeadState extends State<Edit_placead> {
                             children: [
                               // Text(widget.Product_ID),
                               // Text("GOVIND KUMAR"),
+
+
+
                               // Text(globalResponseBody.toString()),
                               // listview(),
+
+
                               // Text('Selected Product IDs: ${widget.selectedProductIDs.join(', ')}'),
 
 
@@ -870,155 +822,320 @@ class _Edit_placeadState extends State<Edit_placead> {
                                         Column(
                                           children: [
                                             //Text("mmmmmmmmmm"),
+
                                             Expanded(
                                               child: itemList.isEmpty
                                                   ? Center(child: CircularProgressIndicator())
                                                   : ListView.builder(
-                                                itemCount: itemList.length,
+                                                 itemCount: itemList.length,
+                                                //itemCount: 1,
                                                 itemBuilder: (context, index) {
                                                   final item = itemList[index];
-                                                  return
-                                                    Column(
-                                                      children: [
-                                                        ListTile(
-                                                          leading: Checkbox(
-                                                            value: isCheckedList[index],
-                                                            onChanged: (bool newValue) {
-                                                              // setState(() {
-                                                              //   isCheckedList[index] = newValue;
-                                                              //   printSelectedItems();
-                                                              //   ProductID=item.id.toString();
-                                                              //   print("print id"+ProductID);
-                                                              //   subcategorylist();
-                                                              //   print(subCatMap);
-                                                              //
-                                                              // });
 
-                                                              setState(() {
+                                                  // Initialize checked state based on id
+                                                  //isCheckedList[index] = [1, 72, 188, 298, 424, 440, 457, 472].contains(item.id);
 
-                                                                isCheckedList[index] = newValue;
-                                                                if (newValue) {
-                                                                  selectedProductIDs.add(item.id.toString());
-                                                                } else {
-                                                                  selectedProductIDs.remove(item.id.toString());
-                                                                }
-                                                                ProductID = item.id.toString();
-                                                                subcategorylist();
-                                                              });
+                                                  // Check items with id equal to 1, 120, and 2
+                                                 //${category}
 
-                                                            },
-                                                          ),
-                                                          title: Text(item.name.toString()),
+                                                  print("GGGGGGG id $globalcategoryId");
+                                                  if (globalcategoryId == item.id) {
+                                                    isCheckedList[index] = true;
+                                                  } else {
+                                                    //isCheckedList[index] = false;
+                                                  }
+
+                                                  /*  print("GGGGGGG id ${globalcategoryId}");
+                                                  if ([globalcategoryId].contains(item.id)) {
+                                                    isCheckedList[index] = true;
+                                                  } else {
+                                                    //isCheckedList[index] = false;
+                                                  }*/
+
+                                                  return Column(
+                                                    children: [
+
+
+                                                        //print("object"),
+
+                                                      ListTile(
+                                                        leading: Checkbox(
+                                                          value: isCheckedList[index],
+                                                          onChanged: (bool newValue) {
+                                                            setState(() {
+                                                              isCheckedList[index] = newValue;
+                                                              if (newValue) {
+                                                                selectedProductIDs.add(item.id.toString());
+                                                              } else {
+                                                                selectedProductIDs.remove(item.id.toString());
+                                                              }
+                                                              ProductID = item.id.toString();
+                                                              subcategorylist();
+                                                            });
+                                                          },
                                                         ),
+                                                        title: Text(item.name.toString()),
+                                                      ),
 
-                                                        if(isCheckedList[index])
-                                                          SubitemList.isEmpty
-                                                              ? Center(child: CircularProgressIndicator())
-                                                              : Column(children: [
+                                                      //if (isCheckedList[index])
+                                                        SubitemList.isEmpty
+                                                            ? Center(child: CircularProgressIndicator())
+                                                            : Column(
+
+
+                                                          children: [
+
 
                                                             ListView.builder(
-                                                              //reverse: true,
                                                               shrinkWrap: true,
                                                               physics: const NeverScrollableScrollPhysics(),
-                                                              itemBuilder: (context , int index){
-                                                                return Column(children: [
-                                                                  Padding(
-                                                                    padding: const EdgeInsets.only(left: 25),
-                                                                    child: ListTile(
-                                                                      leading: Checkbox(
-                                                                        value: isCheckedSubList[index],
-                                                                        onChanged: (bool newValue) {
-                                                                          setState(() {
-                                                                            isCheckedSubList[index] = newValue;
-                                                                            if (newValue) {
-                                                                              selectedProductIDs.add(SubitemList[index].id.toString());
-                                                                            } else {
-                                                                              selectedProductIDs.remove(SubitemList[index].id.toString());
+                                                              itemBuilder: (context, index) {
 
-                                                                            }
-                                                                            subchildproductID=SubitemList[index].id.toString();
-                                                                            print("print idd"+subchildproductID);
-                                                                            SubchildListt();
-                                                                            //printSelectedItems();
-                                                                            printSelectedSubItems();
-                                                                          });
-                                                                        },
-                                                                      ),
-                                                                      // title:Text(SubitemList[index].id.toString() ??""),
-                                                                      title:Text(SubitemList[index].name.toString() ??""),
+                                                                //SubitemList
+                                                                if ([globalcategoryId].contains(SubitemList[index].id)) {
+                                                                  isCheckedSubList[index] = true;
+                                                                } else {
+                                                                  //isCheckedList[index] = false;
+                                                                }
 
-                                                                    ),
-                                                                  ),
+                                                                return Column(
 
-                                                                  if(isCheckedSubList[index])
-
-                                                                    SubchildList.isEmpty
-                                                                        ? Center(child: CircularProgressIndicator())
-                                                                        :  Column(children: [
-
-                                                                      Padding(
-                                                                        padding: const EdgeInsets.only(left: 40),
-                                                                        child: ListView.builder(
-                                                                          shrinkWrap: true,
-                                                                          physics: const NeverScrollableScrollPhysics(),
-                                                                          itemBuilder: (context , int index){
-                                                                            return Column(children: [
-                                                                              Padding(
-                                                                                padding: const EdgeInsets.only(left: 25),
-                                                                                child: ListTile(
-                                                                                  leading: Checkbox(
-                                                                                    value:isCheckedSubchildList[index],
-                                                                                    onChanged: (bool newValue) {
-                                                                                      setState(() {
-                                                                                        isCheckedSubchildList[index] = newValue;
-                                                                                        if (newValue) {
-                                                                                          selectedProductIDs.add(SubchildList[index].id.toString());
-                                                                                        } else {
-                                                                                          selectedProductIDs.remove(SubchildList[index].id.toString());
-                                                                                        }
-                                                                                        //printSelectedItems();
-                                                                                        printSelectedSubchildItems();
-                                                                                      });
-                                                                                    },
-                                                                                  ),
-                                                                                  // title:Text(SubitemList[index].id.toString() ??""),
-                                                                                  title:Text(SubchildList[index].name.toString() ??""),
-
-                                                                                ),
-                                                                              ),
-                                                                            ],);
-
+                                                                  children: [
+                                                                    Padding(
+                                                                      padding: const EdgeInsets.only(left: 25),
+                                                                      child: ListTile(
+                                                                        leading: Checkbox(
+                                                                          value: isCheckedSubList[index],
+                                                                          onChanged: (bool newValue) {
+                                                                            setState(() {
+                                                                              isCheckedSubList[index] = newValue;
+                                                                              if (newValue) {
+                                                                                selectedProductIDs.add(SubitemList[index].id.toString());
+                                                                              } else {
+                                                                                selectedProductIDs.remove(SubitemList[index].id.toString());
+                                                                              }
+                                                                              subchildproductID = SubitemList[index].id.toString();
+                                                                              print("print idd" + subchildproductID);
+                                                                              SubchildListt();
+                                                                            });
                                                                           },
-                                                                          //itemCount: item.childrenCategories[index].categories.length,
-                                                                          //itemCount: SubitemList.length,
-                                                                          itemCount: SubchildList.length,
                                                                         ),
+                                                                        title: Text(SubitemList[index].name.toString() ?? ""),
                                                                       ),
+                                                                    ),
 
-
-                                                                    ],)
-
-                                                                ],);
-
+                                                                    if (isCheckedSubList[index])
+                                                                      SubchildList.isEmpty
+                                                                          ? Center(child: CircularProgressIndicator())
+                                                                          : Column(
+                                                                        children: [
+                                                                          Padding(
+                                                                            padding: const EdgeInsets.only(left: 40),
+                                                                            child: ListView.builder(
+                                                                              shrinkWrap: true,
+                                                                              physics: const NeverScrollableScrollPhysics(),
+                                                                              itemBuilder: (context, index) {
+                                                                                if ([globalcategoryId].contains(SubchildList[index].id)) {
+                                                                                  isCheckedSubchildList[index] = true;
+                                                                                } else {
+                                                                                  //isCheckedList[index] = false;
+                                                                                }
+                                                                                return Column(
+                                                                                  children: [
+                                                                                    Padding(
+                                                                                      padding: const EdgeInsets.only(left: 25),
+                                                                                      child: ListTile(
+                                                                                        leading: Checkbox(
+                                                                                          value: isCheckedSubchildList[index],
+                                                                                          onChanged: (bool newValue) {
+                                                                                            setState(() {
+                                                                                              isCheckedSubchildList[index] = newValue;
+                                                                                              if (newValue) {
+                                                                                                selectedProductIDs.add(SubchildList[index].id.toString());
+                                                                                              } else {
+                                                                                                selectedProductIDs.remove(SubchildList[index].id.toString());
+                                                                                              }
+                                                                                              printSelectedSubchildItems();
+                                                                                            });
+                                                                                          },
+                                                                                        ),
+                                                                                        title: Text(SubchildList[index].name.toString() ?? ""),
+                                                                                      ),
+                                                                                    ),
+                                                                                  ],
+                                                                                );
+                                                                              },
+                                                                              itemCount: SubchildList.length,
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                  ],
+                                                                );
                                                               },
-                                                              //itemCount: item.childrenCategories[index].categories.length,
-                                                              itemCount: 1,
-                                                             // itemCount: SubitemList.length,
+                                                              itemCount: SubitemList.length,
                                                             ),
-
-
-                                                          ],),
-
-
-
-
-
-
-                                                      ],
-                                                    );
+                                                          ],
+                                                        ),
+                                                    ],
+                                                  );
                                                 },
                                               ),
-                                            ),
+                                            )
+
+
+
+
+
+
+                                            // Expanded(
+                                            //   child: itemList.isEmpty
+                                            //       ? Center(child: CircularProgressIndicator())
+                                            //       : ListView.builder(
+                                            //     itemCount: itemList.length,
+                                            //     itemBuilder: (context, index) {
+                                            //       final item = itemList[index];
+                                            //       return
+                                            //         Column(
+                                            //           children: [
+                                            //             ListTile(
+                                            //               leading: Checkbox(
+                                            //                 value: isCheckedList[index],
+                                            //                 onChanged: (bool newValue) {
+                                            //                   // setState(() {
+                                            //                   //   isCheckedList[index] = newValue;
+                                            //                   //   printSelectedItems();
+                                            //                   //   ProductID=item.id.toString();
+                                            //                   //   print("print id"+ProductID);
+                                            //                   //   subcategorylist();
+                                            //                   //   print(subCatMap);
+                                            //                   //
+                                            //                   // });
+                                            //
+                                            //                   setState(() {
+                                            //
+                                            //                     isCheckedList[index] = newValue;
+                                            //                     if (newValue) {
+                                            //                       selectedProductIDs.add(item.id.toString());
+                                            //                     } else {
+                                            //                       selectedProductIDs.remove(item.id.toString());
+                                            //                     }
+                                            //                     ProductID = item.id.toString();
+                                            //                     subcategorylist();
+                                            //                   });
+                                            //
+                                            //                 },
+                                            //               ),
+                                            //               title: Text(item.name.toString()),
+                                            //             ),
+                                            //
+                                            //             if(isCheckedList[index])
+                                            //               SubitemList.isEmpty
+                                            //                   ? Center(child: CircularProgressIndicator())
+                                            //                   : Column(children: [
+                                            //
+                                            //                 ListView.builder(
+                                            //                   shrinkWrap: true,
+                                            //                   physics: const NeverScrollableScrollPhysics(),
+                                            //                   itemBuilder: (context , int index){
+                                            //                     return Column(children: [
+                                            //                       Padding(
+                                            //                         padding: const EdgeInsets.only(left: 25),
+                                            //                         child: ListTile(
+                                            //                           leading: Checkbox(
+                                            //                             value: isCheckedSubList[index],
+                                            //                             onChanged: (bool newValue) {
+                                            //                               setState(() {
+                                            //                                 isCheckedSubList[index] = newValue;
+                                            //                                 if (newValue) {
+                                            //                                   selectedProductIDs.add(SubitemList[index].id.toString());
+                                            //                                 } else {
+                                            //                                   selectedProductIDs.remove(SubitemList[index].id.toString());
+                                            //
+                                            //                                 }
+                                            //                                 subchildproductID=SubitemList[index].id.toString();
+                                            //                                 print("print idd"+subchildproductID);
+                                            //                                 SubchildListt();
+                                            //                                 //printSelectedItems();
+                                            //                                 printSelectedSubItems();
+                                            //                               });
+                                            //                             },
+                                            //                           ),
+                                            //                           // title:Text(SubitemList[index].id.toString() ??""),
+                                            //                           title:Text(SubitemList[index].name.toString() ??""),
+                                            //
+                                            //                         ),
+                                            //                       ),
+                                            //
+                                            //                       if(isCheckedSubList[index])
+                                            //
+                                            //                         SubchildList.isEmpty
+                                            //                             ? Center(child: CircularProgressIndicator())
+                                            //                             :  Column(children: [
+                                            //
+                                            //                           Padding(
+                                            //                             padding: const EdgeInsets.only(left: 40),
+                                            //                             child: ListView.builder(
+                                            //                               shrinkWrap: true,
+                                            //                               physics: const NeverScrollableScrollPhysics(),
+                                            //                               itemBuilder: (context , int index){
+                                            //                                 return Column(children: [
+                                            //                                   Padding(
+                                            //                                     padding: const EdgeInsets.only(left: 25),
+                                            //                                     child: ListTile(
+                                            //                                       leading: Checkbox(
+                                            //                                         value:isCheckedSubchildList[index],
+                                            //                                         onChanged: (bool newValue) {
+                                            //                                           setState(() {
+                                            //                                             isCheckedSubchildList[index] = newValue;
+                                            //                                             if (newValue) {
+                                            //                                               selectedProductIDs.add(SubchildList[index].id.toString());
+                                            //                                             } else {
+                                            //                                               selectedProductIDs.remove(SubchildList[index].id.toString());
+                                            //                                             }
+                                            //                                             //printSelectedItems();
+                                            //                                             printSelectedSubchildItems();
+                                            //                                           });
+                                            //                                         },
+                                            //                                       ),
+                                            //                                       // title:Text(SubitemList[index].id.toString() ??""),
+                                            //                                       title:Text(SubchildList[index].name.toString() ??""),
+                                            //
+                                            //                                     ),
+                                            //                                   ),
+                                            //                                 ],);
+                                            //
+                                            //                               },
+                                            //                               //itemCount: item.childrenCategories[index].categories.length,
+                                            //                               //itemCount: SubitemList.length,
+                                            //                               itemCount: SubchildList.length,
+                                            //                             ),
+                                            //                           ),
+                                            //
+                                            //
+                                            //                         ],)
+                                            //
+                                            //                     ],);
+                                            //
+                                            //                   },
+                                            //                   //itemCount: item.childrenCategories[index].categories.length,
+                                            //                   //itemCount: SubitemList.length,
+                                            //                   itemCount: SubitemList.length,
+                                            //                 ),
+                                            //
+                                            //
+                                            //               ],),
+                                            //
+                                            //
+                                            //
+                                            //
+                                            //
+                                            //
+                                            //           ],
+                                            //         );
+                                            //     },
+                                            //   ),
+                                            // ),
                                           ],
                                         ),
 
@@ -1347,59 +1464,62 @@ class _Edit_placeadState extends State<Edit_placead> {
                       //TESTING BUTTON
 
 
-//                          ElevatedButton(onPressed: (){
-//                            String selectedProduct = selectedProductIDs.map((item) => item.toString()).join(',').replaceAll(', ', ',');
-//
-//
-//                            //product name
-//                            var ProdName = _ProductName.text.toString().isEmpty ? snapshot.data.data[0].name.toString():_ProductName.text.toString();
-//                            //categories
-//                            var category = selectedProduct.isEmpty ? snapshot.data.data[0].categoryId.toString():selectedProduct;
-//                            //brandId
-//                            var brand = dropdownBrands.split(" ")[0].toString() == "Select" ?snapshot.data.data[0].brandId.toString():dropdownBrands.split(" ")[0].toString();
-//                            //description
-//                            var description = _Description.text.toString().isEmpty?snapshot.data.data[0].description.toString():_Description.text.toString();
-//                           //mainPrice
-//                            var amount = _PriceAED.text.toString() ==null ?snapshot.data.data[0].mainPrice.toString():_PriceAED.text.toString();
-//                            //
-//                            var email = _EmailID.text.toString();
-//                            var password = _PassWord.text.toString();
-// //minoffer
-//                            var offer = _offerControler.text.toString().isEmpty?snapshot.data.data[0].minOfferPrice.toString():_offerControler.text.toString();
-//                            // product images thumbnailImage
-//                            var imagebase = allurlss ==null ? snapshot.data.data[0].thumbnailImage.toString():allurlss;
-//                            var offerstatu= offerstatus.isEmpty? snapshot.data.data[0].minoffer.toString():offerstatus;
-//
-//
-//                            var userid = user_id.$;
-//                            //var imagebase = allurlss;
-//
-//
-//                            print("Product name.: ${ProdName}");
-//                            print("category.....: ${category}");
-//                            print("Brandd........: ${brand}");
-//                            print("Description..: ${description}");
-//                            print("Amount.......: ${amount}");
-//                            print("Email........: ${email}");
-//                            print("password.....: ${password}");
-//                            print("****************************************************************");
-//
-//                            print("Base 64 urlll....: ${imagebase}");
-//                            print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
-//
-//                            //print("Base 64 url....: ${allurlss}");
-//                            print("****************************************************************");
-//                            print("User id  .....: ${user_id.$}");
-//                            print("Offer price  .....: ${offer}");
-//                            print("Offer Status  .....: ${offerstatu}");
-//                            print("URLLLLLLLL  .....: ${base64Urls}");
-//                            print("IMAGE_URLLLLL  .....: ${imageUrls}");
-//                            print("Select Images  .....: ${selectedImages}");
-//
-//                            // place_ad_upload(ProdName,category,brand,description,offer,amount,offerstatus,email,password);
-//
-//
-//           }, child: Text("DATAAA")),
+                         ElevatedButton(onPressed: (){
+                           String selectedProduct = selectedProductIDs.map((item) => item.toString()).join(',').replaceAll(', ', ',');
+
+
+                           //product name
+                           var ProdName = _ProductName.text.toString().isEmpty ? snapshot.data.data[0].name.toString():_ProductName.text.toString();
+                           //categories
+                           var category = selectedProduct.isEmpty ? snapshot.data.data[0].categoryId.toString():selectedProduct;
+                           globalcategoryId= category;
+
+                           //brandId
+                           var brand = dropdownBrands.split(" ")[0].toString() == "Select" ?snapshot.data.data[0].brandId.toString():dropdownBrands.split(" ")[0].toString();
+                           //description
+                           var description = _Description.text.toString().isEmpty?snapshot.data.data[0].description.toString():_Description.text.toString();
+                          //mainPrice
+                           var amount = _PriceAED.text.toString() ==null ?snapshot.data.data[0].mainPrice.toString():_PriceAED.text.toString();
+                           //
+                           var email = _EmailID.text.toString();
+                           var password = _PassWord.text.toString();
+//minoffer
+                           var offer = _offerControler.text.toString().isEmpty?snapshot.data.data[0].minOfferPrice.toString():_offerControler.text.toString();
+                           // product images thumbnailImage
+                           var imagebase = allurlss ==null ? snapshot.data.data[0].thumbnailImage.toString():allurlss;
+                           var offerstatu= offerstatus.isEmpty? snapshot.data.data[0].minoffer.toString():offerstatus;
+
+
+                           var userid = user_id.$;
+                           //var imagebase = allurlss;
+
+
+                           print("Product name.: ${ProdName}");
+                           print("category.....: ${category}");
+                           print("globalcategoryId category.....: ${globalcategoryId}");
+                           print("Brandd........: ${brand}");
+                           print("Description..: ${description}");
+                           print("Amount.......: ${amount}");
+                           print("Email........: ${email}");
+                           print("password.....: ${password}");
+                           print("****************************************************************");
+
+                           print("Base 64 urlll....: ${imagebase}");
+                           print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+
+                           //print("Base 64 url....: ${allurlss}");
+                           print("****************************************************************");
+                           print("User id  .....: ${user_id.$}");
+                           print("Offer price  .....: ${offer}");
+                           print("Offer Status  .....: ${offerstatu}");
+                           print("URLLLLLLLL  .....: ${base64Urls}");
+                           print("IMAGE_URLLLLL  .....: ${imageUrls}");
+                           print("Select Images  .....: ${selectedImages}");
+
+                           // place_ad_upload(ProdName,category,brand,description,offer,amount,offerstatus,email,password);
+
+
+          }, child: Text("DATAAA")),
 
 
 
@@ -1512,6 +1632,108 @@ class _Edit_placeadState extends State<Edit_placead> {
                       SizedBox(height: 10,),
                     ]
                 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                // Container(
+                //   //padding: EdgeInsets.only(top: 23),
+                //   child:
+                //
+                //   ListView.separated(
+                //     separatorBuilder: (context, index) {
+                //       // Your separator builder logic here
+                //       return Divider(); // Example: Using a Divider as the separator
+                //     },
+                //     shrinkWrap: true,
+                //     physics: const NeverScrollableScrollPhysics(),
+                //     itemBuilder: (context , int index){
+                //       final thumbnailImage = snapshot.data.data[index].thumbnailImage;
+                //       return
+                //
+                //         Column(children: [
+                //         // Text("Govind"),
+                //         InkWell(
+                //           onTap: (){
+                //             Navigator.push(context, MaterialPageRoute(builder: (context)=>Edit_placead()));
+                //             //print("print product id")
+                //             //product_Id=snapshot.data.data[index].id.toString();
+                //             // print("print product id ${snapshot.data.data[index].id.toString()}");
+                //             //print("print produc ${product_Id}");
+                //           },
+                //           child: Container(
+                //             width: MediaQuery.of(context).size.width *1,
+                //             padding: EdgeInsets.only(left: 10,right: 10),
+                //             child: Row(
+                //               children: [
+                //                 Container(
+                //                   decoration: BoxDecoration(
+                //                       color: Colors.black,
+                //                       borderRadius: BorderRadius.circular(12),
+                //                       //border: Border.all(color: MyTheme.accent_color),
+                //                       boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,offset: Offset(1,3))]
+                //
+                //                   ),
+                //
+                //                   height: 100,
+                //                   width: MediaQuery.of(context).size.width *0.3,
+                //                   //child: Image.asset("assets/silver.png",fit: BoxFit.fill,),
+                //
+                //
+                //                   child:   thumbnailImage == null
+                //                       ? Image.asset("assets/silver.png",fit: BoxFit.fill,)
+                //                       : Image.network(thumbnailImage, fit: BoxFit.fill),
+                //
+                //                 ),
+                //                 SizedBox(width: 10,),
+                //                 Container(
+                //                   padding: EdgeInsets.only(left: 16,top: 16),
+                //                   decoration: BoxDecoration(
+                //                       color: Colors.white,
+                //                       borderRadius: BorderRadius.circular(12),
+                //                       //border: Border.all(color: MyTheme.accent_color),
+                //                       boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,offset: Offset(1,3))]
+                //                   ),
+                //
+                //                   height: 100,
+                //                   width: MediaQuery.of(context).size.width *0.6,
+                //                   child: Column(
+                //                     crossAxisAlignment: CrossAxisAlignment.start,
+                //                     children: [
+                //                       Text(snapshot.data.data[index].name.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500)),
+                //                       SizedBox(height: 5,),
+                //                       Text(snapshot.data.data[index].mainPrice.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500)),
+                //                       //Text(snapshot.data.data[index].links[0].details.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500)),
+                //                     ],),
+                //                 ),
+                //               ],
+                //             ),
+                //           ),
+                //         )
+                //       ],);
+                //
+                //     },
+                //     //itemCount: 51,
+                //     itemCount: snapshot.data.data.length,
+                //   ),
+                //
+                //
+                // );
             }
             else{
               return
@@ -1540,7 +1762,8 @@ class _Edit_placeadState extends State<Edit_placead> {
 
     // Define the API endpoint
    // String url = 'https://webcluestechnology.com/demo/erp/umonda/api/v2/products/${widget.Product_ID}';
-    String url = '${AppConfig.BASE_URL}/products/${widget.Product_ID}';
+     String url = '${AppConfig.BASE_URL}/products/${widget.Product_ID}';
+    //String url = '${AppConfig.BASE_URL}/products/120';
     //String url = "https://umonda.com/api/v2/payment-history/138";
 
     try {
