@@ -86,6 +86,19 @@ class _Edit_placeadState extends State<Edit_placead> {
 
 
 
+  //List<String> selectedItems = ['1', '120', '2', '4'];
+  List<String> selectedItems = [];
+  //List<String> selectedItems = [];
+
+
+  //fetchselectedcategories
+  //List<int> selectedItems = [188, 189, 191];
+
+
+
+  //List<String> selectedItems = [fetchselectedcategories.toString()];
+
+
 
 
 
@@ -114,6 +127,9 @@ class _Edit_placeadState extends State<Edit_placead> {
   String subchildproductID;
   Map<String,List<SubCategoryListModel>> subCatMap={};
   List<String> selectedProductIDs = [];
+  List<String> fetchselectedcategories=[];
+  String convertstring;
+  int gov=0;
 
 
 
@@ -135,6 +151,7 @@ class _Edit_placeadState extends State<Edit_placead> {
     fetch_Category();
     fetchData();
     fetchDataa();
+    fetchallcategoriesdata();
     editmyadsapicall();
 
 
@@ -406,7 +423,7 @@ class _Edit_placeadState extends State<Edit_placead> {
       'moffer': offerstatus,
       'email':email,
       'password':password,
-      'product_id': '326'
+      'product_id': widget.Product_ID
 
     });
 
@@ -735,17 +752,1033 @@ class _Edit_placeadState extends State<Edit_placead> {
   }
 
 
+//   Widget listvieww(){
+//     return
+//       FutureBuilder(
+//           future: editmyadsapicall(),
+//           builder: (context, snapshot) {
+//
+//             if (snapshot.hasData) {
+//               // final thumbnailImage = snapshot.data.data[index].thumbnailImage;
+//               return
+//
+//                 ListView(
+//                     children: [
+//                       Container(
+//                         margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
+//                         child: Card(
+//                           elevation: 10,
+//                           child: Column(
+//                             children: [
+//                               // Text(widget.Product_ID),
+//                               // Text("GOVIND KUMAR"),
+//
+//
+//
+//                               // Text(globalResponseBody.toString()),
+//                               // listview(),
+//
+//
+//                               // Text('Selected Product IDs: ${widget.selectedProductIDs.join(', ')}'),
+//
+//
+//                               Container(
+//                                   margin: const EdgeInsets.fromLTRB(5, 20, 0, 0),
+//                                   child: const Align(
+//                                     alignment: Alignment.topLeft,
+//                                     child: Text("Ad Information",
+//                                         style: TextStyle(fontSize: 14,
+//                                             color: Color.fromARGB(255, 0, 0, 0))),
+//                                   )
+//                               ),
+//                               Container(
+//                                 margin: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+//                                 child: TextField(
+//                                   controller: _ProductName,
+//                                   autofocus: false,
+//                                   enableSuggestions: false,
+//                                   autocorrect: false,
+//
+//
+//                                   // decoration: const InputDecoration(
+//                                   //   border: UnderlineInputBorder(),
+//                                   //   //labelText: 'Product Name',
+//                                   // ),
+//                                   decoration: InputDecoration(
+//                                       border: UnderlineInputBorder(),
+//                                       // border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+//                                       // Text(),
+//                                       //   Center(child: photoUrl?
+//                                       //                                     Text( snapshot.data!.posts![0].userDetails![0].name ?? "",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700),)
+//                                       //                                     :Text("Name"),
+//                                       //                                     ),
+//                                       // hintText:photoUrl,
+//
+//                                       hintText:snapshot.data.data[0].name.toString()?? ""
+//                                   ),
+//
+//
+//                                   style: TextStyle(fontSize: 14),
+//                                 ),
+//                               ),
+//
+//                               ExpansionTile(title: Text("Category"),
+//
+//                                 children: [
+//
+//                                   ListTile(
+//                                     title: InkWell(onTap: (){
+//                                     },
+//                                       child:
+//                                       Container(
+//                                         height: 500,
+//                                         padding: EdgeInsets.only(left: 16,right: 16),
+//                                         child:
+//
+//                                         Column(
+//                                           children: [
+//                                             //Text("mmmmmmmmmm"),
+//
+//                                             Expanded(
+//                                               child: itemList.isEmpty
+//                                                   ? Center(child: CircularProgressIndicator())
+//                                                   : ListView.builder(
+//                                                 itemCount: itemList.length,
+//                                                 //itemCount: 1,
+//                                                 itemBuilder: (context, index) {
+//                                                   final item = itemList[index];
+//
+//                                                   // Initialize checked state based on id
+//                                                   //isCheckedList[index] = [1, 72, 188, 298, 424, 440, 457, 472].contains(item.id);
+//
+//                                                   // Check items with id equal to 1, 120, and 2
+//                                                   if ([1].contains(item.id)) {
+//                                                     isCheckedList[index] = true;
+//                                                   } else {
+//                                                     //isCheckedList[index] = false;
+//                                                   }
+//
+//                                                   return Column(
+//                                                     children: [
+//                                                       ListTile(
+//                                                         leading: Checkbox(
+//                                                           value: isCheckedList[index],
+//                                                           onChanged: (bool newValue) {
+//                                                             setState(() {
+//                                                               isCheckedList[index] = newValue;
+//                                                               if (newValue) {
+//                                                                 selectedProductIDs.add(item.id.toString());
+//                                                               } else {
+//                                                                 selectedProductIDs.remove(item.id.toString());
+//                                                               }
+//                                                               ProductID = item.id.toString();
+//                                                               subcategorylist();
+//                                                             });
+//                                                           },
+//                                                         ),
+//                                                         title: Text(item.name.toString()),
+//                                                       ),
+//
+//                                                       // if (isCheckedList[index])
+//                                                       SubitemList.isEmpty
+//                                                           ? Center(child: CircularProgressIndicator())
+//                                                           : Column(
+//
+//
+//                                                         children: [
+//
+//                                                           ListView.builder(
+//                                                             shrinkWrap: true,
+//                                                             physics: const NeverScrollableScrollPhysics(),
+//                                                             itemBuilder: (context, index) {
+//
+//                                                               //SubitemList
+//                                                               if ([120].contains(SubitemList[index].id)) {
+//                                                                 isCheckedSubList[index] = true;
+//                                                               } else {
+//                                                                 //isCheckedList[index] = false;
+//                                                               }
+//
+//                                                               return Column(
+//
+//                                                                 children: [
+//                                                                   Padding(
+//                                                                     padding: const EdgeInsets.only(left: 25),
+//                                                                     child: ListTile(
+//                                                                       leading: Checkbox(
+//                                                                         value: isCheckedSubList[index],
+//                                                                         onChanged: (bool newValue) {
+//                                                                           setState(() {
+//                                                                             isCheckedSubList[index] = newValue;
+//                                                                             if (newValue) {
+//                                                                               selectedProductIDs.add(SubitemList[index].id.toString());
+//                                                                             } else {
+//                                                                               selectedProductIDs.remove(SubitemList[index].id.toString());
+//                                                                             }
+//                                                                             subchildproductID = SubitemList[index].id.toString();
+//                                                                             print("print idd" + subchildproductID);
+//                                                                             SubchildListt();
+//                                                                           });
+//                                                                         },
+//                                                                       ),
+//                                                                       title: Text(SubitemList[index].name.toString() ?? ""),
+//                                                                     ),
+//                                                                   ),
+//
+//                                                                   // if (isCheckedSubList[index])
+//                                                                   SubchildList.isEmpty
+//                                                                       ? Center(child: CircularProgressIndicator())
+//                                                                       : Column(
+//                                                                     children: [
+//                                                                       Padding(
+//                                                                         padding: const EdgeInsets.only(left: 40),
+//                                                                         child: ListView.builder(
+//                                                                           shrinkWrap: true,
+//                                                                           physics: const NeverScrollableScrollPhysics(),
+//                                                                           itemBuilder: (context, index) {
+//                                                                             if ([120].contains(SubchildList[index].id)) {
+//                                                                               isCheckedSubchildList[index] = true;
+//                                                                             } else {
+//                                                                               //isCheckedList[index] = false;
+//                                                                             }
+//                                                                             return Column(
+//                                                                               children: [
+//                                                                                 Padding(
+//                                                                                   padding: const EdgeInsets.only(left: 25),
+//                                                                                   child: ListTile(
+//                                                                                     leading: Checkbox(
+//                                                                                       value: isCheckedSubchildList[index],
+//                                                                                       onChanged: (bool newValue) {
+//                                                                                         setState(() {
+//                                                                                           isCheckedSubchildList[index] = newValue;
+//                                                                                           if (newValue) {
+//                                                                                             selectedProductIDs.add(SubchildList[index].id.toString());
+//                                                                                           } else {
+//                                                                                             selectedProductIDs.remove(SubchildList[index].id.toString());
+//                                                                                           }
+//                                                                                           printSelectedSubchildItems();
+//                                                                                         });
+//                                                                                       },
+//                                                                                     ),
+//                                                                                     title: Text(SubchildList[index].name.toString() ?? ""),
+//                                                                                   ),
+//                                                                                 ),
+//                                                                               ],
+//                                                                             );
+//                                                                           },
+//                                                                           itemCount: SubchildList.length,
+//                                                                         ),
+//                                                                       ),
+//                                                                     ],
+//                                                                   ),
+//                                                                 ],
+//                                                               );
+//                                                             },
+//                                                             itemCount: SubitemList.length,
+//                                                           ),
+//                                                         ],
+//                                                       ),
+//                                                     ],
+//                                                   );
+//                                                 },
+//                                               ),
+//                                             )
+//
+//
+//
+//
+//
+//
+//                                             // Expanded(
+//                                             //   child: itemList.isEmpty
+//                                             //       ? Center(child: CircularProgressIndicator())
+//                                             //       : ListView.builder(
+//                                             //     itemCount: itemList.length,
+//                                             //     itemBuilder: (context, index) {
+//                                             //       final item = itemList[index];
+//                                             //       return
+//                                             //         Column(
+//                                             //           children: [
+//                                             //             ListTile(
+//                                             //               leading: Checkbox(
+//                                             //                 value: isCheckedList[index],
+//                                             //                 onChanged: (bool newValue) {
+//                                             //                   // setState(() {
+//                                             //                   //   isCheckedList[index] = newValue;
+//                                             //                   //   printSelectedItems();
+//                                             //                   //   ProductID=item.id.toString();
+//                                             //                   //   print("print id"+ProductID);
+//                                             //                   //   subcategorylist();
+//                                             //                   //   print(subCatMap);
+//                                             //                   //
+//                                             //                   // });
+//                                             //
+//                                             //                   setState(() {
+//                                             //
+//                                             //                     isCheckedList[index] = newValue;
+//                                             //                     if (newValue) {
+//                                             //                       selectedProductIDs.add(item.id.toString());
+//                                             //                     } else {
+//                                             //                       selectedProductIDs.remove(item.id.toString());
+//                                             //                     }
+//                                             //                     ProductID = item.id.toString();
+//                                             //                     subcategorylist();
+//                                             //                   });
+//                                             //
+//                                             //                 },
+//                                             //               ),
+//                                             //               title: Text(item.name.toString()),
+//                                             //             ),
+//                                             //
+//                                             //             if(isCheckedList[index])
+//                                             //               SubitemList.isEmpty
+//                                             //                   ? Center(child: CircularProgressIndicator())
+//                                             //                   : Column(children: [
+//                                             //
+//                                             //                 ListView.builder(
+//                                             //                   shrinkWrap: true,
+//                                             //                   physics: const NeverScrollableScrollPhysics(),
+//                                             //                   itemBuilder: (context , int index){
+//                                             //                     return Column(children: [
+//                                             //                       Padding(
+//                                             //                         padding: const EdgeInsets.only(left: 25),
+//                                             //                         child: ListTile(
+//                                             //                           leading: Checkbox(
+//                                             //                             value: isCheckedSubList[index],
+//                                             //                             onChanged: (bool newValue) {
+//                                             //                               setState(() {
+//                                             //                                 isCheckedSubList[index] = newValue;
+//                                             //                                 if (newValue) {
+//                                             //                                   selectedProductIDs.add(SubitemList[index].id.toString());
+//                                             //                                 } else {
+//                                             //                                   selectedProductIDs.remove(SubitemList[index].id.toString());
+//                                             //
+//                                             //                                 }
+//                                             //                                 subchildproductID=SubitemList[index].id.toString();
+//                                             //                                 print("print idd"+subchildproductID);
+//                                             //                                 SubchildListt();
+//                                             //                                 //printSelectedItems();
+//                                             //                                 printSelectedSubItems();
+//                                             //                               });
+//                                             //                             },
+//                                             //                           ),
+//                                             //                           // title:Text(SubitemList[index].id.toString() ??""),
+//                                             //                           title:Text(SubitemList[index].name.toString() ??""),
+//                                             //
+//                                             //                         ),
+//                                             //                       ),
+//                                             //
+//                                             //                       if(isCheckedSubList[index])
+//                                             //
+//                                             //                         SubchildList.isEmpty
+//                                             //                             ? Center(child: CircularProgressIndicator())
+//                                             //                             :  Column(children: [
+//                                             //
+//                                             //                           Padding(
+//                                             //                             padding: const EdgeInsets.only(left: 40),
+//                                             //                             child: ListView.builder(
+//                                             //                               shrinkWrap: true,
+//                                             //                               physics: const NeverScrollableScrollPhysics(),
+//                                             //                               itemBuilder: (context , int index){
+//                                             //                                 return Column(children: [
+//                                             //                                   Padding(
+//                                             //                                     padding: const EdgeInsets.only(left: 25),
+//                                             //                                     child: ListTile(
+//                                             //                                       leading: Checkbox(
+//                                             //                                         value:isCheckedSubchildList[index],
+//                                             //                                         onChanged: (bool newValue) {
+//                                             //                                           setState(() {
+//                                             //                                             isCheckedSubchildList[index] = newValue;
+//                                             //                                             if (newValue) {
+//                                             //                                               selectedProductIDs.add(SubchildList[index].id.toString());
+//                                             //                                             } else {
+//                                             //                                               selectedProductIDs.remove(SubchildList[index].id.toString());
+//                                             //                                             }
+//                                             //                                             //printSelectedItems();
+//                                             //                                             printSelectedSubchildItems();
+//                                             //                                           });
+//                                             //                                         },
+//                                             //                                       ),
+//                                             //                                       // title:Text(SubitemList[index].id.toString() ??""),
+//                                             //                                       title:Text(SubchildList[index].name.toString() ??""),
+//                                             //
+//                                             //                                     ),
+//                                             //                                   ),
+//                                             //                                 ],);
+//                                             //
+//                                             //                               },
+//                                             //                               //itemCount: item.childrenCategories[index].categories.length,
+//                                             //                               //itemCount: SubitemList.length,
+//                                             //                               itemCount: SubchildList.length,
+//                                             //                             ),
+//                                             //                           ),
+//                                             //
+//                                             //
+//                                             //                         ],)
+//                                             //
+//                                             //                     ],);
+//                                             //
+//                                             //                   },
+//                                             //                   //itemCount: item.childrenCategories[index].categories.length,
+//                                             //                   //itemCount: SubitemList.length,
+//                                             //                   itemCount: SubitemList.length,
+//                                             //                 ),
+//                                             //
+//                                             //
+//                                             //               ],),
+//                                             //
+//                                             //
+//                                             //
+//                                             //
+//                                             //
+//                                             //
+//                                             //           ],
+//                                             //         );
+//                                             //     },
+//                                             //   ),
+//                                             // ),
+//                                           ],
+//                                         ),
+//
+//                                       ),
+//
+//                                     ),
+//                                   ),
+//                                 ],
+//
+//                                 onExpansionChanged: (bool expanded){
+//                                   // setState(() => _customeIcon = expanded);
+//                                 },
+//
+//                               ),
+//                               Divider(color: Colors.black,thickness: 1,),
+//
+//                               Container(
+//                                   margin: const EdgeInsets.fromLTRB(5, 16, 0, 0),
+//                                   child: const Align(
+//                                     alignment: Alignment.topLeft,
+//                                     child: Text("Brand",
+//                                         style: TextStyle(fontSize: 14,
+//                                             color: Color.fromARGB(255, 0, 0, 0))
+//                                     ),
+//                                   )
+//                               ),
+//                               Container(
+//                                 margin: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+//                                 alignment: Alignment.topLeft,
+//                                 child: BrandDropdown(),
+//                               ),
+//
+//
+//
+//                               Container(
+//                                 margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+//                               ),
+//
+//                             ],
+//                           ),
+//                         ),
+//                       ),
+//                       //-------------------
+//                       Container(
+//                         margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
+//                         child: Card(
+//                           elevation: 10,
+//                           child: Column(
+//                             children: [
+//                               Container(
+//                                   margin: const EdgeInsets.fromLTRB(5, 20, 0, 0),
+//                                   child: const Align(
+//                                     alignment: Alignment.topLeft,
+//                                     child: Text("Ad Image",
+//                                         style: TextStyle(fontSize: 14,
+//                                             color: Color.fromARGB(255, 0, 0, 0))),
+//                                   )
+//                               ),
+//                               Container(
+//                                 // alignment: Alignment.center,
+//                                 child: Center(
+//                                   child: Column(
+//                                     //mainAxisAlignment: MainAxisAlignment.center,
+//                                     children: [
+//                                       const SizedBox(
+//                                         height: 10,
+//                                       ),
+//                                       ElevatedButton(
+//                                         style: ButtonStyle(
+//                                             backgroundColor: MaterialStateProperty.all(Colors.white)),
+//                                         child: const Text('Select Image from Gallery',
+//                                             style: TextStyle(fontSize: 14,
+//                                                 color: Color.fromARGB(255, 104, 104, 104))),
+//                                         onPressed: () {
+//                                           getImages();
+//                                         },
+//                                       ),
+//
+//                                       SizedBox(
+//                                         height: 150,
+//                                         //width: 20,
+//                                         child: selectedImages.isEmpty
+//                                             ?  Center(child: Text('Sorry nothing selected!!'))
+//                                             : GridView.builder(
+//                                           itemCount: selectedImages.length,
+//                                           gridDelegate:
+//                                           SliverGridDelegateWithFixedCrossAxisCount(
+//                                               crossAxisSpacing: 5,
+//                                               mainAxisSpacing: 5,
+//                                               crossAxisCount: 2),
+//                                           itemBuilder: (BuildContext context, int index) {
+//                                             print("Placead.dart, index : ${index}");
+//                                             print("PlaceadGGG ${selectedImages}");
+//
+//                                             print("base 64 ${basee}");
+//                                             return Center(
+//                                               child: Stack(
+//                                                 children: [
+//                                                   Container(
+//                                                     // width: 200,
+//                                                     height: 150,
+//                                                     alignment: Alignment.center,
+//                                                     child: Image.file(selectedImages[index],fit: BoxFit.cover,),
+//                                                   ),
+//                                                   Positioned(
+//                                                     top: 5, right: 20,
+//                                                     child: GestureDetector(
+//                                                       child: Icon(Icons.close, size: 30, color: Colors.red,),
+//                                                       onTap: (){
+//                                                         delete(index);
+//                                                       },
+//                                                     ),
+//                                                   ),
+//                                                 ],
+//                                                 //child: Image.file(selectedImages[index])
+//                                               ),
+//                                             );
+//                                           },
+//                                         ),
+//                                       ),
+//                                     ],
+//                                   ),
+//                                 ),
+//                               ),
+//                             ],
+//                           ),
+//                         ),
+//                       ),
+//                       //---------------------
+//                       Container(
+//                         margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
+//                         child: Card(
+//                           elevation: 10,
+//                           child: Column(
+//                             children: [
+//                               Padding(
+//                                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+//                                   child: const Align(
+//                                     alignment: Alignment.topLeft,
+//                                     child: Text("Ad Price",
+//                                         style: TextStyle(fontSize: 14,
+//                                             color: Color.fromARGB(255, 0, 0, 0))),
+//                                   )
+//                               ),
+//                               Container(
+//                                 margin: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+//                                 child: TextField(
+//                                   controller: _PriceAED,
+//                                   keyboardType: TextInputType.number,
+//                                   autofocus: false,
+//                                   enableSuggestions: false,
+//                                   autocorrect: false,
+//                                   decoration:  InputDecoration(
+//                                     border: UnderlineInputBorder(),
+//                                     hintText:snapshot.data.data[0].mainPrice.toString()?? "",
+//                                   ),
+//                                   style: TextStyle(fontSize: 14),
+//                                 ),
+//                               ),
+//
+//                               Padding(
+//                                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+//                                 child: Column(
+//                                   mainAxisAlignment: MainAxisAlignment.start,
+//                                   children: <Widget>[
+//                                     Row(
+//                                       children: [
+//                                         Text("Make an offer",
+//                                             style: TextStyle(fontSize: 14,
+//                                                 color: Color.fromARGB(255, 0, 0, 0))),
+//                                         Switch(
+//                                           value: isEnabled,
+//                                           onChanged: (value) {
+//                                             setState(() {
+//                                               isEnabled = value;
+//                                               offerstatus=isEnabled ? '1' : '0';
+//                                               print("Switch value${offerstatus}");
+//                                               if (isEnabled) {
+//                                                 print('Switch is enabled');
+//                                               } else {
+//                                                 print('Switch is disabled');
+//                                               }
+//                                             });
+//                                           },
+//                                         ),
+//                                       ],
+//                                     ),
+//                                     //SizedBox(height: 20.0),
+//
+//                                     isEnabled ?
+//
+//                                     Container(
+//                                       child: TextField(
+//                                         controller: _offerControler,
+//
+//                                         decoration: const InputDecoration(
+//                                           border: UnderlineInputBorder(),
+//                                           labelText: 'Offer',
+//                                         ),
+//                                         keyboardType: TextInputType.number,
+//                                         minLines: 1,
+//                                         maxLines: 11,
+//                                       ),
+//                                     ) :Column()
+//                                   ],
+//                                 ),
+//                               ),
+//
+//                             ],
+//                           ),
+//                         ),
+//                       ),
+//                       //---------------------
+//                       Container(
+//                         margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
+//                         child: Card(
+//                           elevation: 10,
+//                           child: Column(
+//                             children: [
+//                               Container(
+//                                   margin: const EdgeInsets.fromLTRB(5, 16, 0, 0),
+//                                   child: const Align(
+//                                     alignment: Alignment.topLeft,
+//                                     child: Text("Ad Description",
+//                                         style: TextStyle(fontSize: 14,
+//                                             color: Color.fromARGB(255, 0, 0, 0))),
+//                                   )
+//                               ),
+//                               Container(
+//                                 margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
+//                                 child: TextField(
+//                                   controller: _Description,
+//                                   decoration: InputDecoration(
+//                                     border: UnderlineInputBorder(),
+//                                     hintText:snapshot.data.data[0].description.toString()?? "",
+//
+//                                   ),
+//                                   keyboardType: TextInputType.multiline,
+//                                   minLines: 1,
+//                                   maxLines: 11,
+//                                 ),
+//                               ),
+//                             ],
+//                           ),
+//                         ),
+//                       ),
+//
+//                       Padding(
+//                         padding: const EdgeInsets.only(top: 20.0,left: 16),
+//                         child: Row(
+//                           crossAxisAlignment: CrossAxisAlignment.start,
+//                           children: [
+//                             Container(
+//                               height: 15,
+//                               width: 15,
+//                               child: Checkbox(
+//                                   shape: RoundedRectangleBorder(
+//                                       borderRadius: BorderRadius.circular(6)),
+//                                   value: _isAgree,
+//                                   onChanged: (newValue) {
+//                                     _isAgree = newValue;
+//                                     setState(() {});
+//                                   }),
+//                             ),
+//                             Padding(
+//                               padding: const EdgeInsets.only(left: 16.0),
+//                               child: Container(
+//                                 width: DeviceInfo(context).width - 130,
+//                                 child: RichText(
+//                                     maxLines: 2,
+//                                     text: TextSpan(
+//                                         style: TextStyle(
+//                                             color: MyTheme.font_grey, fontSize: 12),
+//                                         children: [
+//                                           TextSpan(
+//                                             text: "I agree to the",
+//                                           ),
+//                                           TextSpan(
+//                                             recognizer: TapGestureRecognizer()
+//                                               ..onTap = () {
+//                                                 Navigator.push(
+//                                                     context,
+//                                                     MaterialPageRoute(
+//                                                         builder: (context) =>
+//                                                             CommonWebviewScreen(
+//                                                               page_name:
+//                                                               "Terms Conditions",
+//                                                               url:
+//                                                               "${AppConfig.RAW_BASE_URL}/mobile-page/terms",
+//                                                             )));
+//                                               },
+//                                             style:
+//                                             TextStyle(color: MyTheme.accent_color),
+//                                             text: " Terms Conditions",
+//                                           ),
+//                                           TextSpan(
+//                                             text: " &",
+//                                           ),
+//                                           TextSpan(
+//                                             recognizer: TapGestureRecognizer()
+//                                               ..onTap = () {
+//                                                 Navigator.push(
+//                                                     context,
+//                                                     MaterialPageRoute(
+//                                                         builder: (context) =>
+//                                                             CommonWebviewScreen(
+//                                                               page_name:
+//                                                               "Privacy Policy",
+//                                                               url:
+//                                                               "${AppConfig.RAW_BASE_URL}/mobile-page/privacy-policy",
+//                                                             )));
+//                                               },
+//                                             text: " Privacy Policy",
+//                                             style:
+//                                             TextStyle(color: MyTheme.accent_color),
+//                                           )
+//                                         ])),
+//                               ),
+//                             )
+//                           ],
+//                         ),
+//                       ),
+//
+//
+//
+//                       //TESTING BUTTON
+//
+//
+//                       ElevatedButton(onPressed: (){
+//                         String selectedProduct = selectedProductIDs.map((item) => item.toString()).join(',').replaceAll(', ', ',');
+//
+//
+//                         //product name
+//                         var ProdName = _ProductName.text.toString().isEmpty ? snapshot.data.data[0].name.toString():_ProductName.text.toString();
+//                         //categories
+//                         var category = selectedProduct.isEmpty ? snapshot.data.data[0].categoryId.toString():selectedProduct;
+//                         //brandId
+//                         var brand = dropdownBrands.split(" ")[0].toString() == "Select" ?snapshot.data.data[0].brandId.toString():dropdownBrands.split(" ")[0].toString();
+//                         //description
+//                         var description = _Description.text.toString().isEmpty?snapshot.data.data[0].description.toString():_Description.text.toString();
+//                         //mainPrice
+//                         var amount = _PriceAED.text.toString() ==null ?snapshot.data.data[0].mainPrice.toString():_PriceAED.text.toString();
+//                         //
+//                         var email = _EmailID.text.toString();
+//                         var password = _PassWord.text.toString();
+// //minoffer
+//                         var offer = _offerControler.text.toString().isEmpty?snapshot.data.data[0].minOfferPrice.toString():_offerControler.text.toString();
+//                         // product images thumbnailImage
+//                         var imagebase = allurlss ==null ? snapshot.data.data[0].thumbnailImage.toString():allurlss;
+//                         var offerstatu= offerstatus.isEmpty? snapshot.data.data[0].minoffer.toString():offerstatus;
+//
+//
+//                         var userid = user_id.$;
+//                         //var imagebase = allurlss;
+//
+//
+//                         print("Product name.: ${ProdName}");
+//                         print("category.....: ${category}");
+//                         print("Brandd........: ${brand}");
+//                         print("Description..: ${description}");
+//                         print("Amount.......: ${amount}");
+//                         print("Email........: ${email}");
+//                         print("password.....: ${password}");
+//                         print("****************************************************************");
+//
+//                         print("Base 64 urlll....: ${imagebase}");
+//                         print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+//
+//                         //print("Base 64 url....: ${allurlss}");
+//                         print("****************************************************************");
+//                         print("User id  .....: ${user_id.$}");
+//                         print("Offer price  .....: ${offer}");
+//                         print("Offer Status  .....: ${offerstatu}");
+//                         print("URLLLLLLLL  .....: ${base64Urls}");
+//                         print("IMAGE_URLLLLL  .....: ${imageUrls}");
+//                         print("Select Images  .....: ${selectedImages}");
+//
+//                         // place_ad_upload(ProdName,category,brand,description,offer,amount,offerstatus,email,password);
+//
+//
+//                       }, child: Text("DATAAA")),
+//
+//
+//
+//                       Padding(
+//                         padding: const EdgeInsets.only(top: 30.0,left: 16,right: 16),
+//                         child: Container(
+//                           height: 45,
+//                           child: Btn.minWidthFixHeight(
+//                             minWidth: MediaQuery.of(context).size.width,
+//                             height: 50,
+//                             color: MyTheme.accent_color,
+//                             shape: RoundedRectangleBorder(
+//                                 borderRadius:
+//                                 const BorderRadius.all(Radius.circular(6.0))),
+//                             child: Text(
+//                               "Update Ad",
+//                               style: TextStyle(
+//                                   color: Colors.white,
+//                                   fontSize: 14,
+//                                   fontWeight: FontWeight.w600),
+//                             ),
+//                             onPressed: _isAgree
+//                                 ? () {
+//
+//
+//                               if (_ProductName.text.isEmpty ||
+//                                   dropdownCategory.isEmpty ||
+//                                   dropdownBrands.isEmpty ||
+//                                   _Description.text.isEmpty ||
+//                                   _PriceAED.text.isEmpty
+//                               //allurlss.isEmpty
+//
+//                               )
+//
+//
+//
+//                               {
+//                                 print("images url${imageurl}");
+//                                 Fluttertoast.showToast(
+//                                   msg: "Please fill in all fields",
+//                                   // toastLength: Toast.LENGTH_SHORT,
+//                                   gravity: ToastGravity.BOTTOM,
+//                                   timeInSecForIosWeb: 1,
+//                                   backgroundColor: Colors.black87,
+//                                   textColor: Colors.red,
+//                                   fontSize: 16.0,
+//                                 );
+//                               } else {
+//                                 String selectedProduct = selectedProductIDs.map((item) => item.toString()).join(',').replaceAll(', ', ',');
+//
+//                                 print("category  remove square renove space....:${selectedProduct}");
+//
+//                                 //var ProdName = _ProductName.text.toString() == null ? snapshot.data.data[0].name.toString():Column();
+//                                 // var ProdName =  snapshot.data.data[0].name.toString();
+//                                 var ProdName = _ProductName.text.toString().isEmpty ? snapshot.data.data[0].name.toString():_ProductName.text.toString();
+//                                 // var category = dropdownCategory.split(" ")[0].toString();
+//                                 // var category = selectedProductIDs;
+//                                 var category = selectedProduct;
+//                                 var brand = dropdownBrands.split(" ")[0].toString();
+//                                 var description = _Description.text.toString();
+//                                 var amount = _PriceAED.text.toString();
+//                                 var email = _EmailID.text.toString();
+//                                 var password = _PassWord.text.toString();
+//                                 var offer = _offerControler.text.toString();
+//                                 // var imagebase = imageurl;
+//                                 var imagebase = allurlss;
+//                                 var userid = user_id.$;
+//                                 //var imagebase = allurlss;
+//
+//
+//                                 print("Product name.: ${ProdName}");
+//                                 print("category.....: ${category}");
+//                                 print("Brand........: ${brand}");
+//                                 print("Description..: ${description}");
+//                                 print("Amount.......: ${amount}");
+//                                 print("Email........: ${email}");
+//                                 print("password.....: ${password}");
+//                                 print("****************************************************************");
+//
+//                                 print("Base 64 url....: ${imagebase}");
+//                                 print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+//
+//                                 print("Base 64 url....: ${allurlss}");
+//                                 print("****************************************************************");
+//                                 print("User id  .....: ${user_id.$}");
+//                                 print("Offer price  .....: ${offer}");
+//                                 print("Offer Status  .....: ${offerstatus}");
+//                                 print("URLLLLLLLL  .....: ${base64Urls}");
+//                                 print("IMAGE_URLLLLL  .....: ${imageUrls}");
+//                                 print("Select Images  .....: ${selectedImages}");
+//
+//
+//                                 //place_ad_upload(ProdName,category,brand,description,offer,amount,offerstatus,email,password);
+// ///////////
+//
+//                                 _ProductName.clear();
+//                                 _Description.clear();
+//                                 _PriceAED.clear();
+//                                 _EmailID.clear();
+//                                 _PassWord.clear();
+//                                 _offerControler.clear();
+//
+//                               }
+//                             }
+//                                 : null,
+//                           ),
+//                         ),
+//                       ),
+//
+//                       SizedBox(height: 10,),
+//                     ]
+//                 );
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//               // Container(
+//               //   //padding: EdgeInsets.only(top: 23),
+//               //   child:
+//               //
+//               //   ListView.separated(
+//               //     separatorBuilder: (context, index) {
+//               //       // Your separator builder logic here
+//               //       return Divider(); // Example: Using a Divider as the separator
+//               //     },
+//               //     shrinkWrap: true,
+//               //     physics: const NeverScrollableScrollPhysics(),
+//               //     itemBuilder: (context , int index){
+//               //       final thumbnailImage = snapshot.data.data[index].thumbnailImage;
+//               //       return
+//               //
+//               //         Column(children: [
+//               //         // Text("Govind"),
+//               //         InkWell(
+//               //           onTap: (){
+//               //             Navigator.push(context, MaterialPageRoute(builder: (context)=>Edit_placead()));
+//               //             //print("print product id")
+//               //             //product_Id=snapshot.data.data[index].id.toString();
+//               //             // print("print product id ${snapshot.data.data[index].id.toString()}");
+//               //             //print("print produc ${product_Id}");
+//               //           },
+//               //           child: Container(
+//               //             width: MediaQuery.of(context).size.width *1,
+//               //             padding: EdgeInsets.only(left: 10,right: 10),
+//               //             child: Row(
+//               //               children: [
+//               //                 Container(
+//               //                   decoration: BoxDecoration(
+//               //                       color: Colors.black,
+//               //                       borderRadius: BorderRadius.circular(12),
+//               //                       //border: Border.all(color: MyTheme.accent_color),
+//               //                       boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,offset: Offset(1,3))]
+//               //
+//               //                   ),
+//               //
+//               //                   height: 100,
+//               //                   width: MediaQuery.of(context).size.width *0.3,
+//               //                   //child: Image.asset("assets/silver.png",fit: BoxFit.fill,),
+//               //
+//               //
+//               //                   child:   thumbnailImage == null
+//               //                       ? Image.asset("assets/silver.png",fit: BoxFit.fill,)
+//               //                       : Image.network(thumbnailImage, fit: BoxFit.fill),
+//               //
+//               //                 ),
+//               //                 SizedBox(width: 10,),
+//               //                 Container(
+//               //                   padding: EdgeInsets.only(left: 16,top: 16),
+//               //                   decoration: BoxDecoration(
+//               //                       color: Colors.white,
+//               //                       borderRadius: BorderRadius.circular(12),
+//               //                       //border: Border.all(color: MyTheme.accent_color),
+//               //                       boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,offset: Offset(1,3))]
+//               //                   ),
+//               //
+//               //                   height: 100,
+//               //                   width: MediaQuery.of(context).size.width *0.6,
+//               //                   child: Column(
+//               //                     crossAxisAlignment: CrossAxisAlignment.start,
+//               //                     children: [
+//               //                       Text(snapshot.data.data[index].name.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500)),
+//               //                       SizedBox(height: 5,),
+//               //                       Text(snapshot.data.data[index].mainPrice.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500)),
+//               //                       //Text(snapshot.data.data[index].links[0].details.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500)),
+//               //                     ],),
+//               //                 ),
+//               //               ],
+//               //             ),
+//               //           ),
+//               //         )
+//               //       ],);
+//               //
+//               //     },
+//               //     //itemCount: 51,
+//               //     itemCount: snapshot.data.data.length,
+//               //   ),
+//               //
+//               //
+//               // );
+//             }
+//             else{
+//               return
+//                 Container(
+//                     child: Center(child: CircularProgressIndicator()));
+//             }
+//           }
+//       );
+//
+//
+//   }
+
+
+
 
   Widget listvieww(){
     return
       FutureBuilder(
           future: editmyadsapicall(),
           builder: (context, snapshot) {
-
             if (snapshot.hasData) {
+              List<String> categoryIdList = [];
+              RegExp regExp = RegExp(r'\d+');
+              Iterable<Match> matches = regExp.allMatches(snapshot.data.data[0].categoryId.toString());
+              for (var match in matches) {
+                categoryIdList.add(match.group(0));
+              }
+              print("Convert String to list  avnish  .: ${categoryIdList}");
+
+              List asd = categoryIdList.toList();
+              //  selectedItems = categoryIdList.map((string) {
+              //   return string.toUpperCase();
+              // }).toList();
+
+              if(gov==0) {
+                for (int i = 0; i < asd.length; i++) {
+                  selectedItems.add("${asd[i]}");
+                }
+                gov=1;
+              }
+              print("fetch  category.....: ${fetchselectedcategories}");
+              print("fetch  category selected items.....: ${selectedItems}");
+
+              print("chalaaaaaaa");
+
               // final thumbnailImage = snapshot.data.data[index].thumbnailImage;
               return
-
                 ListView(
                     children: [
                       Container(
@@ -754,18 +1787,6 @@ class _Edit_placeadState extends State<Edit_placead> {
                           elevation: 10,
                           child: Column(
                             children: [
-                              // Text(widget.Product_ID),
-                              // Text("GOVIND KUMAR"),
-
-
-
-                              // Text(globalResponseBody.toString()),
-                              // listview(),
-
-
-                              // Text('Selected Product IDs: ${widget.selectedProductIDs.join(', ')}'),
-
-
                               Container(
                                   margin: const EdgeInsets.fromLTRB(5, 20, 0, 0),
                                   child: const Align(
@@ -807,327 +1828,23 @@ class _Edit_placeadState extends State<Edit_placead> {
                               ),
 
                               ExpansionTile(title: Text("Category"),
-
+                                // trailing: Icon(
+                                //   _customeIcon ? Icons.arrow_drop_down_circle : Icons.arrow_drop_down,
+                                // ),
                                 children: [
-
+                                  // ListTile(
+                                  //   title: Text("This is tile number 2"),
+                                  // ),
                                   ListTile(
                                     title: InkWell(onTap: (){
+                                      // print("Hellooooo${globalResponseBody}");
                                     },
                                       child:
-                                      Container(
-                                        height: 500,
-                                        padding: EdgeInsets.only(left: 16,right: 16),
-                                        child:
 
-                                        Column(
-                                          children: [
-                                            //Text("mmmmmmmmmm"),
-
-                                            Expanded(
-                                              child: itemList.isEmpty
-                                                  ? Center(child: CircularProgressIndicator())
-                                                  : ListView.builder(
-                                               // itemCount: itemList.length,
-                                                itemCount: 1,
-                                                itemBuilder: (context, index) {
-                                                  final item = itemList[index];
-
-                                                  // Initialize checked state based on id
-                                                  //isCheckedList[index] = [1, 72, 188, 298, 424, 440, 457, 472].contains(item.id);
-
-                                                  // Check items with id equal to 1, 120, and 2
-                                                  if ([1].contains(item.id)) {
-                                                    isCheckedList[index] = true;
-                                                  } else {
-                                                    //isCheckedList[index] = false;
-                                                  }
-
-                                                  return Column(
-                                                    children: [
-                                                      ListTile(
-                                                        leading: Checkbox(
-                                                          value: isCheckedList[index],
-                                                          onChanged: (bool newValue) {
-                                                            setState(() {
-                                                              isCheckedList[index] = newValue;
-                                                              if (newValue) {
-                                                                selectedProductIDs.add(item.id.toString());
-                                                              } else {
-                                                                selectedProductIDs.remove(item.id.toString());
-                                                              }
-                                                              ProductID = item.id.toString();
-                                                              subcategorylist();
-                                                            });
-                                                          },
-                                                        ),
-                                                        title: Text(item.name.toString()),
-                                                      ),
-
-                                                     // if (isCheckedList[index])
-                                                        SubitemList.isEmpty
-                                                            ? Center(child: CircularProgressIndicator())
-                                                            : Column(
-
-
-                                                          children: [
-
-                                                            ListView.builder(
-                                                              shrinkWrap: true,
-                                                              physics: const NeverScrollableScrollPhysics(),
-                                                              itemBuilder: (context, index) {
-
-                                                                //SubitemList
-                                                                if ([120].contains(SubitemList[index].id)) {
-                                                                  isCheckedSubList[index] = true;
-                                                                } else {
-                                                                  //isCheckedList[index] = false;
-                                                                }
-
-                                                                return Column(
-
-                                                                  children: [
-                                                                    Padding(
-                                                                      padding: const EdgeInsets.only(left: 25),
-                                                                      child: ListTile(
-                                                                        leading: Checkbox(
-                                                                          value: isCheckedSubList[index],
-                                                                          onChanged: (bool newValue) {
-                                                                            setState(() {
-                                                                              isCheckedSubList[index] = newValue;
-                                                                              if (newValue) {
-                                                                                selectedProductIDs.add(SubitemList[index].id.toString());
-                                                                              } else {
-                                                                                selectedProductIDs.remove(SubitemList[index].id.toString());
-                                                                              }
-                                                                              subchildproductID = SubitemList[index].id.toString();
-                                                                              print("print idd" + subchildproductID);
-                                                                              SubchildListt();
-                                                                            });
-                                                                          },
-                                                                        ),
-                                                                        title: Text(SubitemList[index].name.toString() ?? ""),
-                                                                      ),
-                                                                    ),
-
-                                                                   // if (isCheckedSubList[index])
-                                                                      SubchildList.isEmpty
-                                                                          ? Center(child: CircularProgressIndicator())
-                                                                          : Column(
-                                                                        children: [
-                                                                          Padding(
-                                                                            padding: const EdgeInsets.only(left: 40),
-                                                                            child: ListView.builder(
-                                                                              shrinkWrap: true,
-                                                                              physics: const NeverScrollableScrollPhysics(),
-                                                                              itemBuilder: (context, index) {
-                                                                                if ([120].contains(SubchildList[index].id)) {
-                                                                                  isCheckedSubchildList[index] = true;
-                                                                                } else {
-                                                                                  //isCheckedList[index] = false;
-                                                                                }
-                                                                                return Column(
-                                                                                  children: [
-                                                                                    Padding(
-                                                                                      padding: const EdgeInsets.only(left: 25),
-                                                                                      child: ListTile(
-                                                                                        leading: Checkbox(
-                                                                                          value: isCheckedSubchildList[index],
-                                                                                          onChanged: (bool newValue) {
-                                                                                            setState(() {
-                                                                                              isCheckedSubchildList[index] = newValue;
-                                                                                              if (newValue) {
-                                                                                                selectedProductIDs.add(SubchildList[index].id.toString());
-                                                                                              } else {
-                                                                                                selectedProductIDs.remove(SubchildList[index].id.toString());
-                                                                                              }
-                                                                                              printSelectedSubchildItems();
-                                                                                            });
-                                                                                          },
-                                                                                        ),
-                                                                                        title: Text(SubchildList[index].name.toString() ?? ""),
-                                                                                      ),
-                                                                                    ),
-                                                                                  ],
-                                                                                );
-                                                                              },
-                                                                              itemCount: SubchildList.length,
-                                                                            ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                  ],
-                                                                );
-                                                              },
-                                                              itemCount: SubitemList.length,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                    ],
-                                                  );
-                                                },
-                                              ),
-                                            )
-
-
-
-
-
-
-                                            // Expanded(
-                                            //   child: itemList.isEmpty
-                                            //       ? Center(child: CircularProgressIndicator())
-                                            //       : ListView.builder(
-                                            //     itemCount: itemList.length,
-                                            //     itemBuilder: (context, index) {
-                                            //       final item = itemList[index];
-                                            //       return
-                                            //         Column(
-                                            //           children: [
-                                            //             ListTile(
-                                            //               leading: Checkbox(
-                                            //                 value: isCheckedList[index],
-                                            //                 onChanged: (bool newValue) {
-                                            //                   // setState(() {
-                                            //                   //   isCheckedList[index] = newValue;
-                                            //                   //   printSelectedItems();
-                                            //                   //   ProductID=item.id.toString();
-                                            //                   //   print("print id"+ProductID);
-                                            //                   //   subcategorylist();
-                                            //                   //   print(subCatMap);
-                                            //                   //
-                                            //                   // });
-                                            //
-                                            //                   setState(() {
-                                            //
-                                            //                     isCheckedList[index] = newValue;
-                                            //                     if (newValue) {
-                                            //                       selectedProductIDs.add(item.id.toString());
-                                            //                     } else {
-                                            //                       selectedProductIDs.remove(item.id.toString());
-                                            //                     }
-                                            //                     ProductID = item.id.toString();
-                                            //                     subcategorylist();
-                                            //                   });
-                                            //
-                                            //                 },
-                                            //               ),
-                                            //               title: Text(item.name.toString()),
-                                            //             ),
-                                            //
-                                            //             if(isCheckedList[index])
-                                            //               SubitemList.isEmpty
-                                            //                   ? Center(child: CircularProgressIndicator())
-                                            //                   : Column(children: [
-                                            //
-                                            //                 ListView.builder(
-                                            //                   shrinkWrap: true,
-                                            //                   physics: const NeverScrollableScrollPhysics(),
-                                            //                   itemBuilder: (context , int index){
-                                            //                     return Column(children: [
-                                            //                       Padding(
-                                            //                         padding: const EdgeInsets.only(left: 25),
-                                            //                         child: ListTile(
-                                            //                           leading: Checkbox(
-                                            //                             value: isCheckedSubList[index],
-                                            //                             onChanged: (bool newValue) {
-                                            //                               setState(() {
-                                            //                                 isCheckedSubList[index] = newValue;
-                                            //                                 if (newValue) {
-                                            //                                   selectedProductIDs.add(SubitemList[index].id.toString());
-                                            //                                 } else {
-                                            //                                   selectedProductIDs.remove(SubitemList[index].id.toString());
-                                            //
-                                            //                                 }
-                                            //                                 subchildproductID=SubitemList[index].id.toString();
-                                            //                                 print("print idd"+subchildproductID);
-                                            //                                 SubchildListt();
-                                            //                                 //printSelectedItems();
-                                            //                                 printSelectedSubItems();
-                                            //                               });
-                                            //                             },
-                                            //                           ),
-                                            //                           // title:Text(SubitemList[index].id.toString() ??""),
-                                            //                           title:Text(SubitemList[index].name.toString() ??""),
-                                            //
-                                            //                         ),
-                                            //                       ),
-                                            //
-                                            //                       if(isCheckedSubList[index])
-                                            //
-                                            //                         SubchildList.isEmpty
-                                            //                             ? Center(child: CircularProgressIndicator())
-                                            //                             :  Column(children: [
-                                            //
-                                            //                           Padding(
-                                            //                             padding: const EdgeInsets.only(left: 40),
-                                            //                             child: ListView.builder(
-                                            //                               shrinkWrap: true,
-                                            //                               physics: const NeverScrollableScrollPhysics(),
-                                            //                               itemBuilder: (context , int index){
-                                            //                                 return Column(children: [
-                                            //                                   Padding(
-                                            //                                     padding: const EdgeInsets.only(left: 25),
-                                            //                                     child: ListTile(
-                                            //                                       leading: Checkbox(
-                                            //                                         value:isCheckedSubchildList[index],
-                                            //                                         onChanged: (bool newValue) {
-                                            //                                           setState(() {
-                                            //                                             isCheckedSubchildList[index] = newValue;
-                                            //                                             if (newValue) {
-                                            //                                               selectedProductIDs.add(SubchildList[index].id.toString());
-                                            //                                             } else {
-                                            //                                               selectedProductIDs.remove(SubchildList[index].id.toString());
-                                            //                                             }
-                                            //                                             //printSelectedItems();
-                                            //                                             printSelectedSubchildItems();
-                                            //                                           });
-                                            //                                         },
-                                            //                                       ),
-                                            //                                       // title:Text(SubitemList[index].id.toString() ??""),
-                                            //                                       title:Text(SubchildList[index].name.toString() ??""),
-                                            //
-                                            //                                     ),
-                                            //                                   ),
-                                            //                                 ],);
-                                            //
-                                            //                               },
-                                            //                               //itemCount: item.childrenCategories[index].categories.length,
-                                            //                               //itemCount: SubitemList.length,
-                                            //                               itemCount: SubchildList.length,
-                                            //                             ),
-                                            //                           ),
-                                            //
-                                            //
-                                            //                         ],)
-                                            //
-                                            //                     ],);
-                                            //
-                                            //                   },
-                                            //                   //itemCount: item.childrenCategories[index].categories.length,
-                                            //                   //itemCount: SubitemList.length,
-                                            //                   itemCount: SubitemList.length,
-                                            //                 ),
-                                            //
-                                            //
-                                            //               ],),
-                                            //
-                                            //
-                                            //
-                                            //
-                                            //
-                                            //
-                                            //           ],
-                                            //         );
-                                            //     },
-                                            //   ),
-                                            // ),
-                                          ],
-                                        ),
-
-                                      ),
+                                      listview(),
 
                                     ),
-                                  ),
+                                  )
                                 ],
 
                                 onExpansionChanged: (bool expanded){
@@ -1135,6 +1852,8 @@ class _Edit_placeadState extends State<Edit_placead> {
                                 },
 
                               ),
+
+
                               Divider(color: Colors.black,thickness: 1,),
 
                               Container(
@@ -1250,6 +1969,8 @@ class _Edit_placeadState extends State<Edit_placead> {
                         ),
                       ),
                       //---------------------
+
+
                       Container(
                         margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
                         child: Card(
@@ -1449,6 +2170,7 @@ class _Edit_placeadState extends State<Edit_placead> {
                       //TESTING BUTTON
 
 
+
                          ElevatedButton(onPressed: (){
                            String selectedProduct = selectedProductIDs.map((item) => item.toString()).join(',').replaceAll(', ', ',');
 
@@ -1473,12 +2195,33 @@ class _Edit_placeadState extends State<Edit_placead> {
                            var offerstatu= offerstatus.isEmpty? snapshot.data.data[0].minoffer.toString():offerstatus;
 
 
+
+                           String selectedPro = selectedItems.map((item) => item.toString()).join(',').replaceAll(', ', ',');
+
                            var userid = user_id.$;
                            //var imagebase = allurlss;
 
 
+
+                           List<String> categoryIdList = [];
+                           RegExp regExp = RegExp(r'\d+');
+                           Iterable<Match> matches = regExp.allMatches(snapshot.data.data[0].categoryId.toString());
+                           for (var match in matches) {
+                             categoryIdList.add(match.group(0));
+                           }
+                           print("Convert String to list  .: ${categoryIdList}");
+
+
+                           fetchselectedcategories=[selectedProduct.isEmpty ? snapshot.data.data[0].categoryId.toString():selectedProduct].map((id) => id.toString())
+                               .toList();
+                            print("fetch  category.....: ${fetchselectedcategories}");
+
+                           print("Convert String to list  .: ${categoryIdList}");
+                           print("sELECTED ITEMS ID .: ${selectedItems}");
+                           print("fetch  category select  .....: ${selectedPro}");
                            print("Product name.: ${ProdName}");
                            print("category.....: ${category}");
+
                            print("Brandd........: ${brand}");
                            print("Description..: ${description}");
                            print("Amount.......: ${amount}");
@@ -1499,11 +2242,10 @@ class _Edit_placeadState extends State<Edit_placead> {
                            print("Select Images  .....: ${selectedImages}");
 
                            // place_ad_upload(ProdName,category,brand,description,offer,amount,offerstatus,email,password);
+                          // place_ad_upload(ProdName,selectedPro,brand,description,offer,amount,offerstatus,email,password);
 
 
           }, child: Text("DATAAA")),
-
-
 
                       Padding(
                         padding: const EdgeInsets.only(top: 30.0,left: 16,right: 16),
@@ -1526,33 +2268,23 @@ class _Edit_placeadState extends State<Edit_placead> {
                             onPressed: _isAgree
                                 ? () {
 
-
-                              if (_ProductName.text.isEmpty ||
-                                  dropdownCategory.isEmpty ||
-                                  dropdownBrands.isEmpty ||
-                                  _Description.text.isEmpty ||
-                                  _PriceAED.text.isEmpty
-                              //allurlss.isEmpty
-
-                              )
-
-
-
-                              {
-                                print("images url${imageurl}");
-                                Fluttertoast.showToast(
-                                  msg: "Please fill in all fields",
-                                  // toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.BOTTOM,
-                                  timeInSecForIosWeb: 1,
-                                  backgroundColor: Colors.black87,
-                                  textColor: Colors.red,
-                                  fontSize: 16.0,
-                                );
-                              } else {
                                 String selectedProduct = selectedProductIDs.map((item) => item.toString()).join(',').replaceAll(', ', ',');
 
-                                print("category  remove square renove space....:${selectedProduct}");
+                                print("category  remove square remove space....:${selectedProduct}");
+
+
+
+                                //
+                                // fetchselectedcategories=[selectedProduct.isEmpty ? snapshot.data.data[0].categoryId.toString():selectedProduct].map((id) => id.toString())
+                                //     .toList();
+
+
+
+                              // Now, categoryIdList contains ["72", "188", "298"]
+
+
+                              String selectedPro = selectedItems.map((item) => item.toString()).join(',').replaceAll(', ', ',');
+
 
                                 //var ProdName = _ProductName.text.toString() == null ? snapshot.data.data[0].name.toString():Column();
                                // var ProdName =  snapshot.data.data[0].name.toString();
@@ -1573,7 +2305,8 @@ class _Edit_placeadState extends State<Edit_placead> {
 
 
                                 print("Product name.: ${ProdName}");
-                                print("category.....: ${category}");
+                               // print("category.....: ${category}");
+                                print("category.....: ${selectedPro}");
                                 print("Brand........: ${brand}");
                                 print("Description..: ${description}");
                                 print("Amount.......: ${amount}");
@@ -1594,7 +2327,7 @@ class _Edit_placeadState extends State<Edit_placead> {
                                 print("Select Images  .....: ${selectedImages}");
 
 
-                               //place_ad_upload(ProdName,category,brand,description,offer,amount,offerstatus,email,password);
+                               place_ad_upload(ProdName,selectedPro,brand,description,offer,amount,offerstatus,email,password);
 ///////////
 
                                 _ProductName.clear();
@@ -1605,7 +2338,7 @@ class _Edit_placeadState extends State<Edit_placead> {
                                 _offerControler.clear();
 
                               }
-                            }
+
                                 : null,
                           ),
                         ),
@@ -1614,108 +2347,6 @@ class _Edit_placeadState extends State<Edit_placead> {
                       SizedBox(height: 10,),
                     ]
                 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                // Container(
-                //   //padding: EdgeInsets.only(top: 23),
-                //   child:
-                //
-                //   ListView.separated(
-                //     separatorBuilder: (context, index) {
-                //       // Your separator builder logic here
-                //       return Divider(); // Example: Using a Divider as the separator
-                //     },
-                //     shrinkWrap: true,
-                //     physics: const NeverScrollableScrollPhysics(),
-                //     itemBuilder: (context , int index){
-                //       final thumbnailImage = snapshot.data.data[index].thumbnailImage;
-                //       return
-                //
-                //         Column(children: [
-                //         // Text("Govind"),
-                //         InkWell(
-                //           onTap: (){
-                //             Navigator.push(context, MaterialPageRoute(builder: (context)=>Edit_placead()));
-                //             //print("print product id")
-                //             //product_Id=snapshot.data.data[index].id.toString();
-                //             // print("print product id ${snapshot.data.data[index].id.toString()}");
-                //             //print("print produc ${product_Id}");
-                //           },
-                //           child: Container(
-                //             width: MediaQuery.of(context).size.width *1,
-                //             padding: EdgeInsets.only(left: 10,right: 10),
-                //             child: Row(
-                //               children: [
-                //                 Container(
-                //                   decoration: BoxDecoration(
-                //                       color: Colors.black,
-                //                       borderRadius: BorderRadius.circular(12),
-                //                       //border: Border.all(color: MyTheme.accent_color),
-                //                       boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,offset: Offset(1,3))]
-                //
-                //                   ),
-                //
-                //                   height: 100,
-                //                   width: MediaQuery.of(context).size.width *0.3,
-                //                   //child: Image.asset("assets/silver.png",fit: BoxFit.fill,),
-                //
-                //
-                //                   child:   thumbnailImage == null
-                //                       ? Image.asset("assets/silver.png",fit: BoxFit.fill,)
-                //                       : Image.network(thumbnailImage, fit: BoxFit.fill),
-                //
-                //                 ),
-                //                 SizedBox(width: 10,),
-                //                 Container(
-                //                   padding: EdgeInsets.only(left: 16,top: 16),
-                //                   decoration: BoxDecoration(
-                //                       color: Colors.white,
-                //                       borderRadius: BorderRadius.circular(12),
-                //                       //border: Border.all(color: MyTheme.accent_color),
-                //                       boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,offset: Offset(1,3))]
-                //                   ),
-                //
-                //                   height: 100,
-                //                   width: MediaQuery.of(context).size.width *0.6,
-                //                   child: Column(
-                //                     crossAxisAlignment: CrossAxisAlignment.start,
-                //                     children: [
-                //                       Text(snapshot.data.data[index].name.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500)),
-                //                       SizedBox(height: 5,),
-                //                       Text(snapshot.data.data[index].mainPrice.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500)),
-                //                       //Text(snapshot.data.data[index].links[0].details.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500)),
-                //                     ],),
-                //                 ),
-                //               ],
-                //             ),
-                //           ),
-                //         )
-                //       ],);
-                //
-                //     },
-                //     //itemCount: 51,
-                //     itemCount: snapshot.data.data.length,
-                //   ),
-                //
-                //
-                // );
             }
             else{
               return
@@ -1724,9 +2355,12 @@ class _Edit_placeadState extends State<Edit_placead> {
             }
           }
       );
-
-
   }
+
+
+
+
+
 
   Future<EditMyAdsListModel> editmyadsapicall() async {
     // Create Dio instance
@@ -1780,5 +2414,143 @@ class _Edit_placeadState extends State<Edit_placead> {
     }
   }
 
+
+  Widget listview() {
+    return FutureBuilder(
+      future: fetchallcategoriesdata(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Container(
+            child: Column(
+              children: [
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, int index) {
+                    bool isItemSelected = selectedItems.contains(snapshot.data[index].id.toString());
+
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CheckboxListTile(
+                          title: Text(snapshot.data[index].name.toString()),
+                          value: isItemSelected,
+                          onChanged: (value) {
+                            setState(() {
+                              if (value) {
+                                selectedItems.add(snapshot.data[index].id.toString());
+                                //selectedItems.add(snapshot.data[index].id.toInt());
+                              } else {
+                                //selectedItems.remove(snapshot.data[index].id.toInt());
+                                selectedItems.remove(snapshot.data[index].id.toString());
+                              }
+                            });
+                          },
+                          controlAffinity: ListTileControlAffinity.leading,
+                        ),
+                        SizedBox(height: 10),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 30),
+                          child: ListView.builder(
+                            itemCount: itemList[index].childrenCategories.length,
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, int subindex) {
+                              bool isSubItemSelected = selectedItems.contains(itemList[index].childrenCategories[subindex].id.toString());
+
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  CheckboxListTile(
+                                    title: Text(itemList[index].childrenCategories[subindex].name.toString()),
+                                    value: isSubItemSelected,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        if (value) {
+                                          selectedItems.add(itemList[index].childrenCategories[subindex].id.toString());
+                                         // selectedItems.add(itemList[index].childrenCategories[subindex].id.toInt());
+                                        } else {
+                                           selectedItems.remove(itemList[index].childrenCategories[subindex].id.toString());
+                                          //selectedItems.remove(itemList[index].childrenCategories[subindex].id.toInt());
+
+                                        }
+                                      });
+                                    },
+                                    controlAffinity: ListTileControlAffinity.leading,
+                                  ),
+                                  SizedBox(height: 10),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 30),
+                                    child: ListView.builder(
+                                      itemCount: itemList[index].childrenCategories[subindex].categories.length,
+                                      shrinkWrap: true,
+                                      physics: const NeverScrollableScrollPhysics(),
+                                      itemBuilder: (context, int catindex) {
+                                        bool isCatItemSelected = selectedItems.contains(itemList[index].childrenCategories[subindex].categories[catindex].id.toString());
+
+                                        return CheckboxListTile(
+                                          title: Text(itemList[index].childrenCategories[subindex].categories[catindex].name.toString()),
+                                          value: isCatItemSelected,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              if (value) {
+                                                selectedItems.add(itemList[index].childrenCategories[subindex].categories[catindex].id.toString());
+                                               // selectedItems.add(itemList[index].childrenCategories[subindex].categories[catindex].id.toInt());
+                                              } else {
+                                                selectedItems.remove(itemList[index].childrenCategories[subindex].categories[catindex].id.toString());
+                                                //selectedItems.remove(itemList[index].childrenCategories[subindex].categories[catindex].id.toInt());
+                                              }
+                                            });
+                                          },
+                                          controlAffinity: ListTileControlAffinity.leading,
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                  itemCount: itemList.length,
+                ),
+              ],
+            ),
+          );
+        } else {
+          return Container(
+            child: Center(child: CircularProgressIndicator()),
+          );
+        }
+      },
+    );
+  }
+
+
+
+  Future<List<allcategoryModel>> fetchallcategoriesdata() async {
+    var url = Uri.parse('${AppConfig.BASE_URL}/all-categories');
+
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      globalResponseBody = response.body; // Assign the response body to the global variable
+
+      List<dynamic> jsonList = json.decode(globalResponseBody);
+
+      itemList = jsonList.map((json) => allcategoryModel.fromJson(json)).toList();
+
+      print("allcategoryModel Response > ${itemList.length}");
+
+
+
+      return itemList;
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
 
 }

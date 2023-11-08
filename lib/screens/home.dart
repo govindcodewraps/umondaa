@@ -3160,14 +3160,14 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               leading: Icon(
                 Icons.home,color: Colors.grey,
               ),
-              title: const Text('Home'),
+              title:  Text('Home',style: TextStyle(color: MyTheme.accent_color),),
               onTap: () {
                 //Navigator.pop(context);
               },
             ),
             ListTile(
               leading: Image.asset("assets/heart.png",height: 20,width: 20,color: Colors.grey,),
-              title: const Text('My Wishlist'),
+              title:  Text('My Wishlist',style: TextStyle(color: MyTheme.accent_color),),
               onTap: () {
                 // Navigator.pop(context);
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>Wishlist()));
@@ -3178,7 +3178,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               leading: Icon(
                 Icons.history,color: Colors.grey,
               ),
-              title: const Text('Order History'),
+              title:  Text('Order History',style: TextStyle(color: MyTheme.accent_color),),
               onTap: () {
                 // Navigator.pop(context);
                 //OrderList
@@ -3371,9 +3371,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             ),
             ListTile(
               leading: Icon(
-                Icons.logout,color: Colors.grey,
+                Icons.logout,color: Colors.red,
               ),
-              title: const Text('Log Out'),
+              title:  Text('Log Out',style: TextStyle(color:Colors.red),),
               onTap: () {
                 Navigator.pop(context);
                 AuthHelper().clearUserData();
