@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'dart:ui';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hardware_lo/my_theme.dart';
 
 import '../../app_config.dart';
 import '../../data_model/PackageList_Model_Screen.dart';
+import '../../data_model/SellerpackageModel.dart';
 import '../../helpers/shared_value_helper.dart';
 import '../login.dart';
 import 'package:http/http.dart' as http;
@@ -13,29 +15,20 @@ import 'package:http/http.dart' as http;
 class Feature_ad_package_Screen extends StatefulWidget {
 
 
+
   @override
   State<Feature_ad_package_Screen> createState() => _Feature_ad_package_ScreenState();
 }
-
-String dropdownvalue = 'Item 1';
-List<PackageListModel> itemList = [];
-
-// List of items in our dropdown menu
-var items = [
-  'Item 1',
-  'Item 2',
-  'Item 3',
-  'Item 4',
-  'Item 5',
-];
 
 
 class _Feature_ad_package_ScreenState extends State<Feature_ad_package_Screen> {
   @override
 
-
-  String dropdownValue = 'Item 1'; // Track the selected value
-
+void initState() {
+    // TODO: implement initState
+    sellerpackage();
+    super.initState();
+  }// Track the selected value
 
 
   Widget build(BuildContext context) {
@@ -45,6 +38,7 @@ class _Feature_ad_package_ScreenState extends State<Feature_ad_package_Screen> {
     Column(
      // crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+       // listview(),
       bodyy(),
     ],),);
   }
@@ -72,7 +66,6 @@ class _Feature_ad_package_ScreenState extends State<Feature_ad_package_Screen> {
           Spacer(),
           Icon(Icons.notifications,color: Colors.white,),
           Icon(Icons.notifications,color: Colors.white,),
-
         ],
       ),
       elevation: 0.0,
@@ -81,11 +74,13 @@ class _Feature_ad_package_ScreenState extends State<Feature_ad_package_Screen> {
   }
 
   Widget bodyy(){
-    return Center(
+    return
+
+      Center(
       child: Column(
         //crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-
+          //listview(),
         Text("Featured Ad Packages",style: TextStyle(color: MyTheme.accent_color,fontSize: 22,fontWeight: FontWeight.w600),),
         SizedBox(height: 10,),
           Padding(
@@ -95,228 +90,7 @@ class _Feature_ad_package_ScreenState extends State<Feature_ad_package_Screen> {
           SizedBox(height: 10,),
         Text("Buy a Package Today !",style: TextStyle(color: MyTheme.accent_color,fontSize: 18,fontWeight: FontWeight.w600),),
           SizedBox(height: 30,),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-          Container(
-           // color: Colors.red,
-           // height: 170,
-            width: MediaQuery.of(context).size.width* 0.44,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                //border: Border.all(color: MyTheme.accent_color),
-                boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,offset: Offset(1,3))]
-            ),
-            child: Column(children:
-            [
-              //Image.asset('assets/appbarlogo.png'),
-              Container(
-                padding: EdgeInsets.only(top: 15),
-
-                //height: 150,
-                child: Column(
-                   children: [
-                     Image.asset(
-                       'assets/silver.png',width:100,height: 80,
-                       //height: 40,
-                       //width: 250,
-                     ),
-                     SizedBox(height: 10,),
-                     Text("Silver"),
-                     Text("AED 29.00 | 15 Day"),
-                     SizedBox(height: 20,),
-                     Container(
-                       padding: EdgeInsets.only(left: 10,right: 10),
-                       height: 30,
-                       width:double.infinity,
-                       child: ElevatedButton(
-
-                         style: ButtonStyle(
-                             backgroundColor: MaterialStateProperty.all<Color>(MyTheme.accent_color),
-
-                             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                 RoundedRectangleBorder(
-
-                                     borderRadius: BorderRadius.circular(12.0),
-                                     side: BorderSide(color:MyTheme.accent_color)
-                                 )
-                             )
-                         ),
-
-                         onPressed: (){
-
-                           if(is_logged_in.$ == false){
-                             Navigator.push(context,
-                                 MaterialPageRoute(builder: (context) => Login()));
-                           }
-                           else{
-                             alertDialog(context);
-                           }
-                           //alertDialog(context);
-                           // Navigator.push(context,MaterialPageRoute(builder: (context)=>Allnewads_Screen()));
-                         },
-                         child:Text(
-                           "Purchase package",
-                           // AppLocalizations.of(context).update_profile_ucf,
-                           style: TextStyle(
-                             color: Colors.white,
-                             fontSize: 11,
-                           ),
-                         ),),
-                     ),
-                     SizedBox(height: 10,)
-                   ],
-                ),
-              )
-
-
-            ],
-
-            ),
-          ),
-
-          Container(
-            // color: Colors.red,
-            //height: 170,
-              width: MediaQuery.of(context).size.width* 0.44,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                //border: Border.all(color: MyTheme.accent_color),
-                boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,offset: Offset(1,3))]
-            ),
-            child:  Container(
-              //height: 150,
-              padding: EdgeInsets.only(top: 15),
-
-              child: Column(
-                children: [
-
-                  Image.asset(
-                    'assets/gold.png',width:100,height: 80,
-                    //height: 40,
-                    //width: 250,
-                  ),
-                  SizedBox(height: 10,),
-                  Text("Gold"),
-                  Text("AED 49.00 | 30 Day"),
-                  SizedBox(height: 20,),
-                  Container(
-                    padding: EdgeInsets.only(left: 10,right: 10),
-                    height: 30,
-                    width:double.infinity,
-                    child: ElevatedButton(
-
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(MyTheme.accent_color),
-
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  side: BorderSide(color:MyTheme.accent_color)
-                              )
-                          )
-                      ),
-
-                      onPressed: (){
-
-                        if(is_logged_in.$ == false){
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Login()));
-                        }
-                        else{
-                          alertDialog(context);
-                        }
-                        //alertDialog(context);
-                        // Navigator.push(context,MaterialPageRoute(builder: (context)=>Allnewads_Screen()));
-                      },
-                      child:Text(
-                        "Purchase package",
-                        // AppLocalizations.of(context).update_profile_ucf,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 11,
-                        ),
-                      ),),
-                  ),
-                  SizedBox(height: 10,)
-                ],
-              ),
-            )
-          ),
-        ],),
-          SizedBox(height: 20,),
-          Container(
-            // color: Colors.red,
-           // height: 170,
-              width: MediaQuery.of(context).size.width* 0.44,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                //border: Border.all(color: MyTheme.accent_color),
-                boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,offset: Offset(1,3))]
-            ),
-              child:  Container(
-                padding: EdgeInsets.only(top: 15),
-                //height: 150,
-                child: Column(
-                  children: [
-                    Image.asset(
-                      'assets/platinum.png',width:100,height: 80,
-                      //height: 40,
-                      //width: 250,
-                    ),
-                  SizedBox(height: 10,),
-                    Text("Platinum"),
-                    Text("AED AED.00 | 90 Day"),
-                    SizedBox(height: 20,),
-                    Container(
-                      padding: EdgeInsets.only(left: 5,right: 5),
-                      height: 30,
-                      width:double.infinity,
-                      child: ElevatedButton(
-
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(MyTheme.accent_color),
-
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-
-                                    borderRadius: BorderRadius.circular(12.0),
-                                    side: BorderSide(color:MyTheme.accent_color)
-                                )
-                            )
-                        ),
-
-                        onPressed: (){
-
-                          if(is_logged_in.$ == false){
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => Login()));
-                          }
-                          else{
-                            alertDialog(context);
-                          }
-                          //alertDialog(context);
-                          // Navigator.push(context,MaterialPageRoute(builder: (context)=>Allnewads_Screen()));
-                        },
-                        child:Text(
-                          "Purchase package",
-                          // AppLocalizations.of(context).update_profile_ucf,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 11,
-                          ),
-                        ),),
-                    ),
-                    SizedBox(height: 10,)
-                  ],
-                ),
-              )
-          ),
-
+          offergridview(),
         ],),
     );
   }
@@ -463,140 +237,130 @@ class _Feature_ad_package_ScreenState extends State<Feature_ad_package_Screen> {
                   ),
                 ],
               ),
+
             ],
           );
         }
     );
   }
 
-  Widget listview(){
-    return  Container(
-      //padding: EdgeInsets.only(top: 23),
-      child:
+  Widget offergridview(){
+    return
 
-      itemList.isEmpty
-          ? Center(child: CircularProgressIndicator())
-          : ListView.builder(
-        itemCount: itemList.length,
-        itemBuilder: (context, index) {
-          final item = itemList[index];
-          return
-            Column(children: [
-              Text(item.data[index].name.toString()),
-            ],
+      FutureBuilder(
+        future: sellerpackage(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Container(
+              padding: EdgeInsets.only(left: 16,right: 16),
+              child: Column(
+                children: [
+                GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, // Adjust the number of items in each row
+                  crossAxisSpacing: 8.0, // Add spacing between items horizontally
+                  mainAxisSpacing: 8.0, // Add spacing between items vertically
+                ),
+                itemBuilder: (context, int index) {
+                  return Container(
+                    width: MediaQuery.of(context).size.width * 0.44,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [BoxShadow(blurRadius: 10, color: Colors.grey, offset: Offset(1, 3))],
+                    ),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          'assets/silver.png',
+                          width: 100,
+                          height: 80,
+                        ),
+                        SizedBox(height: 10),
+                        Text(snapshot.data.data[index].name.toString()),
 
+                        Text("AED ${snapshot.data.data[index].amount.toString()} | ${snapshot.data.data[index].duration.toString()} Day"),
+
+                        SizedBox(height: 20),
+                        Container(
+                          padding: EdgeInsets.only(left: 10, right: 10),
+                          height: 25,
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(MyTheme.accent_color),
+                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  side: BorderSide(color: MyTheme.accent_color),
+                                ),
+                              ),
+                            ),
+                            onPressed: () {
+                              print("ID");
+                              print(snapshot.data.data[index].id.toString());
+                              if (is_logged_in.$ == false) {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+                              } else {
+                                alertDialog(context);
+                              }
+                            },
+                            child: Text(
+                              "Purchase package",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 11,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                      ],
+                    ),
+                  );
+                },
+                itemCount: snapshot.data.data.length,
+              ),
+
+              ],
+              ),
             );
+          } else {
+            return Container(
+              child: Center(child: CircularProgressIndicator()),
+            );
+          }
         },
-      ),
-
-
-      // ListView.builder(
-      //   shrinkWrap: true,
-      //   physics: const NeverScrollableScrollPhysics(),
-      //   itemBuilder: (context , int index){
-      //     return Column(children: [
-      //       Container(
-      //         // color: Colors.red,
-      //         //height: 200,
-      //         width: 180,
-      //         decoration: BoxDecoration(
-      //             color: Colors.white,
-      //             borderRadius: BorderRadius.circular(12),
-      //             //border: Border.all(color: MyTheme.accent_color),
-      //             boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,offset: Offset(1,3))]
-      //         ),
-      //         child: Column(children: [
-      //           Image.asset('assets/appbarlogo.png'),
-      //           Text("Silver"),
-      //           Text("AED 29.00 | 15 Day"),
-      //           SizedBox(height: 20,),
-      //           Container(
-      //             padding: EdgeInsets.only(left: 10,right: 10),
-      //             height: 30,
-      //             width:double.infinity,
-      //             child: ElevatedButton(
-      //
-      //               style: ButtonStyle(
-      //                   backgroundColor: MaterialStateProperty.all<Color>(MyTheme.accent_color),
-      //
-      //                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-      //                       RoundedRectangleBorder(
-      //                           borderRadius: BorderRadius.circular(12.0),
-      //                           side: BorderSide(color:MyTheme.accent_color)
-      //                       )
-      //                   )
-      //               ),
-      //
-      //               onPressed: (){
-      //
-      //                 if(is_logged_in.$ == false){
-      //                   Navigator.push(context,
-      //                       MaterialPageRoute(builder: (context) => Login()));
-      //                 }
-      //                 else{
-      //                   alertDialog(context);
-      //                 }
-      //                 //alertDialog(context);
-      //                 // Navigator.push(context,MaterialPageRoute(builder: (context)=>Allnewads_Screen()));
-      //               },
-      //               child:Text(
-      //                 "Purchase package",
-      //                 // AppLocalizations.of(context).update_profile_ucf,
-      //                 style: TextStyle(
-      //                   color: Colors.white,
-      //                   fontSize: 13,
-      //                 ),
-      //               ),),
-      //           ),
-      //           SizedBox(height: 10,)
-      //
-      //         ],),
-      //       ),
-      //     ],);
-      //
-      //   },
-      //   itemCount: 5,
-      // ),
-    );
+      );
   }
 
 
-
-  Future<List<PackageListModel>> fetchData() async {
-    var url = Uri.parse('${AppConfig.BASE_URL}/all-categories');
-
-    final response = await http.get(url);
+  Future<Sellerpackagemodel> sellerpackage() async {
+    var headers = {
+      'Cookie': 'XSRF-TOKEN=eyJpdiI6IkZmdDRqVXZVUkhqb2pGZnRvbmF0UUE9PSIsInZhbHVlIjoid244NjRDVVhoOG85bGpldkc0SEpDZ2t5YU5FZURWRStIczlJNDc2aWI2bkVJenF4THoxVk9XdTU1UUg0VU1nOXBadTQ3UDFHdlNsbHF4aHBBcUViT1pZVWRJR3NwbnB5amZBVzVBTHNuTnlOVTNnd2xVK1Y0aVUzT2RxdHM0MVQiLCJtYWMiOiJiNDUxODM4MWI2ZWU2NDI3YjUwZGY4MjRmY2MwZTkyN2E4YjY4NmYyNzc2Nzg2MzdjMjJiMGZmMjNkM2IyMGQ1IiwidGFnIjoiIn0%3D; umonda_online_marketplace_session=eyJpdiI6IjE2SjJ4ZjN1MzZWMzNiMEpqeXFER0E9PSIsInZhbHVlIjoiekhpZldYWEZNY2xVWmFOallQSVpTWFZFSXRaQXlZeTVNRFB1cHZoL1Z0Ti84UVh1T1AwdkMrcFc1S0RSWmFKZWtBZ0FkSVVBaGpxWHNDcVU3ZjNVZEtOY28wNkxRbFlvNTVYQmNaVU5PNW1qcnNrd3VtWUlKQmx5QmFBZS9KZk8iLCJtYWMiOiI0MzNlZGFlNzkzZGU4ZmNmZDk2ZjNmOWQ4OThmNThkMGI5NjAwZDE4NjNlZmQ1MGYwMDE3NGVkOWNkZmY4OTE2IiwidGFnIjoiIn0%3D'
+    };
+    var dio = Dio();
+    var response = await dio.request(
+      'https://webcluestechnology.com/demo/erp/umonda/api/v2/seller-package/',
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
 
     if (response.statusCode == 200) {
-      //globalResponseBody = response.body; // Assign the response body to the global variable
-      List<dynamic> jsonList = json.decode(response.body);
-      List<PackageListModel> itemList = jsonList.map((json) => PackageListModel.fromJson(json)).toList();
-      print("allcategoryModel Response > $response.body");
-
-      return itemList;
-    } else {
-      throw Exception('Failed to load data');
+     // print(json.encode(response.data));
+      print("purchase package");
+      //globalResponseBody=response.data;
+      //print("Global data:: ${globalResponseBody}");
+      return Sellerpackagemodel.fromJson(response.data);
+      print("purchase package");
+      //print(response.data);
     }
-  }
-
-  Future<void> fetchDataa() async {
-    final String url ='${AppConfig.BASE_URL}/all-categories'; // Replace with your API endpoint.
-
-    try {
-      final response = await http.get(Uri.parse(url));
-
-      if (response.statusCode == 200) {
-        // If the server returns a 200 OK response, parse the data.
-        // You can access response.body to get the response data.
-        // Example: final data = jsonDecode(response.body);
-        print('Successsssssss: ${response.body}');
-      } else {
-        // If the server did not return a 200 OK response, throw an exception.
-        throw Exception('Failed to load data');
-      }
-    } catch (e) {
-      // Handle any errors that occurred during the HTTP request.
-      print('Error: $e');
+    else {
+      print(response.statusMessage);
     }
   }
 

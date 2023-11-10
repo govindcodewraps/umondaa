@@ -772,7 +772,8 @@ class _placeadState extends State<placead> {
   }
 
   Widget listviewallcategories() {
-    return FutureBuilder(
+    return
+      FutureBuilder(
         future: fetchDataallcategories(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
