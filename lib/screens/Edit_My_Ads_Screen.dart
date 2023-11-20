@@ -99,7 +99,7 @@ class _Edit_placeadState extends State<Edit_placead> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: Scaffold(
-      backgroundColor: Colors.white,
+        backgroundColor: Colors.white,
         appBar: buildAppBar(context),
         body: bodywidget()
     ));
@@ -709,56 +709,56 @@ class _Edit_placeadState extends State<Edit_placead> {
                             ),
                             onPressed: _isAgree
                                 ? () {
-                                String selectedProduct = selectedProductIDs.map((item) => item.toString()).join(',').replaceAll(', ', ',');
-                                print("category  remove square remove space....:${selectedProduct}");
+                              String selectedProduct = selectedProductIDs.map((item) => item.toString()).join(',').replaceAll(', ', ',');
+                              print("category  remove square remove space....:${selectedProduct}");
                               String selectedPro = selectedItems.map((item) => item.toString()).join(',').replaceAll(', ', ',');
-                                var ProdName = _ProductName.text.toString().isEmpty ? snapshot.data.data[0].name.toString():_ProductName.text.toString();
-                                var category = selectedProduct;
-                                var brand = dropdownBrands.split(" ")[0].toString();
-                                var description = _Description.text.toString();
-                                var amount = _PriceAED.text.toString();
-                                var email = _EmailID.text.toString();
-                                var password = _PassWord.text.toString();
-                                var offer = _offerControler.text.toString();
-                                // var imagebase = imageurl;
-                                var imagebase = allurlss;
-                                var userid = user_id.$;
-                                var categoryy = selectedItems.toString();
-                                //var imagebase = allurlss;
+                              var ProdName = _ProductName.text.toString().isEmpty ? snapshot.data.data[0].name.toString():_ProductName.text.toString();
+                              var category = selectedProduct;
+                              var brand = dropdownBrands.split(" ")[0].toString();
+                              var description = _Description.text.toString();
+                              var amount = _PriceAED.text.toString();
+                              var email = _EmailID.text.toString();
+                              var password = _PassWord.text.toString();
+                              var offer = _offerControler.text.toString();
+                              // var imagebase = imageurl;
+                              var imagebase = allurlss;
+                              var userid = user_id.$;
+                              var categoryy = selectedItems.toString();
+                              //var imagebase = allurlss;
 
-                                print("Product name.: ${ProdName}");
-                               // print("category.....: ${category}");
-                                print("category.....: ${selectedPro}");
-                                print("Brand........: ${brand}");
-                                print("Description..: ${description}");
-                                print("Amount.......: ${amount}");
-                                print("Email........: ${email}");
-                                print("password.....: ${password}");
-                                print("****************************************************************");
+                              print("Product name.: ${ProdName}");
+                              // print("category.....: ${category}");
+                              print("category.....: ${selectedPro}");
+                              print("Brand........: ${brand}");
+                              print("Description..: ${description}");
+                              print("Amount.......: ${amount}");
+                              print("Email........: ${email}");
+                              print("password.....: ${password}");
+                              print("****************************************************************");
 
-                                print("Base 64 url....: ${imagebase}");
-                                print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+                              print("Base 64 url....: ${imagebase}");
+                              print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
 
-                                print("Base 64 url....: ${allurlss}");
-                                print("****************************************************************");
-                                print("User id  .....: ${user_id.$}");
-                                print("Offer price  .....: ${offer}");
-                                print("Offer Status  .....: ${offerstatus}");
-                                print("URLLLLLLLL  .....: ${base64Urls}");
-                                print("IMAGE_URLLLLL  .....: ${imageUrls}");
-                                print("Select Images  .....: ${selectedImages}");
-                                print("selected itemsss  .....: ${selectedItems}");
+                              print("Base 64 url....: ${allurlss}");
+                              print("****************************************************************");
+                              print("User id  .....: ${user_id.$}");
+                              print("Offer price  .....: ${offer}");
+                              print("Offer Status  .....: ${offerstatus}");
+                              print("URLLLLLLLL  .....: ${base64Urls}");
+                              print("IMAGE_URLLLLL  .....: ${imageUrls}");
+                              print("Select Images  .....: ${selectedImages}");
+                              print("selected itemsss  .....: ${selectedItems}");
 
-                               place_ad_upload(ProdName,selectedPro,brand,description,offer,amount,offerstatus,email,password);
+                              place_ad_upload(ProdName,selectedPro,brand,description,offer,amount,offerstatus,email,password);
 
-                                // _ProductName.clear();
-                                // _Description.clear();
-                                // _PriceAED.clear();
-                                // _EmailID.clear();
-                                // _PassWord.clear();
-                                // _offerControler.clear();
+                              // _ProductName.clear();
+                              // _Description.clear();
+                              // _PriceAED.clear();
+                              // _EmailID.clear();
+                              // _PassWord.clear();
+                              // _offerControler.clear();
 
-                              }
+                            }
 
                                 : null,
                           ),
@@ -830,7 +830,7 @@ class _Edit_placeadState extends State<Edit_placead> {
                                         if (value) {
                                           selectedItems.add(itemList[index].childrenCategories[subindex].id.toString());
                                         } else {
-                                           selectedItems.remove(itemList[index].childrenCategories[subindex].id.toString());
+                                          selectedItems.remove(itemList[index].childrenCategories[subindex].id.toString());
                                         }
                                       });
                                     },

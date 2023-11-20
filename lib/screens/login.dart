@@ -127,18 +127,21 @@ class _LoginState extends State<Login> {
         );
 
         String fcmToken = await _fcm.getToken();
-
+        print("mobile token${fcmToken}");
         if (fcmToken != null) {
           print("--fcm token--");
           print(fcmToken);
           if (is_logged_in.$ == true) {
+            print("device token api>>>");
             // update device token
             var deviceTokenUpdateResponse = await ProfileRepository()
                 .getDeviceTokenUpdateResponse(fcmToken);
+            print("device token api>>>");
           }
         }
       }
       //push norification ends
+
       Provider.of<HomePresenter>(context,listen: false).dispose();
 
 

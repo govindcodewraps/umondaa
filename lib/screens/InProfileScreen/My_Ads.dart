@@ -174,13 +174,13 @@ class _My_adsScreenState extends State<My_adsScreen> {
                                                     itemBuilder: (context) {
                                                       return [
                                                         PopupMenuItem<int>(
-                                                          value: 0,
-                                                          child: Text("Edit")
+                                                            value: 0,
+                                                            child: Text("Edit")
                                                           //Icon(Icons.edit,color: Colors.green,),
                                                         ),
                                                         PopupMenuItem<int>(
-                                                          value: 1,
-                                                          child: Text("Delete")
+                                                            value: 1,
+                                                            child: Text("Delete")
                                                           //Icon(Icons.delete,color: Colors.red,),
                                                         ),
                                                       ];

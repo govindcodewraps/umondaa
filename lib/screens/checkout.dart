@@ -1496,6 +1496,12 @@ class _CheckoutState extends State<Checkout> {
     }
   }
 
+
+
+
+
+
+
   pay_by_wallet() async {
     var orderCreateResponse = await PaymentRepository()
         .getOrderCreateResponseFromWallet(

@@ -2267,122 +2267,137 @@ class _ProductDetailsState extends State<ProductDetails>
     );
   }
 
-  Widget buildBottomAppBar(BuildContext context, _addedToCartSnackbar) {
-    return BottomNavigationBar(
-      backgroundColor: MyTheme.white.withOpacity(0.9),
-      items: [
-        BottomNavigationBarItem(
-          backgroundColor: Colors.transparent,
-          label: '',
-          icon: InkWell(
-            onTap: () {
-              onPressAddToCart(context, _addedToCartSnackbar);
-            },
-            child: Container(
-              margin: EdgeInsets.only(
-                left: 10,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6.0),
-                color: MyTheme.accent_color,
-                boxShadow: [
-                  BoxShadow(
-                    color: MyTheme.accent_color_shadow,
-                    blurRadius: 20,
-                    spreadRadius: 0.0,
-                    offset: Offset(0.0, 10.0), // shadow direction: bottom right
-                  )
-                ],
-              ),
-              height: 50,
-              child: Center(
-                child: Text(
-                  AppLocalizations.of(context).add_to_cart_ucf,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-            ),
-          ),
-        ),
-        BottomNavigationBarItem(
-          label: "",
-          icon: InkWell(
-            onTap: () {
-              onPressBuyNow(context);
-            },
-            child: Container(
-              margin: EdgeInsets.only(left: 10,right: 10),
-              height: 50,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6.0),
-                color: MyTheme.golden,
-                boxShadow: [
-                  BoxShadow(
-                    color: MyTheme.golden_shadow,
-                    blurRadius: 20,
-                    spreadRadius: 0.0,
-                    offset: Offset(0.0, 10.0), // shadow direction: bottom right
-                  )
-                ],
-              ),
-              child: Center(
-                child: Text(
-                  AppLocalizations.of(context).buy_now_ucf,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-            ),
-          ),
-        ),
-        //productDetailsResponse.detailed_products.length > 0
 
-        if (_productDetails !=null)
-          if(_productDetails.minoffer == 1)
-          BottomNavigationBarItem(
-            backgroundColor: Colors.transparent,
-            label: '',
-            icon: InkWell(
-              onTap: () {
-                //onPressAddToCart(context, _addedToCartSnackbar);
-                alertDialog(context);
-              },
-              child: Container(
-                margin: EdgeInsets.only(right: 10),
-               // padding:EdgeInsets.only(left: 15,right: 15),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6.0),
-                  color: MyTheme.accent_color,
-                  boxShadow: [
-                    BoxShadow(
-                      color: MyTheme.accent_color_shadow,
-                      blurRadius: 20,
-                      spreadRadius: 0.0,
-                      offset: Offset(0.0, 10.0), // shadow direction: bottom right
-                    )
-                  ],
-                ),
-                height: 50,
-                child: Center(
-                  child: Text(
-                     //AppLocalizations.of(context).add_to_cart_ucf,
-                    "Make an Offer",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600),
+
+  Widget buildBottomAppBar(BuildContext context, _addedToCartSnackbar) {
+    return
+
+      Column(
+        //crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          if (_productDetails !=null)
+          if( _productDetails.current_stock >= 1)
+
+          BottomNavigationBar(
+          backgroundColor: MyTheme.white.withOpacity(0.9),
+          items: [
+
+            BottomNavigationBarItem(
+              backgroundColor: Colors.transparent,
+              label: '',
+              icon: InkWell(
+                onTap: () {
+                  onPressAddToCart(context, _addedToCartSnackbar);
+                },
+                child: Container(
+                  margin: EdgeInsets.only(
+                    left: 10,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6.0),
+                    color: MyTheme.accent_color,
+                    boxShadow: [
+                      BoxShadow(
+                        color: MyTheme.accent_color_shadow,
+                        blurRadius: 20,
+                        spreadRadius: 0.0,
+                        offset: Offset(0.0, 10.0), // shadow direction: bottom right
+                      )
+                    ],
+                  ),
+                  height: 50,
+                  child: Center(
+                    child: Text(
+                      AppLocalizations.of(context).add_to_cart_ucf,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600),
+                    ),
                   ),
                 ),
               ),
             ),
-          )
-      ],
-    );
+
+            BottomNavigationBarItem(
+              label: "",
+              icon: InkWell(
+                onTap: () {
+                  onPressBuyNow(context);
+                },
+                child: Container(
+                  margin: EdgeInsets.only(left: 10,right: 10),
+                  height: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6.0),
+                    color: MyTheme.golden,
+                    boxShadow: [
+                      BoxShadow(
+                        color: MyTheme.golden_shadow,
+                        blurRadius: 20,
+                        spreadRadius: 0.0,
+                        offset: Offset(0.0, 10.0), // shadow direction: bottom right
+                      )
+                    ],
+                  ),
+                  child: Center(
+                    child: Text(
+                      AppLocalizations.of(context).buy_now_ucf,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            //productDetailsResponse.detailed_products.length > 0
+
+            if (_productDetails !=null)
+              if(_productDetails.minoffer == 1)
+              BottomNavigationBarItem(
+                backgroundColor: Colors.transparent,
+                label: '',
+                icon: InkWell(
+                  onTap: () {
+                    //onPressAddToCart(context, _addedToCartSnackbar);
+                    alertDialog(context);
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(right: 10),
+                   // padding:EdgeInsets.only(left: 15,right: 15),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6.0),
+                      color: MyTheme.accent_color,
+                      boxShadow: [
+                        BoxShadow(
+                          color: MyTheme.accent_color_shadow,
+                          blurRadius: 20,
+                          spreadRadius: 0.0,
+                          offset: Offset(0.0, 10.0), // shadow direction: bottom right
+                        )
+                      ],
+                    ),
+                    height: 50,
+                    child: Center(
+                      child: Text(
+                         //AppLocalizations.of(context).add_to_cart_ucf,
+                        "Make an Offer",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                  ),
+                ),
+              )
+          ],
+    ),
+        ],
+      );
   }
 
   buildRatingAndWishButtonRow() {
