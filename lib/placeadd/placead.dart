@@ -530,7 +530,8 @@ class _placeadState extends State<placead> {
                         textColor: Colors.red,
                         fontSize: 16.0,
                       );
-                    } else {
+                    }
+                    else {
                       String selectedProduct = selectedProductIDs.map((item) => item.toString()).join(',').replaceAll(', ', ',');
                       String selectedPro = selectedItems.map((item) => item.toString()).join(',').replaceAll(', ', ',');
 
