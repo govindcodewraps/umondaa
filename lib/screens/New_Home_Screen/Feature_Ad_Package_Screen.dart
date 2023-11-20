@@ -5,10 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:hardware_lo/my_theme.dart';
 
 import '../../app_config.dart';
+import '../../custom/toast_component.dart';
 import '../../data_model/PackageList_Model_Screen.dart';
 import '../../helpers/shared_value_helper.dart';
 import '../login.dart';
 import 'package:http/http.dart' as http;
+
+import '../payment_method_screen/stripe_screen.dart';
 
 class Feature_ad_package_Screen extends StatefulWidget {
 
@@ -33,6 +36,11 @@ var items = [
 class _Feature_ad_package_ScreenState extends State<Feature_ad_package_Screen> {
   @override
 
+  var _selected_payment_method = "stripe";
+  var _grandTotalValue = 0.00;
+  String payment_type = "cart_payment";
+  var _selected_payment_method_key = "";
+  var packageId= "";
 
   String dropdownValue = 'Item 1'; // Track the selected value
 
@@ -151,7 +159,50 @@ class _Feature_ad_package_ScreenState extends State<Feature_ad_package_Screen> {
                                  MaterialPageRoute(builder: (context) => Login()));
                            }
                            else{
-                             alertDialog(context);
+                             //alertDialog(context);
+
+                             onPressPlaceOrderOrProceed() {
+
+                               if (_selected_payment_method == "") {
+                                 // ToastComponent.showDialog(
+                                 //     AppLocalizations.of(context).please_choose_one_option_to_pay,
+                                 //     gravity: Toast.center, duration: Toast.lengthLong);
+                                 return;
+                               }
+                               if (_grandTotalValue == 0.00) {
+                                 // ToastComponent.showDialog(
+                                 //     AppLocalizations.of(context).nothing_to_pay, gravity: Toast.center, duration: Toast.lengthLong);
+                                 return;
+                               }
+
+                               // if (_selected_payment_method == "stripe_payment") {
+                               //   Navigator.push(context, MaterialPageRoute(builder: (context) {
+                               //     return StripeScreen(
+                               //       amount: _grandTotalValue,
+                               //       payment_type: payment_type,
+                               //       payment_method_key: _selected_payment_method_key,
+                               //       package_id:packageId.toString(),
+                               //     );
+                               //   }));
+                               //       //.then((value) {
+                               //   //     onPopped(value);
+                               //   //    });
+                               //
+                               // }
+
+
+
+                               Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                 return StripeScreen(
+                                   amount: _grandTotalValue,
+                                   payment_type: payment_type,
+                                   payment_method_key: _selected_payment_method_key,
+                                   package_id:packageId,
+                                 );
+                               }));
+                             }
+
+
                            }
                            //alertDialog(context);
                            // Navigator.push(context,MaterialPageRoute(builder: (context)=>Allnewads_Screen()));
