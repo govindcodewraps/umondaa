@@ -1,13 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/gestures.dart';
-import 'package:hardware_lo/app_config.dart';
-import 'package:hardware_lo/custom/toast_component.dart';
-import 'package:hardware_lo/helpers/shared_value_helper.dart';
-import 'package:hardware_lo/my_theme.dart';
-import 'package:hardware_lo/repositories/payment_repository.dart';
-import 'package:hardware_lo/screens/order_list.dart';
-import 'package:hardware_lo/screens/wallet.dart';
+import 'package:umonda/app_config.dart';
+import 'package:umonda/custom/toast_component.dart';
+import 'package:umonda/helpers/shared_value_helper.dart';
+import 'package:umonda/my_theme.dart';
+import 'package:umonda/repositories/payment_repository.dart';
+import 'package:umonda/screens/order_list.dart';
+import 'package:umonda/screens/wallet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

@@ -1,13 +1,13 @@
-import 'package:hardware_lo/custom/btn.dart';
+import 'package:umonda/custom/btn.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:hardware_lo/screens/order_details.dart';
-import 'package:hardware_lo/screens/login.dart';
-import 'package:hardware_lo/helpers/shared_value_helper.dart';
-import 'package:hardware_lo/repositories/profile_repository.dart';
+import 'package:umonda/screens/order_details.dart';
+import 'package:umonda/screens/login.dart';
+import 'package:umonda/helpers/shared_value_helper.dart';
+import 'package:umonda/repositories/profile_repository.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:one_context/one_context.dart';
-import 'package:hardware_lo/custom/toast_component.dart';
+import 'package:umonda/custom/toast_component.dart';
 import 'package:toast/toast.dart';
 
 final FirebaseMessaging _fcm = FirebaseMessaging.instance;
@@ -48,8 +48,7 @@ class PushNotificationService {
       // print(fcmToken);
       if (is_logged_in.$ == true) {
         // update device token
-        var deviceTokenUpdateResponse =
-            await ProfileRepository().getDeviceTokenUpdateResponse(fcmToken);
+        var deviceTokenUpdateResponse = await ProfileRepository().getDeviceTokenUpdateResponse(fcmToken);
       }
     }
 

@@ -7,17 +7,17 @@
 
 import 'dart:async';
 
-import 'package:hardware_lo/custom/btn.dart';
-import 'package:hardware_lo/other_config.dart';
+import 'package:umonda/custom/btn.dart';
+import 'package:umonda/other_config.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_maps_place_picker_mb/google_maps_place_picker.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:io' show Platform;
-import 'package:hardware_lo/my_theme.dart';
+import 'package:umonda/my_theme.dart';
 import 'package:toast/toast.dart';
-import 'package:hardware_lo/custom/toast_component.dart';
-import 'package:hardware_lo/repositories/address_repository.dart';
+import 'package:umonda/custom/toast_component.dart';
+import 'package:umonda/repositories/address_repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 

@@ -1,30 +1,30 @@
 import 'package:flutter/gestures.dart';
-import 'package:hardware_lo/app_config.dart';
-import 'package:hardware_lo/custom/btn.dart';
-import 'package:hardware_lo/my_theme.dart';
-import 'package:hardware_lo/other_config.dart';
-import 'package:hardware_lo/presenter/home_presenter.dart';
-import 'package:hardware_lo/social_config.dart';
-import 'package:hardware_lo/ui_elements/auth_ui.dart';
+import 'package:umonda/app_config.dart';
+import 'package:umonda/custom/btn.dart';
+import 'package:umonda/my_theme.dart';
+import 'package:umonda/other_config.dart';
+import 'package:umonda/presenter/home_presenter.dart';
+import 'package:umonda/social_config.dart';
+import 'package:umonda/ui_elements/auth_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hardware_lo/custom/input_decorations.dart';
-import 'package:hardware_lo/custom/intl_phone_input.dart';
+import 'package:umonda/custom/input_decorations.dart';
+import 'package:umonda/custom/intl_phone_input.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:hardware_lo/screens/registration.dart';
-import 'package:hardware_lo/screens/main.dart';
-import 'package:hardware_lo/screens/password_forget.dart';
-import 'package:hardware_lo/custom/toast_component.dart';
+import 'package:umonda/screens/registration.dart';
+import 'package:umonda/screens/main.dart';
+import 'package:umonda/screens/password_forget.dart';
+import 'package:umonda/custom/toast_component.dart';
 import 'package:provider/provider.dart';
 import 'package:toast/toast.dart';
-import 'package:hardware_lo/repositories/auth_repository.dart';
-import 'package:hardware_lo/helpers/auth_helper.dart';
+import 'package:umonda/repositories/auth_repository.dart';
+import 'package:umonda/helpers/auth_helper.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:hardware_lo/helpers/shared_value_helper.dart';
-import 'package:hardware_lo/repositories/profile_repository.dart';
+import 'package:umonda/helpers/shared_value_helper.dart';
+import 'package:umonda/repositories/profile_repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:twitter_login/twitter_login.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -46,6 +46,7 @@ class _LoginState extends State<Login> {
   bool _obscureText = true;
   String _login_by = "email"; //phone or email
   String initialCountry = 'US';
+  String FCM="cVosQPN2TqGQAafxIfXHDa:APA91bHQkGsOi_Td6Err-8Dlhi0jgGskr7ycI8Q9cbkR5noh_mimvn84YcfgsNHav-bKE0MJCwwXF9m7KgJaWn6wvn9MFA565_plqUgSTQng468kvUtqA9BcIyHjo-Cwp0X4APwQMjBf";
 
   // PhoneNumber phoneCode = PhoneNumber(isoCode: 'US', dialCode: "+1");
   var countries_code = <String>[];
@@ -112,6 +113,8 @@ class _LoginState extends State<Login> {
       ToastComponent.showDialog(loginResponse.message,
           gravity: Toast.center, duration: Toast.lengthLong);
       AuthHelper().setUserData(loginResponse);
+
+
       // push notification starts
       if (OtherConfig.USE_PUSH_NOTIFICATION) {
         final FirebaseMessaging _fcm = FirebaseMessaging.instance;
@@ -131,6 +134,7 @@ class _LoginState extends State<Login> {
         if (fcmToken != null) {
           print("--fcm token--");
           print(fcmToken);
+          print(FCM);
           if (is_logged_in.$ == true) {
             print("device token api>>>");
             // update device token
@@ -334,6 +338,8 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+
+
     final _screen_height = MediaQuery.of(context).size.height;
     final _screen_width = MediaQuery.of(context).size.width;
     return AuthScreen.buildScreen(

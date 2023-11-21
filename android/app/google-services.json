@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "43273991102",
+    "project_id": "umondaa-a5522",
+    "storage_bucket": "umondaa-a5522.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:43273991102:android:46dfe9b93313e26c1b3fef",
+        "android_client_info": {
+          "package_name": "com.product.hardwarelo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiCt_GxS467VN06noEySlBFPQPHNCLDmU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

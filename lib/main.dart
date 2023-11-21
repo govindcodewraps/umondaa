@@ -1,42 +1,44 @@
-import 'package:hardware_lo/other_config.dart';
-import 'package:hardware_lo/presenter/cart_counter.dart';
-import 'package:hardware_lo/presenter/currency_presenter.dart';
-import 'package:hardware_lo/presenter/home_presenter.dart';
-import 'package:hardware_lo/screens/New_Home_Screen/new_home_presenter.dart';
-import 'package:hardware_lo/screens/address.dart';
-import 'package:hardware_lo/screens/cart.dart';
-import 'package:hardware_lo/screens/category_list.dart';
-import 'package:hardware_lo/screens/digital_product/digital_products.dart';
-import 'package:hardware_lo/screens/login.dart';
-import 'package:hardware_lo/screens/main.dart';
-import 'package:hardware_lo/screens/map_location.dart';
-import 'package:hardware_lo/screens/messenger_list.dart';
-import 'package:hardware_lo/screens/order_details.dart';
-import 'package:hardware_lo/screens/order_list.dart';
-import 'package:hardware_lo/screens/product_reviews.dart';
-import 'package:hardware_lo/screens/profile.dart';
-import 'package:hardware_lo/screens/refund_request.dart';
-import 'package:hardware_lo/screens/splash_screen.dart';
-import 'package:hardware_lo/screens/todays_deal_products.dart';
-import 'package:hardware_lo/screens/top_selling_products.dart';
-import 'package:hardware_lo/screens/wallet.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:umonda/other_config.dart';
+import 'package:umonda/presenter/cart_counter.dart';
+import 'package:umonda/presenter/currency_presenter.dart';
+import 'package:umonda/presenter/home_presenter.dart';
+import 'package:umonda/screens/New_Home_Screen/new_home_presenter.dart';
+import 'package:umonda/screens/address.dart';
+import 'package:umonda/screens/cart.dart';
+import 'package:umonda/screens/category_list.dart';
+import 'package:umonda/screens/digital_product/digital_products.dart';
+import 'package:umonda/screens/login.dart';
+import 'package:umonda/screens/main.dart';
+import 'package:umonda/screens/map_location.dart';
+import 'package:umonda/screens/messenger_list.dart';
+import 'package:umonda/screens/order_details.dart';
+import 'package:umonda/screens/order_list.dart';
+import 'package:umonda/screens/product_reviews.dart';
+import 'package:umonda/screens/profile.dart';
+import 'package:umonda/screens/refund_request.dart';
+import 'package:umonda/screens/splash_screen.dart';
+import 'package:umonda/screens/todays_deal_products.dart';
+import 'package:umonda/screens/top_selling_products.dart';
+import 'package:umonda/screens/wallet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hardware_lo/my_theme.dart';
-import 'package:hardware_lo/screens/splash.dart';
+import 'package:umonda/my_theme.dart';
+import 'package:umonda/screens/splash.dart';
 import 'package:shared_value/shared_value.dart';
-import 'package:hardware_lo/helpers/shared_value_helper.dart';
+import 'package:umonda/helpers/shared_value_helper.dart';
 import 'dart:async';
 import 'app_config.dart';
-import 'package:hardware_lo/services/push_notification_service.dart';
+import 'package:umonda/services/push_notification_service.dart';
 import 'package:one_context/one_context.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:hardware_lo/providers/locale_provider.dart';
+import 'package:umonda/providers/locale_provider.dart';
+import 'firebase_options.dart';
 import 'lang_config.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'screens/auction_products.dart';
@@ -61,7 +63,15 @@ import 'screens/seller_products.dart';
 
 
 main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+
+
   FlutterDownloader.initialize(
       debug: true,
       // optional: set to false to disable printing logs to console (default: true)
@@ -104,12 +114,31 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  // @override
+  // void initState() {
+  //   super.initState();
+  //
+  //   Future.delayed(Duration.zero).then(
+  //     (value) async {
+  //       Firebase.initializeApp().then((value) {
+  //         if (OtherConfig.USE_PUSH_NOTIFICATION) {
+  //           Future.delayed(Duration(milliseconds: 10), () async {
+  //             PushNotificationService().initialise();
+  //           });
+  //         }
+  //       });
+  //     },
+  //   );
+  // }
+
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+
   @override
   void initState() {
     super.initState();
 
     Future.delayed(Duration.zero).then(
-      (value) async {
+          (value) async {
         Firebase.initializeApp().then((value) {
           if (OtherConfig.USE_PUSH_NOTIFICATION) {
             Future.delayed(Duration(milliseconds: 10), () async {
@@ -119,6 +148,20 @@ class _MyAppState extends State<MyApp> {
         });
       },
     );
+
+    _firebaseMessaging.requestPermission();
+
+    _firebaseMessaging.getToken().then((String token) {
+      print("Device Token: $token");
+    });
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print("Received message: $message");
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print("Message opened: $message");
+    });
   }
 
   @override

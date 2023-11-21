@@ -1,20 +1,20 @@
-import 'package:hardware_lo/custom/btn.dart';
+import 'package:umonda/custom/btn.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hardware_lo/my_theme.dart';
+import 'package:umonda/my_theme.dart';
 import 'dart:ui';
 import 'package:flutter/painting.dart';
 import 'dart:async';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:hardware_lo/custom/toast_component.dart';
+import 'package:umonda/custom/toast_component.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter/services.dart';
 import 'package:expandable/expandable.dart';
-import 'package:hardware_lo/repositories/review_repositories.dart';
-import 'package:hardware_lo/app_config.dart';
-import 'package:hardware_lo/helpers/shimmer_helper.dart';
-import 'package:hardware_lo/helpers/shared_value_helper.dart';
+import 'package:umonda/repositories/review_repositories.dart';
+import 'package:umonda/app_config.dart';
+import 'package:umonda/helpers/shimmer_helper.dart';
+import 'package:umonda/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProductReviews extends StatefulWidget {

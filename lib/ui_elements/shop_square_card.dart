@@ -1,7 +1,7 @@
-import 'package:hardware_lo/custom/box_decorations.dart';
-import 'package:hardware_lo/my_theme.dart';
+import 'package:umonda/custom/box_decorations.dart';
+import 'package:umonda/my_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:hardware_lo/screens/seller_details.dart';
+import 'package:umonda/screens/seller_details.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class ShopSquareCard extends StatefulWidget {

@@ -1,18 +1,18 @@
-import 'package:hardware_lo/screens/change_language.dart';
+import 'package:umonda/screens/change_language.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'package:hardware_lo/screens/main.dart';
-import 'package:hardware_lo/screens/profile.dart';
-import 'package:hardware_lo/screens/order_list.dart';
-import 'package:hardware_lo/screens/wishlist.dart';
+import 'package:umonda/screens/main.dart';
+import 'package:umonda/screens/profile.dart';
+import 'package:umonda/screens/order_list.dart';
+import 'package:umonda/screens/wishlist.dart';
 
-import 'package:hardware_lo/screens/login.dart';
-import 'package:hardware_lo/screens/messenger_list.dart';
-import 'package:hardware_lo/screens/wallet.dart';
-import 'package:hardware_lo/helpers/shared_value_helper.dart';
-import 'package:hardware_lo/app_config.dart';
-import 'package:hardware_lo/helpers/auth_helper.dart';
+import 'package:umonda/screens/login.dart';
+import 'package:umonda/screens/messenger_list.dart';
+import 'package:umonda/screens/wallet.dart';
+import 'package:umonda/helpers/shared_value_helper.dart';
+import 'package:umonda/app_config.dart';
+import 'package:umonda/helpers/auth_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MainDrawer extends StatefulWidget {

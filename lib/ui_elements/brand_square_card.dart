@@ -1,7 +1,7 @@
-import 'package:hardware_lo/my_theme.dart';
+import 'package:umonda/my_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:hardware_lo/screens/brand_products.dart';
-import 'package:hardware_lo/custom/box_decorations.dart';
+import 'package:umonda/screens/brand_products.dart';
+import 'package:umonda/custom/box_decorations.dart';
 class BrandSquareCard extends StatefulWidget {
   int id;
   String image;

@@ -1,22 +1,22 @@
-import 'package:hardware_lo/custom/box_decorations.dart';
-import 'package:hardware_lo/custom/btn.dart';
-import 'package:hardware_lo/custom/device_info.dart';
-import 'package:hardware_lo/custom/enum_classes.dart';
-import 'package:hardware_lo/custom/useful_elements.dart';
-import 'package:hardware_lo/screens/checkout.dart';
+import 'package:umonda/custom/box_decorations.dart';
+import 'package:umonda/custom/btn.dart';
+import 'package:umonda/custom/device_info.dart';
+import 'package:umonda/custom/enum_classes.dart';
+import 'package:umonda/custom/useful_elements.dart';
+import 'package:umonda/screens/checkout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hardware_lo/my_theme.dart';
+import 'package:umonda/my_theme.dart';
 import 'dart:ui';
 import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
-import 'package:hardware_lo/helpers/reg_ex_inpur_formatter.dart';
-import 'package:hardware_lo/repositories/wallet_repository.dart';
-import 'package:hardware_lo/helpers/shimmer_helper.dart';
-import 'package:hardware_lo/custom/toast_component.dart';
+import 'package:umonda/helpers/reg_ex_inpur_formatter.dart';
+import 'package:umonda/repositories/wallet_repository.dart';
+import 'package:umonda/helpers/shimmer_helper.dart';
+import 'package:umonda/custom/toast_component.dart';
 import 'package:toast/toast.dart';
-import 'package:hardware_lo/screens/main.dart';
-import 'package:hardware_lo/helpers/shared_value_helper.dart';
+import 'package:umonda/screens/main.dart';
+import 'package:umonda/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 

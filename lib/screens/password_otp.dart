@@ -1,19 +1,19 @@
-import 'package:hardware_lo/custom/btn.dart';
-import 'package:hardware_lo/custom/device_info.dart';
-import 'package:hardware_lo/custom/lang_text.dart';
-import 'package:hardware_lo/my_theme.dart';
-import 'package:hardware_lo/screens/password_forget.dart';
-import 'package:hardware_lo/ui_elements/auth_ui.dart';
+import 'package:umonda/custom/btn.dart';
+import 'package:umonda/custom/device_info.dart';
+import 'package:umonda/custom/lang_text.dart';
+import 'package:umonda/my_theme.dart';
+import 'package:umonda/screens/password_forget.dart';
+import 'package:umonda/ui_elements/auth_ui.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hardware_lo/custom/input_decorations.dart';
-import 'package:hardware_lo/custom/toast_component.dart';
+import 'package:umonda/custom/input_decorations.dart';
+import 'package:umonda/custom/toast_component.dart';
 import 'package:toast/toast.dart';
-import 'package:hardware_lo/repositories/auth_repository.dart';
-import 'package:hardware_lo/screens/login.dart';
-import 'package:hardware_lo/helpers/shared_value_helper.dart';
+import 'package:umonda/repositories/auth_repository.dart';
+import 'package:umonda/screens/login.dart';
+import 'package:umonda/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PasswordOtp extends StatefulWidget {

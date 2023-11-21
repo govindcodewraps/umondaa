@@ -1,22 +1,22 @@
-import 'package:hardware_lo/custom/box_decorations.dart';
-import 'package:hardware_lo/custom/useful_elements.dart';
-import 'package:hardware_lo/data_model/currency_response.dart';
-import 'package:hardware_lo/helpers/system_config.dart';
-import 'package:hardware_lo/presenter/currency_presenter.dart';
-import 'package:hardware_lo/presenter/home_presenter.dart';
+import 'package:umonda/custom/box_decorations.dart';
+import 'package:umonda/custom/useful_elements.dart';
+import 'package:umonda/data_model/currency_response.dart';
+import 'package:umonda/helpers/system_config.dart';
+import 'package:umonda/presenter/currency_presenter.dart';
+import 'package:umonda/presenter/home_presenter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hardware_lo/my_theme.dart';
+import 'package:umonda/my_theme.dart';
 
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:hardware_lo/repositories/language_repository.dart';
-import 'package:hardware_lo/repositories/coupon_repository.dart';
-import 'package:hardware_lo/helpers/shimmer_helper.dart';
-import 'package:hardware_lo/custom/toast_component.dart';
+import 'package:umonda/repositories/language_repository.dart';
+import 'package:umonda/repositories/coupon_repository.dart';
+import 'package:umonda/helpers/shimmer_helper.dart';
+import 'package:umonda/custom/toast_component.dart';
 import 'package:toast/toast.dart';
-import 'package:hardware_lo/helpers/shared_value_helper.dart';
-import 'package:hardware_lo/screens/main.dart';
-import 'package:hardware_lo/providers/locale_provider.dart';
+import 'package:umonda/helpers/shared_value_helper.dart';
+import 'package:umonda/screens/main.dart';
+import 'package:umonda/providers/locale_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

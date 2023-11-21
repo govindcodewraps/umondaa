@@ -1,7 +1,7 @@
 
 
 
-import 'package:hardware_lo/helpers/shared_value_helper.dart';
+import 'package:umonda/helpers/shared_value_helper.dart';
 
 import '../repositories/auth_repository.dart';
 

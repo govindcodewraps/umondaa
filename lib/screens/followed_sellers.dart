@@ -1,13 +1,13 @@
-import 'package:hardware_lo/custom/box_decorations.dart';
-import 'package:hardware_lo/custom/device_info.dart';
-import 'package:hardware_lo/custom/lang_text.dart';
-import 'package:hardware_lo/custom/style.dart';
-import 'package:hardware_lo/custom/toast_component.dart';
-import 'package:hardware_lo/data_model/followed_sellers_response.dart';
-import 'package:hardware_lo/helpers/shimmer_helper.dart';
-import 'package:hardware_lo/my_theme.dart';
-import 'package:hardware_lo/repositories/shop_repository.dart';
-import 'package:hardware_lo/screens/seller_details.dart';
+import 'package:umonda/custom/box_decorations.dart';
+import 'package:umonda/custom/device_info.dart';
+import 'package:umonda/custom/lang_text.dart';
+import 'package:umonda/custom/style.dart';
+import 'package:umonda/custom/toast_component.dart';
+import 'package:umonda/data_model/followed_sellers_response.dart';
+import 'package:umonda/helpers/shimmer_helper.dart';
+import 'package:umonda/my_theme.dart';
+import 'package:umonda/repositories/shop_repository.dart';
+import 'package:umonda/screens/seller_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 

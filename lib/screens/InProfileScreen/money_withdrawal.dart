@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:hardware_lo/my_theme.dart';
+import 'package:umonda/my_theme.dart';
 import 'package:http/http.dart' as http;
 
 
