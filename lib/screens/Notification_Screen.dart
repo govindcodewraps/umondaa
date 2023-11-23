@@ -3,8 +3,11 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
 
+import '../app_config.dart';
 import '../data_model/Infomation_Model.dart';
+import '../helpers/shared_value_helper.dart';
 
 class Notification_Screen extends StatefulWidget {
 
@@ -15,21 +18,27 @@ class Notification_Screen extends StatefulWidget {
 }
 
 class _Notification_ScreenState extends State<Notification_Screen> {
+  Map responseData = {};
 
   @override
   void initState() {
     // TODO: implement initState
-    notification_list();
+     notification_list();
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: Column(children: [
+      appBar: buildAppBar(context),
+      body: SafeArea(child: 
+      SingleChildScrollView(
+        child: Column(children: [
+            SizedBox(height: 20,),
+           notificationlist(),
+          SizedBox(height: 20,),
 
-        notificationlist(),
-        Text("data"),
-      ],),),
+        ],),
+      ),),
     );
   }
 
@@ -84,55 +93,13 @@ class _Notification_ScreenState extends State<Notification_Screen> {
                             child: Container(
                               padding: EdgeInsets.all(8.0),
                               child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Text("Time slot:"),
-                                          //Text(snapshot.data.data.length.toString()),
-                                          SizedBox(width: 5,),
-                                          // Text(snapshot.data.data[index]
-                                          //     .appointmentTime.toString()),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text("Date :"),
-                                      SizedBox(width: 10,),
-                                      Text(""
-                                        // DateFormat('yyyy-MM-dd').format(
-                                        //   snapshot.data.data[index]
-                                        //       .appointmentDate.toLocal(),
-                                        // ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text("Name :"),
-                                      Text(snapshot.data.data[index]..toString()),
-                                      SizedBox(width: 10,),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text("Email:"),
-                                      SizedBox(width: 2,),
-                                     // Text(snapshot.data.data[index].email.toString()),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text("Contact :"),
-                                      SizedBox(width: 10,),
-                                      Text("+91 98765432121"),
-                                    ],
-                                  ),
+                                  Text("Order # ${snapshot.data.data[index].data.orderCode.toString()} has been ${snapshot.data.data[index].data.status.toString()}"),
+                                  SizedBox(height: 7,),
+                                  Text("${DateFormat('MMMM d y').format(snapshot.data.data[index].readAt.toLocal(),)}, ${DateFormat('h:mm a').format(snapshot.data.data[index].createdAt.toLocal(),)}"),
+
                                 ],
                               ),
                             ),
@@ -147,11 +114,12 @@ class _Notification_ScreenState extends State<Notification_Screen> {
                 ],
               ),
             );
-          } else {
-            return Container(
-              child: Center(child: Text("No data available")),
-            );
-          }
+          } 
+          // else {
+          //   return Container(
+          //     child: Center(child: Text("No data available")),
+          //   );
+          // }
         } else {
           return Container(
             child: Center(child: CircularProgressIndicator()),
@@ -161,45 +129,72 @@ class _Notification_ScreenState extends State<Notification_Screen> {
     );
   }
 
+
   Future<NotificationListModel> notification_list() async {
-    try {
-      var headers = {
-        'Content-Type': 'application/json',
-      };
-      var data = json.encode({
-        "id": 198,
-      });
+    var headers = {
+      'Content-Type': 'application/json',
+    };
+    var data = json.encode({
+      "id":user_id.$,
+    });
+    var dio = Dio();
+    var response = await dio.request(
+      //"${AppConfig.RAW_BASE_URL}/notifications",
+       //'https://webcluestechnology.com/demo/erp/umonda/api/v2/notifications',
+       'https://umonda.com/api/v2/notifications',
 
-      var dio = Dio();
-      var response = await dio.request(
-        'https://webcluestechnology.com/demo/erp/umonda/api/v2/notifications',
-        options: Options(
-          method: 'POST',
-          headers: headers,
-        ),
-        data: data,
-      );
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+      data: data,
 
-      if (response.statusCode == 200) {
-        print(json.encode(response.data));
-        print(response.data);
-        print("print response notification ");
+    );
 
-        // Check if the response is a string, then decode it to a Map
-        var responseData = response.data is String
-            ? json.decode(response.data)
-            : response.data;
-
-        return NotificationListModel.fromJson(responseData);
-
-        print(json.encode(response.data));
-      } else {
-        print('Error: ${response.statusMessage}');
-      }
-    } catch (e) {
-      print('Error: $e');
+    if (response.statusCode == 200) {
+      // print(json.encode(response.data));
+      print("purchase package");
+      print(response.data);
+      //globalResponseBody=response.data;
+      //print("Global data:: ${globalResponseBody}");
+      return NotificationListModel.fromJson(response.data);
+      print("purchase package");
+      //print(response.data);
+    }
+    else {
+      print(response.statusMessage);
     }
   }
 
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.white,
+      leading:InkWell(
+          onTap: (){
+            Navigator.pop(context);
+          },
+          child: Icon(Icons.arrow_back,color: Colors.black,)),
+      title: Row(
+        children: [
+          // Text(
+          //   AppLocalizations.of(context).shopping_cart_ucf,
+          //   style: TextStyles.buildAppBarTexStyle(),
+          // ),
+          Spacer(),
+          Image.asset(
+            'assets/appbarlogo.png',width:100,height: 80,
+            //height: 40,
+            //width: 250,
+          ),
+          Spacer(),
+          Icon(Icons.notifications),
+          Icon(Icons.notifications),
+
+        ],
+      ),
+      elevation: 0.0,
+      titleSpacing: 0,
+    );
+  }
 
 }

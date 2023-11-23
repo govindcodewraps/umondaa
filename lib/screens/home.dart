@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/gestures.dart';
 import 'package:umonda/app_config.dart';
 import 'package:umonda/custom/aiz_image.dart';
@@ -27,6 +30,7 @@ import 'package:toast/toast.dart';
 
 import '../custom/device_info.dart';
 import '../custom/toast_component.dart';
+import '../data_model/Notification_count_model.dart';
 import '../helpers/auth_helper.dart';
 import '../ui_sections/drawer.dart';
 import 'New_Home_Screen/All_Feature_Ads_Screen.dart';
@@ -65,9 +69,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   //HomePresenter homeData = HomePresenter();
 
   HomePresenter homePresenter;
+  Map savecount={};
+  String notificationnumber="0";
 
   @override
   void initState() {
+    notification_count();
     Future.delayed(Duration.zero).then((value) {
       change();
     });
@@ -141,11 +148,48 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                 child: Icon(Icons.search)),
                             SizedBox(width: 10,),
                             ///////////////////
+                            // InkWell(
+                            //     onTap: (){
+                            //       Navigator.push(context, MaterialPageRoute(builder: (context)=>Notification_Screen()));
+                            //     },
+                            //     child: Icon(Icons.notifications)),
+
+
                             InkWell(
-                                onTap: (){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Notification_Screen()));
-                                },
-                                child: Icon(Icons.notifications)),
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => Notification_Screen()));
+                              },
+                              child: Stack(
+                                children: [
+                                  Icon(Icons.notifications),
+                                  Positioned(
+                                    top: 0,
+                                    right: 0,
+                                    child: Container(
+                                      padding: EdgeInsets.all(1),
+                                      decoration: BoxDecoration(
+                                        color: MyTheme.accent_color,
+                                        borderRadius: BorderRadius.circular(50), // Set a circular border radius
+                                      ),
+                                      child: Text(
+                                        " ${notificationnumber} ",
+                                        style: TextStyle(
+                                          fontSize: 8,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+
+
+
+
+
                             SizedBox(width: 10,),
                             InkWell(
                                 onTap: (){
@@ -421,6 +465,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+
                                     Align(
                                       alignment: Alignment.centerRight,
                                       child: Container(
@@ -2062,31 +2107,31 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   //   }
   // }
 
-  AppBar buildAppBar(double statusBarHeight, BuildContext context) {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      // Don't show the leading button
-      backgroundColor: Colors.white,
-      centerTitle: false,
-      elevation: 0,
-      flexibleSpace: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return Filter();
-              }));
-            },
-            child: buildHomeSearchBox(context),
-          ),
-
-          Icon(Icons.notifications),
-
-        ],
-      ),
-    );
-  }
+  // AppBar buildAppBar(double statusBarHeight, BuildContext context) {
+  //   return AppBar(
+  //     automaticallyImplyLeading: false,
+  //     // Don't show the leading button
+  //     backgroundColor: Colors.white,
+  //     centerTitle: false,
+  //     elevation: 0,
+  //     flexibleSpace: Row(
+  //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //       children: [
+  //         GestureDetector(
+  //           onTap: () {
+  //             Navigator.push(context, MaterialPageRoute(builder: (context) {
+  //               return Filter();
+  //             }));
+  //           },
+  //           child: buildHomeSearchBox(context),
+  //         ),
+  //
+  //         Icon(Icons.notifications),
+  //
+  //       ],
+  //     ),
+  //   );
+  // }
 
 
   buildHomeSearchBox(BuildContext context) {
@@ -2366,5 +2411,153 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   }
 
 
+
+
+  Widget notificationcount() {
+    bool isExpanded = false;
+    return FutureBuilder(
+      future: notification_count(),
+      builder: (context, snapshot) {
+        print("object");
+
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Container(
+            child: Center(child: CircularProgressIndicator()),
+          );
+        } else if (snapshot.hasError) {
+          return Container(
+            child: Center(child: Text("No more notification")),
+          );
+        } else if (snapshot.hasData) {
+          if (snapshot.data != null && snapshot.data.data != null) {
+            print(snapshot.data.data.length);
+            print("object");
+
+            return Container(
+              padding: EdgeInsets.only(left: 16, right: 16),
+              child: Column(
+                children: [
+                  ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, int index) {
+                      return
+
+                        InkWell(
+                          onTap: () {
+                            print("govind kkk");
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.2),
+                                  spreadRadius: 2,
+                                  blurRadius: 4,
+                                  offset: Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: Container(
+                              padding: EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Text("Notification Count:"),
+                                          SizedBox(width: 5,),
+                                         // Text(snapshot.data.unreadNotificationCount.toString()),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+
+
+
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                    },
+                    separatorBuilder: (context, index) {
+                      return SizedBox(height: 16);
+                    },
+                    itemCount:0
+                    //snapshot.data.length,
+                  ),
+                ],
+              ),
+            );
+          } else {
+            return Container(
+              child: Center(child: Text("No data available")),
+            );
+          }
+        } else {
+          return Container(
+            child: Center(child: CircularProgressIndicator()),
+          );
+        }
+      },
+    );
+  }
+  Future<NotificationCountModel> notification_count() async {
+    var headers = {
+      'Content-Type': 'application/json',
+      'Cookie': 'XSRF-TOKEN=eyJpdiI6IlFyRFh3Qkk4dzVaNGN6dm9MWlh1c3c9PSIsInZhbHVlIjoiZlJqbW9MK3pnOTJsdU13ejZ1OGN3ekFvNFBTS1BwSWl1WWZKUERHTHVnTjZnWGRQeUNMQzBiOEVCaHl5TzhiditPK3UyUjBsUzY1TlBtRk5DRGFCVEpxMS8yMSsySXlSdmZTK2NMODRwUXJSL1RENkdNYm5KQ2p5Y0FSaEhHUG4iLCJtYWMiOiJkYTM2Njk3MDc1MGExZGRjNjgxYjVlYmM3MTEzNWUyMTgwMmY2ZmI5NjdlNWM2MGNhYWE5NmMzNmZiODkwNDJhIiwidGFnIjoiIn0%3D; umonda_online_marketplace_session=eyJpdiI6IkhFRkJlNEFFNE96NWV3Y0xoT3M4Qnc9PSIsInZhbHVlIjoiNUdPbnVNcjR5SG9xRndCeHBpbDZKQWZKNVVyUm5nQnY3ZmQ0UTlLSk5kTEI5UGs0UVpqWTFub3V6SkJZTTJFNDhJNmwybXN6NmlHdnh4RVBiejZBZ2hZVVZmbWtaTEpmUkpSUG4weDFOVWlSbjRVeWZHQnNmc0hDQnZzaFVsSnUiLCJtYWMiOiJmMjAxYjE0Y2QzNTMzNjQzMWM1ZGJkMmZjZGJkNjg4Mjk2MTAyMzRkOTZkMjIzNTQyMmRmMmQwNWQ5NTc5YjZjIiwidGFnIjoiIn0%3D'
+    };
+    var data = json.encode({
+      "id": user_id.$,
+      //"id": 198,
+    });
+    var dio = Dio();
+    var response = await dio.request(
+      //"${AppConfig.RAW_BASE_URL}/notificationsCount",
+
+     // 'https://webcluestechnology.com/demo/erp/umonda/api/v2/notificationsCount',
+      'https://umonda.com/api/v2/notificationsCount',
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+      data: data,
+
+    );
+
+    if (response.statusCode == 200) {
+      // print(json.encode(response.data));
+      print("notification count");
+      print(response.data);
+      savecount=response.data;
+      print("save count variable ${savecount}");
+
+      print("Notification count response: ${response.data}");
+
+      // Assuming response.data is a map like {'unread_notification_count': 1}
+      int numericValue = response.data['unread_notification_count'] ?? 0;
+
+      print("Numeric value: $numericValue");
+
+      print("only number ${numericValue}");
+      notificationnumber=numericValue.toString();// Output: 1
+      print("onlynummmm ${notificationnumber}"); // Output: 1
+
+      //globalResponseBody=response.data;
+      //print("Global data:: ${globalResponseBody}");
+      return NotificationCountModel.fromJson(response.data);
+      print("purchase package");
+      //print(response.data);
+    }
+    else {
+      print(response.statusMessage);
+    }
+  }
 
 }
