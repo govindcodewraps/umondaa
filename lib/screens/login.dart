@@ -46,7 +46,7 @@ class _LoginState extends State<Login> {
   bool _obscureText = true;
   String _login_by = "email"; //phone or email
   String initialCountry = 'US';
-  String FCM="cVosQPN2TqGQAafxIfXHDa:APA91bHQkGsOi_Td6Err-8Dlhi0jgGskr7ycI8Q9cbkR5noh_mimvn84YcfgsNHav-bKE0MJCwwXF9m7KgJaWn6wvn9MFA565_plqUgSTQng468kvUtqA9BcIyHjo-Cwp0X4APwQMjBf";
+  //String FCM="cVosQPN2TqGQAafxIfXHDa:APA91bHQkGsOi_Td6Err-8Dlhi0jgGskr7ycI8Q9cbkR5noh_mimvn84YcfgsNHav-bKE0MJCwwXF9m7KgJaWn6wvn9MFA565_plqUgSTQng468kvUtqA9BcIyHjo-Cwp0X4APwQMjBf";
 
   // PhoneNumber phoneCode = PhoneNumber(isoCode: 'US', dialCode: "+1");
   var countries_code = <String>[];
@@ -134,7 +134,7 @@ class _LoginState extends State<Login> {
         if (fcmToken != null) {
           print("--fcm token--");
           print(fcmToken);
-          print(FCM);
+         // print(FCM);
           if (is_logged_in.$ == true) {
             print("device token api>>>");
             // update device token

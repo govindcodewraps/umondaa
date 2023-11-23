@@ -33,6 +33,7 @@ import 'New_Home_Screen/All_Feature_Ads_Screen.dart';
 import 'New_Home_Screen/Allnewads_Screen.dart';
 import 'InProfileScreen/commisssion_history_screen.dart';
 import 'New_Home_Screen/Feature_Ad_Package_Screen.dart';
+import 'Notification_Screen.dart';
 import 'common_webview_screen.dart';
 import 'drawermenu/Aboutus.dart';
 import 'drawermenu/ContactInf.dart';
@@ -139,7 +140,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                 },
                                 child: Icon(Icons.search)),
                             SizedBox(width: 10,),
-                            Icon(Icons.notifications),
+                            ///////////////////
+                            InkWell(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Notification_Screen()));
+                                },
+                                child: Icon(Icons.notifications)),
                             SizedBox(width: 10,),
                             InkWell(
                                 onTap: (){
@@ -2154,7 +2160,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 )
             ),
 
-            Icon(Icons.notifications),
+            InkWell(
+                onTap: (){
+                },
+                child: Icon(Icons.notifications)),
 
             // Container(
             //   margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
