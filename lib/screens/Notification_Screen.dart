@@ -178,7 +178,6 @@ class _Notification_ScreenState extends State<Notification_Screen> {
           onTap: (){
             Provider.of<HomePresenter>(context,listen: false).dispose();
 
-
             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
               return Main();
             }),(newRoute)=>false);

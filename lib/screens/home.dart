@@ -33,6 +33,7 @@ import '../custom/toast_component.dart';
 import '../data_model/Notification_count_model.dart';
 import '../helpers/auth_helper.dart';
 import '../ui_sections/drawer.dart';
+import 'Done_Screen.dart';
 import 'New_Home_Screen/All_Feature_Ads_Screen.dart';
 import 'New_Home_Screen/Allnewads_Screen.dart';
 import 'InProfileScreen/commisssion_history_screen.dart';
@@ -491,8 +492,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                             ),
 
                                             onPressed: (){
-                                             // Navigator.push(context,MaterialPageRoute(builder: (context)=>Feature_ad_package_Screen()));
                                               Navigator.push(context,MaterialPageRoute(builder: (context)=>Feature_ad_package_Screen()));
+                                            // Navigator.push(context,MaterialPageRoute(builder: (context)=>DoneScreen()));
                                             },
                                             child:Text(
                                               "Get Featured On Home Page",

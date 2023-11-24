@@ -38,6 +38,7 @@ import '../custom/device_info.dart';
 import '../data_model/check_response_model.dart';
 import '../data_model/order_create_response.dart';
 import '../helpers/response_check.dart';
+import 'Done_Screen.dart';
 import 'common_webview_screen.dart';
 
 class Checkout extends StatefulWidget {
@@ -472,9 +473,12 @@ class _CheckoutState extends State<Checkout> {
     if (response.statusCode == 200) {
       print('Successfully submitted! govind');
 
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return OrderList(from_checkout: true);
-      }));
+      Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>DoneScreen()));
+
+
+      // Navigator.push(context, MaterialPageRoute(builder: (context) {
+      //   return OrderList(from_checkout: true);
+      // }));
     } else {
       print('Error submitting: ${response.statusCode}');
     }
