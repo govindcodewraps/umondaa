@@ -21,7 +21,7 @@ import '../data_model/state_response.dart';
 import '../helpers/response_check.dart';
 import '../helpers/shared_value_helper.dart';
 import '../helpers/system_config.dart';
-//monday recheck
+//monday recheck AddressRepository().getAddressList();
 class AddressRepository {
   Future<dynamic> getAddressList() async {
     Uri url =
@@ -69,7 +69,10 @@ class AddressRepository {
       @required int state_id,
       @required int city_id,
       @required String postal_code,
-      @required String phone}) async {
+      @required String phone,
+      @required String landmark,
+
+      }) async {
     var post_body = jsonEncode({
       "user_id": "${user_id.$}",
       "address": "$address",
@@ -77,7 +80,8 @@ class AddressRepository {
       "state_id": "$state_id",
       "city_id": "$city_id",
       "postal_code": "$postal_code",
-      "phone": "$phone"
+      "phone": "$phone",
+      "landmark": "$landmark"
     });
 
     Uri url = Uri.parse("${AppConfig.BASE_URL}/user/shipping/create");
@@ -106,7 +110,9 @@ class AddressRepository {
       @required int state_id,
       @required int city_id,
       @required String postal_code,
-      @required String phone}) async {
+      @required String phone,
+      @required String landmark,
+      }) async {
     var post_body = jsonEncode({
       "id": "${id}",
       "user_id": "${user_id.$}",
@@ -115,7 +121,8 @@ class AddressRepository {
       "state_id": "$state_id",
       "city_id": "$city_id",
       "postal_code": "$postal_code",
-      "phone": "$phone"
+      "phone": "$phone",
+      "landmark": "$landmark"
     });
 
     Uri url = Uri.parse("${AppConfig.BASE_URL}/user/shipping/update");

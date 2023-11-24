@@ -44,6 +44,7 @@ class _AddressState extends State<Address> {
   TextEditingController _cityController = TextEditingController();
   TextEditingController _stateController = TextEditingController();
   TextEditingController _countryController = TextEditingController();
+  TextEditingController _landmark = TextEditingController();
 
   //for update purpose
   List<TextEditingController> _addressControllerListForUpdate = [];
@@ -247,6 +248,7 @@ class _AddressState extends State<Address> {
     var address = _addressController.text.toString();
     var postal_code = _postalCodeController.text.toString();
     var phone = _phoneController.text.toString();
+    var landmark = _landmark.text.toString();
 
     if (address == "") {
       ToastComponent.showDialog(
@@ -286,7 +288,10 @@ class _AddressState extends State<Address> {
         state_id: _selected_state.id,
        // city_id: _selected_city.id,
         postal_code: postal_code,
-        phone: phone);
+        phone: phone,
+        landmark: landmark
+
+    );
 
     if (addressAddResponse.result == false) {
       ToastComponent.showDialog(addressAddResponse.message,
@@ -839,7 +844,29 @@ class _AddressState extends State<Address> {
                                 .enter_phone_number),
                           ),
                         ),
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Text("LandMark",
+                            //AppLocalizations.of(context).phone_ucf,
+                            style: TextStyle(
+                                color: MyTheme.font_grey, fontSize: 12)),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Container(
+                          height: 40,
+                          child: TextField(
+                            controller: _landmark,
+                            autofocus: false,
+                            decoration: buildAddressInputDecoration(context, AppLocalizations.of(context)
+                                .enter_phone_number),
+                          ),
+                        ),
                       )
+
+
                     ],
                   ),
                 ),
@@ -1545,6 +1572,35 @@ class _AddressState extends State<Address> {
                           width: 200,
                           child: Text(
                             _shippingAddressList[index].phone,
+                            maxLines: 2,
+                            style: TextStyle(
+                                color: MyTheme.dark_grey,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 75,
+                          child: Text(
+                            "Land Mark",
+                            //AppLocalizations.of(context).phone_ucf,
+                            style: TextStyle(
+                              color: MyTheme.grey_153,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: 200,
+                          child: Text(
+                            //_shippingAddressList[index].phone,
+                            _shippingAddressList[index].landmark,
                             maxLines: 2,
                             style: TextStyle(
                                 color: MyTheme.dark_grey,
