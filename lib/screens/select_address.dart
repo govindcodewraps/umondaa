@@ -339,10 +339,40 @@ class _SelectAddressState extends State<SelectAddress> {
         buildShippingInfoItemCountry(index),
         buildShippingInfoItemPostalCode(index),
         buildShippingInfoItemPhone(index),
+        buildShippingInfoItemLandmark(index),
       ],
     );
   }
 
+  Padding buildShippingInfoItemLandmark(index) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 75,
+            child: Text(
+              "Land Mark",
+              //LangText(context).local.phone_ucf,
+              style: TextStyle(
+                color: MyTheme.grey_153,
+              ),
+            ),
+          ),
+          Container(
+            width: 200,
+            child: Text(
+              _shippingAddressList[index].landmark,
+              maxLines: 2,
+              style: TextStyle(
+                  color: MyTheme.dark_grey, fontWeight: FontWeight.w600),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
   Padding buildShippingInfoItemPhone(index) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),

@@ -1,9 +1,12 @@
 
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
+import 'package:provider/provider.dart';
 import 'dart:convert';
-
 import '../app_config.dart';
+import '../custom/toast_component.dart';
 import '../data_model/bkash_begin_response.dart';
 import '../data_model/bkash_payment_process_response.dart';
 import '../data_model/check_response_model.dart';
@@ -19,6 +22,11 @@ import '../data_model/razorpay_payment_success_response.dart';
 import '../data_model/sslcommerz_begin_response.dart';
 import '../helpers/response_check.dart';
 import '../helpers/shared_value_helper.dart';
+import '../presenter/home_presenter.dart';
+import '../screens/main.dart';
+import '../screens/order_list.dart';
+import 'package:get/get.dart';
+
 
 
 class PaymentRepository {
@@ -130,26 +138,56 @@ class PaymentRepository {
   }
 
   Future<dynamic> getOrderCreateResponseFromCod(
-      @required payment_method) async {
-    var post_body = jsonEncode(
-        {"user_id": "${user_id.$}", "payment_type": "${payment_method}"});
+      @required payment_method,
+      ) async {
+    var post_body = jsonEncode({
+      "user_id": "${user_id.$}",
+      "payment_type": "${payment_method}",
+    });
 
     Uri url = Uri.parse("${AppConfig.BASE_URL}/payments/pay/cod");
 
-    final response = await http.post(url,
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer ${access_token.$}"
-        },
-        body: post_body);
+    final response = await http.post(
+      url,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer ${access_token.$}",
+      },
+      body: post_body,
+    );
 
+    // Check the HTTP status code
+    if (response.statusCode == 200) {
+      print('Successfully submitted! govind');
+
+     // ToastComponent.showDialog("Remove to wish list",);
+      // Navigate to another screen using Get.to
+      // Navigator.push(context, MaterialPageRoute(builder: (context) {
+      //   return OrderList(from_checkout: true);
+      // }));
+
+      //Provider.of<HomePresenter>(context,listen: false).dispose();
+
+
+      // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
+      //   return Main();
+      // }),(newRoute)=>false);
+
+      //Get.to(Main());
+     // Get.to(OrderList(from_checkout: true));
+
+    } else {
+      print('Error submitting: ${response.statusCode}');
+    }
+
+    // Continue with the rest of your code
     bool checkResult = ResponseCheck.apply(response.body);
 
-    if(!checkResult)
-      return responseCheckModelFromJson(response.body);
+    if (!checkResult) return responseCheckModelFromJson(response.body);
 
     return orderCreateResponseFromJson(response.body);
   }
+
 
   Future<dynamic> getOrderCreateResponseFromManualPayment(
       @required payment_method) async {
