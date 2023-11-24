@@ -12,6 +12,7 @@ import '../login.dart';
 import 'package:http/http.dart' as http;
 
 import '../payment_method_screen/stripe_screen.dart';
+import '../seller_package_screen.dart';
 
 class Feature_ad_package_Screen extends StatefulWidget {
 
@@ -348,7 +349,9 @@ class _Feature_ad_package_ScreenState extends State<Feature_ad_package_Screen> {
                                 MaterialPageRoute(builder: (context) => Login()));
                           }
                           else{
-                            alertDialog(context);
+                            Navigator.push(context,MaterialPageRoute(builder: (context)=>Seller_package_Screen()));
+
+                          //  alertDialog(context);
                           }
                           //alertDialog(context);
                           // Navigator.push(context,MaterialPageRoute(builder: (context)=>Allnewads_Screen()));
@@ -356,7 +359,7 @@ class _Feature_ad_package_ScreenState extends State<Feature_ad_package_Screen> {
                         child:Text(
                           "Purchase package",
                           // AppLocalizations.of(context).update_profile_ucf,
-                          style: TextStyle(
+                            style: TextStyle(
                             color: Colors.white,
                             fontSize: 11,
                           ),
