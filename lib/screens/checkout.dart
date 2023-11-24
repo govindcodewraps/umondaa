@@ -428,6 +428,7 @@ class _CheckoutState extends State<Checkout> {
     var orderCreateResponse = await PaymentRepository()
         .getOrderCreateResponseFromCod(_selected_payment_method_key);
     Navigator.of(loadingcontext).pop();
+
     if (orderCreateResponse.result == false) {
       ToastComponent.showDialog(orderCreateResponse.message, gravity: Toast.center, duration: Toast.lengthLong);
       Navigator.of(context).pop();

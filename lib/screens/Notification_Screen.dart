@@ -4,10 +4,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 import '../app_config.dart';
 import '../data_model/Infomation_Model.dart';
 import '../helpers/shared_value_helper.dart';
+import '../presenter/home_presenter.dart';
+import 'main.dart';
 
 class Notification_Screen extends StatefulWidget {
 
@@ -54,11 +57,13 @@ class _Notification_ScreenState extends State<Notification_Screen> {
           return Container(
             child: Center(child: CircularProgressIndicator()),
           );
-        } else if (snapshot.hasError) {
-          return Container(
-            child: Center(child: Text("No more notification")),
-          );
-        } else if (snapshot.hasData) {
+        }
+        // else if (snapshot.hasError) {
+        //   return Container(
+        //     child: Center(child: Text("No more notification")),
+        //   );
+        // }
+        else if (snapshot.hasData) {
           if (snapshot.data != null && snapshot.data.data != null) {
             print(snapshot.data.data.length);
             print("object");
@@ -171,7 +176,13 @@ class _Notification_ScreenState extends State<Notification_Screen> {
       backgroundColor: Colors.white,
       leading:InkWell(
           onTap: (){
-            Navigator.pop(context);
+            Provider.of<HomePresenter>(context,listen: false).dispose();
+
+
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
+              return Main();
+            }),(newRoute)=>false);
+           // Navigator.pop(context);
           },
           child: Icon(Icons.arrow_back,color: Colors.black,)),
       title: Row(
