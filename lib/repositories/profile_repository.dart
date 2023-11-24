@@ -1,10 +1,6 @@
-
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
-
 import 'package:flutter/foundation.dart';
-
 import '../app_config.dart';
 import '../data_model/check_response_model.dart';
 import '../data_model/device_token_update_response.dart';
@@ -61,7 +57,7 @@ print("profile_repository, response : ${response.body}");
     Uri url = Uri.parse("${AppConfig.BASE_URL}/profile/update-device-token");
     final response = await http.post(url,
         headers: {"Content-Type": "application/json", "Authorization": "Bearer ${access_token.$}","App-Language": app_language.$,},body: post_body );
-print("profile_repository, getDeviceTokenUpdateResponse : ${response.body}");
+    print("profile_repository, getDeviceTokenUpdateResponse : ${response.body}");
     bool checkResult = ResponseCheck.apply(response.body);
 
     if(!checkResult)
@@ -69,6 +65,7 @@ print("profile_repository, getDeviceTokenUpdateResponse : ${response.body}");
 
     return deviceTokenUpdateResponseFromJson(response.body);
   }
+
 
   Future<dynamic> getProfileImageUpdateResponse(
       @required String image,@required String filename) async {

@@ -299,19 +299,19 @@ class _WishlistState extends State<Wishlist> {
 
 
 
-import 'package:hardware_lo/custom/useful_elements.dart';
-import 'package:hardware_lo/ui_elements/product_card.dart';
+import 'package:umonda/custom/useful_elements.dart';
+import 'package:umonda/ui_elements/product_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hardware_lo/my_theme.dart';
-import 'package:hardware_lo/helpers/shimmer_helper.dart';
-import 'package:hardware_lo/app_config.dart';
-import 'package:hardware_lo/repositories/wishlist_repository.dart';
-import 'package:hardware_lo/screens/product_details.dart';
-import 'package:hardware_lo/custom/toast_component.dart';
+import 'package:umonda/my_theme.dart';
+import 'package:umonda/helpers/shimmer_helper.dart';
+import 'package:umonda/app_config.dart';
+import 'package:umonda/repositories/wishlist_repository.dart';
+import 'package:umonda/screens/product_details.dart';
+import 'package:umonda/custom/toast_component.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:toast/toast.dart';
-import 'package:hardware_lo/helpers/shared_value_helper.dart';
+import 'package:umonda/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 

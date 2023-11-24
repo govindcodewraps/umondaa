@@ -63,6 +63,7 @@ class PaymentRepository {
 
     bool checkResult = ResponseCheck.apply(response.body);
     print("order details 1 ${response.body}");
+    print("pay cod ${response.body}");
 
     if(!checkResult)
       return responseCheckModelFromJson(response.body);

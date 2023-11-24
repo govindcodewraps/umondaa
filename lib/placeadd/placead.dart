@@ -1,33 +1,29 @@
 import 'dart:io';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_multi_select_items/flutter_multi_select_items.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:hardware_lo/custom/device_info.dart';
-import 'package:hardware_lo/my_theme.dart';
-import 'package:hardware_lo/custom/useful_elements.dart';
+import 'package:umonda/custom/device_info.dart';
+import 'package:umonda/my_theme.dart';
+import 'package:umonda/custom/useful_elements.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:hardware_lo/repositories/brand_repository.dart';
+import 'package:umonda/repositories/brand_repository.dart';
 import '../custom/btn.dart';
 import '../data_model/AllCategoryResponse.dart';
 import '../app_config.dart';
 import '../helpers/shared_value_helper.dart';
 import 'package:http/http.dart' as http;
 import 'package:dropdown_button2/dropdown_button2.dart';
-import '../repositories/category_repository.dart';
 import '../screens/common_webview_screen.dart';
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../../data_model/Sub_Category_List_Model.dart';
-
 
 class placead extends StatefulWidget {
   String catevale;
 
   placead({Key key,this.catevale}) : super(key: key);
+
   @override
   State<placead> createState() => _placeadState();
-
 }
 
 class _placeadState extends State<placead> {
@@ -37,11 +33,8 @@ class _placeadState extends State<placead> {
   bool light = false, isChecked = true;
   bool _filteredBrandsCalled = false;
   bool _filteredcategoryCalled = false;
-  // List<File> selectedImages = [];
   List<File> basee = [];
   List<dynamic> brandsList = [];
-  List<dynamic> categoryList = [];
-  List<dynamic> ALLcategoryList = [];
   final picker = ImagePicker();
   String imageurl;
   String dropdownBrands = "Select Select_Brand";
@@ -53,10 +46,8 @@ class _placeadState extends State<placead> {
   List<File> selectedImages = []; // List to hold selected image files
   List<String> imageUrls = [];
   List<String> base64Urls = [];
-  String selectedValue = '';
   bool _customeIcon = false;
   String globalResponseBody;
-  String globalResponseBo;
 
   TextEditingController _ProductName = TextEditingController();
   TextEditingController _Category = TextEditingController();
@@ -67,28 +58,15 @@ class _placeadState extends State<placead> {
   TextEditingController _EmailID = TextEditingController();
   TextEditingController _PassWord = TextEditingController();
   TextEditingController _offerControler = TextEditingController();
-
+  List<String> selectedItems = [];
   List<bool> isCheckedList = [];
-  List<bool> isCheckedSubList = [];
-  List<bool> isCheckedSubchildList = [];
-  List<bool> isCheckedList2 = [];
   List<allcategoryModel> itemList = [];
-  List<SubCategoryListModel> SubitemList = [];
-  List<SubCategoryListModel> SubchildList = [];
-  List<ChildrenCategories> itemList2 = [];
-  //bool isChecked = false;
   String ProductID;
-  String subchildproductID;
-  Map<String,List<SubCategoryListModel>> subCatMap={};
   List<String> selectedProductIDs = [];
 
   @override
   void initState() {
     fetch_Brands();
-    fetch_Category();
-    fetchData();
-    fetchDataa();
-    printSelectedItems();
     super.initState();
   }
 
@@ -100,14 +78,6 @@ class _placeadState extends State<placead> {
     setState(() {});
   }
 
-  fetch_Category() async {
-    var categoryResponse = await CategoryRepository().getCategories();
-    categoryList.addAll(categoryResponse.categories);
-    print("Category list : ${categoryResponse.categories}");
-    _filteredcategoryCalled = true;
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: Scaffold(
@@ -115,14 +85,10 @@ class _placeadState extends State<placead> {
     ));
   }
 
-  // class MyCustomForm extends StatelessWidget {
-  // const MyCustomForm({Key key, go_back = true}) : super(key: key);
-
   Widget MyCustomForm() {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: buildAppBar(context),
-
         body: buildBody()
     );
   }
@@ -131,7 +97,6 @@ class _placeadState extends State<placead> {
     return AppBar(
       //iconTheme: IconThemeData(color: Colors.black),
       leading: UsefulElements.backToMain(context, go_back: false,color:Colors.black),
-
       backgroundColor: Color.fromARGB(240, 243, 237, 237),
       title: buildAppBarTitleOption(context),
       elevation: 0.0,
@@ -141,10 +106,9 @@ class _placeadState extends State<placead> {
   }
 
   Widget buildAppBarTitleOption(BuildContext context) {
-
     print("Govind>>>>> ${ProductID}");
-
     print("Selected ProductIDs>>>>>>>>>>>>: $selectedProductIDs");
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 0),
       child: Row(
@@ -161,6 +125,7 @@ class _placeadState extends State<placead> {
               style: TextStyle(color: Colors.black,),
             ),
           )
+
         ],
       ),
     );
@@ -169,9 +134,6 @@ class _placeadState extends State<placead> {
   Widget buildBody() {
     bool light = false;
     return
-      // is_logged_in.$ == false?
-      // Navigator.push(context, MaterialPageRoute(builder: (context)=>Login())):
-
       ListView(
           children: [
             Container(
@@ -180,10 +142,6 @@ class _placeadState extends State<placead> {
                 elevation: 10,
                 child: Column(
                   children: [
-                    // Text(globalResponseBody.toString()),
-                    // listview(),
-                    // Text('Selected Product IDs: ${widget.selectedProductIDs.join(', ')}'),
-
                     Container(
                         margin: const EdgeInsets.fromLTRB(5, 20, 0, 0),
                         child: const Align(
@@ -208,185 +166,21 @@ class _placeadState extends State<placead> {
                       ),
                     ),
 
-
                     ExpansionTile(title: Text("Category"),
-
                       children: [
-
-                        /* ListTile(
-                        title: InkWell(onTap: (){
-                        },
-                          child:
-                          Container(
-                              height: 500,
-                              padding: EdgeInsets.only(left: 16,right: 16),
-                              child: CheckboxListScreen()),
-
-                        ),
-                      ),*/
                         ListTile(
                           title: InkWell(onTap: (){
                           },
-                            child:
-                            Container(
-                              height: 500,
-                              padding: EdgeInsets.only(left: 16,right: 16),
-                              child:
-
-                              Column(
-                                children: [
-                                  //Text("mmmmmmmmmm"),
-                                  Expanded(
-                                    child: itemList.isEmpty
-                                        ? Center(child: CircularProgressIndicator())
-                                        : ListView.builder(
-                                      itemCount: itemList.length,
-                                      itemBuilder: (context, index) {
-                                        final item = itemList[index];
-                                        return
-                                          Column(
-                                            children: [
-                                              ListTile(
-                                                leading: Checkbox(
-                                                  value: isCheckedList[index],
-                                                  onChanged: (bool newValue) {
-                                                    // setState(() {
-                                                    //   isCheckedList[index] = newValue;
-                                                    //   printSelectedItems();
-                                                    //   ProductID=item.id.toString();
-                                                    //   print("print id"+ProductID);
-                                                    //   subcategorylist();
-                                                    //   print(subCatMap);
-                                                    //
-                                                    // });
-
-                                                    setState(() {
-
-                                                      isCheckedList[index] = newValue;
-                                                      if (newValue) {
-                                                        selectedProductIDs.add(item.id.toString());
-                                                      } else {
-                                                        selectedProductIDs.remove(item.id.toString());
-                                                      }
-                                                      ProductID = item.id.toString();
-                                                      subcategorylist();
-                                                    });
-
-                                                  },
-                                                ),
-                                                title: Text(item.name.toString()),
-                                              ),
-
-                                              if(isCheckedList[index])
-                                                SubitemList.isEmpty
-                                                    ? Center(child: CircularProgressIndicator())
-                                                    : Column(children: [
-
-                                                  ListView.builder(
-                                                    shrinkWrap: true,
-                                                    physics: const NeverScrollableScrollPhysics(),
-                                                    itemBuilder: (context , int index){
-                                                      return Column(children: [
-                                                        Padding(
-                                                          padding: const EdgeInsets.only(left: 25),
-                                                          child: ListTile(
-                                                            leading: Checkbox(
-                                                              value: isCheckedSubList[index],
-                                                              onChanged: (bool newValue) {
-                                                                setState(() {
-                                                                  isCheckedSubList[index] = newValue;
-                                                                  if (newValue) {
-                                                                    selectedProductIDs.add(SubitemList[index].id.toString());
-                                                                  } else {
-                                                                    selectedProductIDs.remove(SubitemList[index].id.toString());
-
-                                                                  }
-                                                                  subchildproductID=SubitemList[index].id.toString();
-                                                                  print("print idd"+subchildproductID);
-                                                                  SubchildListt();
-                                                                  //printSelectedItems();
-                                                                  printSelectedSubItems();
-                                                                });
-                                                              },
-                                                            ),
-                                                            // title:Text(SubitemList[index].id.toString() ??""),
-                                                            title:Text(SubitemList[index].name.toString() ??""),
-
-                                                          ),
-                                                        ),
-
-                                                        if(isCheckedSubList[index])
-
-                                                          SubchildList.isEmpty
-                                                              ? Center(child: CircularProgressIndicator())
-                                                              :  Column(children: [
-
-                                                            Padding(
-                                                              padding: const EdgeInsets.only(left: 40),
-                                                              child: ListView.builder(
-                                                                shrinkWrap: true,
-                                                                physics: const NeverScrollableScrollPhysics(),
-                                                                itemBuilder: (context , int index){
-                                                                  return Column(children: [
-                                                                    Padding(
-                                                                      padding: const EdgeInsets.only(left: 25),
-                                                                      child: ListTile(
-                                                                        leading: Checkbox(
-                                                                          value:isCheckedSubchildList[index],
-                                                                          onChanged: (bool newValue) {
-                                                                            setState(() {
-                                                                              isCheckedSubchildList[index] = newValue;
-                                                                              if (newValue) {
-                                                                                selectedProductIDs.add(SubchildList[index].id.toString());
-                                                                              } else {
-                                                                                selectedProductIDs.remove(SubchildList[index].id.toString());
-                                                                              }
-                                                                              //printSelectedItems();
-                                                                              printSelectedSubchildItems();
-                                                                            });
-                                                                          },
-                                                                        ),
-                                                                        // title:Text(SubitemList[index].id.toString() ??""),
-                                                                        title:Text(SubchildList[index].name.toString() ??""),
-
-                                                                      ),
-                                                                    ),
-                                                                  ],);
-
-                                                                },
-                                                                //itemCount: item.childrenCategories[index].categories.length,
-                                                                //itemCount: SubitemList.length,
-                                                                itemCount: SubchildList.length,
-                                                              ),
-                                                            ),
-                                                          ],)
-                                                      ],);
-                                                    },
-                                                    //itemCount: item.childrenCategories[index].categories.length,
-                                                    //itemCount: SubitemList.length,
-                                                    itemCount: SubitemList.length,
-                                                  ),
-                                                ],),
-                                            ],
-                                          );
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-                            ),
-
+                            child: listviewallcategories(),
                           ),
-                        ),
+                        )
                       ],
-
                       onExpansionChanged: (bool expanded){
                         // setState(() => _customeIcon = expanded);
                       },
 
                     ),
-                    Divider(color: Colors.black,thickness: 1,),
+                    Divider(thickness: 1.2,color: Colors.black,),
 
                     Container(
                         margin: const EdgeInsets.fromLTRB(5, 16, 0, 0),
@@ -403,10 +197,10 @@ class _placeadState extends State<placead> {
                       alignment: Alignment.topLeft,
                       child: BrandDropdown(),
                     ),
-
                     Container(
                       margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                     ),
+
                   ],
                 ),
               ),
@@ -589,8 +383,6 @@ class _placeadState extends State<placead> {
               ),
             ),
 
-            //listcategori(),
-
             Container(
               margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
               child: Card(
@@ -623,137 +415,6 @@ class _placeadState extends State<placead> {
                 ),
               ),
             ),
-            //---------------------
-
-            // if (is_logged_in.$ == false)
-            //
-            //   Column(
-            //     crossAxisAlignment: CrossAxisAlignment.end,
-            //     children: [
-            //       Container(
-            //         margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
-            //         child: Card(
-            //           elevation: 10,
-            //           child: Column(
-            //             children: [
-            //               Container(
-            //                   margin: const EdgeInsets.fromLTRB(5, 16, 0, 0),
-            //                   child: const Align(
-            //                     alignment: Alignment.topLeft,
-            //                     child: Text("User Details",
-            //                         style: TextStyle(fontSize: 14,
-            //                             color: Color.fromARGB(255, 0, 0, 0))),
-            //                   )
-            //               ),
-            //               Container(
-            //                 margin: const EdgeInsets.fromLTRB(5, 12, 0, 0),
-            //                 child: TextField(
-            //                   controller: _EmailID,
-            //                   autofocus: false,
-            //                   enableSuggestions: false,
-            //                   autocorrect: false,
-            //                   decoration: const InputDecoration(
-            //                     border: UnderlineInputBorder(),
-            //                     labelText: 'Email',
-            //                   ),
-            //                 ),
-            //               ),
-            //
-            //               Container(
-            //                 margin: const EdgeInsets.fromLTRB(5, 12, 0, 0),
-            //                 child:
-            //                 TextFormField(
-            //                   controller: _PassWord,
-            //                   obscureText: _obscureText,
-            //                   decoration: InputDecoration(
-            //                     labelText: 'Password',
-            //                     suffixIcon: GestureDetector(
-            //                       onTap: () {
-            //                         setState(() {
-            //                           _obscureText = !_obscureText;
-            //                         });
-            //                       },
-            //                       child: _obscureText
-            //                           ? Icon(Icons.visibility
-            //                         // Feather.eye_off, // Use Feather for Flutter icons
-            //                       )
-            //                           : Icon(
-            //                           Icons.visibility_off
-            //                       ),
-            //                     ),
-            //                   ),
-            //                 ),
-            //               ),
-            //
-            //
-            //             ],
-            //           ),
-            //         ),
-            //       ),
-            //       Padding(
-            //         padding:  EdgeInsets.only(top: 20.0,right:16),
-            //         child: Column(
-            //           crossAxisAlignment: CrossAxisAlignment.end,
-            //           children: [
-            //             Text(
-            //               "Don't have an account ?",
-            //               style: TextStyle(color: MyTheme.font_grey, fontSize: 12),
-            //             ),
-            //             SizedBox(
-            //               width: 10,
-            //             ),
-            //             InkWell(
-            //               child: Text(
-            //                 AppLocalizations.of(context).sign_up_ucf,
-            //                 style: TextStyle(
-            //                     color: MyTheme.accent_color,
-            //                     fontSize: 14,
-            //                     fontWeight: FontWeight.w600),
-            //               ),
-            //               onTap: () {
-            //                 Navigator.push(context,
-            //                     MaterialPageRoute(builder: (context) {
-            //                       return Registration();
-            //                     }));
-            //               },
-            //             ),
-            //           ],
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-
-
-            /*    Padding(
-            padding:  EdgeInsets.only(top: 20.0,right:16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  "Don't have an account ?",
-                  style: TextStyle(color: MyTheme.font_grey, fontSize: 12),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                InkWell(
-                  child: Text(
-                    AppLocalizations.of(context).sign_up_ucf,
-                    style: TextStyle(
-                        color: MyTheme.accent_color,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                          return Registration();
-                        }));
-                  },
-                ),
-              ],
-            ),
-          ),*/
 
             Padding(
               padding: const EdgeInsets.only(top: 20.0,left: 16),
@@ -831,27 +492,6 @@ class _placeadState extends State<placead> {
               ),
             ),
 
-            //TESTING BUTTON
-            /*   ElevatedButton(onPressed: (){
-            var category = dropdownCategory.split(" ")[0].toString();
-            print("category.....: ${category}");
-            var category2 = selectedProductIDs;
-            //selectedProductIDs=', '.join(map(str, my_list));
-            print("category check box.....: ${category2}");
-            String result = selectedProductIDs.map((item) => item.toString()).join(', ');
-
-            print("category  remove square.....: ${result}");
-
-
-            String selectedProduct = selectedProductIDs.map((item) => item.toString()).join(',').replaceAll(', ', ',');
-
-            print("category  remove square renove space....:${selectedProduct}");
-
-
-
-          }, child: Text("DATAAA")),*/
-
-
             Padding(
               padding: const EdgeInsets.only(top: 30.0,left: 16,right: 16),
               child: Container(
@@ -872,16 +512,11 @@ class _placeadState extends State<placead> {
                   ),
                   onPressed: _isAgree
                       ? () {
-
-                    // Uncheck all checked items when the "Upload" button is pressed
-
                     if (_ProductName.text.isEmpty ||
                         dropdownCategory.isEmpty ||
                         dropdownBrands.isEmpty ||
                         _Description.text.isEmpty ||
                         _PriceAED.text.isEmpty
-                    //allurlss.isEmpty
-
                     )
 
                     {
@@ -895,15 +530,16 @@ class _placeadState extends State<placead> {
                         textColor: Colors.red,
                         fontSize: 16.0,
                       );
-                    } else {
+                    }
+                    else {
                       String selectedProduct = selectedProductIDs.map((item) => item.toString()).join(',').replaceAll(', ', ',');
+                      String selectedPro = selectedItems.map((item) => item.toString()).join(',').replaceAll(', ', ',');
 
                       print("category  remove square renove space....:${selectedProduct}");
 
                       var ProdName = _ProductName.text.toString();
-                      // var category = dropdownCategory.split(" ")[0].toString();
-                      // var category = selectedProductIDs;
-                      var category = selectedProduct;
+
+                      var category = selectedPro;
                       var brand = dropdownBrands.split(" ")[0].toString();
                       var description = _Description.text.toString();
                       var amount = _PriceAED.text.toString();
@@ -950,33 +586,8 @@ class _placeadState extends State<placead> {
           ]
       );
   }
-//------------------------
-  _CheckState () {
-    Color getColor(Set<MaterialState> states) {
-      const Set<MaterialState> interactiveStates = <MaterialState>{
-        MaterialState.pressed,
-        MaterialState.hovered,
-        MaterialState.focused,
-      };
-      if (states.any(interactiveStates.contains)) {
-        return Colors.blue;
-      }
-      return MyTheme.accent_color;
-    }
-    return Checkbox(
-      checkColor: Colors.white,
-      fillColor: MaterialStateProperty.resolveWith(getColor),
-      value: isChecked,
-      onChanged: (bool value) {
-        setState(() {
-          isChecked = value;
-        });
-      },
-    );
-  }
 
   BrandDropdown() {
-
     print("placead.dart, BrandDropdown(), dropdownBrands : ${dropdownBrands}");
     return DropdownButton2<dynamic>(
       hint: Text(dropdownBrands.split(" ")[1],style: TextStyle(color: Colors.black),),
@@ -1023,17 +634,14 @@ class _placeadState extends State<placead> {
           selectedImages.add(File(pickedFiles[i].path));
           print("Select images${selectedImages}");
         }
-
         // Create a list to store image paths in the desired format
         List<String> imagePaths = [];
-
         // Append selected image paths to the list
         for (var image in selectedImages) {
           String imagePath = image.path.replaceAll('\\', '/');
           imagePaths.add(imagePath);
           imageUrls=imagePaths;
           // print('Selected Image Path: $imagePath');
-
         }
 
       } else {
@@ -1052,262 +660,6 @@ class _placeadState extends State<placead> {
     });
   }
 
-
-  Widget childrenCategories() {
-    return
-      Column(
-        children: [
-          FutureBuilder(
-              future: fetchData(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return
-                    Container(
-                      //padding: EdgeInsets.only(top: 23),
-                      child:
-                      Column(
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemBuilder: (context , int index){
-                                  return Column(
-                                    children: [
-                                      MultiSelectContainer(items: [
-                                        //MultiSelectCard(value: snapshot.data[index].childrenCategories[0].categories.length.toString(), label:snapshot.data[index].childrenCategories[0].categories.length.toString()),
-                                        MultiSelectCard(value: snapshot.data[index].childrenCategories[index].id.toString(), label:snapshot.data[index].childrenCategories[index].name.toString()),
-                                      ], onChange: (allSelectedItems, selectedItem) {
-                                        print("childrenCategories>>>>>>>>>>>${allSelectedItems}");
-                                        print(selectedItem);
-                                      }),
-                                    ],
-                                  );
-                                },
-                                itemCount: 2,
-                                //itemCount: snapshot.data.length,
-                                // itemCount: snapshot.data.childrenCategories[0].categories.length,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    );
-                }
-                else{
-                  return
-                    Container(
-                        child: Center(child: CircularProgressIndicator()));
-                }
-              }
-          ),
-        ],
-      );
-  }
-  Widget childCategories() {
-    return
-      Column(
-        children: [
-          FutureBuilder(
-              future: fetchData(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return
-                    Container(
-                      //padding: EdgeInsets.only(top: 23),
-                      child:
-                      Column(
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemBuilder: (context , int index){
-                                  return Column(
-                                    children: [
-                                      MultiSelectContainer(items: [
-                                        //MultiSelectCard(value: snapshot.data[index].childrenCategories[0].categories.length.toString(), label:snapshot.data[index].childrenCategories[0].categories.length.toString()),
-                                        MultiSelectCard(value: snapshot.data[index].childrenCategories[index].categories[index].id.toString(), label:snapshot.data[index].childrenCategories[index].categories[index].name.toString()),
-                                      ], onChange: (allSelectedItems, selectedItem) {
-                                        print("categoriesCategories>>>>>>>>>>>${allSelectedItems}");
-                                        print(selectedItem);
-                                      }),
-                                    ],
-                                  );
-                                },
-                                itemCount: 2,
-                                // itemCount: snapshot.data.childrenCategories.categories.length,
-                                // itemCount: snapshot.data.childrenCategories[0].categories.length,
-                              ),
-
-                            ],
-                          ),
-                        ],
-                      ),
-
-                    );
-                }
-                else{
-                  return
-                    Container(
-                        child: Center(child: CircularProgressIndicator()));
-                }
-              }
-          ),
-        ],
-      );
-  }
-
-  Future<List<allcategoryModel>> fetchData() async {
-    var url = Uri.parse('${AppConfig.BASE_URL}/all-categories');
-    final response = await http.get(url);
-
-    if (response.statusCode == 200) {
-      globalResponseBody = response.body; // Assign the response body to the global variable
-      List<dynamic> jsonList = json.decode(globalResponseBody);
-      List<allcategoryModel> itemList = jsonList.map((json) => allcategoryModel.fromJson(json)).toList();
-      print("allcategoryModel Response > $globalResponseBody");
-
-      return itemList;
-    } else {
-      throw Exception('Failed to load data');
-    }
-  }
-  //Check box
-  Future<void> fetchDataa() async {
-    var url = Uri.parse('${AppConfig.BASE_URL}/all-categories');
-
-    final response = await http.get(url);
-
-    if (response.statusCode == 200) {
-      List<dynamic> jsonList = json.decode(response.body);
-      itemList = jsonList.map((json) => allcategoryModel.fromJson(json)).toList();
-      setState(() {
-        isCheckedList = List<bool>.filled(itemList.length, false);
-      });
-    }
-    else {
-      throw Exception('Failed to load data');
-    }
-  }
-
-  Widget listcategori() {
-    return
-      FutureBuilder(
-          future: fetchDataa(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return
-                Container(
-                  child:
-                  ListView.builder(
-                    shrinkWrap: true,
-                    //physics:  NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, int index) {
-                      return
-
-                        Column(children: [
-                          Text(itemList[index].name.toString()),
-                        ],);
-
-                    },
-                    itemCount: itemList.length,
-                  ),
-                );
-            }
-            else{
-              return
-                Container(
-                    child: Center(child: CircularProgressIndicator()));
-            }
-          }
-      );
-  }
-
-  Future<void> subcategorylist() async {
-    print("Govind ${ProductID}");
-    var url = Uri.parse('${AppConfig.BASE_URL}/sub-category-list/$ProductID');
-
-    final response = await http.get(url);
-
-    if (response.statusCode == 200) {
-      List<dynamic> jsonList = json.decode(response.body);
-      SubitemList = jsonList.map((json) => SubCategoryListModel.fromJson(json)).toList();
-
-      subCatMap[ProductID.toString()]= SubitemList;
-      print("hello ${subCatMap["$ProductID"][0].name}");
-      print("Sub category list ${response.body}");
-      print("Sub category list ${SubitemList}");
-      setState(() {
-        isCheckedSubList = List<bool>.filled(SubitemList.length, false);
-      });
-    }
-
-    else {
-      throw Exception('Failed to load data');
-    }
-  }
-
-  Future<void> SubchildListt() async {
-    print("sub child ${subchildproductID}");
-    var url = Uri.parse('${AppConfig.BASE_URL}/sub-category-list/$subchildproductID');
-
-    final response = await http.get(url);
-
-    if (response.statusCode == 200) {
-      List<dynamic> jsonList = json.decode(response.body);
-      SubchildList = jsonList.map((json) => SubCategoryListModel.fromJson(json)).toList();
-      setState(() {
-        isCheckedSubchildList = List<bool>.filled(SubchildList.length, false);
-      });
-    }
-
-    else {
-      throw Exception('Failed to load data');
-    }
-  }
-
-  void subCatList(int id,List list){
-    //subCatMap["$id"]=list;
-  }
-
-  void printSelectedItems() {
-    for (int i = 0; i < itemList.length; i++) {
-      if (isCheckedList[i]) {
-        print("Selected Item Name: ${itemList[i].id}");
-        subchildproductID="${itemList[i].id}";
-        ProductID = subchildproductID;
-        print("Product id First ${ProductID}");
-      }
-    }
-  }
-
-  void printSelectedSubItems() {
-    for (int i = 0; i < SubitemList.length; i++) {
-      if (isCheckedSubList[i]) {
-        print("Selected Item Namegg: ${SubitemList[i].id}");
-        ProductID="${SubitemList[i].id}";
-        print("Product id Second ${ProductID}");
-      }
-    }
-  }
-
-  void printSelectedSubchildItems() {
-    for (int i = 0; i < SubchildList.length; i++) {
-      if (isCheckedSubchildList[i]) {
-        print("Selected Item Nameee: ${SubchildList[i].id}");
-        ProductID="${SubchildList[i].id}";
-        print("Product id Third ${ProductID}");
-      }
-    }
-  }
-
-  // import 'package:http/http.dart' as http;
-//place_ad_upload(ProdName,userid,category,brand,description,offer,amount,offerstatus,email,password);
   place_ad_upload(name,Category,Brand,description,offer,amount,offerstatus,email,password) async {
 
     setState(() {
@@ -1343,6 +695,8 @@ class _placeadState extends State<placead> {
     for(var i=0;i<imageUrls.length;i++)
     {
       request.files.add(await http.MultipartFile.fromPath('thumbnail_img[]', imageUrls[i],));
+
+
     }
 
     request.headers.addAll(headers);
@@ -1374,12 +728,14 @@ class _placeadState extends State<placead> {
           isCheckedList[i] = false;
         }
         setState(() {
-          printSelectedItems();
+          // printSelectedItems();
           _isAgree = false;
           isEnabled = false;
           selectedImages.clear();
+          selectedItems.clear();
           dropdownBrands =  dropdownBrands="Select Select_Brand";
         });
+
 
       }
       else if(response.statusCode == 401)
@@ -1416,4 +772,133 @@ class _placeadState extends State<placead> {
     });
   }
 
+  Widget listviewallcategories() {
+    return
+      FutureBuilder(
+        future: fetchDataallcategories(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Container(
+              child: Column(
+                children: [
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, int index) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CheckboxListTile(
+                            title: Text(snapshot.data[index].name.toString()),
+                            value: selectedItems.contains(snapshot.data[index].id.toString()),
+                            onChanged: (value) {
+                              setState(() {
+                                if (value) {
+                                  selectedItems.add(itemList[index].id.toString());
+                                } else {
+                                  selectedItems.remove(itemList[index].id.toString());
+                                }
+                              });
+
+                              // Handle checkbox state changes here.
+                              // You can add or remove the item from the selectedItems list.
+                            },
+                            controlAffinity: ListTileControlAffinity.leading, // Move checkbox to the left side.
+                          ),
+                          SizedBox(height: 10),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 30),
+                            child: ListView.builder(
+                              itemCount: itemList[index].childrenCategories.length,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, int subindex) {
+                                return Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    CheckboxListTile(
+                                      title: Text(itemList[index].childrenCategories[subindex].name.toString()),
+                                      value: selectedItems.contains(itemList[index].childrenCategories[subindex].id.toString()),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          if (value) {
+                                            selectedItems.add(itemList[index].childrenCategories[subindex].id.toString());
+                                          } else {
+                                            selectedItems.remove(itemList[index].childrenCategories[subindex].id.toString());
+                                          }
+                                        });
+
+                                        // Handle checkbox state changes here.
+                                      },
+                                      controlAffinity: ListTileControlAffinity.leading, // Move checkbox to the left side.
+                                    ),
+                                    SizedBox(height: 10),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 30),
+                                      child: ListView.builder(
+                                        itemCount: itemList[index].childrenCategories[subindex].categories.length,
+                                        shrinkWrap: true,
+                                        physics: const NeverScrollableScrollPhysics(),
+                                        itemBuilder: (context, int catindex) {
+                                          return CheckboxListTile(
+                                            title: Text(itemList[index].childrenCategories[subindex].categories[catindex].name.toString()),
+                                            value: selectedItems.contains(itemList[index].childrenCategories[subindex].categories[catindex].id.toString()),
+                                            onChanged: (value) {
+
+                                              setState(() {
+                                                if (value) {
+                                                  selectedItems.add(itemList[index].childrenCategories[subindex].categories[catindex].id.toString());
+                                                } else {
+                                                  selectedItems.remove(itemList[index].childrenCategories[subindex].categories[catindex].id.toString());
+                                                }
+                                              });
+
+                                              // Handle checkbox state changes here.
+                                            },
+                                            controlAffinity: ListTileControlAffinity.leading, // Move checkbox to the left side.
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                    itemCount: itemList.length,
+                  ),
+                ],
+              ),
+            );
+          } else {
+            return Container(
+              child: Center(child: CircularProgressIndicator()),
+            );
+          }
+        },
+      );
+  }
+
+  Future<List<allcategoryModel>> fetchDataallcategories() async {
+    var url = Uri.parse('${AppConfig.BASE_URL}/all-categories');
+
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      globalResponseBody = response.body; // Assign the response body to the global variable
+
+      List<dynamic> jsonList = json.decode(globalResponseBody);
+
+      itemList = jsonList.map((json) => allcategoryModel.fromJson(json)).toList();
+
+      print("allcategoryModel Response > ${itemList.length}");
+
+      return itemList;
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
 }

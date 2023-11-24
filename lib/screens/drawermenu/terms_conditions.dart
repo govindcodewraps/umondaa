@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hardware_lo/custom/useful_elements.dart';
+import 'package:umonda/custom/useful_elements.dart';
 
 class TermsConditions extends StatelessWidget {
   //const TermsConditions({super.key});

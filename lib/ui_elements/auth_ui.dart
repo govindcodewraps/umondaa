@@ -1,7 +1,7 @@
-import 'package:hardware_lo/custom/box_decorations.dart';
-import 'package:hardware_lo/custom/device_info.dart';
-import 'package:hardware_lo/helpers/shared_value_helper.dart';
-import 'package:hardware_lo/my_theme.dart';
+import 'package:umonda/custom/box_decorations.dart';
+import 'package:umonda/custom/device_info.dart';
+import 'package:umonda/helpers/shared_value_helper.dart';
+import 'package:umonda/my_theme.dart';
 import 'package:flutter/material.dart';
 
 import '../main.dart';

@@ -1,13 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/gestures.dart';
-import 'package:hardware_lo/app_config.dart';
-import 'package:hardware_lo/custom/toast_component.dart';
-import 'package:hardware_lo/helpers/shared_value_helper.dart';
-import 'package:hardware_lo/my_theme.dart';
-import 'package:hardware_lo/repositories/payment_repository.dart';
-import 'package:hardware_lo/screens/order_list.dart';
-import 'package:hardware_lo/screens/wallet.dart';
+import 'package:umonda/app_config.dart';
+import 'package:umonda/custom/toast_component.dart';
+import 'package:umonda/helpers/shared_value_helper.dart';
+import 'package:umonda/my_theme.dart';
+import 'package:umonda/repositories/payment_repository.dart';
+import 'package:umonda/screens/order_list.dart';
+import 'package:umonda/screens/wallet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -18,9 +18,11 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 class Seller_package_Screen extends StatefulWidget {
   double amount;
+  String package_id;
+
   String payment_type;
   String payment_method_key;
-  String package_id;
+
 
 
   Seller_package_Screen(
@@ -70,7 +72,8 @@ class _Seller_package_ScreenState extends State<Seller_package_Screen> {
 
     //"https://webcluestechnology.com/demo/erp/umonda/api/v2/stripe?payment_type=${widget.payment_type}&combined_order_id=${_combined_order_id}&amount=${widget.amount}&user_id=${user_id.$}";
     // "https://webcluestechnology.com/demo/erp/umonda/api/v2/stripe?payment_type=cart_payment&order_id=444&amount=1200&user_id=198";
-        "${AppConfig.BASE_URL}/stripe?payment_type=cart_payment&order_id=${_combined_order_id}&amount=${widget.amount}&user_id=${user_id.$}";
+        //"${AppConfig.BASE_URL}/stripe?payment_type=cart_payment&order_id=${_combined_order_id}&amount=${widget.amount}&user_id=${user_id.$}";
+    "https://www.webcluestechnology.com/demo/erp/umonda/api/v2/stripe?payment_type=seller_package_payment&order_id=0&amount=${widget.amount}&user_id=${user_id.$}&package_id=${widget.package_id}";
 
     _webViewController
       ..setJavaScriptMode(JavaScriptMode.unrestricted)

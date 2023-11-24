@@ -1,10 +1,10 @@
-import 'package:hardware_lo/custom/box_decorations.dart';
-import 'package:hardware_lo/helpers/system_config.dart';
-import 'package:hardware_lo/my_theme.dart';
-import 'package:hardware_lo/screens/digital_product/digital_product_details.dart';
+import 'package:umonda/custom/box_decorations.dart';
+import 'package:umonda/helpers/system_config.dart';
+import 'package:umonda/my_theme.dart';
+import 'package:umonda/screens/digital_product/digital_product_details.dart';
 import 'package:flutter/material.dart';
-import 'package:hardware_lo/screens/product_details.dart';
-import 'package:hardware_lo/app_config.dart';
+import 'package:umonda/screens/product_details.dart';
+import 'package:umonda/app_config.dart';
 class DigitalProductCard extends StatefulWidget {
 
   int id;

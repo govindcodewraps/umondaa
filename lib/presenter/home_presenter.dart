@@ -149,6 +149,7 @@ class HomePresenter extends ChangeNotifier {
 
   Future<void> onRefresh() async {
     reset();
+
     fetchAll();
   }
 

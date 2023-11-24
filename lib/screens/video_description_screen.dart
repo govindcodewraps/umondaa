@@ -1,5 +1,5 @@
-import 'package:hardware_lo/helpers/shared_value_helper.dart';
-import 'package:hardware_lo/my_theme.dart';
+import 'package:umonda/helpers/shared_value_helper.dart';
+import 'package:umonda/my_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

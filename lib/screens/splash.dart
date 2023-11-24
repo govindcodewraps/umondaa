@@ -1,14 +1,14 @@
 
 import 'dart:ui';
 
-import 'package:hardware_lo/app_config.dart';
-import 'package:hardware_lo/my_theme.dart';
-import 'package:hardware_lo/screens/main.dart';
+import 'package:umonda/app_config.dart';
+import 'package:umonda/my_theme.dart';
+import 'package:umonda/screens/main.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
 import 'dart:async';
 import 'package:flutter/services.dart';
-import 'package:hardware_lo/helpers/shared_value_helper.dart';
+import 'package:umonda/helpers/shared_value_helper.dart';
 
 class Splash extends StatefulWidget {
   @override

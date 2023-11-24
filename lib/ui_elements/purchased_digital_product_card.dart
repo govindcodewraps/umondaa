@@ -2,11 +2,11 @@ import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
 
-import 'package:hardware_lo/app_config.dart';
-import 'package:hardware_lo/custom/box_decorations.dart';
-import 'package:hardware_lo/custom/toast_component.dart';
-import 'package:hardware_lo/helpers/shared_value_helper.dart';
-import 'package:hardware_lo/my_theme.dart';
+import 'package:umonda/app_config.dart';
+import 'package:umonda/custom/box_decorations.dart';
+import 'package:umonda/custom/toast_component.dart';
+import 'package:umonda/helpers/shared_value_helper.dart';
+import 'package:umonda/my_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:path_provider/path_provider.dart';

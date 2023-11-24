@@ -1,8 +1,8 @@
-import 'package:hardware_lo/custom/device_info.dart';
-import 'package:hardware_lo/custom/useful_elements.dart';
+import 'package:umonda/custom/device_info.dart';
+import 'package:umonda/custom/useful_elements.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hardware_lo/my_theme.dart';
+import 'package:umonda/my_theme.dart';
 import 'dart:ui';
 import 'package:intl/intl.dart' as intl;
 import 'package:flutter/painting.dart';
@@ -10,10 +10,10 @@ import 'package:flutter_chat_bubble/bubble_type.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'dart:async';
 import 'package:flutter_chat_bubble/clippers/chat_bubble_clipper_5.dart';
-import 'package:hardware_lo/app_config.dart';
-import 'package:hardware_lo/repositories/chat_repository.dart';
-import 'package:hardware_lo/helpers/shimmer_helper.dart';
-import 'package:hardware_lo/helpers/shared_value_helper.dart';
+import 'package:umonda/app_config.dart';
+import 'package:umonda/repositories/chat_repository.dart';
+import 'package:umonda/helpers/shimmer_helper.dart';
+import 'package:umonda/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shimmer/shimmer.dart';
 

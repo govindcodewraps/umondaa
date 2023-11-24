@@ -7,7 +7,7 @@ import '../../helpers/shimmer_helper.dart';
 import '../../presenter/home_presenter.dart';
 import '../../ui_elements/product_card.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:hardware_lo/custom/useful_elements.dart';
+import 'package:umonda/custom/useful_elements.dart';
 
 
 import 'new_home_presenter.dart';
