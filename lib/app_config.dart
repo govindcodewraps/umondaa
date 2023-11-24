@@ -21,11 +21,11 @@ class AppConfig {
   //configure this
   static const bool HTTPS = false;
 
- // static const DOMAIN_PATH = "192.168.6.1/ecommerce"; //localhost
+  // static const DOMAIN_PATH = "192.168.6.1/ecommerce"; //localhost
   //static const DOMAIN_PATH = "https://hardwarelo.com"; //localhost
 
 
-  static const DOMAIN_PATH = "https://umonda.com"; //localhost
+        static const DOMAIN_PATH = "https://umonda.com"; //localhost
          //static const DOMAIN_PATH = "https://webcluestechnology.com/demo/erp/umonda"; //localhost
 
 // directly inside the public folder
