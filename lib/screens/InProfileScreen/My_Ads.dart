@@ -75,161 +75,148 @@ class _My_adsScreenState extends State<My_adsScreen> {
     );
   }
 
-
-
-  Widget listview(){
-    return
-      FutureBuilder(
-          future: myadsapicall(),
-          builder: (context, snapshot) {
-
-            if (snapshot.hasData) {
-              // final thumbnailImage = snapshot.data.data[index].thumbnailImage;
-              return
-
-                SingleChildScrollView(
-                  child: Container(
-                    //height: 600,
-                      height: MediaQuery.of(context).size.height*1,
-                      padding: EdgeInsets.only(bottom: 90),
-                      child:
-                      Column(
-                        children: [
-
-
-                          Expanded(
-                            child: GridView.builder(
-                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2, // You can change this number based on the number of columns you want
-                              ),
-                              itemCount: snapshot.data.data.length,
-                              itemBuilder: (context, index) {
-                                final thumbnailImage = snapshot.data.data[index].thumbnailImage;
-                                return InkWell(
-                                  onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Edit_placead(Product_ID:product_Id,)));
-                                    print("Govind >>>>>>>>>>>>>>");
-                                    product_Id = snapshot.data.data[index].id.toString();
-                                    print("print product id ${product_Id}");
-                                  },
-                                  child: Container(
-
-                                    padding: EdgeInsets.all(10),
-                                    child: Stack(
-                                      children: [
-                                        Card(
-                                          elevation: 20,
-                                          child: Column(
-                                            children: [
-                                              Container(
-
-                                                // height: MediaQuery.of(context).size.height * 0.11,
-                                                // width: MediaQuery.of(context).size.width * 0.5,
-
-                                                height: MediaQuery.of(context).size.height * 0.11,
-                                                width: MediaQuery.of(context).size.width * 0.5,
-                                                child: thumbnailImage == null
-                                                    ? Image.asset("assets/silver.png", fit: BoxFit.fill)
-                                                    : Image.network(
-                                                  thumbnailImage,
-                                                  fit: BoxFit.fill,
-                                                ),
-
-                                              ),
-                                              SizedBox(height: 10),
-                                              Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    snapshot.data.data[index].name.toString(),
-                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
-                                                  ),
-                                                  SizedBox(height: 5),
-                                                  Text(
-                                                    snapshot.data.data[index].mainPrice.toString(),
-                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
+  Widget listview() {
+    return FutureBuilder(
+      future: myadsapicall(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Container(
+            child: Center(child: CircularProgressIndicator()),
+          );
+        } else if (snapshot.hasError) {
+          return Container(
+            child: Center(
+              child: Text('Error: ${snapshot.error}'),
+            ),
+          );
+        } else if (!snapshot.hasData || snapshot.data.data.isEmpty) {
+          return Container(
+            child: Center(
+              child: Text('No ads available.'),
+            ),
+          );
+        } else {
+          return SingleChildScrollView(
+            child: Container(
+              height: MediaQuery.of(context).size.height * 1,
+              padding: EdgeInsets.only(bottom: 90),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, // You can change this number based on the number of columns you want
+                      ),
+                      itemCount: snapshot.data.data.length,
+                      itemBuilder: (context, index) {
+                        final thumbnailImage = snapshot.data.data[index].thumbnailImage;
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => Edit_placead(Product_ID: product_Id)));
+                            print("Govind >>>>>>>>>>>>>>");
+                            product_Id = snapshot.data.data[index].id.toString();
+                            print("print product id ${product_Id}");
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(10),
+                            child: Stack(
+                              children: [
+                                Card(
+                                  elevation: 20,
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: MediaQuery.of(context).size.height * 0.11,
+                                        width: MediaQuery.of(context).size.width * 0.5,
+                                        child: thumbnailImage == null
+                                            ? Image.asset("assets/silver.png", fit: BoxFit.fill)
+                                            : Image.network(
+                                          thumbnailImage,
+                                          fit: BoxFit.fill,
                                         ),
-
-                                        Positioned(
-                                          right: 1,
-                                          child: GestureDetector(
-                                            onTap: (){
+                                      ),
+                                      SizedBox(height: 10),
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            snapshot.data.data[index].name.toString(),
+                                            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+                                          ),
+                                          SizedBox(height: 5),
+                                          Text(
+                                            snapshot.data.data[index].mainPrice.toString(),
+                                            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Positioned(
+                                  right: 1,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      product_Id = snapshot.data.data[index].id.toString();
+                                      print("print product iddddddd ${product_Id}");
+                                    },
+                                    child: InkWell(
+                                      onTap: () {
+                                        product_Id = snapshot.data.data[index].id.toString();
+                                        print("print product id Delete ${product_Id}");
+                                        deleteapicall(product_Id);
+                                      },
+                                      child: Center(
+                                        child: PopupMenuButton<int>(
+                                          itemBuilder: (context) {
+                                            return [
+                                              PopupMenuItem<int>(
+                                                value: 0,
+                                                child: Text("Edit"),
+                                              ),
+                                              PopupMenuItem<int>(
+                                                value: 1,
+                                                child: Text("Delete"),
+                                              ),
+                                            ];
+                                          },
+                                          onSelected: (value) {
+                                            if (value == 0) {
                                               product_Id = snapshot.data.data[index].id.toString();
-                                              print("print product iddddddd ${product_Id}");
-                                            },
-                                            child:  InkWell(
-                                                onTap: (){
-                                                  product_Id = snapshot.data.data[index].id.toString();
-                                                  print("print product id Delete ${product_Id}");
-                                                  deleteapicall(product_Id);
-                                                },
-                                                child:
-                                                Center(
-                                                  child: PopupMenuButton<int>(
-                                                    itemBuilder: (context) {
-                                                      return [
-                                                        PopupMenuItem<int>(
-                                                            value: 0,
-                                                            child: Text("Edit")
-                                                          //Icon(Icons.edit,color: Colors.green,),
-                                                        ),
-                                                        PopupMenuItem<int>(
-                                                            value: 1,
-                                                            child: Text("Delete")
-                                                          //Icon(Icons.delete,color: Colors.red,),
-                                                        ),
-                                                      ];
-                                                    },
-                                                    onSelected: (value) {
-                                                      if (value == 0) {
-                                                        product_Id = snapshot.data.data[index].id.toString();
-                                                        print("print product id Edit ${product_Id}");
-                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Edit_placead(Product_ID:product_Id,),));
-                                                        print("Edit  menu is selected.");
-                                                        // Handle edit action
-                                                      } else if (value == 1) {
-                                                        product_Id = snapshot.data.data[index].id.toString();
-                                                        print("print product id Delete ${product_Id}");
-                                                        deleteapicall(product_Id);
-                                                        // Handle delete action
-                                                      }
-                                                    },
-                                                    child: Icon(Icons.more_vert), // Add an icon to trigger the popup
-                                                    offset: Offset(0, 0,), // Optional: Adjust the position of the popup
-                                                    //color: Colors.transparent, // Set the background color to transparent
-                                                    elevation: 0,
-                                                    //padding: EdgeInsets.only(left: 10),
-                                                    // Optional: Remove the shadow
-                                                  ),
-                                                )
-                                            ),
-                                          ),
+                                              print("print product id Edit ${product_Id}");
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => Edit_placead(Product_ID: product_Id)));
+                                              print("Edit  menu is selected.");
+                                            } else if (value == 1) {
+                                              product_Id = snapshot.data.data[index].id.toString();
+                                              print("print product id Delete ${product_Id}");
+                                              deleteapicall(product_Id);
+                                            }
+                                          },
+                                          child: Icon(Icons.more_vert),
+                                          offset: Offset(0, 0,),
+                                          elevation: 0,
                                         ),
-                                      ],
+                                      ),
                                     ),
                                   ),
-                                );
-                              },
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      )
+                        );
+                      },
+                    ),
                   ),
-                );
-            }
-            else{
-              return
-                Container(
-                    child: Center(child: CircularProgressIndicator()));
-            }
-          }
-      );
+                ],
+              ),
+            ),
+          );
+        }
+      },
+    );
   }
+
+
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(

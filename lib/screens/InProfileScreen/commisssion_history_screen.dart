@@ -52,189 +52,79 @@ class _CommissionHistoryScreenState extends State<CommissionHistoryScreen> {
 
 
 
-
   Widget listview() {
-    return
-      FutureBuilder(
-          future: paymentdata(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return
-                Container(
+    return FutureBuilder(
+      future: paymentdata(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Container(
+            child: Center(child: CircularProgressIndicator()),
+          );
+        } else if (snapshot.hasError) {
+          return Container(
+            child: Center(
+              child: Text('Error: ${snapshot.error}'),
+            ),
+          );
+        } else if (!snapshot.hasData || snapshot.data.data.isEmpty) {
+          return Container(
+            child: Center(
+              child: Text('No data available.'),
+            ),
+          );
+        } else {
+          return Container(
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemBuilder: (context, int index) {
+                return Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Container(
+                        padding: EdgeInsets.only(top: 10, bottom: 10),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: [BoxShadow(blurRadius: 10, color: Colors.grey, offset: Offset(1, 3))],
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // ... your existing code ...
 
-                  //padding: EdgeInsets.only(top: 23),
-                  child:
+                                // Example: Display "No data" message if id is null
+                                if (snapshot.data.data[index].id == null)
+                                  Text("No data", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
+                                // Add similar checks for other fields
 
-                  ListView.builder(
-
-                    shrinkWrap: true,
-                    //physics:  NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, int index) {
-                      return
-
-
-                        Column(
-                        //crossAxisAlignment: CrossAxisAlignment.end,
-                        //mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-
-                          Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Container(
-                              padding: EdgeInsets.only(top: 10,bottom: 10),
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(12),
-                                  //border: Border.all(color: MyTheme.accent_color),
-                                  boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,offset: Offset(1,3))]
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                    Container(
-                                        padding: EdgeInsets.only(left: 7),
-                                        width:MediaQuery.of(context).size.width*0.33,
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(8),
-                                         // //color: Colors.grey[300],
-
-                                          //borderRadius: BorderRadius.circular(12),
-                                            //border: Border.all(color: MyTheme.accent_color),
-
-                                          //border: Border.all(color: MyTheme.accent_color)
-                                        ),
-                                        child: Text("Id :", style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
-
-                                   SizedBox(height:4),
-                                    Container(
-                                      padding: EdgeInsets.only(left: 7),
-                                      width:MediaQuery.of(context).size.width*0.33,
-                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                          //color: Colors.grey[300],
-                                          //border: Border.all(color: MyTheme.accent_color)
-                      ),
-                                        child: Text("Order ID :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
-                                      SizedBox(height:4),
-                                    Container(
-                                        padding: EdgeInsets.only(left: 7),
-                                        width:MediaQuery.of(context).size.width*0.33,
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                          //color: Colors.grey[300],
-                                          //border: Border.all(color: MyTheme.accent_color)
-                                        ),
-                                        child: Text("User_ID :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
-                                      SizedBox(height:4),
-                                     Container(
-                                        padding: EdgeInsets.only(left: 7),
-                                        width:MediaQuery.of(context).size.width*0.33,
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                          //color: Colors.grey[300],
-                                          //border: Border.all(color: MyTheme.accent_color)
-                                        ),
-                                        child: Text("Seller Earning :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
-                                      SizedBox(height:4),
-                                    Container(
-                                        padding: EdgeInsets.only(left: 7),
-                                        width:MediaQuery.of(context).size.width*0.33,
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                          //color: Colors.grey[300],
-                                          //border: Border.all(color: MyTheme.accent_color)
-                                        ),
-                                        child: Text("Created At :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
-                                      SizedBox(height:4),
-                                      Container(
-                                        padding: EdgeInsets.only(left: 7),
-                                        width:MediaQuery.of(context).size.width*0.33,
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                          //color: Colors.grey[300],
-                                          //border: Border.all(color: MyTheme.accent_color)
-                                        ),
-                                        child: Text("updated At :",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
-
-                                  ],),
-                                  SizedBox(width: 8,),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                    Container(
-                                        padding: EdgeInsets.only(left: 7),
-                                        width:MediaQuery.of(context).size.width*0.5,
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                          //color: Colors.grey[300],
-                                          //border: Border.all(color: MyTheme.accent_color)
-                                        ),
-                                        child: Text(snapshot.data.data[index].id.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
-                                      SizedBox(height:4),
-                                    Container(
-                                        padding: EdgeInsets.only(left: 7),
-                                        width:MediaQuery.of(context).size.width*0.5,
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                          //color: Colors.grey[300],
-                                          //border: Border.all(color: MyTheme.accent_color)
-                                        ),
-                                        child: Text(snapshot.data.data[index].orderId.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
-                                      SizedBox(height:4),
-                                    Container(
-                                        padding: EdgeInsets.only(left: 7),
-                                        width:MediaQuery.of(context).size.width*0.5,
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                          //color: Colors.grey[300],
-                                          //border: Border.all(color: MyTheme.accent_color)
-                                        ),
-                                        child: Text(snapshot.data.data[index].userId.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
-                                      SizedBox(height:4),
-                                      Container(
-                                        padding: EdgeInsets.only(left: 7),
-                                        width:MediaQuery.of(context).size.width*0.5,
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                          //color: Colors.grey[300],
-                                          //border: Border.all(color: MyTheme.accent_color)
-                                        ),
-                                        child: Text(snapshot.data.data[index].sellerEarning.toString(),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
-                                      SizedBox(height:4),
-                                      Container(
-                                        padding: EdgeInsets.only(left: 7),
-                                        width:MediaQuery.of(context).size.width*0.5,
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                          //color: Colors.grey[300],
-                                          //border: Border.all(color: MyTheme.accent_color)
-                                        ),
-                                        child: Text(snapshot.data.data[index].createdAt.toString().substring(0,10),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
-                                      SizedBox(height:4),
-                                      Container(
-                                        padding: EdgeInsets.only(left: 7),
-                                        width:MediaQuery.of(context).size.width*0.5,
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                          //color: Colors.grey[300],
-                                          //border: Border.all(color: MyTheme.accent_color)
-                                        ),
-                                        child: Text(snapshot.data.data[index].updatedAt.toString().substring(0,10),style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500))),
-
-                                  ],),
-                                ],
-                              ),
+                              ],
                             ),
-                          ),
-
-                          //SizedBox(height: 25,),
-
-                        ],);
-                    },
-                    itemCount: snapshot.data.data.length,
-                  ),
+                            SizedBox(width: 8),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // ... your existing code ...
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 );
-            }
-            else{
-              return
-                Container(
-                    child: Center(child: CircularProgressIndicator()));
-            }
-          }
-      );
+              },
+              itemCount: snapshot.data.data.length,
+            ),
+          );
+        }
+      },
+    );
   }
+
 
 
   Future<CommisionHistoryModel> paymentdata() async {

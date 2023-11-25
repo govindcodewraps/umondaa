@@ -70,7 +70,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
             var appointmentsListModel =
             snapshot.data as PaymenthistoryModel;
 
-            return Container(
+            return
+              Container(
               //padding: EdgeInsets.only(top: 23),
               child: ListView.builder(
                 shrinkWrap: true,

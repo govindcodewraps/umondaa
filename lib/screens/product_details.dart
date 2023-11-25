@@ -1591,11 +1591,45 @@ class _ProductDetailsState extends State<ProductDetails>
               ),
                       if (_productDetails !=null)
                         if( _productDetails.current_stock == 0)
-                      Center(
-                        child: Positioned(
-                            left: 20,
-                            top: 30,
-                            child: Text("Out of stock",style: TextStyle(color: Colors.grey,fontSize: 49,fontWeight: FontWeight.w700),)),
+                      Positioned(
+                          left: 10,
+                          right: 10,
+                          //top: 30,
+                          bottom: 10,
+
+                          child:
+                          SizedBox(
+                            height: 45,
+                            width:MediaQuery.of(context).size.width*1,
+                            child:
+                            ElevatedButton(
+
+                              style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all<Color>(MyTheme.golden),
+
+                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+
+                                          borderRadius: BorderRadius.circular(12.0),
+                                          side: BorderSide(color:MyTheme.golden)
+                                      )
+                                  )
+                              ),
+
+                              onPressed: (){
+                                //onPressUpdatePassword();
+                              },
+                              child:Text(
+                              "Out Of Stock",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600),
+                              ),),
+                          ),
+
+                          //ElevatedButton(onPressed: (){}, child: Text("Out of stock",style: TextStyle(color: Colors.grey,fontSize: 49,fontWeight: FontWeight.w700),))
+                        //Text("Out of stock",style: TextStyle(color: Colors.grey,fontSize: 49,fontWeight: FontWeight.w700),)
                       ),
                     ],
                   ),
