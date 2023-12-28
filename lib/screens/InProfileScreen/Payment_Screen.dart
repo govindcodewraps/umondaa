@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:umonda/my_theme.dart';
 import '../../Models/payment_model.dart';
+import '../../app_config.dart';
 import '../../helpers/shared_value_helper.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -1130,7 +1131,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
     };
 
     // Define the API endpoint
-     String url = "https://umonda.com/api/v2/payment-history/${user_id.$}";
+
+    // String url = "https://umonda.com/api/v2/payment-history/${user_id.$}";
+     String url = "${AppConfig.BASE_URL}/payment-history/${user_id.$}";
     //String url = "https://umonda.com/api/v2/payment-history/138";
 
     try {
@@ -1139,7 +1142,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
       // Handle the response
       if (response.statusCode == 200) {
-        print("user iddddd${user_id.$}");
+        print("user idnbd${user_id.$}");
         print("Payments screen data ${response.data}");
         return PaymenthistoryModel.fromJson(response.data);
 
@@ -1150,7 +1153,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
      else if(response.statusCode == 401){
 
         print("500 Internal Server Error........... ");
-        print("user iddddd${user_id.$}");
+        print("user id${user_id.$}");
         print(response.data);
       }
 

@@ -35,6 +35,7 @@ class AppConfig {
   static const String PROTOCOL = HTTPS ? "https://" : "http://";
   static const String RAW_BASE_URL = "${DOMAIN_PATH}";
   static const String BASE_URL = "${RAW_BASE_URL}/${API_ENDPATH}";
+  //https://umonda.com/api/v2/notifications'
 
   @override
   String toString() {

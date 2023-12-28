@@ -621,6 +621,8 @@ class _LoginState extends State<Login> {
                                     TextStyle(color: MyTheme.accent_color),
                                     text: " Terms Conditions",
                                   ),
+
+
                                   TextSpan(
                                     text: " &",
                                   ),

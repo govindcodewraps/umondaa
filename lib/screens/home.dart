@@ -2414,102 +2414,103 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
 
 
+  //
+  // Widget notificationcount() {
+  //   bool isExpanded = false;
+  //   return FutureBuilder(
+  //     future: notification_count(),
+  //     builder: (context, snapshot) {
+  //       print("object");
+  //
+  //       if (snapshot.connectionState == ConnectionState.waiting) {
+  //         return Container(
+  //           child: Center(child: CircularProgressIndicator()),
+  //         );
+  //       } else if (snapshot.hasError) {
+  //         return Container(
+  //           child: Center(child: Text("No more notification")),
+  //         );
+  //       } else if (snapshot.hasData) {
+  //         if (snapshot.data != null && snapshot.data.data != null) {
+  //           print(snapshot.data.data.length);
+  //           print("object");
+  //
+  //           return Container(
+  //             padding: EdgeInsets.only(left: 16, right: 16),
+  //             child: Column(
+  //               children: [
+  //                 ListView.separated(
+  //                   shrinkWrap: true,
+  //                   physics: const NeverScrollableScrollPhysics(),
+  //                   itemBuilder: (context, int index) {
+  //                     return
+  //
+  //                       InkWell(
+  //                         onTap: () {
+  //                           print("govind kkk");
+  //                         },
+  //                         child: Container(
+  //                           decoration: BoxDecoration(
+  //                             color: Colors.white,
+  //                             borderRadius: BorderRadius.circular(12.0),
+  //                             boxShadow: [
+  //                               BoxShadow(
+  //                                 color: Colors.black.withOpacity(0.2),
+  //                                 spreadRadius: 2,
+  //                                 blurRadius: 4,
+  //                                 offset: Offset(0, 3),
+  //                               ),
+  //                             ],
+  //                           ),
+  //                           child: Container(
+  //                             padding: EdgeInsets.all(8.0),
+  //                             child: Column(
+  //                               children: [
+  //                                 Row(
+  //                                   mainAxisAlignment:
+  //                                   MainAxisAlignment.spaceBetween,
+  //                                   children: [
+  //                                     Row(
+  //                                       children: [
+  //                                         Text("Notification Count:"),
+  //                                         SizedBox(width: 5,),
+  //                                        // Text(snapshot.data.unreadNotificationCount.toString()),
+  //                                       ],
+  //                                     ),
+  //                                   ],
+  //                                 ),
+  //
+  //
+  //
+  //                               ],
+  //                             ),
+  //                           ),
+  //                         ),
+  //                       );
+  //                   },
+  //                   separatorBuilder: (context, index) {
+  //                     return SizedBox(height: 16);
+  //                   },
+  //                   itemCount:0
+  //                   //snapshot.data.length,
+  //                 ),
+  //               ],
+  //             ),
+  //           );
+  //         } else {
+  //           return Container(
+  //             child: Center(child: Text("No data available")),
+  //           );
+  //         }
+  //       } else {
+  //         return Container(
+  //           child: Center(child: CircularProgressIndicator()),
+  //         );
+  //       }
+  //     },
+  //   );
+  // }
 
-  Widget notificationcount() {
-    bool isExpanded = false;
-    return FutureBuilder(
-      future: notification_count(),
-      builder: (context, snapshot) {
-        print("object");
-
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Container(
-            child: Center(child: CircularProgressIndicator()),
-          );
-        } else if (snapshot.hasError) {
-          return Container(
-            child: Center(child: Text("No more notification")),
-          );
-        } else if (snapshot.hasData) {
-          if (snapshot.data != null && snapshot.data.data != null) {
-            print(snapshot.data.data.length);
-            print("object");
-
-            return Container(
-              padding: EdgeInsets.only(left: 16, right: 16),
-              child: Column(
-                children: [
-                  ListView.separated(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, int index) {
-                      return
-
-                        InkWell(
-                          onTap: () {
-                            print("govind kkk");
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12.0),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.2),
-                                  spreadRadius: 2,
-                                  blurRadius: 4,
-                                  offset: Offset(0, 3),
-                                ),
-                              ],
-                            ),
-                            child: Container(
-                              padding: EdgeInsets.all(8.0),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Text("Notification Count:"),
-                                          SizedBox(width: 5,),
-                                         // Text(snapshot.data.unreadNotificationCount.toString()),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-
-
-
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                    },
-                    separatorBuilder: (context, index) {
-                      return SizedBox(height: 16);
-                    },
-                    itemCount:0
-                    //snapshot.data.length,
-                  ),
-                ],
-              ),
-            );
-          } else {
-            return Container(
-              child: Center(child: Text("No data available")),
-            );
-          }
-        } else {
-          return Container(
-            child: Center(child: CircularProgressIndicator()),
-          );
-        }
-      },
-    );
-  }
   Future<NotificationCountModel> notification_count() async {
     var headers = {
       'Content-Type': 'application/json',

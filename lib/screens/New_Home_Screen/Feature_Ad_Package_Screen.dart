@@ -296,7 +296,8 @@ class _Feature_ad_package_ScreenState extends State<Feature_ad_package_Screen> {
                                     Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
                                   } else {
                                     //Navigator.push(context, MaterialPageRoute(builder: (context) => Seller_package_Screen()));
-                                    alertDialog(context);
+
+
 
                                   }
                                 },

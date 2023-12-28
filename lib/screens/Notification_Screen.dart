@@ -27,6 +27,7 @@ class _Notification_ScreenState extends State<Notification_Screen> {
   void initState() {
     // TODO: implement initState
      notification_list();
+
     super.initState();
   }
   @override
@@ -143,10 +144,12 @@ class _Notification_ScreenState extends State<Notification_Screen> {
       "id":user_id.$,
     });
     var dio = Dio();
+
     var response = await dio.request(
-      //"${AppConfig.RAW_BASE_URL}/notifications",
+      "${AppConfig.BASE_URL}/notifications",
        //'https://webcluestechnology.com/demo/erp/umonda/api/v2/notifications',
-       'https://umonda.com/api/v2/notifications',
+       //'https://umonda.com/api/v2/notifications',
+
 
       options: Options(
         method: 'POST',
@@ -155,6 +158,10 @@ class _Notification_ScreenState extends State<Notification_Screen> {
       data: data,
 
     );
+    print("Request URL aaaa: ${AppConfig.BASE_URL}/notifications");
+
+
+
 
     if (response.statusCode == 200) {
       // print(json.encode(response.data));
