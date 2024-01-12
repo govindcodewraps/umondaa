@@ -1,7 +1,7 @@
 import UIKit
 import Flutter
 import flutter_downloader
-import GoogleMaps
+//import GoogleMaps
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
@@ -9,7 +9,7 @@ import GoogleMaps
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-      GMSServices.provideAPIKey("AIzaSyACtt1uT3NDCjqCAQtJwMDEx66R095M24M")
+     // GMSServices.provideAPIKey("AIzaSyACtt1uT3NDCjqCAQtJwMDEx66R095M24M")
     GeneratedPluginRegistrant.register(with: self)
     FlutterDownloaderPlugin.setPluginRegistrantCallback(registerPlugins)
 
