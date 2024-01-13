@@ -61,7 +61,8 @@ class _SplashScreenState extends State<SplashScreen> {
     return Container(
       width: DeviceInfo(context).height,
       height: DeviceInfo(context).height,
-      color:  MyTheme.splash_screen_color,
+      color:  Colors.white,
+      //color:  MyTheme.splash_screen_color,
       child: InkWell(
         child: Stack(
 
@@ -88,8 +89,8 @@ class _SplashScreenState extends State<SplashScreen> {
                     child: Hero(
                       tag: "splashscreenImage",
                       child: Container(
-                        height: 130,
-                        width: 130,
+                        height: 170,
+                        width: 210,
                         padding: EdgeInsets.symmetric(horizontal: 12,vertical: 12),
                         decoration: BoxDecoration(
                           color: MyTheme.white,
@@ -126,22 +127,22 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
-            Positioned.fill(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 51.0),
-                  child: Text(
-                    AppConfig.copyright_text,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 13.0,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            // Positioned.fill(
+            //   child: Align(
+            //     alignment: Alignment.bottomCenter,
+            //     child: Padding(
+            //       padding: const EdgeInsets.only(bottom: 51.0),
+            //       child: Text(
+            //         AppConfig.copyright_text,
+            //         style: TextStyle(
+            //           fontWeight: FontWeight.w400,
+            //           fontSize: 13.0,
+            //           color: Colors.white,
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
 /*
             Padding(
               padding: const EdgeInsets.only(top: 120.0),
