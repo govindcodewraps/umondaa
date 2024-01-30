@@ -93,21 +93,54 @@ class _OtpState extends State<Otp> {
               child: Image.asset(
                   "assets/splash_login_registration_background_image.png"),
             ),
+
+
             Container(
               width: double.infinity,
               child: SingleChildScrollView(
                   child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  //Icon(Icons.keyboard_backspace_rounded,color: Colors.red,),
+
+                  // Row(children: [
+                  //   Icon(Icons.keyboard_backspace_rounded,color: Colors.red,),
+                  // ],),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(top: 40.0, bottom: 15),
+                  //   child: Container(
+                  //     width: 75,
+                  //     height: 75,
+                  //     child:
+                  //         Image.asset('assets/umondalogo.png'),
+                  //   ),
+                  // ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 40.0, bottom: 15),
-                    child: Container(
-                      width: 75,
-                      height: 75,
-                      child:
+                    padding:  EdgeInsets.only(left: 16,right: 16),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                      InkWell(
+                          onTap:(){
+                            Navigator.pop(context);
+                         },
+                          child: Icon(Icons.keyboard_backspace_rounded,color: Colors.black,)),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 40.0, bottom: 15),
+                        child: Container(
+                          width: 75,
+                          height: 75,
+                          child:
                           Image.asset('assets/umondalogo.png'),
-                    ),
+                        ),
+                      ),
+                        //Icon(Icons.keyboard_backspace_rounded,color: Colors.red,),
+                       Text("       "),
+
+                      ],),
                   ),
+
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20.0),
                     child: Text(
@@ -137,6 +170,7 @@ class _OtpState extends State<Otp> {
                                 style: TextStyle(
                                     color: MyTheme.dark_grey, fontSize: 14))),
                   ),
+
                   Container(
                     width: _screen_width * (3 / 4),
                     child: Column(
@@ -160,6 +194,7 @@ class _OtpState extends State<Otp> {
                             ],
                           ),
                         ),
+
                         Padding(
                           padding: const EdgeInsets.only(top: 40.0),
                           child: Container(
@@ -207,7 +242,9 @@ class _OtpState extends State<Otp> {
                   ),
                 ],
               )),
-            )
+            ),
+            Icon(Icons.keyboard_backspace_rounded,color: Colors.red,),
+
           ],
         ),
       ),

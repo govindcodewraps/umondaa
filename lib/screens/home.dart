@@ -27,6 +27,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 import 'package:toast/toast.dart';
+import 'package:umonda/screens/login.dart';
+
 
 import '../custom/device_info.dart';
 import '../custom/toast_component.dart';
@@ -73,6 +75,11 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   Map savecount={};
   String notificationnumber="0";
 
+
+
+
+
+
   @override
   void initState() {
     notification_count();
@@ -88,6 +95,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       print("1- home.dart, is_logged_in : ${is_logged_in}");
       print("2- home.dart, is_logged_in : ${is_logged_in.$}");
     }
+
   }
 
   change() {
@@ -1175,21 +1183,82 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 // }));
               },
             ),
+
+            is_logged_in.$ == false ?
+            ListTile(
+              leading: Icon(
+                Icons.login,color: Colors.green,
+              ),
+              title:  Text('LogIn',style: TextStyle(color:Colors.green),),
+              onTap: () {
+
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return Login();
+                }));
+              },
+            )
+                :
+
             ListTile(
               leading: Icon(
                 Icons.logout,color: Colors.red,
               ),
-              title:  Text('Log Out',style: TextStyle(color:Colors.red),),
+              title:  Text('LogOut',style: TextStyle(color:Colors.red),),
               onTap: () {
-                Navigator.pop(context);
-                AuthHelper().clearUserData();
-                Provider.of<HomePresenter>(context,listen: false).dispose();
 
-                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
-                  return Main();
-                }), (route) => false);
+                Navigator.pop(context);
+                      AuthHelper().clearUserData();
+                      Provider.of<HomePresenter>(context,listen: false).dispose();
+
+                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
+                        return Main();
+                      }), (route) => false);
               },
-            ),
+            )
+
+
+
+            //
+            // is_logged_in.$ == false ?
+            //
+            // ListTile(
+            //   leading: Icon(
+            //     Icons.logout,color: Colors.red,
+            //   ),
+            //   title:
+            //
+            //   is_logged_in.$ == false ?
+            //   ///Login()
+            //   InkWell(
+            //       onTap: ()
+            //       {
+            //         Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
+            //       },
+            //       child: Text("Login"))
+            //       :
+            //   Text('Log Out',style: TextStyle(color:Colors.red),),
+            //   onTap: () {
+            //     Navigator.pop(context);
+            //     AuthHelper().clearUserData();
+            //     Provider.of<HomePresenter>(context,listen: false).dispose();
+            //
+            //     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
+            //       return Main();
+            //     }), (route) => false);
+            //   },
+            // ):              InkWell(
+            //     onTap: () {
+            //       Navigator.pop(context);
+            //       AuthHelper().clearUserData();
+            //       Provider.of<HomePresenter>(context,listen: false).dispose();
+            //
+            //       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
+            //         return Main();
+            //       }), (route) => false);
+            //     },
+            //     child: Text('Log Out',style: TextStyle(color:Colors.red),)),
+
+
           ],
 
         ),
@@ -1253,6 +1322,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           mainAxisSpacing: 14,
           crossAxisSpacing: 14,
           itemCount: homeData.allProductList.length =4,
+         // itemCount: homeData.allProductList.length,
           shrinkWrap: true,
           padding: EdgeInsets.only(top: 20.0, bottom: 1, left: 18, right: 18),
           physics: NeverScrollableScrollPhysics(),

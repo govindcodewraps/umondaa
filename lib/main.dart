@@ -1,4 +1,9 @@
+//import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'firebase_options.dart';
+
+
 import 'package:umonda/other_config.dart';
 import 'package:umonda/presenter/cart_counter.dart';
 import 'package:umonda/presenter/currency_presenter.dart';
@@ -38,9 +43,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:umonda/providers/locale_provider.dart';
-import 'firebase_options.dart';
 import 'lang_config.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'screens/auction_products.dart';
 import 'screens/auction_products_details.dart';
 import 'screens/brand_products.dart';
@@ -62,71 +65,98 @@ import 'screens/seller_details.dart';
 import 'screens/seller_products.dart';
 
 
-main() async {
 
+// main() async {
+//
+//   //WidgetsFlutterBinding.ensureInitialized();
+//
+//   //WidgetsFlutterBinding.ensureInitialized();
+//
+//   WidgetsFlutterBinding.ensureInitialized();
+//   //for ios
+//   // await
+//    //Firebase.initializeApp();
+//
+//    //for Android
+//
+//   await Firebase.initializeApp(
+//     options: DefaultFirebaseOptions.currentPlatform,
+//   );
+//
+//
+//   // await Firebase.initializeApp(
+//   //   options: DefaultFirebaseOptions.currentPlatform,
+//   // );
+//
+//
+//
+// /*  FlutterDownloader.initialize(
+//       debug: true,
+//       // optional: set to false to disable printing logs to console (default: true)
+//       ignoreSsl:
+//           true //
+//     // : set to false to disable working with http links (default: false)
+//       );
+//   SystemChrome.setPreferredOrientations([
+//     DeviceOrientation.portraitUp,
+//     DeviceOrientation.portraitDown,
+//   ]);*/
+//
+//   // AddonsHelper().setAddonsData();
+//   // BusinessSettingHelper().setBusinessSettingData();
+//   // app_language.load();
+//   // app_mobile_language.load();
+//   // app_language_rtl.load();
+//   //
+//   // access_token.load().whenComplete(() {
+//   //   AuthHelper().fetch_and_set();
+//   // });
+//
+// /*
+//   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+//     statusBarColor: Colors.transparent,
+//     systemNavigationBarDividerColor: Colors.transparent,
+//   ));
+// */
+//
+//
+//
+//
+//
+//
+//
+//
+//   // await Firebase.initializeApp(
+//   //   options: DefaultFirebaseOptions.currentPlatform,
+//   // );
+//
+//
+//
+//   runApp(
+//    // SharedValue.wrapApp(
+//       MyApp(),
+//     //),
+//   );
+// }
+
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+ // await Firebase.initializeApp();
+  //for Android
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
-
-
-  FlutterDownloader.initialize(
-      debug: true,
-      // optional: set to false to disable printing logs to console (default: true)
-      ignoreSsl:
-          true //
-    // : set to false to disable working with http links (default: false)
-      );
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
-
-  // AddonsHelper().setAddonsData();
-  // BusinessSettingHelper().setBusinessSettingData();
-  // app_language.load();
-  // app_mobile_language.load();
-  // app_language_rtl.load();
-  //
-  // access_token.load().whenComplete(() {
-  //   AuthHelper().fetch_and_set();
-  // });
-
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-    systemNavigationBarDividerColor: Colors.transparent,
-  ));
-
-
-
-  WidgetsFlutterBinding.ensureInitialized();
-
-  // Initialize Firebase
-  await Firebase.initializeApp();
-
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
-
-  // Request permission for receiving push notifications (if not already granted)
-  NotificationSettings settings = await messaging.requestPermission();
-
-  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-    // Permission granted, fetch FCM token
-    String fcmToken = await messaging.getToken();
-    print("FCM Tokennnn: $fcmToken");
-  } else {
-    print("Permission denied for push notifications");
-  }
-
-
-
-  runApp(
-    SharedValue.wrapApp(
+  // runApp(MyApp());
+    runApp(
+      SharedValue.wrapApp(
       MyApp(),
     ),
-  );
+    );
 }
+
+
 
 class MyApp extends StatefulWidget {
   // This widget is the root of your application.
@@ -153,37 +183,46 @@ class _MyAppState extends State<MyApp> {
   //   );
   // }
 
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  // final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
   @override
   void initState() {
     super.initState();
 
-    Future.delayed(Duration.zero).then(
-          (value) async {
-        Firebase.initializeApp().then((value) {
-          if (OtherConfig.USE_PUSH_NOTIFICATION) {
-            Future.delayed(Duration(milliseconds: 10), () async {
-              PushNotificationService().initialise();
-            });
-          }
-        });
-      },
-    );
+    FirebaseMessaging.instance.getToken().then((newToken){
 
-    _firebaseMessaging.requestPermission();
+      print("FCM Token");
+      //tokenService.updateTokenOnServer(newToken);
+      print(newToken);
+      print("FCM Token");
 
-    _firebaseMessaging.getToken().then((String token) {
-      print("Device Token: $token");
     });
 
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print("Received message: $message");
-    });
+    // Future.delayed(Duration.zero).then(
+    //       (value) async {
+    //     Firebase.initializeApp().then((value) {
+    //       if (OtherConfig.USE_PUSH_NOTIFICATION) {
+    //         Future.delayed(Duration(milliseconds: 10), () async {
+    //           PushNotificationService().initialise();
+    //         });
+    //       }
+    //     });
+    //   },
+    // );
 
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print("Message opened: $message");
-    });
+    // _firebaseMessaging.requestPermission();
+    //
+    // _firebaseMessaging.getToken().then((String token) {
+    //   print("Device Token: $token");
+    // });
+
+    // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    //   print("Received message: $message");
+    // });
+
+    // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    //   print("Message opened: $message");
+    // });
   }
 
   @override
@@ -225,7 +264,7 @@ class _MyAppState extends State<MyApp> {
                 "/home":(context)=>Home(),
                 "/login":(context)=>Login(),
                 "/main":(context)=>Main(),
-                "/map_location":(context)=>MapLocation(),
+                //"/map_location":(context)=>MapLocation(),
                 "/messenger_list":(context)=>MessengerList(),
                 "/order_details":(context)=>OrderDetails(),
                 "/order_list":(context)=>OrderList(),

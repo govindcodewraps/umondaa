@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:umonda/custom/input_decorations.dart';
 import 'package:umonda/custom/intl_phone_input.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+//import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:umonda/screens/otp.dart';
 import 'package:umonda/screens/login.dart';
 import 'package:umonda/custom/toast_component.dart';
@@ -252,40 +252,40 @@ class _RegistrationState extends State<Registration> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Container(
-                        height: 36,
-                        child: CustomInternationalPhoneNumberInput(
-                          countries: countries_code,
-                          onInputChanged: (PhoneNumber number) {
-                            print(number.phoneNumber);
-                            setState(() {
-                              _phone = number.phoneNumber;
-                            });
-                          },
-                          onInputValidated: (bool value) {
-                            print(value);
-                          },
-                          selectorConfig: SelectorConfig(
-                            selectorType: PhoneInputSelectorType.DIALOG,
-                          ),
-                          ignoreBlank: false,
-                          autoValidateMode: AutovalidateMode.disabled,
-                          selectorTextStyle:
-                              TextStyle(color: MyTheme.font_grey),
-                          initialValue: PhoneNumber(
-                              isoCode: countries_code[0].toString()),
-                          textFieldController: _phoneNumberController,
-                          formatInput: true,
-                          keyboardType: TextInputType.numberWithOptions(
-                              signed: true, decimal: true),
-                          inputDecoration:
-                              InputDecorations.buildInputDecoration_phone(
-                                  hint_text: "01XXX XXX XXX"),
-                          onSaved: (PhoneNumber number) {
-                            //print('On Saved: $number');
-                          },
-                        ),
-                      ),
+                      // Container(
+                      //   height: 36,
+                      //   child: CustomInternationalPhoneNumberInput(
+                      //     countries: countries_code,
+                      //     onInputChanged: (PhoneNumber number) {
+                      //       print(number.phoneNumber);
+                      //       setState(() {
+                      //         _phone = number.phoneNumber;
+                      //       });
+                      //     },
+                      //     onInputValidated: (bool value) {
+                      //       print(value);
+                      //     },
+                      //     selectorConfig: SelectorConfig(
+                      //       selectorType: PhoneInputSelectorType.DIALOG,
+                      //     ),
+                      //     ignoreBlank: false,
+                      //     autoValidateMode: AutovalidateMode.disabled,
+                      //     selectorTextStyle:
+                      //         TextStyle(color: MyTheme.font_grey),
+                      //     initialValue: PhoneNumber(
+                      //         isoCode: countries_code[0].toString()),
+                      //     textFieldController: _phoneNumberController,
+                      //     formatInput: true,
+                      //     keyboardType: TextInputType.numberWithOptions(
+                      //         signed: true, decimal: true),
+                      //     inputDecoration:
+                      //         InputDecorations.buildInputDecoration_phone(
+                      //             hint_text: "01XXX XXX XXX"),
+                      //     onSaved: (PhoneNumber number) {
+                      //       //print('On Saved: $number');
+                      //     },
+                      //   ),
+                      // ),
                       GestureDetector(
                         onTap: () {
                           setState(() {

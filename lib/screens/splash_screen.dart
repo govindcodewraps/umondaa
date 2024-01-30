@@ -20,17 +20,17 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  PackageInfo _packageInfo = PackageInfo(
-    appName: AppConfig.app_name,
-    packageName: 'Unknown',
-    version: 'Unknown',
-    buildNumber: 'Unknown',
-  );
+  // PackageInfo _packageInfo = PackageInfo(
+  //   appName: AppConfig.app_name,
+  //   packageName: 'Unknown',
+  //   version: 'Unknown',
+  //   buildNumber: 'Unknown',
+  // );
 
   Future<void> _initPackageInfo() async {
     final PackageInfo info = await PackageInfo.fromPlatform();
     setState(() {
-      _packageInfo = info;
+      //_packageInfo = info;
     });
   }
 
@@ -61,8 +61,8 @@ class _SplashScreenState extends State<SplashScreen> {
     return Container(
       width: DeviceInfo(context).height,
       height: DeviceInfo(context).height,
+     // color:  MyTheme.splash_screen_color,
       color:  Colors.white,
-      //color:  MyTheme.splash_screen_color,
       child: InkWell(
         child: Stack(
 
@@ -89,30 +89,32 @@ class _SplashScreenState extends State<SplashScreen> {
                     child: Hero(
                       tag: "splashscreenImage",
                       child: Container(
-                        height: 170,
-                        width: 210,
-                        padding: EdgeInsets.symmetric(horizontal: 12,vertical: 12),
+                        //height: 150,
+                        //width: 460,
+                        //padding: EdgeInsets.symmetric(horizontal: 12,vertical: 12),
                         decoration: BoxDecoration(
                           color: MyTheme.white,
                           borderRadius: BorderRadius.circular(8)
                         ),
                         child: Image.asset(
-                            "assets/umondalogo.png",
-                          filterQuality: FilterQuality.low,
+                            "assets/appbarlogo.png",
+                            filterQuality: FilterQuality.low,
+
                         ),
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 5.0),
-                    child: Text(
-                      "",//AppConfig.app_name,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14.0,
-                          color: Colors.white),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(bottom: 5.0),
+                  //   child: Text(
+                  //     "",//AppConfig.app_name,
+                  //     style: TextStyle(
+                  //         fontWeight: FontWeight.bold,
+                  //         fontSize: 14.0,
+                  //         color: Colors.white),
+                  //   ),
+                  // ),
+
                   /*Text(
                     "GGGG " + _packageInfo.version,
                     style: TextStyle(
@@ -126,7 +128,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
 
 
-
+            //
             // Positioned.fill(
             //   child: Align(
             //     alignment: Alignment.bottomCenter,

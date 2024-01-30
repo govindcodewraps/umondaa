@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>813637134338-detmckmgisuvtsm5amcjf2cei4k6i8a4.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.620463100599-ach14i3qo4h3pbgsh57hj6c0pc0dnjgg</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD4Rnhrw32UQS1tkzfj6Y9_aBvlmDhiU58</string>
+	<key>GCM_SENDER_ID</key>
+	<string>813637134338</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>umonda</string>
+	<key>PROJECT_ID</key>
+	<string>umonda-d65d6</string>
+	<key>STORAGE_BUCKET</key>
+	<string>umonda-d65d6.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:813637134338:ios:cb36c5c516eed1299e9f1b</string>
+</dict>
+</plist>

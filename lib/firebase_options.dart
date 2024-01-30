@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAiCt_GxS467VN06noEySlBFPQPHNCLDmU',
-    appId: '1:43273991102:android:46dfe9b93313e26c1b3fef',
-    messagingSenderId: '43273991102',
-    projectId: 'umondaa-a5522',
-    storageBucket: 'umondaa-a5522.appspot.com',
+    apiKey: 'AIzaSyA4d0rF9inWH_036a89Se55-_8SdBFaWAg',
+    appId: '1:813637134338:android:2c64284331fa52c49e9f1b',
+    messagingSenderId: '813637134338',
+    projectId: 'umonda-d65d6',
+    storageBucket: 'umonda-d65d6.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDDsELp9n81_cL9ePGjYIJHlpAP4QfKk74',
-    appId: '1:43273991102:ios:7abff1dbdeca3f761b3fef',
-    messagingSenderId: '43273991102',
-    projectId: 'umondaa-a5522',
-    storageBucket: 'umondaa-a5522.appspot.com',
-    iosBundleId: 'com.activeitzone.ecommerceapplesignup',
+    apiKey: 'AIzaSyD4Rnhrw32UQS1tkzfj6Y9_aBvlmDhiU58',
+    appId: '1:813637134338:ios:cb36c5c516eed1299e9f1b',
+    messagingSenderId: '813637134338',
+    projectId: 'umonda-d65d6',
+    storageBucket: 'umonda-d65d6.appspot.com',
+    iosBundleId: 'umonda',
   );
 }
