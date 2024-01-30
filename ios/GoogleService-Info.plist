@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>620463100599-ach14i3qo4h3pbgsh57hj6c0pc0dnjgg.apps.googleusercontent.com</string>
+	<string>813637134338-detmckmgisuvtsm5amcjf2cei4k6i8a4.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
 	<string>com.googleusercontent.apps.620463100599-ach14i3qo4h3pbgsh57hj6c0pc0dnjgg</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>620463100599-6ugm9kpt4scqtr7hl4j35c0loe3mga6c.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBbeqHlQdo_R_S59Z2slzGyJ73Tp-dbbNk</string>
+	<string>AIzaSyD4Rnhrw32UQS1tkzfj6Y9_aBvlmDhiU58</string>
 	<key>GCM_SENDER_ID</key>
-	<string>620463100599</string>
+	<string>813637134338</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.umonda</string>
+	<string>umonda</string>
 	<key>PROJECT_ID</key>
-	<string>testproject-43</string>
+	<string>umonda-d65d6</string>
 	<key>STORAGE_BUCKET</key>
-	<string>testproject-43.appspot.com</string>
+	<string>umonda-d65d6.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:620463100599:ios:736cbf21eb3a56fd253332</string>
+	<string>1:813637134338:ios:cb36c5c516eed1299e9f1b</string>
 </dict>
 </plist>

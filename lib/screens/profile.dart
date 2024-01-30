@@ -816,6 +816,24 @@ class _ProfileState extends State<Profile> {
 
 
 
+          // Container(
+          //   // color: Colors.red,
+          //
+          //   child: buildSettingAndAddonsHorizontalMenuItem("assets/wallet.png",
+          //       AppLocalizations.of(context).my_wallet_ucf, () {
+          //
+          //         Navigator.push(context, MaterialPageRoute(builder: (context) {
+          //           return Moneywithdrawal();
+          //         }));
+          //
+          //         // Navigator.push(context, MaterialPageRoute(builder: (context) {
+          //         //   return Wallet();
+          //         // }));
+          //       }),
+          // ),
+
+
+
         ],
       ),
     );
@@ -1033,7 +1051,7 @@ class _ProfileState extends State<Profile> {
         cacheExtent: 5.0,
         mainAxisSpacing: 16,
         children: [
-          if (wallet_system_status.$)
+          //if (wallet_system_status.$)
             Container(
               // color: Colors.red,
 
@@ -1049,6 +1067,31 @@ class _ProfileState extends State<Profile> {
                     // }));
                   }),
             ),
+
+
+          //
+          // buildHorizontalSettingItem(
+          //     is_logged_in.$,
+          //     "assets/adplace.png",
+          //     "My ads",
+          //     is_logged_in.$
+          //         ? () {
+          //       Navigator.push(context, MaterialPageRoute(builder: (context)
+          //       {
+          //         return My_adsScreen();
+          //       },
+          //       ),
+          //       );
+          //     }
+          //         : () => showLoginWarning()),
+
+
+
+
+
+
+
+
           buildSettingAndAddonsHorizontalMenuItem(
               "assets/orders.png",
               AppLocalizations.of(context).orders_ucf,

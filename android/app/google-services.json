@@ -1,26 +1,43 @@
 {
   "project_info": {
-    "project_number": "43273991102",
-    "project_id": "umondaa-a5522",
-    "storage_bucket": "umondaa-a5522.appspot.com"
+    "project_number": "813637134338",
+    "project_id": "umonda-d65d6",
+    "storage_bucket": "umonda-d65d6.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:43273991102:android:46dfe9b93313e26c1b3fef",
+        "mobilesdk_app_id": "1:813637134338:android:2c64284331fa52c49e9f1b",
         "android_client_info": {
           "package_name": "com.umonda"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "813637134338-f1ubajktph4i78rj3qc4nevfmniasnhv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyAiCt_GxS467VN06noEySlBFPQPHNCLDmU"
+          "current_key": "AIzaSyA4d0rF9inWH_036a89Se55-_8SdBFaWAg"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "813637134338-f1ubajktph4i78rj3qc4nevfmniasnhv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "813637134338-detmckmgisuvtsm5amcjf2cei4k6i8a4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "umonda"
+              }
+            }
+          ]
         }
       }
     }

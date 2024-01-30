@@ -474,11 +474,11 @@ class _AddressState extends State<Address> {
         onPressDelete(_shippingAddressList[listIndex].id);
         break;
       case 2:
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return MapLocation(address: _shippingAddressList[listIndex]);
-        })).then((value) {
-          onPopped(value);
-        });
+        // Navigator.push(context, MaterialPageRoute(builder: (context) {
+        //   return MapLocation(address: _shippingAddressList[listIndex]);
+        // })).then((value) {
+        //   onPopped(value);
+        // });
         //deleteProduct(productId);
         break;
       default:

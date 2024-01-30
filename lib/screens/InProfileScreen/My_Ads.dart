@@ -26,6 +26,10 @@ class _My_adsScreenState extends State<My_adsScreen> {
 
   List<Product> products = [];
   String product_Id;
+  String product_name;
+  String product_price;
+  String product_des;
+
   //
   @override
   void initState() {
@@ -110,11 +114,18 @@ class _My_adsScreenState extends State<My_adsScreen> {
                       itemCount: snapshot.data.data.length,
                       itemBuilder: (context, index) {
                         final thumbnailImage = snapshot.data.data[index].thumbnailImage;
+
                         return InkWell(
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => Edit_placead(Product_ID: product_Id)));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => Edit_placead(Product_ID: product_Id,Product_Name: product_name,Product_Price: product_price,)));
                             print("Govind >>>>>>>>>>>>>>");
                             product_Id = snapshot.data.data[index].id.toString();
+                            product_name = snapshot.data.data[index].name.toString();
+                            product_price = snapshot.data.data[index].mainPrice.toString();
+                           // product_des = snapshot.data.data[index].des.toString();
+                            //nvbndm
+                            //snapshot.data.data[index].name.toString(),
+
                             print("print product id ${product_Id}");
                           },
                           child: Container(

@@ -34,26 +34,64 @@ class AuthScreen{
                 SliverList(
                   delegate: SliverChildListDelegate(
                       [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 48.0),
-                      child: Row(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 8,vertical: 12),
+                    Column(
+                      children: [
 
-                            width: 72,
-                            height: 72,
-                            decoration: BoxDecoration(
-                                color: MyTheme.white,
-                                borderRadius: BorderRadius.circular(8)),
-                            child: Image.asset('assets/umondalogo.png'),
+
+
+                        Padding(
+                          padding:  EdgeInsets.only(top: 40.0),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 20,top: 10),
+                                child: Row(children: [
+
+                                  InkWell(
+                                    onTap: (){
+                                      Navigator.pop(context);
+                                      print("ontabbbbbb");
+                                    },
+                                    child: Icon(Icons.arrow_back),
+                                  ),
+
+                                  //
+                                  // InkWell(
+                                  //   onTap: (){
+                                  //     Navigator.pop(context);
+                                  //     print("ontabbbbbb");
+                                  //   },
+                                  //   child: Icon(Icons.arrow_back,color: Colors.red,),
+                                  // ),
+
+                                ],),
+                              ),
+
+                              Row(
+                                children: [
+
+
+                                  Container(
+                                    padding: EdgeInsets.symmetric(horizontal: 8,vertical: 12),
+
+                                    width: 72,
+                                    height: 72,
+                                    decoration: BoxDecoration(
+                                        color: MyTheme.white,
+                                        borderRadius: BorderRadius.circular(8)),
+                                    child: Image.asset('assets/umondalogo.png'),
+                                  ),
+
+                                ],
+                                mainAxisAlignment: MainAxisAlignment.center,
+                              ),
+                            ],
                           ),
-                        ],
-                        mainAxisAlignment: MainAxisAlignment.center,
-                      ),
+                        ),
+                      ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 20.0,top: 10),
+                      padding:  EdgeInsets.only(bottom: 20.0,top: 10),
                       child: Text(
                         headerText,
                         style: TextStyle(
@@ -75,20 +113,33 @@ class AuthScreen{
                 )
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(13.0),
-              child: InkWell(
-                  onTap: (){
+            // Padding(
+            //   padding:  EdgeInsets.only(top: 10,left: 20),
+            //   child: InkWell(
+            //       onTap: (){
+            //
+            //         Navigator.pop(context);
+            //        print("ontab");
+            //         // Navigator.push(context,
+            //         //     MaterialPageRoute(builder: (context) {
+            //         //       return MyApp();
+            //         //     }));
+            //       },
+            //       child: Icon(Icons.arrow_back)),
+            // ),
 
-                    Navigator.pop(context);
+            // InkWell(
+            //   onTap: (){
+            //     Navigator.pop(context);
+            //     print("ontabbbbbb");
+            //   },
+            //   child: Container(
+            //     //color: Colors.red,
+            //       height: 330,
+            //       width: 330,
+            //       child: Icon(Icons.arrow_back)),
+            // ),
 
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) {
-                    //       return MyApp();
-                    //     }));
-                  },
-                  child: Icon(Icons.arrow_back)),
-            ),
           ],
         ),
       ),

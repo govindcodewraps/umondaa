@@ -7,6 +7,7 @@ import 'package:umonda/my_theme.dart';
 import 'package:umonda/custom/useful_elements.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:umonda/repositories/brand_repository.dart';
+import '../Social_Login/googleloginn.dart';
 import '../custom/btn.dart';
 import '../data_model/AllCategoryResponse.dart';
 import '../app_config.dart';
@@ -16,6 +17,8 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import '../screens/common_webview_screen.dart';
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import '../screens/main.dart';
 
 class placead extends StatefulWidget {
   String catevale;
@@ -492,6 +495,9 @@ class _placeadState extends State<placead> {
               ),
             ),
 
+
+
+
             Padding(
               padding: const EdgeInsets.only(top: 30.0,left: 16,right: 16),
               child: Container(
@@ -736,6 +742,11 @@ class _placeadState extends State<placead> {
           dropdownBrands =  dropdownBrands="Select Select_Brand";
         });
 
+        Navigator.pushAndRemoveUntil(context,
+          MaterialPageRoute(builder: (context) {
+            return Main(go_back: false,);
+          },
+          ),(route)=>false,);
 
       }
       else if(response.statusCode == 401)

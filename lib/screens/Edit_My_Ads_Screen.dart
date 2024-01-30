@@ -20,11 +20,13 @@ import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../data_model/Sub_Category_List_Model.dart';
 
+
+//                             var _remarkinput=remarkInputController.text .isEmpty ? widget.remark:remarkInputController.text;
 class Edit_placead extends StatefulWidget {
-  String Product_ID;
+  String Product_ID,Product_Name,Product_Price,Product_Des;
 
 
-  Edit_placead({Key key,this.Product_ID}) : super(key: key);
+  Edit_placead({Key key,this.Product_ID,this.Product_Name,this.Product_Price, this.Product_Des}) : super(key: key);
 
   @override
   State<Edit_placead> createState() => _Edit_placeadState();
@@ -44,11 +46,16 @@ class _Edit_placeadState extends State<Edit_placead> {
   String offerstatus="0";
   String allurlss;
   String image;
+  String discription=" ";
   List<File> selectedImages = []; // List to hold selected image files
   List<String> imageUrls = [];
+  List<String> imagePaths = [];
+  String preimagepath;
   List<String> base64Urls = [];
   bool _customeIcon = false;
   String globalResponseBody;
+  bool isLoading = false;
+  String oldimages;
 
 
   List<String> selectedItems = [];
@@ -77,16 +84,46 @@ class _Edit_placeadState extends State<Edit_placead> {
   List<String> selectedProductIDs = [];
   List<String> fetchselectedcategories=[];
   String convertstring;
+  //List<String> imagePaths = [];
+  //Set<String> imagePaths = {};
+  List<String> remainingImagePaths = [];
+
+
+  //List<String> remainingImagePaths = [];
   int gov=0;
 
   @override
   void initState() {
+    print("product iddd ${widget.Product_ID}");
+    _ProductName.text = widget.Product_Name ?? 'No remark';
+
+    _PriceAED.text =  getNumericPart(widget.Product_Price) ?? 'No remark';
+
     fetch_Brands();
     fetchallcategoriesdata();
     editmyadsapicall();
 
     super.initState();
   }
+
+
+  String getNumericPart(String input) {
+    // Remove non-numeric characters from the string
+    String numericPart = input.replaceAll(RegExp(r'[^0-9.]'), '');
+
+    // Ensure that there is exactly one dot (.) in the numeric part
+    if (numericPart.contains('.')) {
+      int dotCount = numericPart.split('.').length - 1;
+      if (dotCount > 1) {
+        // If there is more than one dot, keep only the first one
+        numericPart = numericPart.replaceFirst('.', '');
+      }
+    }
+
+    return numericPart;
+  }
+
+
 
   fetch_Brands() async {
     var filteredBrandResponse = await BrandRepository().getFilterPageBrands();
@@ -121,6 +158,7 @@ class _Edit_placeadState extends State<Edit_placead> {
   Widget buildAppBarTitleOption(BuildContext context) {
 
     print("Govind>>>>> ${ProductID}");
+    print("Price>>>>> ${discription}");
 
     print("Selected ProductIDs>>>>>>>>>>>>: $selectedProductIDs");
     return Container(
@@ -245,7 +283,8 @@ class _Edit_placeadState extends State<Edit_placead> {
       'moffer': offerstatus,
       'email':email,
       'password':password,
-      'product_id': widget.Product_ID
+      'product_id': widget.Product_ID,
+      'old_image_url':oldimages
 
     });
 
@@ -273,12 +312,14 @@ class _Edit_placeadState extends State<Edit_placead> {
           textColor: Colors.green, // Text color of the toast message
           fontSize: 16.0, // Font size of the toast message
         );
+        print(response);
 
         print("Product Update successfully");
         Navigator.pop(context);
       }
       else if(response.statusCode == 401)
       {
+        print(response);
         print("Unauthorized user");
         Fluttertoast.showToast(
           msg: "Unauthorized user",
@@ -308,21 +349,106 @@ class _Edit_placeadState extends State<Edit_placead> {
     }
   }
 
+/*  Widget bodywidget() {
+    // List<String> remainingImagePaths = [];
+    // List<String> imagePaths = [];
+
+    return FutureBuilder(
+      future: editmyadsapicall(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          // Use a List to store image paths
+          imagePaths = List.from(snapshot.data.data[0].photos.map((photo) => photo.path));
+
+          return Container(
+            height: 150,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: imagePaths.length,
+              separatorBuilder: (context, index) => SizedBox(width: 8.0),
+              itemBuilder: (context, index) {
+                final String imagePath = imagePaths[index];
+
+                return Stack(
+                  children: [
+                    Image.network(
+                      imagePath,
+                      fit: BoxFit.cover,
+                      width: 150, // Adjust the width as needed
+                      height: 150, // Adjust the height as needed
+                    ),
+                    Positioned(
+                      top: 0,
+                      right: 0,
+                      child: IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () {
+                          // Delete the image at the current index
+                          _deleteImage(index);
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+          );
+        } else {
+          return Container(
+            child: Center(child: CircularProgressIndicator()),
+          );
+        }
+      },
+    );
+  }
+  void _deleteImage(int index) {
+    setState(() {
+      imagePaths.removeAt(index);
+      print("Remaining Image URLs: $imagePaths");
+    });
+  }*/
+
+
+
+
+
+
+
+
   Widget bodywidget(){
     return
       FutureBuilder(
           future: editmyadsapicall(),
           builder: (context, snapshot) {
+            //itemCount: imagePaths.length,
+
+
             if (snapshot.hasData) {
+
               List<String> categoryIdList = [];
               RegExp regExp = RegExp(r'\d+');
               Iterable<Match> matches = regExp.allMatches(snapshot.data.data[0].categoryId.toString());
               for (var match in matches) {
                 categoryIdList.add(match.group(0));
-              }
-              print("Convert String to list  avnish  .: ${categoryIdList}");
 
-              List asd = categoryIdList.toList();
+              }
+              print("Convert String to list  .: ${categoryIdList}");
+              discription=snapshot.data.data[0].description.toString();
+              print("Descriptionnnnnn ${discription}");
+              _Description.text = discription.toString() ?? 'No remark';
+
+
+
+              imagePaths = List.from(snapshot.data.data[0].photos.map((photo) => photo.path));
+             // Set<String> imagePathSet = Set.from(imagePaths);
+
+              print("selected thum");
+              print(imagePaths);
+              print("selected thum");
+
+
+
+            List asd = categoryIdList.toList();
 
               if(gov==0) {
                 for (int i = 0; i < asd.length; i++) {
@@ -333,7 +459,7 @@ class _Edit_placeadState extends State<Edit_placead> {
               print("fetch  category.....: ${fetchselectedcategories}");
               print("fetch  category selected items.....: ${selectedItems}");
 
-              // final thumbnailImage = snapshot.data.data[index].thumbnailImage;
+             // final thumbnailImage = snapshot.data.data[index].thumbnailImage;
               return
                 ListView(
                     children: [
@@ -410,6 +536,291 @@ class _Edit_placeadState extends State<Edit_placead> {
                           ),
                         ),
                       ),
+                      //Text(imagePaths.length.toString()),
+
+                      Container(
+                        padding: EdgeInsets.only(left: 16,right: 16,top: 10),
+                        height: 170,
+                        child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: imagePaths.length,
+                          separatorBuilder: (context, index) => SizedBox(width: 8.0),
+                          itemBuilder: (context, index) {
+                            final String imagePath = imagePaths[index];
+
+                            return Stack(
+                              children: [
+                                Image.network(
+                                  imagePath,
+                                  fit: BoxFit.cover,
+                                  width: 150, // Adjust the width as needed
+                                  height: 150, // Adjust the height as needed
+                                ),
+                                Positioned(
+                                  top: 0,
+                                  right: 0,
+                                   child:
+
+
+                                 /*  IconButton(
+                                     icon: Icon(Icons.delete),
+                                     onPressed: () {
+                                       setState(() {
+                                         // Check if the index is valid
+                                         if (index >= 0 && index < imagePaths.length) {
+                                           // Print the URL of the image to be deleted
+                                           print("Deleting image at index $index, URL: ${imagePaths[index]}");
+
+                                           // Remove the specified part from the URL in imagePaths list
+                                           imagePaths[index] = imagePaths[index].replaceAll("https://webcluestechnology.com/demo/erp/umonda/public//uploads/all/", "");
+
+                                           // Delete the image at the current index
+                                           imagePaths.removeAt(index);
+                                           print("Deleted image at index $index");
+
+                                           // Print information related to image paths after deletion
+                                           print("Image paths after deletion: $imagePaths");
+                                         } else {
+                                           print("Invalid index: $index");
+                                         }
+                                       });
+                                     },
+                                   ),*/
+
+
+                                   IconButton(
+                                     icon: Icon(Icons.delete),
+                                     onPressed: () {
+                                      // fetchData();
+
+                                       // setState(() {
+                                       //   // Check if the index is valid
+                                       //   if (index >= 0 && index < imagePaths.length) {
+                                       //     // Print the original URL of the image to be deleted
+                                       //     String originalUrl = imagePaths[index];
+                                       //     print("Deleting image at index $index, Original URL: $originalUrl");
+                                       //     //simagePaths[index] = originalUrl.replaceAll("https://webcluestechnology.com/demo/erp/umonda/public//uploads/all/", "");
+                                       //     imagePaths[index] = originalUrl.replaceAll("https://umonda.com/public//uploads/all/", "");
+                                       //     preimagepath = imagePaths[index];
+                                       //     fetchData();
+                                       //
+                                       //   } else {
+                                       //     print("Invalid index: $index");
+                                       //   }
+                                       // });
+
+
+
+                                      /* setState(() {
+                                         // Check if the index is valid
+                                         if (index >= 0 && index < imagePaths.length) {
+                                           // Print the original URL of the image to be deleted
+                                           String originalUrl = imagePaths[index];
+                                           print("Deleting image at index $index, Original URL: $originalUrl");
+
+                                           // Update the image path
+                                           imagePaths[index] = originalUrl.replaceAll("https://umonda.com/public//uploads/all/", "");
+                                           preimagepath = imagePaths[index];
+
+                                           // Call the fetchData() function if needed
+                                           fetchData();
+
+                                           // Print the remaining URLs in the console
+                                           print("Remaining URLs:");
+                                           imagePaths.forEach((url) {
+                                             print(url);
+                                           });
+                                         } else {
+                                           print("Invalid index: $index");
+                                         }
+                                       });*/
+
+
+                                     /*  setState(() {
+                                         // Check if the index is valid
+                                         if (index >= 0 && index < imagePaths.length) {
+                                           // Print the original URL of the image to be deleted
+                                           String originalUrl = imagePaths[index];
+                                           print("Deleting image at index $index, Original URL: $originalUrl");
+
+                                           // Update the image path
+                                           imagePaths[index] = originalUrl.replaceAll("https://umonda.com/public//uploads/all/", "");
+                                           preimagepath = imagePaths[index];
+
+                                           // Call the fetchData() function if needed
+                                           fetchData();
+
+                                           // Print the remaining URLs in the console without the specified prefix
+                                           print("Remaining URLs:");
+                                           imagePaths.forEach((url) {
+                                             // Remove the specified prefix before printing
+                                             String urlWithoutPrefix = url.replaceAll("https://umonda.com/public//uploads/all/", "");
+
+                                            print("AAAAAAAAAAA");
+                                             print(urlWithoutPrefix);
+                                             print("AAAAAAAAAAA");
+
+                                           });
+                                         } else {
+                                           print("Invalid index: $index");
+                                         }
+                                       });*/
+
+
+
+
+                                       /*setState(() {
+                                         // Check if the index is valid
+                                         if (index >= 0 && index < imagePaths.length) {
+                                           // Print the original URL of the image to be deleted
+                                           String originalUrl = imagePaths[index];
+                                           print("Deleting image at index $index, Original URL: $originalUrl");
+
+                                           // Update the image path
+                                           imagePaths[index] = originalUrl.replaceAll("https://umonda.com/public//uploads/all/", "");
+                                           preimagepath = imagePaths[index];
+
+                                           // Call the fetchData() function if needed
+                                           fetchData();
+
+                                           // Store the remaining URLs without the specified prefix in the allurlsvar variable
+                                           List<String> modifiedUrls = [];
+                                           imagePaths.forEach((url) {
+                                             // Remove the specified prefix
+                                             String urlWithoutPrefix = url.replaceAll("https://umonda.com/public//uploads/all/", "");
+                                             modifiedUrls.add(urlWithoutPrefix);
+                                           });
+
+                                           // Store the modified URLs in the variable named allurlsvar
+                                           String allurlsvar = modifiedUrls.join("\n");
+                                           print("allurlsvar: $allurlsvar");
+                                         } else {
+                                           print("Invalid index: $index");
+                                         }
+                                       });*/
+
+
+                                       setState(() {
+                                         // Check if the index is valid
+                                         if (index >= 0 && index < imagePaths.length) {
+                                           // Print the original URL of the image to be deleted
+                                           String originalUrl = imagePaths[index];
+                                           print("Deleting image at index $index, Original URL: $originalUrl");
+
+                                           // Update the image path
+                                           imagePaths[index] = originalUrl.replaceAll("https://umonda.com/public//uploads/all/", "");
+                                           preimagepath = imagePaths[index];
+
+                                           // Call the fetchData() function if needed
+                                           fetchData();
+
+                                           // Store the remaining URLs without the specified prefix (excluding the selected index) in the allurlsvar variable
+                                           List<String> modifiedUrls = [];
+                                           for (int i = 0; i < imagePaths.length; i++) {
+                                             if (i != index) {
+                                               // Exclude the selected index
+                                               String urlWithoutPrefix = imagePaths[i].replaceAll("https://umonda.com/public//uploads/all/", "");
+                                               modifiedUrls.add(urlWithoutPrefix);
+                                             }
+                                           }
+
+                                           // Store the modified URLs in the variable named allurlsvar
+                                          // String allurlsvar = modifiedUrls.join("\n");
+                                           String allurlsvar = modifiedUrls.join(",");
+                                           oldimages=allurlsvar;
+                                          // print("allurlsvar: $allurlsvar");
+
+                                           print("\\\\\\\\\\\\\\\\");
+                                           print("allurlsvar: $allurlsvar");
+
+                                           print("\\\\\\\\\\\\\\\\");
+                                           print("?????????????????");
+                                           print(oldimages);
+                                           print("?????????????????");
+
+                                         } else {
+                                           print("Invalid index: $index");
+                                         }
+                                       });
+
+
+
+
+
+
+
+                                     },
+                                   ),
+
+
+
+
+
+
+
+                                  //
+                                  //
+                                  // IconButton(
+                                  //   icon: Icon(Icons.delete),
+                                  //   onPressed: () {
+                                  //
+                                  //     // print("delete");
+                                  //     //
+                                  //     // imagePaths.removeAt(index);
+                                  //     // print("delete");
+                                  //     // Delete the image at the current index
+                                  //     setState(() {
+                                  //
+                                  //       print("Image length before");
+                                  //       print(imagePaths.length);
+                                  //       imagePaths.removeAt(index);
+                                  //      // print(index);
+                                  //       print("deleteeeet");
+                                  //       print("Image length after");
+                                  //       print(imagePaths.length);
+                                  //      // remainingImagePaths.add(imagePath);
+                                  //
+                                  //     });
+                                  //   },
+                                  // ),
+                                ),
+
+
+                              ],
+                            );
+                          },
+                        ),
+                      ),
+
+
+
+
+
+
+                      // Container(
+                      //   height: 150,
+                      //   child: ListView.builder(
+                      //     scrollDirection: Axis.horizontal,
+                      //     itemCount: imagePaths.length,
+                      //     itemBuilder: (context, index) {
+                      //       return Padding(
+                      //         padding: const EdgeInsets.all(8.0),
+                      //         child: Image.network(
+                      //           imagePaths[index],
+                      //           fit: BoxFit.cover,
+                      //           width: 150, // Adjust the width as needed
+                      //           height: 150, // Adjust the height as needed
+                      //         ),
+                      //       );
+                      //     },
+                      //   ),
+                      // ),
+
+
+
+
+
+
                       //-------------------
                       Container(
                         margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
@@ -426,6 +837,12 @@ class _Edit_placeadState extends State<Edit_placead> {
                                             color: Color.fromARGB(255, 0, 0, 0))),
                                   )
                               ),
+
+
+
+
+
+
                               Container(
                                 // alignment: Alignment.center,
                                 child: Center(
@@ -466,11 +883,14 @@ class _Edit_placeadState extends State<Edit_placead> {
                                             return Center(
                                               child: Stack(
                                                 children: [
+
                                                   Container(
                                                     // width: 200,
                                                     height: 150,
                                                     alignment: Alignment.center,
-                                                    child: Image.file(selectedImages[index],fit: BoxFit.cover,),
+
+                                                   child: Image.file(selectedImages[index],fit: BoxFit.cover,),
+                                                   //child: Image.file(thumbnailImage,fit: BoxFit.cover,),
                                                   ),
                                                   Positioned(
                                                     top: 5, right: 20,
@@ -498,6 +918,12 @@ class _Edit_placeadState extends State<Edit_placead> {
                       ),
                       //---------------------
 
+
+
+
+
+
+
                       Container(
                         margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
                         child: Card(
@@ -523,7 +949,7 @@ class _Edit_placeadState extends State<Edit_placead> {
                                   autocorrect: false,
                                   decoration:  InputDecoration(
                                     border: UnderlineInputBorder(),
-                                    hintText:snapshot.data.data[0].mainPrice.toString()?? "",
+                                    //hintText:snapshot.data.data[0].mainPrice.toString()?? "",
                                   ),
                                   style: TextStyle(fontSize: 14),
                                 ),
@@ -600,7 +1026,7 @@ class _Edit_placeadState extends State<Edit_placead> {
                                   controller: _Description,
                                   decoration: InputDecoration(
                                     border: UnderlineInputBorder(),
-                                    hintText:snapshot.data.data[0].description.toString()?? "",
+                                    //hintText:snapshot.data.data[0].description.toString()?? "",
 
                                   ),
                                   keyboardType: TextInputType.multiline,
@@ -712,11 +1138,15 @@ class _Edit_placeadState extends State<Edit_placead> {
                               String selectedProduct = selectedProductIDs.map((item) => item.toString()).join(',').replaceAll(', ', ',');
                               print("category  remove square remove space....:${selectedProduct}");
                               String selectedPro = selectedItems.map((item) => item.toString()).join(',').replaceAll(', ', ',');
-                              var ProdName = _ProductName.text.toString().isEmpty ? snapshot.data.data[0].name.toString():_ProductName.text.toString();
+                              var ProdName = _ProductName.text.toString().isEmpty ? widget.Product_Name:_ProductName.text.toString();
                               var category = selectedProduct;
                               var brand = dropdownBrands.split(" ")[0].toString();
-                              var description = _Description.text.toString();
-                              var amount = _PriceAED.text.toString();
+                              var description = _Description.text.isEmpty ? discription :_Description.text;
+                              var amount = _PriceAED.text.isEmpty ? getNumericPart(widget.Product_Price):_PriceAED.text;
+
+
+                              //var _remarkinput=remarkInputController.text .isEmpty ? widget.remark:remarkInputController.text;
+
                               var email = _EmailID.text.toString();
                               var password = _PassWord.text.toString();
                               var offer = _offerControler.text.toString();
@@ -942,5 +1372,84 @@ class _Edit_placeadState extends State<Edit_placead> {
       print('An error occurred: $error');
     }
   }
+
+
+
+  void fetchData() async {
+    Dio dio = Dio();
+
+    try {
+      Response response = await dio.get('https://umonda.com/api/v2/products/image', queryParameters: {
+        //'product_id': 239,
+        'product_id': widget.Product_ID,
+        'image': preimagepath,
+        //'image': '1706168407_image_picker_E1D6B539-0BEC-4D2F-8642-19DFvvvvvFAADED49-446-000000AC36D52AB6.jpg',
+      });
+
+      if (response.statusCode == 200) {
+        print("Product delete");
+        print(response.data);
+        setState(() {
+
+          print("::::::::::::::::::::");
+          print(imagePaths);
+          print(imagePaths.length);
+          print("::::::::::::::::::::");
+
+          print("product iddd ${widget.Product_ID}");
+          _ProductName.text = widget.Product_Name ?? 'No remark';
+
+          _PriceAED.text =  getNumericPart(widget.Product_Price) ?? 'No remark';
+
+          fetch_Brands();
+          fetchallcategoriesdata();
+          editmyadsapicall();
+        });
+        // Use response.data for the response body
+      } else {
+        print('Error: ${response.statusCode}, ${response.statusMessage}');
+      }
+    } catch (error) {
+      print('Error: $error');
+    }
+  }
+
+
+  void _deleteImage(int index) async {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+
+    try {
+      // Your existing delete logic goes here
+      // ...
+
+      // After successful deletion, hide the progress indicator
+      Navigator.of(context).pop();
+
+      // Optionally, you can show a snackbar or perform other UI updates
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Image deleted successfully"),
+        ),
+      );
+    } catch (error) {
+      // Handle errors, hide the progress indicator, and show an error message
+      Navigator.of(context).pop();
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Error deleting image: $error"),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
 
 }

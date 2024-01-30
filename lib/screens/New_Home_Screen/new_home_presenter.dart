@@ -6,6 +6,7 @@ import '../../repositories/category_repository.dart';
 import '../../repositories/flash_deal_repository.dart';
 import '../../repositories/product_repository.dart';
 import '../../repositories/sliders_repository.dart';
+import 'Allnewads_Screen.dart';
 
 
 
@@ -42,11 +43,12 @@ class AllHomePresenter extends ChangeNotifier {
   var allProductList = [];
   bool isAllProductInitial = true;
   int totalAllProductData = 0;
-  int allProductPage = 1;
+  //int allProductPage = 1;
   bool showAllLoadingContainer = false;
   int cartCount = 0;
 
   fetchAll() {
+    print("All product list count:: ${allProductPage}");
     fetchCarouselImages();
     fetchBannerOneImages();
     fetchBannerTwoImages();
@@ -150,6 +152,7 @@ class AllHomePresenter extends ChangeNotifier {
   }
 
   Future<void> onRefresh() async {
+    print("All product list count::on ${allProductPage}");
     reset();
     fetchAll();
   }
@@ -167,25 +170,50 @@ class AllHomePresenter extends ChangeNotifier {
     allProductList.clear();
     isAllProductInitial = true;
     totalAllProductData = 0;
-    allProductPage = 1;
+    allProductPage;
     showAllLoadingContainer = false;
     notifyListeners();
   }
 
+  // mainScrollListener() {
+  //   mainScrollController.addListener(() {
+  //     //print("position: " + xcrollController.position.pixels.toString());
+  //     //print("max: " + xcrollController.position.maxScrollExtent.toString());
+  //
+  //     if (mainScrollController.position.pixels ==
+  //         mainScrollController.position.maxScrollExtent) {
+  //       allProductPage++;
+  //       print("Product page count : ${allProductPage}");
+  //
+  //       showAllLoadingContainer = true;
+  //       fetchAllProducts();
+  //       //print("Product page count : ${allProductPage}");
+  //     }
+  //   });
+  // }
+
+
   mainScrollListener() {
     mainScrollController.addListener(() {
-      //print("position: " + xcrollController.position.pixels.toString());
-      //print("max: " + xcrollController.position.maxScrollExtent.toString());
-
-      if (mainScrollController.position.pixels ==
-          mainScrollController.position.maxScrollExtent) {
+      if (mainScrollController.position.pixels == mainScrollController.position.maxScrollExtent) {
+        // Scrolling down, load next page
         allProductPage++;
-
+        print("Product page count : ${allProductPage}");
         showAllLoadingContainer = true;
         fetchAllProducts();
+      } else if (mainScrollController.position.pixels == mainScrollController.position.minScrollExtent) {
+        // Scrolling up, load previous page
+        if (allProductPage > 1) {
+          allProductPage--;
+          print("Product page count : ${allProductPage}");
+          showAllLoadingContainer = true;
+          fetchAllProducts();
+        }
       }
     });
   }
+
+
 
   initPiratedAnimation(vnc) {
     pirated_logo_controller =

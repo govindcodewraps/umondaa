@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:umonda/custom/input_decorations.dart';
 import 'package:umonda/custom/intl_phone_input.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+//import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:umonda/screens/password_otp.dart';
 import 'package:umonda/custom/toast_component.dart';
 import 'package:toast/toast.dart';
@@ -22,7 +22,7 @@ class PasswordForget extends StatefulWidget {
 class _PasswordForgetState extends State<PasswordForget> {
   String _send_code_by = "email"; //phone or email
   String initialCountry = 'US';
-  PhoneNumber phoneCode = PhoneNumber(isoCode: 'US');
+ // PhoneNumber phoneCode = PhoneNumber(isoCode: 'US');
   String _phone = "";
 
   //controllers
@@ -142,38 +142,38 @@ class _PasswordForgetState extends State<PasswordForget> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Container(
-                                height: 36,
-                                child: CustomInternationalPhoneNumberInput(
-                                  onInputChanged: (PhoneNumber number) {
-                                    //print(number.phoneNumber);
-                                    setState(() {
-                                      _phone = number.phoneNumber;
-                                    });
-                                  },
-                                  onInputValidated: (bool value) {
-                                    //print(value);
-                                  },
-                                  selectorConfig: SelectorConfig(
-                                    selectorType: PhoneInputSelectorType.DIALOG,
-                                  ),
-                                  ignoreBlank: false,
-                                  autoValidateMode: AutovalidateMode.disabled,
-                                  selectorTextStyle:
-                                      TextStyle(color: MyTheme.font_grey),
-                                  initialValue: phoneCode,
-                                  textFieldController: _phoneNumberController,
-                                  formatInput: true,
-                                  keyboardType: TextInputType.numberWithOptions(
-                                      signed: true, decimal: true),
-                                  inputDecoration: InputDecorations
-                                      .buildInputDecoration_phone(
-                                          hint_text: "01710 333 558"),
-                                  onSaved: (PhoneNumber number) {
-                                    //print('On Saved: $number');
-                                  },
-                                ),
-                              ),
+                              // Container(
+                              //   height: 36,
+                              //   child: CustomInternationalPhoneNumberInput(
+                              //     onInputChanged: (PhoneNumber number) {
+                              //       //print(number.phoneNumber);
+                              //       setState(() {
+                              //         _phone = number.phoneNumber;
+                              //       });
+                              //     },
+                              //     onInputValidated: (bool value) {
+                              //       //print(value);
+                              //     },
+                              //     selectorConfig: SelectorConfig(
+                              //       selectorType: PhoneInputSelectorType.DIALOG,
+                              //     ),
+                              //     ignoreBlank: false,
+                              //     autoValidateMode: AutovalidateMode.disabled,
+                              //     selectorTextStyle:
+                              //         TextStyle(color: MyTheme.font_grey),
+                              //     initialValue: phoneCode,
+                              //     textFieldController: _phoneNumberController,
+                              //     formatInput: true,
+                              //     keyboardType: TextInputType.numberWithOptions(
+                              //         signed: true, decimal: true),
+                              //     inputDecoration: InputDecorations
+                              //         .buildInputDecoration_phone(
+                              //             hint_text: "01710 333 558"),
+                              //     onSaved: (PhoneNumber number) {
+                              //       //print('On Saved: $number');
+                              //     },
+                              //   ),
+                              // ),
                               GestureDetector(
                                 onTap: () {
                                   setState(() {

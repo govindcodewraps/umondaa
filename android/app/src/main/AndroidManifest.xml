@@ -18,7 +18,7 @@
         android:name="${applicationName}"
         android:label="UMONDA"
         android:requestLegacyExternalStorage="true"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
 
         <!-- FlutterDownloader Provider -->
         <provider
