@@ -99,6 +99,28 @@ main() async {
     systemNavigationBarDividerColor: Colors.transparent,
   ));
 
+
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Firebase
+  await Firebase.initializeApp();
+
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+  // Request permission for receiving push notifications (if not already granted)
+  NotificationSettings settings = await messaging.requestPermission();
+
+  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+    // Permission granted, fetch FCM token
+    String fcmToken = await messaging.getToken();
+    print("FCM Tokennnn: $fcmToken");
+  } else {
+    print("Permission denied for push notifications");
+  }
+
+
+
   runApp(
     SharedValue.wrapApp(
       MyApp(),
