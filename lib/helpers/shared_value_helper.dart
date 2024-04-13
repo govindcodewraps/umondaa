@@ -26,6 +26,23 @@ final SharedValue<String> user_name = SharedValue(
   value: "", // initial value
   key: "user_name", // disk storage key for shared_preferences
 );
+final SharedValue<String> user_dob = SharedValue(
+  value: "", // initial value
+  key: "user_dob", // disk storage key for shared_preferences
+);
+final SharedValue<String> user_bankname = SharedValue(
+  value: "", // initial value
+  key: "user_bankname", // disk storage key for shared_preferences
+);
+final SharedValue<String> user_iban = SharedValue(
+  value: "", // initial value
+  key: "user_bankname", // disk storage key for shared_preferences
+);
+final SharedValue<String> user_bic = SharedValue(
+  value: "", // initial value
+  key: "user_bic", // disk storage key for shared_preferences
+);
+
 
 final SharedValue<String> user_email = SharedValue(
   value: "", // initial value

@@ -1830,13 +1830,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   Widget buildHomeCarouselSlider(context, HomePresenter homeData) {
     if (homeData.isCarouselInitial && homeData.carouselImageList.length == 0) {
       return Padding(
-          padding:
-          const EdgeInsets.only(left: 15, right: 15, top: 0, bottom: 20),
+          padding: EdgeInsets.only(left: 15, right: 15, top: 0, bottom: 20),
           child: ShimmerHelper().buildBasicShimmer(height: 120));
     } else if (homeData.carouselImageList.length > 0) {
       return CarouselSlider(
         options: CarouselOptions(
-            aspectRatio: 351 /120,
+            aspectRatio: 351 /90,
             viewportFraction:1,
             initialPage: 0,
             enableInfiniteScroll: true,

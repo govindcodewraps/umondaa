@@ -146,7 +146,7 @@ void main() async {
   //for Android
 
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+    //options: DefaultFirebaseOptions.currentPlatform,
   );
   // runApp(MyApp());
     runApp(

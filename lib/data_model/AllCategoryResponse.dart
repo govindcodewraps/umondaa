@@ -12,8 +12,8 @@ class allcategoryModel {
   int top;
   int digital;
   String slug;
-  Null metaTitle;
-  Null metaDescription;
+  String metaTitle;
+  String metaDescription;
   int dismantlingStatus;
   Null dismantlingFees;
   String createdAt;
@@ -158,8 +158,8 @@ class ChildrenCategories {
   int top;
   int digital;
   String slug;
-  Null metaTitle;
-  Null metaDescription;
+  String metaTitle;
+  String metaDescription;
   int dismantlingStatus;
   Null dismantlingFees;
   String createdAt;
@@ -266,8 +266,8 @@ class Categories {
   int top;
   int digital;
   String slug;
-  Null metaTitle;
-  Null metaDescription;
+  String metaTitle;
+  String metaDescription;
   int dismantlingStatus;
   String dismantlingFees;
   String createdAt;
