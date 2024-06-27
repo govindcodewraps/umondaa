@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:umonda/custom/btn.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -38,10 +41,15 @@ class _ProductReviewsState extends State<ProductReviews> {
   int _page = 1;
   int _totalData = 0;
   bool _showLoadingContainer = false;
+  String prductstatus;
 
   @override
   void initState() {
     // TODO: implement initState
+    reviewid();
+    print("Product id :: ${widget.id}");
+
+    print("user id ::: ${user_id.$}");
     super.initState();
 
     fetchData();
@@ -168,10 +176,16 @@ class _ProductReviewsState extends State<ProductReviews> {
                 ),
               ), //original
 
+              //add review
+
+           if(prductstatus == "true")
+
               Align(
                 alignment: Alignment.bottomCenter,
                 child: buildBottomBar(context),
               ),
+
+
               Align(
                   alignment: Alignment.bottomCenter,
                   child: buildLoadingContainer()),
@@ -501,4 +515,156 @@ class _ProductReviewsState extends State<ProductReviews> {
       ],
     );
   }
+
+
+  // Future reviewid() async {
+  //   var data = FormData.fromMap({
+  //     'user_id': '229',
+  //     'product_id': '307'
+  //   });
+  //
+  //   var dio = Dio();
+  //
+  //   try {
+  //     var response = await dio.request(
+  //       'https://umonda.com/api/v2/reviews/authentication',
+  //       options: Options(
+  //         method: 'POST',
+  //       ),
+  //       data: data,
+  //     );
+  //
+  //     if (response.statusCode == 200) {
+  //       print(json.encode(response.data));
+  //       print("Response :: ${response.data}");
+  //     } else {
+  //       print(response.statusMessage);
+  //     }
+  //   } catch (e) {
+  //     if (e is DioError) {
+  //       // Handle Dio errors
+  //       print('DioError: ${e.message}');
+  //       if (e.response != null) {
+  //         print('Status code: ${e.response?.statusCode}');
+  //         print('Data: ${e.response?.data}');
+  //       }
+  //     } else {
+  //       // Handle other errors
+  //       print('Error: $e');
+  //     }
+  //   }
+  // }
+
+
+//    print("Product id :: ${widget.id}");
+//
+//     print("user id ::: ${user_id.$}");
+
+  // Future reviewid()  async {
+  //   var data = FormData.fromMap({
+  //     // 'user_id': '229',
+  //     // 'product_id': '307'
+  //     'user_id': user_id.$,
+  //     'product_id': widget.id
+  //   });
+  //
+  //   var dio = Dio();
+  //
+  //   try {
+  //     var response = await dio.request(
+  //       'https://umonda.com/api/v2/reviews/authentication',
+  //       options: Options(
+  //         method: 'POST',
+  //       ),
+  //       data: data,
+  //     );
+  //
+  //     if (response.statusCode == 200) {
+  //       var responseData = response.data;
+  //       if (responseData is Map<String, dynamic> && responseData.containsKey('result')) {
+  //
+  //         prductstatus = responseData['result'];
+  //         print('Result: ${responseData['result']}');
+  //         print('Resultttt: ${prductstatus}');
+  //         setState(() {
+  //           prductstatus == responseData['result'];
+  //          // print('Result: ${responseData['result']}');
+  //           print('Resultttt: ${prductstatus}');
+  //         });
+  //
+  //       } else {
+  //         print('Unexpected response format: $responseData');
+  //       }
+  //     } else {
+  //       print('Error: ${response.statusMessage}');
+  //     }
+  //   } catch (e) {
+  //     if (e is DioError) {
+  //       // Handle Dio errors
+  //       print('DioError: ${e.message}');
+  //       if (e.response != null) {
+  //         print('Status code: ${e.response?.statusCode}');
+  //         print('Data: ${e.response?.data}');
+  //       }
+  //     } else {
+  //       // Handle other errors
+  //       print('Error: $e');
+  //     }
+  //   }
+  // }
+
+
+
+  Future reviewid() async {
+    var data = FormData.fromMap({
+          'user_id': user_id.$,
+          'product_id': widget.id
+    });
+
+    var dio = Dio();
+
+    try {
+      var response = await dio.request(
+        'https://umonda.com/api/v2/reviews/authentication',
+        options: Options(
+          method: 'POST',
+        ),
+        data: data,
+      );
+
+      if (response.statusCode == 200) {
+        var responseData = response.data;
+        if (responseData is Map<String, dynamic> && responseData.containsKey('result')) {
+          var result = responseData['result'];
+          prductstatus=result.toString();
+
+          print('Result: $result');
+          setState(() {
+            print("AAAAAAAA::::${prductstatus}");
+            prductstatus=result.toString();
+            print("AAAAAAAA::${prductstatus}");
+          });
+        } else {
+          print('Unexpected response format: $responseData');
+        }
+      } else {
+        print('Error: ${response.statusMessage}');
+      }
+    } catch (e) {
+      if (e is DioError) {
+        // Handle Dio errors
+        print('DioError: ${e.message}');
+        if (e.response != null) {
+          print('Status code: ${e.response?.statusCode}');
+          print('Data: ${e.response?.data}');
+        }
+      } else {
+        // Handle other errors
+        print('Error: $e');
+      }
+    }
+  }
+
+
+
 }

@@ -140,13 +140,13 @@ class _placeadState extends State<placead> {
       ListView(
           children: [
             Container(
-              margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
+              margin: const EdgeInsets.fromLTRB(5, 0, 5, 0),
               child: Card(
                 elevation: 10,
                 child: Column(
                   children: [
                     Container(
-                        margin: const EdgeInsets.fromLTRB(5, 20, 0, 0),
+                        margin: const EdgeInsets.fromLTRB(5, 2, 0, 0),
                         child: const Align(
                           alignment: Alignment.topLeft,
                           child: Text("Ad Information",
@@ -183,10 +183,10 @@ class _placeadState extends State<placead> {
                       },
 
                     ),
-                    Divider(thickness: 1.2,color: Colors.black,),
+                   // Divider(thickness: 1.2,color: Colors.black,),
 
                     Container(
-                        margin: const EdgeInsets.fromLTRB(5, 16, 0, 0),
+                        margin: const EdgeInsets.fromLTRB(5, 6, 0, 0),
                         child: const Align(
                           alignment: Alignment.topLeft,
                           child: Text("Brand",
@@ -200,9 +200,9 @@ class _placeadState extends State<placead> {
                       alignment: Alignment.topLeft,
                       child: BrandDropdown(),
                     ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                    ),
+                    // Container(
+                    //   margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    // ),
 
                   ],
                 ),
@@ -211,13 +211,13 @@ class _placeadState extends State<placead> {
 
             //-------------------
             Container(
-              margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
+              margin: const EdgeInsets.fromLTRB(5, 2, 5, 0),
               child: Card(
                 elevation: 10,
                 child: Column(
                   children: [
                     Container(
-                        margin: const EdgeInsets.fromLTRB(5, 20, 0, 0),
+                        margin: const EdgeInsets.fromLTRB(5, 2, 0, 0),
                         child: const Align(
                           alignment: Alignment.topLeft,
                           child: Text("Ad Image",
@@ -246,7 +246,7 @@ class _placeadState extends State<placead> {
                             ),
 
                             SizedBox(
-                              height: 150,
+                              height: 100,
                               //width: 20,
                               child: selectedImages.isEmpty
                                   ?  Center(child: Text('Sorry nothing selected!!'))
@@ -268,12 +268,12 @@ class _placeadState extends State<placead> {
                                       children: [
                                         Container(
                                           // width: 200,
-                                          height: 150,
+                                          //height: 10880,
                                           alignment: Alignment.center,
                                           child: Image.file(selectedImages[index],fit: BoxFit.cover,),
                                         ),
                                         Positioned(
-                                          top: 5, right: 20,
+                                          top: 2, right: 20,
                                           child: GestureDetector(
                                             child: Icon(Icons.close, size: 30, color: Colors.red,),
                                             onTap: (){
@@ -303,13 +303,13 @@ class _placeadState extends State<placead> {
               ),
 
             Container(
-              margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
+              margin: const EdgeInsets.fromLTRB(5, 2, 5, 0),
               child: Card(
                 elevation: 10,
                 child: Column(
                   children: [
                     Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                         child: const Align(
                           alignment: Alignment.topLeft,
                           child: Text("Ad Price",
@@ -334,7 +334,7 @@ class _placeadState extends State<placead> {
                     ),
 
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
@@ -387,13 +387,13 @@ class _placeadState extends State<placead> {
             ),
 
             Container(
-              margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
+              margin: const EdgeInsets.fromLTRB(5, 2, 5, 0),
               child: Card(
                 elevation: 10,
                 child: Column(
                   children: [
                     Container(
-                        margin: const EdgeInsets.fromLTRB(5, 16, 0, 0),
+                        margin: const EdgeInsets.fromLTRB(5, 6, 0, 0),
                         child: const Align(
                           alignment: Alignment.topLeft,
                           child: Text("Ad Description",
@@ -402,7 +402,7 @@ class _placeadState extends State<placead> {
                         )
                     ),
                     Container(
-                      margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
+                      margin: const EdgeInsets.fromLTRB(5, 2, 5, 0),
                       child: TextField(
                         controller: _Description,
                         decoration: const InputDecoration(
@@ -420,7 +420,7 @@ class _placeadState extends State<placead> {
             ),
 
             Padding(
-              padding: const EdgeInsets.only(top: 20.0,left: 16),
+              padding: const EdgeInsets.only(top: 10.0,left: 16),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -499,7 +499,7 @@ class _placeadState extends State<placead> {
 
 
             Padding(
-              padding: const EdgeInsets.only(top: 30.0,left: 16,right: 16),
+              padding: const EdgeInsets.only(top: 20.0,left: 16,right: 16),
               child: Container(
                 height: 45,
                 child: Btn.minWidthFixHeight(
@@ -580,6 +580,13 @@ class _placeadState extends State<placead> {
                       print("Select Images  .....: ${selectedImages}");
 
                       place_ad_upload(ProdName,category,brand,description,offer,amount,offerstatus,email,password);
+                      setState(() {
+                        // printSelectedItems();
+                        _isAgree = false;
+
+                      });
+
+
 
                     }
                   }
@@ -588,7 +595,7 @@ class _placeadState extends State<placead> {
               ),
             ),
 
-            SizedBox(height: 10,),
+            SizedBox(height: 5,),
           ]
       );
   }
@@ -814,10 +821,12 @@ class _placeadState extends State<placead> {
                               // Handle checkbox state changes here.
                               // You can add or remove the item from the selectedItems list.
                             },
-                            controlAffinity: ListTileControlAffinity.leading, // Move checkbox to the left side.
+                            controlAffinity: ListTileControlAffinity.leading,
+                            contentPadding: EdgeInsets.zero, // Move checkbox to the left side.
                           ),
-                          SizedBox(height: 10),
-                          Padding(
+                        //  SizedBox(height: 1),
+
+                            Padding(
                             padding: const EdgeInsets.only(left: 30),
                             child: ListView.builder(
                               itemCount: itemList[index].childrenCategories.length,
@@ -841,9 +850,10 @@ class _placeadState extends State<placead> {
 
                                         // Handle checkbox state changes here.
                                       },
-                                      controlAffinity: ListTileControlAffinity.leading, // Move checkbox to the left side.
+                                      controlAffinity: ListTileControlAffinity.leading,
+                                      contentPadding: EdgeInsets.zero, // Move checkbox to the left side.
                                     ),
-                                    SizedBox(height: 10),
+                                   // SizedBox(height: 10),
                                     Padding(
                                       padding: const EdgeInsets.only(left: 30),
                                       child: ListView.builder(
@@ -866,7 +876,8 @@ class _placeadState extends State<placead> {
 
                                               // Handle checkbox state changes here.
                                             },
-                                            controlAffinity: ListTileControlAffinity.leading, // Move checkbox to the left side.
+                                            controlAffinity: ListTileControlAffinity.leading,
+                                            contentPadding: EdgeInsets.zero, // Move checkbox to the left side.
                                           );
                                         },
                                       ),

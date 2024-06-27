@@ -90,7 +90,7 @@ class _Feature_ad_package_ScreenState extends State<Feature_ad_package_Screen> {
             SizedBox(height: 10,),
             Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Text("Accelearte the sale of your product, get it featured on Home page",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400),),
+              child: Text("Accelerate the sale of your product, and get it featured on our Homepage.",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400),),
             ),
             SizedBox(height: 10,),
             Text("Buy a Package Today !",style: TextStyle(color: MyTheme.accent_color,fontSize: 18,fontWeight: FontWeight.w600),),

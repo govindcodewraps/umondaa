@@ -32,16 +32,18 @@ import 'package:toast/toast.dart';
 import 'package:umonda/screens/payment_method_screen/offline_screen.dart';
 import 'package:umonda/screens/payment_method_screen/paytm_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:umonda/screens/payment_method_screen/stripe_screen_wallet_recharge.dart';
 
-import '../Models/withdwawalamountmodel.dart';
-import '../custom/device_info.dart';
-import '../data_model/check_response_model.dart';
-import '../data_model/order_create_response.dart';
-import '../helpers/response_check.dart';
-import 'Done_Screen.dart';
-import 'common_webview_screen.dart';
+import '../../Models/withdwawalamountmodel.dart';
+import '../../custom/device_info.dart';
+import '../../data_model/check_response_model.dart';
+import '../../data_model/order_create_response.dart';
+import '../../helpers/response_check.dart';
+import '../Done_Screen.dart';
+import '../common_webview_screen.dart';
 
-class Checkout extends StatefulWidget {
+
+class Checkoutwalleterecharge extends StatefulWidget {
   int order_id; // only need when making manual payment from order details
   String list;
   //final OffLinePaymentFor offLinePaymentFor;
@@ -53,7 +55,7 @@ class Checkout extends StatefulWidget {
 
 
 
-  Checkout(
+  Checkoutwalleterecharge(
       {Key key,
         this.order_id = 0,
         this.paymentFor,
@@ -66,10 +68,10 @@ class Checkout extends StatefulWidget {
       : super(key: key);
 
   @override
-  _CheckoutState createState() => _CheckoutState();
+  _CheckoutwalleterechargeState createState() => _CheckoutwalleterechargeState();
 }
 
-class _CheckoutState extends State<Checkout> {
+class _CheckoutwalleterechargeState extends State<Checkoutwalleterecharge> {
   var _selected_payment_method_index = 0;
   var _selected_payment_method = "";
   var _selected_payment_method_key = "";
@@ -239,7 +241,7 @@ class _CheckoutState extends State<Checkout> {
 
     if (_selected_payment_method == "stripe_payment") {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return StripeScreen(
+        return StripeScreenWalletRecharge(
           amount: _grandTotalValue,
           payment_type: payment_type,
           payment_method_key: _selected_payment_method_key,
@@ -734,56 +736,56 @@ class _CheckoutState extends State<Checkout> {
                           padding: const EdgeInsets.all(16.0),
                           child: buildPaymentMethodList(),
                         ),
-                       if (_selected_payment_method == "wallet_system")
+                        if (_selected_payment_method == "wallet_system")
 
-                         withdrawalaccount_widget(),
+                          withdrawalaccount_widget(),
 
-                      //    Padding(
-                      //     padding: const EdgeInsets.only(left: 35,right: 35),
-                      //     child: Container(
-                      //         decoration: BoxDecoration(
-                      //           borderRadius: BorderRadius.circular(12.0),
-                      //           border: Border.all(color: Colors.black38),
-                      //           // color:Color(0xffFEE572),
-                      //           // boxShadow:const [
-                      //           //   BoxShadow(
-                      //           //     color: Colors.black,
-                      //           //     blurRadius: 2.0,
-                      //           //     spreadRadius: 0.0,
-                      //           //     offset: Offset(2.0, 2.0,), // shadow direction: bottom right
-                      //           //   )
-                      //           // ],
-                      //         ),
-                      //         padding: EdgeInsets.only(left: 16,right: 16,top: 18,bottom: 18),
-                      //         child:
-                      //         Row(
-                      //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      //           children: [
-                      //             Text("Your wallet balance:",style: TextStyle(color: Colors.grey),),
-                      //             Text("AED 0.00"),
-                      //
-                      // ],)
-                      //     ),
-                      //   ),
+                        //    Padding(
+                        //     padding: const EdgeInsets.only(left: 35,right: 35),
+                        //     child: Container(
+                        //         decoration: BoxDecoration(
+                        //           borderRadius: BorderRadius.circular(12.0),
+                        //           border: Border.all(color: Colors.black38),
+                        //           // color:Color(0xffFEE572),
+                        //           // boxShadow:const [
+                        //           //   BoxShadow(
+                        //           //     color: Colors.black,
+                        //           //     blurRadius: 2.0,
+                        //           //     spreadRadius: 0.0,
+                        //           //     offset: Offset(2.0, 2.0,), // shadow direction: bottom right
+                        //           //   )
+                        //           // ],
+                        //         ),
+                        //         padding: EdgeInsets.only(left: 16,right: 16,top: 18,bottom: 18),
+                        //         child:
+                        //         Row(
+                        //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        //           children: [
+                        //             Text("Your wallet balance:",style: TextStyle(color: Colors.grey),),
+                        //             Text("AED 0.00"),
+                        //
+                        // ],)
+                        //     ),
+                        //   ),
 
 
 
                         if (_selected_payment_method == "cash_payment")
-                         // Text("Account Details"),
+                        // Text("Account Details"),
                           Padding(
                             padding: const EdgeInsets.only(left: 36,right: 36),
                             child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text("Please initiate the payment within 3 days via bank transfer on the below mentioned account details.",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600),),
 
-                               SizedBox(height: 10,),
+                                SizedBox(height: 10,),
                                 Text("Account Details",style: TextStyle(fontWeight: FontWeight.w600),),
                                 Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(12.0),
                                     border: Border.all(color: Colors.black38),
-                                   // color:Color(0xffFEE572),
+                                    // color:Color(0xffFEE572),
                                     // boxShadow:const [
                                     //   BoxShadow(
                                     //     color: Colors.black,

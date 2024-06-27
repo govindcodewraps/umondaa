@@ -257,7 +257,7 @@ class _OrderListState extends State<OrderList> {
             decoration: BoxDecorations.buildBoxDecoration_1(),
             padding: EdgeInsets.symmetric(horizontal: 14),
             height: 36,
-            width: MediaQuery.of(context).size.width * .4,
+            width: MediaQuery.of(context).size.width * .44 ,
             child: new DropdownButton<PaymentStatus>(
               icon: Padding(
                 padding: const EdgeInsets.only(left: 38.0),
@@ -289,7 +289,7 @@ class _OrderListState extends State<OrderList> {
             decoration: BoxDecorations.buildBoxDecoration_1(),
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             height: 36,
-            width: MediaQuery.of(context).size.width * .4,
+            width: MediaQuery.of(context).size.width * .44,
             child: new DropdownButton<DeliveryStatus>(
               icon: Padding(
                 padding: const EdgeInsets.only(left: 22.0),
@@ -431,6 +431,7 @@ class _OrderListState extends State<OrderList> {
                       id: _orderList[index].id,
                     );
                   }));
+                  print("order idddddd :: ${_orderList[index].id}");
                 },
                 child: buildOrderListItemCard(index),
               );

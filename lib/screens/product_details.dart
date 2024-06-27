@@ -862,9 +862,9 @@ class _ProductDetailsState extends State<ProductDetails>
     SnackBar _addedToCartSnackbar = SnackBar(
       content: Text(
         AppLocalizations.of(context).added_to_cart,
-        style: TextStyle(color: MyTheme.font_grey),
+        style: TextStyle(color: MyTheme.white),
       ),
-      backgroundColor: MyTheme.soft_accent_color,
+      backgroundColor: MyTheme.accent_color,
       duration: const Duration(seconds: 3),
       action: SnackBarAction(
         label: AppLocalizations.of(context).show_cart_all_capital,
@@ -875,7 +875,7 @@ class _ProductDetailsState extends State<ProductDetails>
             onPopped(value);
           });
         },
-        textColor: MyTheme.accent_color,
+        textColor: MyTheme.white,
         disabledTextColor: Colors.grey,
       ),
     );
@@ -1100,7 +1100,7 @@ class _ProductDetailsState extends State<ProductDetails>
                               ),
                               Padding(
                                 padding:
-                                    EdgeInsets.only(top: 14, left: 14, right: 14),
+                                    EdgeInsets.only(top: 14, left: 14, right: 14,bottom: 14),
                                 child: _productDetails != null
                                     ? buildBrandRow()
                                     : ShimmerHelper().buildBasicShimmer(
@@ -1244,6 +1244,50 @@ class _ProductDetailsState extends State<ProductDetails>
                                             height: 60.0,
                                           )),
                                     ),
+
+                                    divider(),
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.push(context,
+                                            MaterialPageRoute(builder: (context) {
+                                              return ProductReviews(id: widget.id);
+                                            })).then((value) {
+                                          onPopped(value);
+                                        });
+                                      },
+                                      child: Container(
+                                        color: MyTheme.white,
+                                        height: 48,
+                                        child: Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                            18.0,
+                                            14.0,
+                                            18.0,
+                                            14.0,
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                AppLocalizations.of(context).reviews_ucf,
+                                                style: TextStyle(
+                                                    color: MyTheme.dark_font_grey,
+                                                    fontSize: 13,
+                                                    fontWeight: FontWeight.w600),
+                                              ),
+                                              Spacer(),
+                                              Image.asset(
+                                                "assets/arrow.png",
+                                                height: 11,
+                                                width: 20,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    divider(),
+
+
                                   ],
                                 ),
                               ),
@@ -1409,47 +1453,47 @@ class _ProductDetailsState extends State<ProductDetails>
                               //     ),
                               //   ),
                               // ),
-                              divider(),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                        return ProductReviews(id: widget.id);
-                                      })).then((value) {
-                                    onPopped(value);
-                                  });
-                                },
-                                child: Container(
-                                  color: MyTheme.white,
-                                  height: 48,
-                                  child: Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                      18.0,
-                                      14.0,
-                                      18.0,
-                                      14.0,
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          AppLocalizations.of(context).reviews_ucf,
-                                          style: TextStyle(
-                                              color: MyTheme.dark_font_grey,
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                        Spacer(),
-                                        Image.asset(
-                                          "assets/arrow.png",
-                                          height: 11,
-                                          width: 20,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              divider(),
+                              // divider(),
+                              // InkWell(
+                              //   onTap: () {
+                              //     Navigator.push(context,
+                              //         MaterialPageRoute(builder: (context) {
+                              //           return ProductReviews(id: widget.id);
+                              //         })).then((value) {
+                              //       onPopped(value);
+                              //     });
+                              //   },
+                              //   child: Container(
+                              //     color: MyTheme.white,
+                              //     height: 48,
+                              //     child: Padding(
+                              //       padding: const EdgeInsets.fromLTRB(
+                              //         18.0,
+                              //         14.0,
+                              //         18.0,
+                              //         14.0,
+                              //       ),
+                              //       child: Row(
+                              //         children: [
+                              //           Text(
+                              //             AppLocalizations.of(context).reviews_ucf,
+                              //             style: TextStyle(
+                              //                 color: MyTheme.dark_font_grey,
+                              //                 fontSize: 13,
+                              //                 fontWeight: FontWeight.w600),
+                              //           ),
+                              //           Spacer(),
+                              //           Image.asset(
+                              //             "assets/arrow.png",
+                              //             height: 11,
+                              //             width: 20,
+                              //           ),
+                              //         ],
+                              //       ),
+                              //     ),
+                              //   ),
+                              // ),
+                              // divider(),
                               // InkWell(
                               //   onTap: () {
                               //     Navigator.push(context,
@@ -1620,7 +1664,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                 //onPressUpdatePassword();
                               },
                               child:Text(
-                              "Out Of Stock",
+                              "Sold Out",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 16,

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:html/parser.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:umonda/custom/device_info.dart';
 import 'package:umonda/my_theme.dart';
@@ -19,8 +20,9 @@ import '../screens/common_webview_screen.dart';
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../data_model/Sub_Category_List_Model.dart';
+import 'InProfileScreen/My_Ads.dart';
 
-
+  String imagePath;
 //                             var _remarkinput=remarkInputController.text .isEmpty ? widget.remark:remarkInputController.text;
 class Edit_placead extends StatefulWidget {
   String Product_ID,Product_Name,Product_Price,Product_Des;
@@ -87,13 +89,17 @@ class _Edit_placeadState extends State<Edit_placead> {
   //List<String> imagePaths = [];
   //Set<String> imagePaths = {};
   List<String> remainingImagePaths = [];
-
+  String htmlText = parse("String with HTML tags").body.text;
 
   //List<String> remainingImagePaths = [];
   int gov=0;
 
   @override
   void initState() {
+
+
+
+
     print("product iddd ${widget.Product_ID}");
     _ProductName.text = widget.Product_Name ?? 'No remark';
 
@@ -105,6 +111,8 @@ class _Edit_placeadState extends State<Edit_placead> {
 
     super.initState();
   }
+
+
 
 
   String getNumericPart(String input) {
@@ -138,20 +146,18 @@ class _Edit_placeadState extends State<Edit_placead> {
     return SafeArea(child: Scaffold(
         backgroundColor: Colors.white,
         appBar: buildAppBar(context),
+       // appBar: buildAppBarTitleOption(context),
         body: bodywidget()
     ));
   }
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      //iconTheme: IconThemeData(color: Colors.black),
-      leading: UsefulElements.backToMain(context, go_back: false,color:Colors.black),
-
+      automaticallyImplyLeading: false, // This will remove the back button
       backgroundColor: Color.fromARGB(240, 243, 237, 237),
       title: buildAppBarTitleOption(context),
       elevation: 0.0,
       titleSpacing: 0,
-
     );
   }
 
@@ -165,6 +171,11 @@ class _Edit_placeadState extends State<Edit_placead> {
       padding: EdgeInsets.symmetric(horizontal: 0),
       child: Row(
         children: [
+          InkWell(
+            onTap: (){
+              Navigator.pop(context);
+            },
+              child: Icon(Icons.arrow_back,color: Colors.black,)),
           // Text(widget.catevale),
           Container(
             width: 20,
@@ -284,18 +295,34 @@ class _Edit_placeadState extends State<Edit_placead> {
       'email':email,
       'password':password,
       'product_id': widget.Product_ID,
-      'old_image_url':oldimages
+      'old_image_url':imagePath
+      //'old_image_url':oldimages
 
     });
 
     for(var i=0;i<imageUrls.length;i++)
     {
       request.files.add(await http.MultipartFile.fromPath('thumbnail_img[]', imageUrls[i],));
+      //request.files.add(await http.MultipartFile.fromPath('thumbnail_img[]', imagePath[i],));
 
 
     }
 
     request.headers.addAll(headers);
+    print("headerrrrr");
+    print(name);
+    print(user_id.$.toString());
+    print(Category);
+    print(Brand);
+    print(description);
+    print(offer);
+    print(amount);
+    print(offerstatus);
+    print(widget.Product_ID);
+    print("hqwertyu");
+    print(oldimages);
+    print("Old Image url ${imagePath}");
+    print("headerrrrr");
 
     try {
       http.StreamedResponse response = await request.send();
@@ -315,7 +342,10 @@ class _Edit_placeadState extends State<Edit_placead> {
         print(response);
 
         print("Product Update successfully");
-        Navigator.pop(context);
+        Navigator.pop(context, true);
+        //Navigator.pop(context);
+        //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>My_adsScreen()));
+
       }
       else if(response.statusCode == 401)
       {
@@ -345,7 +375,7 @@ class _Edit_placeadState extends State<Edit_placead> {
         );
       }
     } catch (e) {
-      print('Errorrr: $e');
+      print('Errorrr:::: $e');
     }
   }
 
@@ -433,7 +463,8 @@ class _Edit_placeadState extends State<Edit_placead> {
 
               }
               print("Convert String to list  .: ${categoryIdList}");
-              discription=snapshot.data.data[0].description.toString();
+              //discription=snapshot.data.data[0].description.toString();
+              String discription = parse(snapshot.data.data[0].description.toString()).body.text;
               print("Descriptionnnnnn ${discription}");
               _Description.text = discription.toString() ?? 'No remark';
 
@@ -546,7 +577,9 @@ class _Edit_placeadState extends State<Edit_placead> {
                           itemCount: imagePaths.length,
                           separatorBuilder: (context, index) => SizedBox(width: 8.0),
                           itemBuilder: (context, index) {
-                            final String imagePath = imagePaths[index];
+                          //  final String imagePath = imagePaths[index];
+                            imagePath = imagePaths[index];
+                            print("old Image path${imagePath}");
 
                             return Stack(
                               children: [
@@ -708,8 +741,9 @@ class _Edit_placeadState extends State<Edit_placead> {
                                            print("Deleting image at index $index, Original URL: $originalUrl");
 
                                            // Update the image path
-                                           imagePaths[index] = originalUrl.replaceAll("https://umonda.com/public//uploads/all/", "");
+                                           imagePaths[index] = originalUrl.replaceAll("https://umonda.com/public/uploads/all/", "");
                                            preimagepath = imagePaths[index];
+
 
                                            // Call the fetchData() function if needed
                                            fetchData();
@@ -719,7 +753,7 @@ class _Edit_placeadState extends State<Edit_placead> {
                                            for (int i = 0; i < imagePaths.length; i++) {
                                              if (i != index) {
                                                // Exclude the selected index
-                                               String urlWithoutPrefix = imagePaths[i].replaceAll("https://umonda.com/public//uploads/all/", "");
+                                               String urlWithoutPrefix = imagePaths[i].replaceAll("https://umonda.com/public/uploads/all/", "");
                                                modifiedUrls.add(urlWithoutPrefix);
                                              }
                                            }
@@ -737,11 +771,16 @@ class _Edit_placeadState extends State<Edit_placead> {
                                            print("?????????????????");
                                            print(oldimages);
                                            print("?????????????????");
-
                                          } else {
                                            print("Invalid index: $index");
                                          }
                                        });
+
+
+
+
+
+
 
 
 

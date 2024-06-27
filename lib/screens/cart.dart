@@ -677,20 +677,16 @@ class _CartState extends State<Cart> {
                           Text(
                            // SystemConfig.systemCurrency.symbol+
                            "AED "+
-                                (_shopList[seller_index]
-                                            .cart_items[item_index]
-                                            .price *
-                                        _shopList[seller_index]
-                                            .cart_items[item_index]
-                                            .quantity)
-                                    .toStringAsFixed(2),
+                                //(_shopList[seller_index].cart_items[item_index].price * _shopList[seller_index].cart_items[item_index].quantity)
+                                (_shopList[seller_index].cart_items[item_index].price)
+                                    .toStringAsFixed(1),
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
+                            maxLines: 1,
                             style: TextStyle(
                                 color: MyTheme.accent_color,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600),
                           ),
                         ],
                       ),

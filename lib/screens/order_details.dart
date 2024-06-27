@@ -58,6 +58,7 @@ class _OrderDetailsState extends State<OrderDetails> {
     super.initState();
 
     print(widget.id);
+
   }
 
   @override
@@ -145,6 +146,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         padding: const EdgeInsets.only(bottom: 8.0),
                         child: Row(
                           children: [
+                            Text("opkpoilop"),
                             Text(AppLocalizations.of(context).product_name_ucf,
                                 style: TextStyle(
                                     color: MyTheme.font_grey, fontSize: 12)),
