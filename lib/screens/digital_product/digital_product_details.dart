@@ -737,9 +737,9 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
     SnackBar _addedToCartSnackbar = SnackBar(
       content: Text(
         AppLocalizations.of(context).added_to_cart,
-        style: TextStyle(color: MyTheme.font_grey),
+        style: TextStyle(color: MyTheme.white),
       ),
-      backgroundColor: MyTheme.soft_accent_color,
+      backgroundColor: MyTheme.accent_color,
       duration: const Duration(seconds: 3),
       action: SnackBarAction(
         label: AppLocalizations.of(context).show_cart_all_capital,
@@ -750,7 +750,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
             onPopped(value);
           });
         },
-        textColor: MyTheme.accent_color,
+        textColor: MyTheme.white,
         disabledTextColor: Colors.grey,
       ),
     );

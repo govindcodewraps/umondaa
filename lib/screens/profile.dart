@@ -41,6 +41,7 @@ import 'package:route_transitions/route_transitions.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../Models/withdwawalamountmodel.dart';
 import '../data_model/My_ads_list_model.dart';
 import '../repositories/auth_repository.dart';
 import 'InProfileScreen/My_Ads.dart';
@@ -49,6 +50,7 @@ import 'InProfileScreen/commisssion_history_screen.dart';
 import 'InProfileScreen/money_withdrawal.dart';
 import 'package:http/http.dart' as http;
 
+var globWalletebalance;
 class Profile extends StatefulWidget {
   Profile({Key key, this.show_back_button = false}) : super(key: key);
 
@@ -76,6 +78,7 @@ class _ProfileState extends State<Profile> {
     super.initState();
 
     if (is_logged_in.$ == true) {
+      withdrawalaccount();
       fetchAll();
     }
   }
@@ -247,6 +250,36 @@ class _ProfileState extends State<Profile> {
               padding: const EdgeInsets.symmetric(horizontal: 18.0),
               child: buildSettingAndAddonsHorizontalMenu(),
             ),
+
+            //if (is_logged_in.$)
+              Padding(
+                padding: const EdgeInsets.only(left: 100, right: 100, top: 40),
+                child: Container(
+                  width: 40,
+                  child: is_logged_in.$
+                      ? Container() // Empty container if logged in
+                      : Btn.basic(
+                    padding: EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                        side: BorderSide(color: MyTheme.white)),
+                    child: Text(
+                      LangText(context).local.login_ucf,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Login()));
+                    },
+                  ),
+                ),
+              ),
+
+
+            if (is_logged_in.$)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18.0),
               child: buildBottomVerticalCardList(),
@@ -411,70 +444,72 @@ class _ProfileState extends State<Profile> {
           if (is_logged_in.$)
           Column(
             children: [
-              Column(
-                children: [
-                  if (is_logged_in.$) // Check if the user is logged in
-                    buildBottomVerticalCardListItem(
-                      "assets/shop.png",
-                      LangText(context).local.browse_all_sellers_ucf,
-                      onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) {
-                          return Moneywithdrawal();
-                        }));
-                      },
-                    ),
-                  // else
-                  //   Material(
-                  //     child: InkWell(
-                  //       // Disabled button
-                  //       child: ColorFiltered(
-                  //         colorFilter: ColorFilter.mode(
-                  //           Colors.white, // Specify the disabled color
-                  //           BlendMode.color, // Adjust blend mode as needed
-                  //         ),
-                  //         child:
-                  //
-                  //         Container(
-                  //           height: 20,
-                  //           child: TextButton(
-                  //             // onPressed: onPressed,
-                  //             style: TextButton.styleFrom(
-                  //                 splashFactory: NoSplash.splashFactory,
-                  //                 alignment: Alignment.center,
-                  //                 padding: EdgeInsets.zero),
-                  //             child:
-                  //             Row(
-                  //               crossAxisAlignment: CrossAxisAlignment.center,
-                  //               children: [
-                  //                 Image.asset(
-                  //                   "assets/shop.png",
-                  //                   color: Colors.grey, // Image color set to grey
-                  //                 ),
-                  //                 SizedBox(width: 20,),
-                  //                 Text(
-                  //                   LangText(context).local.browse_all_sellers_ucf,
-                  //                   style: TextStyle(color: Colors.grey), // Text color set to grey
-                  //                 ),
-                  //               ],
-                  //             ),
-                  //           ),
-                  //         ),
-                  //
-                  //       ),
-                  //       onTap: () {
-                  //         showLoginWarning();
-                  //         // Add any custom action when the disabled button is tapped
-                  //       },
-                  //     ),
-                  //   ),
-
-
-                  Divider(
-                    thickness: 1,
-                    color: MyTheme.light_grey,
-                  ),
-                ],
-              ),
+              // Column(
+              //   children: [
+              //     // if (is_logged_in.$) // Check if the user is logged in
+              //     //   buildBottomVerticalCardListItem(
+              //     //     "assets/shop.png",
+              //     //     LangText(context).local.browse_all_sellers_ucf,
+              //     //     onPressed: () {
+              //     //       Navigator.push(context, MaterialPageRoute(builder: (context) {
+              //     //         return Moneywithdrawal();
+              //     //       }));
+              //     //     },
+              //     //   ),
+              //
+              //
+              //     // else
+              //     //   Material(
+              //     //     child: InkWell(
+              //     //       // Disabled button
+              //     //       child: ColorFiltered(
+              //     //         colorFilter: ColorFilter.mode(
+              //     //           Colors.white, // Specify the disabled color
+              //     //           BlendMode.color, // Adjust blend mode as needed
+              //     //         ),
+              //     //         child:
+              //     //
+              //     //         Container(
+              //     //           height: 20,
+              //     //           child: TextButton(
+              //     //             // onPressed: onPressed,
+              //     //             style: TextButton.styleFrom(
+              //     //                 splashFactory: NoSplash.splashFactory,
+              //     //                 alignment: Alignment.center,
+              //     //                 padding: EdgeInsets.zero),
+              //     //             child:
+              //     //             Row(
+              //     //               crossAxisAlignment: CrossAxisAlignment.center,
+              //     //               children: [
+              //     //                 Image.asset(
+              //     //                   "assets/shop.png",
+              //     //                   color: Colors.grey, // Image color set to grey
+              //     //                 ),
+              //     //                 SizedBox(width: 20,),
+              //     //                 Text(
+              //     //                   LangText(context).local.browse_all_sellers_ucf,
+              //     //                   style: TextStyle(color: Colors.grey), // Text color set to grey
+              //     //                 ),
+              //     //               ],
+              //     //             ),
+              //     //           ),
+              //     //         ),
+              //     //
+              //     //       ),
+              //     //       onTap: () {
+              //     //         showLoginWarning();
+              //     //         // Add any custom action when the disabled button is tapped
+              //     //       },
+              //     //     ),
+              //     //   ),
+              //
+              //
+              //     Divider(
+              //       thickness: 1,
+              //       color: MyTheme.light_grey,
+              //     ),
+              //   ],
+              // ),
               Column(
                 children: [
                   if (is_logged_in.$) // Check if the user is logged in
@@ -543,7 +578,8 @@ class _ProfileState extends State<Profile> {
                   if (is_logged_in.$) // Check if the user is logged in
                     buildBottomVerticalCardListItem(
                       "assets/shop.png",
-                      LangText(context).local.followed_sellers_ucf,
+                      "Seller Commission",
+                      //LangText(context).local.followed_sellers_ucf,
                       onPressed: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context) {
                           return CommissionHistoryScreen();
@@ -815,20 +851,20 @@ class _ProfileState extends State<Profile> {
                   : () => showLoginWarning()),
 
 
-
+          //
           // Container(
           //   // color: Colors.red,
           //
           //   child: buildSettingAndAddonsHorizontalMenuItem("assets/wallet.png",
           //       AppLocalizations.of(context).my_wallet_ucf, () {
           //
-          //         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          //           return Moneywithdrawal();
-          //         }));
-          //
           //         // Navigator.push(context, MaterialPageRoute(builder: (context) {
-          //         //   return Wallet();
+          //         //   return Moneywithdrawal();
           //         // }));
+          //
+          //         Navigator.push(context, MaterialPageRoute(builder: (context) {
+          //           return Wallet();
+          //         }));
           //       }),
           // ),
 
@@ -1614,33 +1650,45 @@ class _ProfileState extends State<Profile> {
           ),
           buildUserInfo(),
           Spacer(),
+
+
           Container(
-            width: 70,
-            height: 26,
-            child: Btn.basic(
-              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 7),
-              // 	rgb(50,205,50)
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(6),
-                  side: BorderSide(color: MyTheme.white)),
-              child: Text(
-                is_logged_in.$
-                    ? AppLocalizations.of(context).logout_ucf
-                    : LangText(context).local.login_ucf,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 10,
-                    fontWeight: FontWeight.w500),
+            width: 80,
+            child: is_logged_in.$
+                ?
+            Container(
+              width: 70,
+              height: 28,
+              child: Btn.basic(
+                padding: EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+                // 	rgb(50,205,50)
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    side: BorderSide(color: MyTheme.white)),
+                child: Text(
+                  is_logged_in.$
+                      ? AppLocalizations.of(context).logout_ucf
+                      : LangText(context).local.login_ucf,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600),
+                ),
+                onPressed: () {
+                  if (is_logged_in.$)
+                    onTapLogout(context);
+                  else
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Login()));
+                },
               ),
-              onPressed: () {
-                if (is_logged_in.$)
-                  onTapLogout(context);
-                else
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Login()));
-              },
-            ),
+            )
+            : Container() // Empty container if logged in
+
           ),
+
+
+
         ],
       ),
     );
@@ -1766,6 +1814,56 @@ class _ProfileState extends State<Profile> {
       print('An error occurred: $e');
     }
   }*/
+
+
+  Future<List<Withdrawalamount>> withdrawalaccount() async {
+    var url = Uri.parse('${AppConfig.BASE_URL}/money-withdraw-requests/${user_id.$}');
+    // var url = Uri.parse('${AppConfig.BASE_URL}/money-withdraw-requests/138');
+
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      List<dynamic> jsonList = json.decode(response.body);
+
+      List<Withdrawalamount> itemList = jsonList.map((json) => Withdrawalamount.fromJson(json)).toList();
+
+      // Print admin_to_pay values in the console
+      for (var item in itemList) {
+        print("admin_to_pay: ${item.adminToPay}");
+        globWalletebalance = item.adminToPay.toString();
+        print("QWER ${globWalletebalance}");
+      }
+
+      return itemList;
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
+
+
+  // Future<List<Withdrawalamount>> withdrawalaccount() async {
+  //   var url = Uri.parse('${AppConfig.BASE_URL}/money-withdraw-requests/${user_id.$}');
+  //   // var url = Uri.parse('${AppConfig.BASE_URL}/money-withdraw-requests/138');
+  //
+  //   final response = await http.get(url);
+  //
+  //   if (response.statusCode == 200) {
+  //
+  //     List<dynamic> jsonList = json.decode(response.body);
+  //
+  //     List<Withdrawalamount> itemList = jsonList.map((json) => Withdrawalamount.fromJson(json)).toList();
+  //
+  //     print("Withdrawalamountttttt ${response.body}");
+  //
+  //     //print(response.body);
+  //
+  //     return itemList;
+  //
+  //   } else {
+  //     throw Exception('Failed to load data');
+  //   }
+  // }
 
 
 }

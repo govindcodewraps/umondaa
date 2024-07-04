@@ -36,6 +36,7 @@ import '../data_model/Notification_count_model.dart';
 import '../helpers/auth_helper.dart';
 import '../ui_sections/drawer.dart';
 import 'Done_Screen.dart';
+import 'InProfileScreen/My_Ads.dart';
 import 'New_Home_Screen/All_Feature_Ads_Screen.dart';
 import 'New_Home_Screen/Allnewads_Screen.dart';
 import 'InProfileScreen/commisssion_history_screen.dart';
@@ -228,84 +229,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   ],
                 ),
 
-                // appBar: AppBar(
-                //   backgroundColor: Colors.white,
-                //   iconTheme: IconThemeData(
-                //     color: Colors.black, // Change this to your desired color
-                //   ),
-                //   // actions: [
-                //   //   Expanded(
-                //   //     child: Row(children: [
-                //   //       SizedBox(width: 44,),
-                //   //       Icon(Icons.add_box_rounded),
-                //   //       Spacer(),
-                //   //       Icon(Icons.add_box_rounded),
-                //   //       Spacer(),
-                //   //       Icon(Icons.add_box_rounded),
-                //   //     ],),
-                //   //   )
-                //   // ],
-                //   actions: [
-                //     Expanded(
-                //       child: Row(
-                //         //crossAxisAlignment: CrossAxisAlignment.center,
-                //         //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //         children: [
-                //           SizedBox(
-                //           //  width: 44,
-                //           width:MediaQuery.of(context).size.width*0.25,
-                //           ),
-                //           //Text("aaaaaaaa"),
-                //           Text("",style: TextStyle(color: Colors.black),),
-                //           Spacer(),
-                //           Image.asset('assets/appbarlogo.png',
-                //              //height: 40,
-                //              //width: 250,
-                //            ),
-                //           Spacer(),
-                //           GestureDetector(
-                //               onTap: () {
-                //                 Navigator.push(context, MaterialPageRoute(builder: (context) => Filter()));
-                //                 return;
-                //               },
-                //               child: Icon(Icons.search_rounded,size:20,color: Colors.black,)
-                //
-                //             // Image.asset(
-                //             //   'assets/search.png',
-                //             //   height: 16,
-                //             //   //color: MyTheme.dark_grey,
-                //             //   color: MyTheme.dark_grey,
-                //             // ),
-                //
-                //           ),
-                //           Icon(Icons.notifications,size:20,color: Colors.black,),
-                //           SizedBox(width: 7,),
-                //           //Icon(Icons.shopping_cart,color: Colors.black,),
-                //           //
-                //           //Image.asset("assets/icons/wishicon.png",height: 30,width: 30,),
-                //
-                //           //buildSettingAndAddonsHorizontalMenu(),
-                //           SizedBox(
-                //             height: 30,
-                //             width: 30,
-                //             child: Expanded(
-                //               flex: 1,
-                //                 child: buildBodyChildren()),
-                //           ),
-                //
-                //           SizedBox(width: 14,),
-                //         ],
-                //       ),
-                //     )
-                //   ],
-                // ),
-
-
-
-                // PreferredSize(
-                //   preferredSize: Size.fromHeight(80),
-                //   child: buildAppBar(statusBarHeight, context),
-                // ),
                 drawer: MainDrawer(),
                 body: Stack(
                   children: [
@@ -770,136 +693,143 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                   // Container(
                                   // margin: const EdgeInsets.fromLTRB(5, 5, 5, 20),
                                   // ),
-                                  Container(
-                                    margin: const EdgeInsets.fromLTRB(5, 5, 5, 0),
-                                    //decoration: BoxDecorations.buildBoxDecoration_1(),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Container(
-                                          child: GestureDetector(
-                                            child: Image.asset(
-                                              'assets/topbrand_image.png',
-                                              height: 100,
-                                              width: 120,
-                                              //color: MyTheme.dark_grey,
-                                              color: MyTheme.dark_grey,
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 8,right: 8),
+                                    child: Container(
+                                      margin: const EdgeInsets.fromLTRB(5, 5, 5, 0),
+                                      decoration: BoxDecorations.buildBoxDecoration_1(),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Container(
+                                            child: GestureDetector(
+                                              child: Image.asset(
+                                                'assets/topbrand_image.png',
+                                                height: 60,
+                                                width: 70,
+                                                //color: MyTheme.dark_grey,
+                                                color: MyTheme.dark_grey,
+                                              ),
+
+                                              // onTap: () {
+                                              //   Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                              //     return TopBrand();
+                                              //   }));
+                                              // },
                                             ),
-
-                                            // onTap: () {
-                                            //   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                            //     return TopBrand();
-                                            //   }));
-                                            // },
                                           ),
-                                        ),
-                                        Container(
-                                          margin: const EdgeInsets.fromLTRB(21, 0, 0, 0),
-                                          child: GestureDetector(
-                                            child: Text("Top Brands",
-                                              overflow: TextOverflow.ellipsis,
-                                              style:
-                                              TextStyle(fontSize: 20, color:Colors.black, ),
+                                          Container(
+                                            margin: const EdgeInsets.fromLTRB(21, 0, 0, 0),
+                                            child: GestureDetector(
+                                              child: Text("Top Brands",
+                                                overflow: TextOverflow.ellipsis,
+                                                style:
+                                                TextStyle(fontSize: 20, color:Colors.black, ),
+                                              ),
+
+                                              onTap: () {
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                                  return TopBrands();
+                                                }));
+                                              },
                                             ),
-
-                                            onTap: () {
-                                              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                                return TopBrands();
-                                              }));
-                                            },
                                           ),
-                                        ),
-                                        Container(
-                                          // margin: const EdgeInsets.fromLTRB(56, 0, 0, 0),
-                                          child: GestureDetector(
-                                            child: Text("View All >",
-                                              overflow: TextOverflow.ellipsis,
-                                              style:
-                                              TextStyle(fontSize: 14, color: Colors.black, ),
+                                          Container(
+                                            // margin: const EdgeInsets.fromLTRB(56, 0, 0, 0),
+                                            child: GestureDetector(
+                                              child: Text("View All",
+                                                overflow: TextOverflow.ellipsis,
+                                                style:
+                                                TextStyle(fontSize: 14, color: Colors.black, ),
+                                              ),
+
+                                              onTap: () {
+
+                                                // Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                                //   return TopBrands();
+                                                // }));
+
+                                                Navigator.push(context, MaterialPageRoute(builder: (context)
+                                                {
+                                                  return TopBrands(
+                                                    selected_filter: "brands",
+                                                  );
+                                                }));
+
+
+                                              },
+
                                             ),
-
-                                            onTap: () {
-
-                                              // Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                              //   return TopBrands();
-                                              // }));
-
-                                              Navigator.push(context, MaterialPageRoute(builder: (context)
-                                              {
-                                                return TopBrands(
-                                                  selected_filter: "brands",
-                                                );
-                                              }));
-
-
-                                            },
-
                                           ),
-                                        ),
 
-                                      ],
+                                        ],
+                                      ),
+
                                     ),
-
                                   ),
 
-                                  Container(
-                                    margin: const EdgeInsets.fromLTRB(5, 15, 5, 0),
-                                    decoration: BoxDecorations.buildBoxDecoration_1(),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Container(
-                                          child: GestureDetector(
-                                            child: Image.asset(
-                                              'assets/brand_image.png',
-                                              height: 100,
-                                              width: 120,
-                                              //color: MyTheme.dark_grey,
-                                              color: MyTheme.dark_grey,
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 8,right: 8),
+                                    child: Container(
+                                      margin: const EdgeInsets.fromLTRB(5, 15, 5, 0),
+                                      decoration: BoxDecorations.buildBoxDecoration_1(),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Container(
+                                            child: GestureDetector(
+                                              child: Image.asset(
+                                                'assets/brand_image.png',
+                                                height: 60,
+                                                width: 70,
+                                                //color: MyTheme.dark_grey,
+                                                color: MyTheme.dark_grey,
+                                              ),
+
+                                              onTap: () {
+
+                                              },
                                             ),
-
-                                            onTap: () {
-
-                                            },
                                           ),
-                                        ),
-                                        Container(
-                                          margin: const EdgeInsets.fromLTRB(21, 0, 0, 0),
-                                          child: GestureDetector(
-                                            child: Text("All Brands",
-                                              overflow: TextOverflow.ellipsis,
-                                              style:
-                                              TextStyle(fontSize: 20, color:Colors.black, ),
+                                          Container(
+                                            margin: const EdgeInsets.fromLTRB(21, 0, 0, 0),
+                                            child: GestureDetector(
+                                              child: Text("All Brands",
+                                                overflow: TextOverflow.ellipsis,
+                                                style:
+                                                TextStyle(fontSize: 20, color:Colors.black, ),
+                                              ),
+
+                                              onTap: () {
+
+                                              },
                                             ),
-
-                                            onTap: () {
-
-                                            },
                                           ),
-                                        ),
-                                        Container(
-                                          //margin: const EdgeInsets.fromLTRB(61, 0, 0, 0),
-                                          child: GestureDetector(
-                                            child: Text("View All >",
-                                              overflow: TextOverflow.ellipsis,
-                                              style:
-                                              TextStyle(fontSize: 14, color:Colors.black, ),
+                                          Container(
+                                            //margin: const EdgeInsets.fromLTRB(61, 0, 0, 0),
+                                            child: GestureDetector(
+                                              child: Text("View All",
+                                                overflow: TextOverflow.ellipsis,
+                                                style:
+                                                TextStyle(fontSize: 14, color:Colors.black, ),
+                                              ),
+
+                                              onTap: () {
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                                  return Filter(
+                                                    selected_filter: "brands",
+                                                  );
+                                                }));
+                                              },
                                             ),
-
-                                            onTap: () {
-                                              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                                return Filter(
-                                                  selected_filter: "brands",
-                                                );
-                                              }));
-                                            },
                                           ),
-                                        ),
 
-                                      ],
+                                        ],
+                                      ),
+
                                     ),
-
                                   ),
+                                  SizedBox(height: 10,)
                                 ],
                               ),
                             ],
@@ -976,7 +906,19 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               ),
               title:  Text('Home',style: TextStyle(color: MyTheme.accent_color),),
               onTap: () {
-                //Navigator.pop(context);
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              //leading: Image.asset("assets/heart.png",height: 20,width: 20,color: Colors.grey,),
+              leading: Icon(Icons.monetization_on_outlined),
+              title:  Text('My Sales',style: TextStyle(color: MyTheme.accent_color),),
+              onTap: () {
+
+
+                // Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>My_adsScreen()));
+               // Navigator.push(context, MaterialPageRoute(builder: (context)=>StripeScreen()));
               },
             ),
             ListTile(
@@ -992,7 +934,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               leading: Icon(
                 Icons.history,color: Colors.grey,
               ),
-              title:  Text('Order History',style: TextStyle(color: MyTheme.accent_color),),
+              title:  Text('My Purchases',style: TextStyle(color: MyTheme.accent_color),),
               onTap: () {
                 // Navigator.pop(context);
                 //OrderList
@@ -1051,7 +993,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               builder: (context) =>
                                   CommonWebviewScreen(
                                     page_name:
-                                    "Terms Conditions",
+                                    "Terms & Conditions",
                                     url:
                                     //"https://umonm.com/",
                                     "${AppConfig.RAW_BASE_URL}/mobile-page/terms",
@@ -1830,13 +1772,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   Widget buildHomeCarouselSlider(context, HomePresenter homeData) {
     if (homeData.isCarouselInitial && homeData.carouselImageList.length == 0) {
       return Padding(
-          padding:
-          const EdgeInsets.only(left: 15, right: 15, top: 0, bottom: 20),
+          padding: EdgeInsets.only(left: 15, right: 15, top: 0, bottom: 20),
           child: ShimmerHelper().buildBasicShimmer(height: 120));
     } else if (homeData.carouselImageList.length > 0) {
       return CarouselSlider(
         options: CarouselOptions(
-            aspectRatio: 351 /120,
+            aspectRatio: 351 /90,
             viewportFraction:1,
             initialPage: 0,
             enableInfiniteScroll: true,

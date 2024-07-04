@@ -71,6 +71,7 @@ class _My_adsScreenState extends State<My_adsScreen> {
       child:      SingleChildScrollView(
         child: Column(
           children: [
+
             listview(),
 
           ],
@@ -85,7 +86,10 @@ class _My_adsScreenState extends State<My_adsScreen> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Container(
-            child: Center(child: CircularProgressIndicator()),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 250),
+              child: Center(child: CircularProgressIndicator()),
+            ),
           );
         } else if (snapshot.hasError) {
           return Container(
@@ -95,15 +99,28 @@ class _My_adsScreenState extends State<My_adsScreen> {
           );
         } else if (!snapshot.hasData || snapshot.data.data.isEmpty) {
           return Container(
-            child: Center(
-              child: Text('No ads available.'),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 250),
+              child: Center(
+                child: Column(
+                  children: [
+
+                    Icon(Icons.folder_off_outlined,size: 88,color: MyTheme.font_grey),
+                    Center(
+                        child: Text(
+                          "No ads available.",
+                          style: TextStyle(color: MyTheme.font_grey),
+                        )),
+                  ],
+                ),
+              ),
             ),
           );
         } else {
           return SingleChildScrollView(
             child: Container(
               height: MediaQuery.of(context).size.height * 1,
-              padding: EdgeInsets.only(bottom: 90),
+              padding: EdgeInsets.only(bottom: 9),
               child: Column(
                 children: [
                   Expanded(
@@ -117,12 +134,24 @@ class _My_adsScreenState extends State<My_adsScreen> {
 
                         return InkWell(
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => Edit_placead(Product_ID: product_Id,Product_Name: product_name,Product_Price: product_price,)));
+                            if(snapshot.data.data[index].sold_status==0)
+
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => Edit_placead(Product_ID: product_Id,Product_Name: product_name,Product_Price: product_price)))
+                                  .then((value){ if(value != null && value)
+                              {
+                                setState(() {
+                                  myadsapicall();
+                                });
+                              };
+                              });
+
                             print("Govind >>>>>>>>>>>>>>");
                             product_Id = snapshot.data.data[index].id.toString();
                             product_name = snapshot.data.data[index].name.toString();
                             product_price = snapshot.data.data[index].mainPrice.toString();
-                           // product_des = snapshot.data.data[index].des.toString();
+
+                            product_des = snapshot.data.data[2].published.toString();
+                            print("PUBLISH   ${product_des}");
                             //nvbndm
                             //snapshot.data.data[index].name.toString(),
 
@@ -137,7 +166,9 @@ class _My_adsScreenState extends State<My_adsScreen> {
                                   child: Column(
                                     children: [
                                       Container(
-                                        height: MediaQuery.of(context).size.height * 0.11,
+
+                                        height: MediaQuery.of(context).size.height * 0.09,
+                                        //height:double.infinity,
                                         width: MediaQuery.of(context).size.width * 0.5,
                                         child: thumbnailImage == null
                                             ? Image.asset("assets/silver.png", fit: BoxFit.fill)
@@ -147,23 +178,49 @@ class _My_adsScreenState extends State<My_adsScreen> {
                                         ),
                                       ),
                                       SizedBox(height: 10),
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            snapshot.data.data[index].name.toString(),
-                                            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
-                                          ),
-                                          SizedBox(height: 5),
-                                          Text(
-                                            snapshot.data.data[index].mainPrice.toString(),
-                                            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
-                                          ),
-                                        ],
+                                      Padding(
+                                        padding:  EdgeInsets.only(left: 10),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              snapshot.data.data[index].name.toString(),
+                                              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+                                              maxLines: 2,  // Set maximum lines to 2
+                                              overflow: TextOverflow.ellipsis,  // Handle overflow with ellipsis (...)
+                                            ),
+                                            SizedBox(height: 5),
+                                            Text(
+                                              snapshot.data.data[index].mainPrice.toString(),
+                                              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+                                            ),
+                                            // SizedBox(height: 5),
+                                            // Text(
+                                            //   snapshot.data.data[index].published.toString(),
+                                            //   style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+                                            // ),
+
+
+                                            //
+                                            Row(children: [
+                                              Text("Status:"),
+                                              Text(
+                                                snapshot.data.data[index].sold_status == 0 ? 'Not Sold' : 'Product Sold',
+                                                style: TextStyle(
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: snapshot.data.data[index].sold_status == 0 ? Colors.red : Colors.green,
+                                                ),
+                                              ),
+                                            ],),
+
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),
                                 ),
+                               if(snapshot.data.data[index].sold_status==0)
                                 Positioned(
                                   right: 1,
                                   child: GestureDetector(
@@ -193,9 +250,23 @@ class _My_adsScreenState extends State<My_adsScreen> {
                                           },
                                           onSelected: (value) {
                                             if (value == 0) {
+                                              //product_Id = snapshot.data.data[index].id.toString();
                                               product_Id = snapshot.data.data[index].id.toString();
+                                              product_name = snapshot.data.data[index].name.toString();
+                                              product_price = snapshot.data.data[index].mainPrice.toString();
                                               print("print product id Edit ${product_Id}");
-                                              Navigator.push(context, MaterialPageRoute(builder: (context) => Edit_placead(Product_ID: product_Id)));
+
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => Edit_placead(Product_ID: product_Id,Product_Name: product_name,Product_Price: product_price)))
+                                                  .then((value){ if(value != null && value)
+                                              {
+                                                setState(() {
+                                                  myadsapicall();
+                                                });
+                                              };
+                                              });
+
+
+                                              // Navigator.push(context, MaterialPageRoute(builder: (context) => Edit_placead(Product_ID: product_Id)));
                                               print("Edit  menu is selected.");
                                             } else if (value == 1) {
                                               product_Id = snapshot.data.data[index].id.toString();

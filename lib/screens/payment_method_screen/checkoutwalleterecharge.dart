@@ -32,17 +32,18 @@ import 'package:toast/toast.dart';
 import 'package:umonda/screens/payment_method_screen/offline_screen.dart';
 import 'package:umonda/screens/payment_method_screen/paytm_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:umonda/screens/product_details.dart';
+import 'package:umonda/screens/payment_method_screen/stripe_screen_wallet_recharge.dart';
 
-import '../Models/withdwawalamountmodel.dart';
-import '../custom/device_info.dart';
-import '../data_model/check_response_model.dart';
-import '../data_model/order_create_response.dart';
-import '../helpers/response_check.dart';
-import 'Done_Screen.dart';
-import 'common_webview_screen.dart';
+import '../../Models/withdwawalamountmodel.dart';
+import '../../custom/device_info.dart';
+import '../../data_model/check_response_model.dart';
+import '../../data_model/order_create_response.dart';
+import '../../helpers/response_check.dart';
+import '../Done_Screen.dart';
+import '../common_webview_screen.dart';
 
-class Checkout extends StatefulWidget {
+
+class Checkoutwalleterecharge extends StatefulWidget {
   int order_id; // only need when making manual payment from order details
   String list;
   //final OffLinePaymentFor offLinePaymentFor;
@@ -54,7 +55,7 @@ class Checkout extends StatefulWidget {
 
 
 
-  Checkout(
+  Checkoutwalleterecharge(
       {Key key,
         this.order_id = 0,
         this.paymentFor,
@@ -67,10 +68,10 @@ class Checkout extends StatefulWidget {
       : super(key: key);
 
   @override
-  _CheckoutState createState() => _CheckoutState();
+  _CheckoutwalleterechargeState createState() => _CheckoutwalleterechargeState();
 }
 
-class _CheckoutState extends State<Checkout> {
+class _CheckoutwalleterechargeState extends State<Checkoutwalleterecharge> {
   var _selected_payment_method_index = 0;
   var _selected_payment_method = "";
   var _selected_payment_method_key = "";
@@ -83,7 +84,6 @@ class _CheckoutState extends State<Checkout> {
   var _grandTotalValue = 0.00;
   var _subTotalString = ". . .";
   var _taxString = ". . .";
-  var _dismantlingString = ". . .";
   var _shippingCostString = ". . .";
   var _discountString = ". . .";
   var _used_coupon_code = "";
@@ -95,8 +95,6 @@ class _CheckoutState extends State<Checkout> {
 
   @override
   void initState() {
-    print("recharge amount ${widget.rechargeAmount}}");
-    print("globdismantalfee::: ${globdismantalfee.toString()}}");
     // TODO: implement initState
     super.initState();
     /*print("user data");
@@ -145,7 +143,6 @@ class _CheckoutState extends State<Checkout> {
     if (cartSummaryResponse != null) {
       _subTotalString = cartSummaryResponse.sub_total;
       _taxString = cartSummaryResponse.tax;
-      _dismantlingString = cartSummaryResponse.dismantling;
       _shippingCostString = cartSummaryResponse.shipping_cost;
       _discountString = cartSummaryResponse.discount;
       _totalString = cartSummaryResponse.grand_total;
@@ -153,8 +150,6 @@ class _CheckoutState extends State<Checkout> {
       _used_coupon_code = cartSummaryResponse.coupon_code;
       _couponController.text = _used_coupon_code;
       _coupon_applied = cartSummaryResponse.coupon_applied;
-      print("TOTALLL ${_totalString}");
-      print("TOTALLL grand ${_grandTotalValue}");
       setState(() {});
     }
   }
@@ -243,12 +238,10 @@ class _CheckoutState extends State<Checkout> {
           AppLocalizations.of(context).nothing_to_pay, gravity: Toast.center, duration: Toast.lengthLong);
       return;
     }
-//print("Proceed button press :::  ${_grandTotalValue}");
-    if (_selected_payment_method == "stripe_payment") {
-      print("Proceed button press :::  ${_grandTotalValue}");
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return StripeScreen(
 
+    if (_selected_payment_method == "stripe_payment") {
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return StripeScreenWalletRecharge(
           amount: _grandTotalValue,
           payment_type: payment_type,
           payment_method_key: _selected_payment_method_key,
@@ -544,16 +537,15 @@ class _CheckoutState extends State<Checkout> {
         content: Padding(
           padding: const EdgeInsets.only(left: 8.0, right: 16.0),
           child: Container(
-            height: 180,
+            height: 150,
             child: Column(
               children: [
                 Padding(
                     padding: const EdgeInsets.only(bottom: 8),
                     child: Row(
-                      mainAxisAlignment:MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          //width: 120,
+                          width: 120,
                           child: Text(
                             AppLocalizations.of(context)
                                 .subtotal_all_capital,
@@ -564,7 +556,7 @@ class _CheckoutState extends State<Checkout> {
                                 fontWeight: FontWeight.w600),
                           ),
                         ),
-                       // Spacer(),
+                        Spacer(),
                         Text(
                           SystemConfig.systemCurrency !=null?
                           _subTotalString.replaceAll(SystemConfig.systemCurrency.code, SystemConfig.systemCurrency.symbol)
@@ -580,11 +572,9 @@ class _CheckoutState extends State<Checkout> {
                 Padding(
                     padding: const EdgeInsets.only(bottom: 8),
                     child: Row(
-                   mainAxisAlignment:MainAxisAlignment.spaceBetween,
-
                       children: [
                         Container(
-                          //width: 120,
+                          width: 120,
                           child: Text(
                             AppLocalizations.of(context)
                                 .tax_all_capital,
@@ -595,7 +585,7 @@ class _CheckoutState extends State<Checkout> {
                                 fontWeight: FontWeight.w600),
                           ),
                         ),
-                        //Spacer(),
+                        Spacer(),
                         Text(
                           SystemConfig.systemCurrency !=null?
                           _taxString.replaceAll(SystemConfig.systemCurrency.code, SystemConfig.systemCurrency.symbol)
@@ -612,43 +602,9 @@ class _CheckoutState extends State<Checkout> {
                 Padding(
                     padding: const EdgeInsets.only(bottom: 8),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          //width: 120,
-                          child: Text(
-                            // AppLocalizations.of(context)
-                            //     .tax_all_capital,
-                            // textAlign: TextAlign.end,
-                            "DISMANTLING FEES",
-                            style: TextStyle(
-                                color: MyTheme.font_grey,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                       //Spacer(),
-                        Text(
-                          SystemConfig.systemCurrency !=null?
-                          _dismantlingString.replaceAll(SystemConfig.systemCurrency.code, SystemConfig.systemCurrency.symbol)
-                              :_dismantlingString,
-
-
-                          style: TextStyle(
-                              color: MyTheme.font_grey,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ],
-                    )),
-                Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: Row(
-
-                      mainAxisAlignment:MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                         // width: 120,
+                          width: 120,
                           child: Text(
                             AppLocalizations.of(context)
                                 .shipping_cost_all_capital,
@@ -659,7 +615,7 @@ class _CheckoutState extends State<Checkout> {
                                 fontWeight: FontWeight.w600),
                           ),
                         ),
-                       // Spacer(),
+                        Spacer(),
                         Text(
                           SystemConfig.systemCurrency !=null?
                           _shippingCostString.replaceAll(SystemConfig.systemCurrency.code, SystemConfig.systemCurrency.symbol)
@@ -672,44 +628,12 @@ class _CheckoutState extends State<Checkout> {
                         ),
                       ],
                     )),
-
-                // Padding(
-                //     padding: const EdgeInsets.only(bottom: 8),
-                //     child: Row(
-                //       children: [
-                //         Container(
-                //           width: 120,
-                //           child: Text(
-                //             "Dismantal Fee",
-                //             textAlign: TextAlign.end,
-                //             style: TextStyle(
-                //                 color: MyTheme.font_grey,
-                //                 fontSize: 14,
-                //                 fontWeight: FontWeight.w600),
-                //           ),
-                //         ),
-                //         Spacer(),
-                //         Text(
-                //             globdismantalfee.toString(),
-                //           // SystemConfig.systemCurrency !=null? _shippingCostString.replaceAll(SystemConfig.systemCurrency.code, SystemConfig.systemCurrency.symbol)
-                //           //     :_shippingCostString,
-                //
-                //           style: TextStyle(
-                //               color: MyTheme.font_grey,
-                //               fontSize: 14,
-                //               fontWeight: FontWeight.w600),
-                //         ),
-                //       ],
-                //     )),
-
-
                 Padding(
                     padding: const EdgeInsets.only(bottom: 8),
                     child: Row(
-                      mainAxisAlignment:MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          //width: 120,
+                          width: 120,
                           child: Text(
                             AppLocalizations.of(context)
                                 .discount_all_capital,
@@ -720,7 +644,7 @@ class _CheckoutState extends State<Checkout> {
                                 fontWeight: FontWeight.w600),
                           ),
                         ),
-                        //Spacer(),
+                        Spacer(),
                         Text(
                           SystemConfig.systemCurrency !=null?
                           _discountString.replaceAll(SystemConfig.systemCurrency.code, SystemConfig.systemCurrency.symbol)
@@ -739,7 +663,7 @@ class _CheckoutState extends State<Checkout> {
                     child: Row(
                       children: [
                         Container(
-                          //width: 120,
+                          width: 120,
                           child: Text(
                             AppLocalizations.of(context)
                                 .grand_total_all_capital,
@@ -812,56 +736,56 @@ class _CheckoutState extends State<Checkout> {
                           padding: const EdgeInsets.all(16.0),
                           child: buildPaymentMethodList(),
                         ),
-                       if (_selected_payment_method == "wallet_system")
+                        if (_selected_payment_method == "wallet_system")
 
-                         withdrawalaccount_widget(),
+                          withdrawalaccount_widget(),
 
-                      //    Padding(
-                      //     padding: const EdgeInsets.only(left: 35,right: 35),
-                      //     child: Container(
-                      //         decoration: BoxDecoration(
-                      //           borderRadius: BorderRadius.circular(12.0),
-                      //           border: Border.all(color: Colors.black38),
-                      //           // color:Color(0xffFEE572),
-                      //           // boxShadow:const [
-                      //           //   BoxShadow(
-                      //           //     color: Colors.black,
-                      //           //     blurRadius: 2.0,
-                      //           //     spreadRadius: 0.0,
-                      //           //     offset: Offset(2.0, 2.0,), // shadow direction: bottom right
-                      //           //   )
-                      //           // ],
-                      //         ),
-                      //         padding: EdgeInsets.only(left: 16,right: 16,top: 18,bottom: 18),
-                      //         child:
-                      //         Row(
-                      //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      //           children: [
-                      //             Text("Your wallet balance:",style: TextStyle(color: Colors.grey),),
-                      //             Text("AED 0.00"),
-                      //
-                      // ],)
-                      //     ),
-                      //   ),
+                        //    Padding(
+                        //     padding: const EdgeInsets.only(left: 35,right: 35),
+                        //     child: Container(
+                        //         decoration: BoxDecoration(
+                        //           borderRadius: BorderRadius.circular(12.0),
+                        //           border: Border.all(color: Colors.black38),
+                        //           // color:Color(0xffFEE572),
+                        //           // boxShadow:const [
+                        //           //   BoxShadow(
+                        //           //     color: Colors.black,
+                        //           //     blurRadius: 2.0,
+                        //           //     spreadRadius: 0.0,
+                        //           //     offset: Offset(2.0, 2.0,), // shadow direction: bottom right
+                        //           //   )
+                        //           // ],
+                        //         ),
+                        //         padding: EdgeInsets.only(left: 16,right: 16,top: 18,bottom: 18),
+                        //         child:
+                        //         Row(
+                        //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        //           children: [
+                        //             Text("Your wallet balance:",style: TextStyle(color: Colors.grey),),
+                        //             Text("AED 0.00"),
+                        //
+                        // ],)
+                        //     ),
+                        //   ),
 
 
 
                         if (_selected_payment_method == "cash_payment")
-                         // Text("Account Details"),
+                        // Text("Account Details"),
                           Padding(
                             padding: const EdgeInsets.only(left: 36,right: 36),
                             child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text("Please initiate the payment within 3 days via bank transfer on the below mentioned account details.",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600),),
 
-                               SizedBox(height: 10,),
+                                SizedBox(height: 10,),
                                 Text("Account Details",style: TextStyle(fontWeight: FontWeight.w600),),
                                 Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(12.0),
                                     border: Border.all(color: Colors.black38),
-                                   // color:Color(0xffFEE572),
+                                    // color:Color(0xffFEE572),
                                     // boxShadow:const [
                                     //   BoxShadow(
                                     //     color: Colors.black,
@@ -929,15 +853,14 @@ class _CheckoutState extends State<Checkout> {
                     child: Column(
                       children: [
 
-                        // widget.paymentFor == PaymentFor.Order
-                        //     ? Padding(
-                        //   padding:
-                        //   const EdgeInsets.only(bottom: 16.0),
-                        //   child: buildApplyCouponRow(context),
-                        // )
-                            //: Container(),
-                        SizedBox(height: 50,),
-                       grandTotalSection(),
+                        widget.paymentFor == PaymentFor.Order
+                            ? Padding(
+                          padding:
+                          const EdgeInsets.only(bottom: 16.0),
+                          child: buildApplyCouponRow(context),
+                        )
+                            : Container(),
+                        grandTotalSection(),
                         //Text("data"),
                         Padding(
                           padding: const EdgeInsets.only(top: 20.0),
@@ -1300,7 +1223,6 @@ class _CheckoutState extends State<Checkout> {
               ),
               child: Text(
                 AppLocalizations.of(context).recharge_wallet_ucf,
-
 
                 // widget.paymentFor == PaymentFor.WalletRecharge
                 //     ? AppLocalizations.of(context)

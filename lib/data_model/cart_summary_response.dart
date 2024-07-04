@@ -12,6 +12,7 @@ class CartSummaryResponse {
   CartSummaryResponse({
     this.sub_total,
     this.tax,
+    this.dismantling,
     this.shipping_cost,
     this.discount,
     this.grand_total,
@@ -22,6 +23,7 @@ class CartSummaryResponse {
 
   String sub_total;
   String tax;
+  String dismantling;
   String shipping_cost;
   String discount;
   String grand_total;
@@ -32,6 +34,7 @@ class CartSummaryResponse {
   factory CartSummaryResponse.fromJson(Map<String, dynamic> json) => CartSummaryResponse(
     sub_total: json["sub_total"],
     tax: json["tax"],
+    dismantling: json["dismantling"],
     shipping_cost: json["shipping_cost"],
     discount: json["discount"],
     grand_total: json["grand_total"],
@@ -43,6 +46,7 @@ class CartSummaryResponse {
   Map<String, dynamic> toJson() => {
     "sub_total": sub_total,
     "tax": tax,
+    "dismantling": dismantling,
     "shipping_cost": shipping_cost,
     "discount": discount,
     "grand_total": grand_total,

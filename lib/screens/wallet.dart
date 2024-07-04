@@ -18,6 +18,7 @@ import 'package:toast/toast.dart';
 import 'package:umonda/screens/main.dart';
 import 'package:umonda/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:umonda/screens/payment_method_screen/checkoutwalleterecharge.dart';
 
 
 class Wallet extends StatefulWidget {
@@ -123,12 +124,19 @@ class _WalletState extends State<Wallet> {
     }
 
     var amount = double.parse(amount_String);
-
-    Navigator.of(context, rootNavigator: true).pop();
+    print("Wallete recharge:::::::::");
+    print(PaymentFor.WalletRecharge);
+    print(amount);
+    print("wallet_payment");
+    print("Wallete recharge:::::::::");
+     Navigator.of(context, rootNavigator: true).pop();
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return Checkout(paymentFor: PaymentFor.WalletRecharge,rechargeAmount: amount,title: AppLocalizations.of(context).recharge_wallet_ucf
+      return Checkoutwalleterecharge(paymentFor: PaymentFor.WalletRecharge,rechargeAmount: amount,title: "wallet_payment"
         ,);
     }));
+
+
+
     // Navigator.push(context, MaterialPageRoute(builder: (context) {
     //   return RechargeWallet(amount: amount );
     // }));
@@ -173,11 +181,14 @@ class _WalletState extends State<Wallet> {
                           : ShimmerHelper().buildBasicShimmer(height: 150),
                     ),
                   ),
+
                   Padding(
                     padding: const EdgeInsets.only(
                         top: 100.0, left: 16.0, right: 16.0, bottom: 0.0),
                     child: buildRechargeList(),
                   ),
+
+
                   /*SliverList(
                     delegate: SliverChildListDelegate([
 
@@ -321,6 +332,8 @@ class _WalletState extends State<Wallet> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+
+
             Container(
                 width: 50,
                 child: Text(
@@ -364,7 +377,7 @@ class _WalletState extends State<Wallet> {
             Spacer(),
             Container(
                 width: 120,
-                child: Column(
+                child: Column(  
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
@@ -444,7 +457,7 @@ class _WalletState extends State<Wallet> {
                       fontWeight: FontWeight.w600),
                 ),
               ),
-              Spacer(),
+             // Spacer(),
               // Padding(
               //   padding: const EdgeInsets.only(bottom: 16.0),
               //   child: Text(

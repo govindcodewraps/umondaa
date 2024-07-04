@@ -226,6 +226,327 @@
 
 
 
+
+
+
+
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:provider/provider.dart';
+import 'package:umonda/my_theme.dart';
+
+import '../../data_model/classified_ads_response.dart';
+import '../../helpers/shared_value_helper.dart';
+import '../../helpers/shimmer_helper.dart';
+import '../../presenter/home_presenter.dart';
+import '../../ui_elements/product_card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'new_home_presenter.dart';
+
+int allProductPage = 1;
+int lastPageee=0;
+class Allnewads_Screen extends StatefulWidget {
+  @override
+  State<Allnewads_Screen> createState() => _Allnewads_ScreenState();
+}
+
+class _Allnewads_ScreenState extends State<Allnewads_Screen> {
+  AllHomePresenter homePresenterr;
+
+// String lastPage;
+
+  @override
+  void initState() {
+    pagecountapi();
+
+    Future.delayed(Duration.zero).then((value) {
+      change();
+    });
+    super.initState();
+    print("0- home.dart, is_logged_in :");
+    if (is_logged_in.$ == true) {
+      print("1- home.dart, is_logged_in : ${is_logged_in}");
+      print("2- home.dart, is_logged_in : ${is_logged_in.$}");
+    }
+  }
+
+  change() {
+    homePresenterr = Provider.of<AllHomePresenter>(context, listen: false);
+    homePresenterr.onRefresh();
+    homePresenterr.mainScrollListener();
+    homePresenterr.initPiratedAnimation(this);
+  }
+
+  @override
+  void dispose() {
+    print("Dispose");
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<AllHomePresenter>(builder: (context, homeDataa, child) {
+      return Scaffold(
+        appBar: buildAppBar(context),
+        body: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    buildHomeAllProducts20(context, homeDataa),
+                    //SizedBox(height: 10,),
+
+                    Padding(
+                      padding:  EdgeInsets.only(left: 20,right: 20,bottom: 10,top: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+
+                        children: [
+                          if (allProductPage > 1)
+                            InkWell(
+                                onTap:(){
+                                  setState(() {
+                                    allProductPage--;
+                                    allProductPage = allProductPage.clamp(1, double.infinity).toInt();
+                                    homePresenterr.resetAllProductList();
+                                    homePresenterr.fetchAllProducts();
+                                    print("Aproduct-${allProductPage}");
+                                  });
+                                },
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.arrow_back_ios_new_sharp,size: 20,),
+//Text(" Prev",style: TextStyle(fontSize: 19),),
+
+                                  ],
+                                )),
+                          if (allProductPage == 1)
+                            Icon(Icons.arrow_back_ios_new_sharp,color: Colors.grey,size: 20),
+
+                          //Spacer(),
+
+                // ListView.builder(
+                //   itemCount: 10,
+                //   itemBuilder: (context, index) {
+                //     int currentNumber = index + 1;
+                //     Color textColor = currentNumber == 5 ? Colors.green : Colors.grey;
+                //
+                //     return ListTile(
+                //       title: Text(
+                //         '$currentNumber',
+                //         style: TextStyle(
+                //           fontSize: 24.0,
+                //           color: textColor,
+                //         ),
+                //       ),
+                //     );
+                //   },
+                // ),
+
+
+                          SizedBox(width: 10,),
+
+
+                          //for (int i = 1; i <= 12; i++)
+
+                          Row(children: [
+
+                            for (int i = 1; i <= lastPageee; i++)
+                            //for (int i = 1; i <= 5; i++)
+                              InkWell(
+                                onTap: (){
+                                  setState(() {
+                                    allProductPage=i;
+                                    //allProductPage = allProductPage.clamp(1, double.infinity).toInt();
+                                    homePresenterr.resetAllProductList();
+                                    homePresenterr.fetchAllProducts();
+                                    print("Aproduct-${allProductPage}");
+                                    print("current page -${i}");
+                                  });
+                                },
+                                child: Container(
+
+                                  width: 20,
+                                  height: 20,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: i == allProductPage ? MyTheme.accent_color : Colors.transparent,
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      i.toString(),
+                                      style: TextStyle(
+                                        color: i == allProductPage ? Colors.white : Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                          ],),
+
+
+                          // Text(i.toString()),
+
+
+
+
+
+//if (allProductPage < 3)
+                        SizedBox(width: 10,),
+                          if (allProductPage < lastPageee)
+                            InkWell(
+                                onTap: (){
+                                  setState(() {
+                                    allProductPage++;
+                                    print("Aproductt ${allProductPage}");
+
+                                    homePresenterr.resetAllProductList();
+                                    homePresenterr.fetchAllProducts();
+                                    print("Aproducttt ${allProductPage}");
+                                  });
+                                  print("Aproductaaa ${allProductPage}");
+
+                                },
+                                child: Row(
+                                  children: [
+// Text("Next",style: TextStyle(fontSize: 19),),
+
+                                    Icon(Icons.arrow_forward_ios_rounded,size: 20),
+                                  ],
+                                )),
+                          if (allProductPage == lastPageee)
+                            Icon(Icons.arrow_forward_ios_rounded,color: Colors.grey,size: 20),
+
+
+
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 10,),
+
+
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    });
+  }
+
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+      iconTheme: IconThemeData(
+        color: Colors.black,
+      ),
+      backgroundColor: Colors.white,
+      title: Row(
+        children: [
+          Spacer(),
+          Image.asset(
+            'assets/appbarlogo.png',
+            width: 100,
+            height: 80,
+          ),
+          Spacer(),
+          Icon(Icons.notifications, color: Colors.white,),
+          Icon(Icons.notifications, color: Colors.white,),
+        ],
+      ),
+      elevation: 0.0,
+      titleSpacing: 0,
+    );
+  }
+
+  Widget buildHomeAllProducts20(context, AllHomePresenter homeDataa) {
+    if (homeDataa.isAllProductInitial && homeDataa.allProductList.length == 0) {
+      return SingleChildScrollView(
+          child: ShimmerHelper().buildProductGridShimmer(
+              scontroller: homeDataa.allProductScrollController));
+    } else if (homeDataa.allProductList.length > 0) {
+      return MasonryGridView.count(
+          crossAxisCount: 2,
+          mainAxisSpacing: 14,
+          crossAxisSpacing: 14,
+          itemCount: homeDataa.allProductList.length,
+          shrinkWrap: true,
+          padding: EdgeInsets.only(top: 20.0, bottom: 1, left: 18, right: 18),
+          physics: NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            return Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [BoxShadow(blurRadius: 10, color: Colors.grey, offset: Offset(1, 3))]
+              ),
+              child: ProductCard(
+                id: homeDataa.allProductList[index].id,
+                image: homeDataa.allProductList[index].thumbnail_image,
+                name: homeDataa.allProductList[index].name,
+                main_price: homeDataa.allProductList[index].main_price,
+                stroked_price: homeDataa.allProductList[index].stroked_price,
+                has_discount: homeDataa.allProductList[index].has_discount,
+                discount: homeDataa.allProductList[index].discount,
+                is_wholesale: homeDataa.allProductList[index].isWholesale,
+              ),
+            );
+          });
+    } else if (homeDataa.totalAllProductData == 0) {
+      return Center(
+          child: Text(AppLocalizations.of(context).no_product_is_available));
+    } else {
+      return Container();
+    }
+  }
+
+  Future<void> pagecountapi() async {
+    Dio dio = Dio();
+    var apiUrl = 'https://umonda.com/api/v2/products?page=1';
+
+    try {
+// Make the API request using Dio
+      var response = await dio.get(apiUrl);
+
+// Check if the request was successful (status code 200)
+      if (response.statusCode == 200) {
+
+// Parse the JSON response
+        Map<String, dynamic> jsonMap = response.data;
+
+
+// Extract and print the "last_page" value
+        int lastPage = jsonMap['meta']['last_page'];
+        lastPageee=lastPage;
+        print('Last Page: $lastPageee');
+
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+        print('Reason: ${response.statusMessage}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+//auto pagination start
+
+/*
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -463,6 +784,9 @@ class _Allnewads_ScreenState extends State<Allnewads_Screen> {
     }
   }
 }
+*/
+//auto pagination end
+
 
 
 

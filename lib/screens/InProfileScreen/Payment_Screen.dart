@@ -18,7 +18,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    paymentdata();
+    paymentdataa();
   }
 
   @override
@@ -47,17 +47,374 @@ class _PaymentScreenState extends State<PaymentScreen> {
         ),
       ),
 
-      body:listview(),
+      body:listvieww(),
     ));
+  }
+
+
+  Widget listviewwr() {
+    return FutureBuilder(
+      future: paymentdataa(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Container(
+            child: Center(child: CircularProgressIndicator()),
+          );
+        } else if (snapshot.hasError) {
+          return Container(
+            padding: EdgeInsets.only(top: 190),
+            child: Center(child: Column(
+              children: [
+                Icon(Icons.history,size: 88,color: MyTheme.font_grey),
+                Center(
+                    child: Text(
+                      "No Payment History.",
+                      style: TextStyle(color: MyTheme.font_grey),
+                    )),
+              ],
+            )),
+          );
+        } else if (snapshot.hasData) {
+          var appointmentsListModel = snapshot.data as PaymenthistoryModel;
+
+          return Container(
+            child:
+            ListView.builder(
+              itemCount: snapshot.data.data.length,
+              itemBuilder: (context, int index) {
+                // Mapping function to convert enum-like string to a readable format
+                String paymentType = snapshot.data.data[index].paymentType.toString().split('.')[1].replaceAll('_', ' ');
+
+                return Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Container(
+                    padding: EdgeInsets.only(top: 10, bottom: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(blurRadius: 10, color: Colors.grey, offset: Offset(1, 3))
+                      ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'Payment Type : ',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                TextSpan(
+                                  text: paymentType,
+                                  style: TextStyle(color: MyTheme.accent_color),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'Date : ',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                TextSpan(
+                                  text: snapshot.data.data[index].date.toString(),
+                                  style: TextStyle(color: MyTheme.accent_color),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'Amount	 : ',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                TextSpan(
+                                  text: snapshot.data.data[index].grandTotal.toString(),
+                                  style: TextStyle(color: MyTheme.accent_color),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          );
+        } else {
+          return Container(
+            padding: EdgeInsets.only(top: 258),
+            child: Column(
+              children: [
+                Icon(Icons.history,size: 88,color: MyTheme.font_grey),
+                Center(
+                    child: Text(
+                      "No Payment History.",
+                      style: TextStyle(color: MyTheme.font_grey),
+                    )),
+              ],
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  Widget listviewww() {
+    return FutureBuilder(
+      future: paymentdataa(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Container(
+            child: Center(child: CircularProgressIndicator()),
+          );
+        } else if (snapshot.hasError) {
+          return Container(
+            child: Center(
+              child: Text('Error: ${snapshot.error}'),
+            ),
+          );
+        } else if (!snapshot.hasData || snapshot.data.data.isEmpty) {
+          return Container(
+            padding: EdgeInsets.only(top: 250),
+            child: Center(
+              child: Column(
+                children: [
+                  Icon(Icons.folder_off_outlined, size: 88, color: MyTheme.font_grey),
+                  Center(
+                    child: Text(
+                      "No Commission available.",
+                      style: TextStyle(color: MyTheme.font_grey),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        } else {
+
+          return
+            Container(
+            child: ListView.builder(
+              itemCount: snapshot.data.data.length,
+              itemBuilder: (context, int index) {
+
+                return Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Container(
+                    padding: EdgeInsets.only(top: 10, bottom: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(blurRadius: 10, color: Colors.grey, offset: Offset(1, 3))
+                      ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'Payment Type : ',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                // TextSpan(
+                                //   text: paymentType,
+                                //   style: TextStyle(color: MyTheme.accent_color),
+                                // ),
+                                TextSpan(
+                                  text: snapshot.data.data[index].paymentType. toString() ?? "" ,
+                                  style: TextStyle(color: MyTheme.accent_color),
+                                ),
+
+                              ],
+                            ),
+                          ),
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'Date : ',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                TextSpan(
+                                  text: snapshot.data.data[index].date.toString(),
+                                  style: TextStyle(color: MyTheme.accent_color),
+                                ),
+                              ],
+                            ),
+                          ),
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'Amount	 : ',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                TextSpan(
+                                  text: snapshot.data.data[index].grandTotal.toString(),
+                                  style: TextStyle(color: MyTheme.accent_color),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          );
+        }
+      },
+    );
+  }
+
+
+  Widget listviewwb() {
+    return FutureBuilder(
+      future: paymentdataa(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Container(
+            child: Center(child: CircularProgressIndicator()),
+          );
+        } else if (snapshot.hasError) {
+          return Container(
+            child: Center(
+              child: Text('Error: ${snapshot.error}'),
+            ),
+          );
+        } else if (!snapshot.hasData || snapshot.data.data.isEmpty) {
+          return Container(
+            padding: EdgeInsets.only(top: 250),
+            child: Center(
+              child: Column(
+                children: [
+                  Icon(Icons.folder_off_outlined, size: 88, color: MyTheme.font_grey),
+                  Center(
+                    child: Text(
+                      "No Commission available...",
+                      style: TextStyle(color: MyTheme.font_grey),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        } else {
+
+          return Container(
+            child: ListView.builder(
+              itemCount: snapshot.data.data.length,
+              itemBuilder: (context, int index) {
+
+                return Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Container(
+                    padding: EdgeInsets.only(top: 10, bottom: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(blurRadius: 10, color: Colors.grey, offset: Offset(1, 3))
+                      ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'Payment Type : ',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                // TextSpan(
+                                //   text: paymentType,
+                                //   style: TextStyle(color: MyTheme.accent_color),
+                                // ),
+                                TextSpan(
+                                  text: snapshot.data.data[index].paymentType. toString() ?? "" ,
+                                  style: TextStyle(color: MyTheme.accent_color),
+                                ),
+
+                              ],
+                            ),
+                          ),
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'Date : ',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                TextSpan(
+                                  text: snapshot.data.data[index].date.toString(),
+                                  style: TextStyle(color: MyTheme.accent_color),
+                                ),
+                              ],
+                            ),
+                          ),
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'Amount	 : ',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                TextSpan(
+                                  text: snapshot.data.data[index].grandTotal.toString(),
+                                  style: TextStyle(color: MyTheme.accent_color),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          );
+        }
+      },
+    );
   }
 
 
 
 
-  Widget listview() {
+
+  Widget listvieww() {
     return
       FutureBuilder(
-        future: paymentdata(),
+        future: paymentdataa(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Container(
@@ -65,7 +422,17 @@ class _PaymentScreenState extends State<PaymentScreen> {
             );
           } else if (snapshot.hasError) {
             return Container(
-              child: Center(child: Text("No data available ")),
+              padding: EdgeInsets.only(top: 190),
+              child: Center(child: Column(
+                children: [
+                  Icon(Icons.history,size: 88,color: MyTheme.font_grey),
+                  Center(
+                      child: Text(
+                        "No Payment History.",
+                        style: TextStyle(color: MyTheme.font_grey),
+                      )),
+                ],
+              )),
             );
           } else if (snapshot.hasData) {
             var appointmentsListModel =
@@ -74,1098 +441,287 @@ class _PaymentScreenState extends State<PaymentScreen> {
             return
               Container(
               //padding: EdgeInsets.only(top: 23),
-              child: ListView.builder(
-                shrinkWrap: true,
-                //physics:  NeverScrollableScrollPhysics(),
-                itemBuilder: (context, int index) {
-                  return Column(
-                    //crossAxisAlignment: CrossAxisAlignment.end,
-                    //mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(14.0),
-                        child: Container(
-                          padding: EdgeInsets.only(top: 10,bottom: 10),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12),
-                              //border: Border.all(color: MyTheme.accent_color),
-                              boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,offset: Offset(1,3))]
-                          ),
-                          child:   Row(
+              child:
 
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-
-                            children: [
-
-                              Column(
-
-                                crossAxisAlignment: CrossAxisAlignment.start,
-
-                                children: [
-
-
-
-                                  Container(
-                                      padding: EdgeInsets.only(left: 7),
-                                      width:MediaQuery.of(context).size.width*0.43,
-
-                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                        //color: Colors.grey[300],
-
-                                        //border: Border.all(color: MyTheme.accent_color)
-
-
-
-                                      ),
-
-
-                                      child: Text("Id :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500),)),
-
-                                  //SizedBox(height: 4,),
-
-                                  // Container(
-                                  //     padding: EdgeInsets.only(left: 7),
-                                  //     width:MediaQuery.of(context).size.width*0.43,
-                                  //
-                                  //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                  //
-                                  //       //color: Colors.grey[300],
-                                  //
-                                  //       // border: Border.all(color: MyTheme.accent_color)
-                                  //
-                                  //     ),
-                                  //
-                                  //     child: Text("Code :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                  // SizedBox(height: 4,),
-
-                                  // Container(
-                                  //     padding: EdgeInsets.only(left: 7),
-                                  //     width:MediaQuery.of(context).size.width*0.43,
-                                  //
-                                  //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                  //
-                                  //       //color: Colors.grey[300],
-                                  //
-                                  //       //border: Border.all(color: MyTheme.accent_color)
-                                  //
-                                  //     ),
-                                  //
-                                  //     child: Text("User_ID :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                  SizedBox(height: 4,),
-
-                                  Container(
-                                      padding: EdgeInsets.only(left: 7),
-                                      width:MediaQuery.of(context).size.width*0.43,
-
-                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                        //color: Colors.grey[300],
-
-                                        //border: Border.all(color: MyTheme.accent_color)
-
-                                      ),
-
-                                      child: Text("Payment_type :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                  // SizedBox(height: 4,),
-
-                                  // Container(
-                                  //     padding: EdgeInsets.only(left: 7),
-                                  //     width:MediaQuery.of(context).size.width*0.43,
-                                  //
-                                  //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                  //
-                                  //       //color: Colors.grey[300],
-                                  //
-                                  //       //border: Border.all(color: MyTheme.accent_color)
-                                  //
-                                  //     ),
-                                  //
-                                  //     child: Text("Payment_status :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                  // SizedBox(height: 4,),
-
-                                  // Container(
-                                  //     padding: EdgeInsets.only(left: 7),
-                                  //     width:MediaQuery.of(context).size.width*0.43,
-                                  //
-                                  //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                  //
-                                  //       //color: Colors.grey[300],
-                                  //
-                                  //       //border: Border.all(color: MyTheme.accent_color)
-                                  //
-                                  //     ),
-                                  //
-                                  //     child: Text("Payment status string :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                  // SizedBox(height: 4,),
-
-                                  // Container(
-                                  //     padding: EdgeInsets.only(left: 7),
-                                  //     width:MediaQuery.of(context).size.width*0.43,
-                                  //
-                                  //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                  //
-                                  //       //color: Colors.grey[300],
-                                  //
-                                  //       // border: Border.all(color: MyTheme.accent_color)
-                                  //
-                                  //     ),
-                                  //
-                                  //     child: Text("Delivery Status :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                  SizedBox(height: 4,),
-
-                                  Container(
-                                      padding: EdgeInsets.only(left: 7),
-                                      width:MediaQuery.of(context).size.width*0.43,
-
-                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                        //color: Colors.grey[300],
-
-                                        //border: Border.all(color: MyTheme.accent_color)
-
-                                      ),
-
-                                      child: Text("Amount:",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                  // SizedBox(height: 4,),
-
-                                  // Container(
-                                  //     padding: EdgeInsets.only(left: 7),
-                                  //     width:MediaQuery.of(context).size.width*0.43,
-                                  //
-                                  //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                  //
-                                  //       //color: Colors.grey[300],
-                                  //
-                                  //       // border: Border.all(color: MyTheme.accent_color)
-                                  //
-                                  //     ),
-                                  //
-                                  //     child: Text("Plane Grand Total :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                  // SizedBox(height: 4,),
-
-                                  // Container(
-                                  //     padding: EdgeInsets.only(left: 7),
-                                  //     width:MediaQuery.of(context).size.width*0.43,
-                                  //
-                                  //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                  //
-                                  //       //color: Colors.grey[300],
-                                  //
-                                  //       //border: Border.all(color: MyTheme.accent_color)
-                                  //
-                                  //     ),
-                                  //
-                                  //     child: Text("Coupon Discount :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                  //SizedBox(height: 4,),
-
-                                  // Container(
-                                  //
-                                  //
-                                  //     padding: EdgeInsets.only(left: 7),
-                                  //     width:MediaQuery.of(context).size.width*0.43,
-                                  //
-                                  //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                  //
-                                  //       //color: Colors.grey[300],
-                                  //
-                                  //       //border: Border.all(color: MyTheme.accent_color)
-                                  //
-                                  //     ),child: Text("Shipping Cost :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                  //SizedBox(height: 4,),
-
-                                  // Container(
-                                  //     padding: EdgeInsets.only(left: 7),
-                                  //     width:MediaQuery.of(context).size.width*0.43,
-                                  //
-                                  //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                  //
-                                  //       //color: Colors.grey[300],
-                                  //
-                                  //       //border: Border.all(color: MyTheme.accent_color)
-                                  //
-                                  //     ),
-                                  //
-                                  //     child: Text("Sub Total :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                  //SizedBox(height: 4,),
-
-                                  // Container(
-                                  //     padding: EdgeInsets.only(left: 7),
-                                  //     width:MediaQuery.of(context).size.width*0.43,
-                                  //
-                                  //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                  //
-                                  //       //color: Colors.grey[300],
-                                  //
-                                  //       // border: Border.all(color: MyTheme.accent_color)
-                                  //
-                                  //     ),
-                                  //
-                                  //     child: Text("UMONDA FEES : ",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-                                  SizedBox(height: 4,),
-
-                                  Container(
-                                      padding: EdgeInsets.only(left: 7),
-                                      width:MediaQuery.of(context).size.width*0.43,
-
-                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                        //color: Colors.grey[300],
-
-                                        //  border: Border.all(color: MyTheme.accent_color)
-
-                                      ),
-
-                                      child: Text(" Date :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-
-                                ],),
-
-
-
-
-
-                              SizedBox(width: 8,),
-
-                              Column(
-
-                                crossAxisAlignment: CrossAxisAlignment.start,
-
-                                children: [
-
-
-
-                                  Container(
-
-                                      width:MediaQuery.of(context).size.width*0.4,
-                                      padding: EdgeInsets.only(left: 10),
-                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                        //color: Colors.grey[300],
-
-                                        //border: Border.all(color: MyTheme.accent_color)
-
-                                      ),
-
-
-
-                                      child: Text(snapshot.data.data[index].id.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                  // SizedBox(height: 4,),
-                                  // Container(
-                                  //     padding: EdgeInsets.only(left: 6),
-                                  //     width:MediaQuery.of(context).size.width*0.4,
-                                  //
-                                  //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                  //
-                                  //       //color: Colors.grey[300],
-                                  //
-                                  //       //border: Border.all(color: MyTheme.accent_color)
-                                  //
-                                  //     ),
-                                  //     child: Text(snapshot.data.data[index].code.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-                                  // SizedBox(height: 4,),
-                                  // Container(
-                                  //     padding: EdgeInsets.only(left: 10),
-                                  //     width:MediaQuery.of(context).size.width*0.4,
-                                  //
-                                  //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                  //
-                                  //       //color: Colors.grey[300],
-                                  //
-                                  //       //border: Border.all(color: MyTheme.accent_color)
-                                  //
-                                  //     ),
-                                  //     child: Text(snapshot.data.data[index].userId.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                  SizedBox(height: 4,),
-                                  Container(
-                                      padding: EdgeInsets.only(left: 10),
-                                      width:MediaQuery.of(context).size.width*0.4,
-
-                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                        //color: Colors.grey[300],
-
-                                        //border: Border.all(color: MyTheme.accent_color)
-
-                                      ),
-                                      child:
-                                      // // Text("AED " + (snapshot.data[0].adminToPay ?? "").toString(), style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
-                                      //
-                                      //Text("Govind"),
-                                      Text(snapshot.data.data[index].paymentType.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))
-                                  ),
-
-
-                                  //SizedBox(height: 4,),
-                                  // Container(
-                                  //     padding: EdgeInsets.only(left: 10),
-                                  //     width:MediaQuery.of(context).size.width*0.4,
-                                  //
-                                  //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                  //
-                                  //       //color: Colors.grey[300],
-                                  //
-                                  //       //border: Border.all(color: MyTheme.accent_color)
-                                  //
-                                  //     ),
-                                  //     child: Text(snapshot.data.data[index].paymentStatus.toString().substring(14),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                  // SizedBox(height: 4,),
-                                  // Container(
-                                  //     padding: EdgeInsets.only(left: 10),
-                                  //     width:MediaQuery.of(context).size.width*0.4,
-                                  //
-                                  //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                  //
-                                  //       //color: Colors.grey[300],
-                                  //
-                                  //       //border: Border.all(color: MyTheme.accent_color)
-                                  //
-                                  //     ),
-                                  //     child: Text(snapshot.data.data[index].paymentStatusString.toString().substring(20),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                  // SizedBox(height: 4,),
-                                  // Container(
-                                  //     padding: EdgeInsets.only(left: 10),
-                                  //     width:MediaQuery.of(context).size.width*0.4,
-                                  //
-                                  //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                  //
-                                  //       //color: Colors.grey[300],
-                                  //
-                                  //       //border: Border.all(color: MyTheme.accent_color)
-                                  //
-                                  //     ),
-                                  //     child: Text(snapshot.data.data[index].deliveryStatus.toString().substring(15),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                  SizedBox(height: 4,),
-                                  Container(
-                                      padding: EdgeInsets.only(left: 10),
-                                      width:MediaQuery.of(context).size.width*0.4,
-
-                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-
-                                        //color: Colors.grey[300],
-
-                                        //border: Border.all(color: MyTheme.accent_color)
-
-                                      ),
-                                      child: Text(snapshot.data.data[index].grandTotal.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                  // SizedBox(height: 4,),
-                                  // Container(
-                                  //     padding: EdgeInsets.only(left: 10),
-                                  //     width:MediaQuery.of(context).size.width*0.4,
-                                  //
-                                  //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                  //
-                                  //       //color: Colors.grey[300],
-                                  //
-                                  //       //border: Border.all(color: MyTheme.accent_color)
-                                  //
-                                  //     ),
-                                  //     child: Text(snapshot.data.data[index].planeGrandTotal.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                  //SizedBox(height: 4,),
-                                  // Container(
-                                  //     padding: EdgeInsets.only(left: 10),
-                                  //     width:MediaQuery.of(context).size.width*0.4,
-                                  //
-                                  //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                  //
-                                  //       //color: Colors.grey[300],
-                                  //
-                                  //       //border: Border.all(color: MyTheme.accent_color)
-                                  //
-                                  //     ),
-                                  //     child: Text(snapshot.data.data[index].couponDiscount.toString().substring(15),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                  //SizedBox(height: 4,),
-                                  // Container(
-                                  //     padding: EdgeInsets.only(left: 10),
-                                  //     width:MediaQuery.of(context).size.width*0.4,
-                                  //
-                                  //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                  //
-                                  //       //color: Colors.grey[300],
-                                  //
-                                  //       //border: Border.all(color: MyTheme.accent_color)
-                                  //
-                                  //     ),
-                                  //     child: Text(snapshot.data.data[index].shippingCost.toString().substring(15),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                  //SizedBox(height: 4,),
-                                  // Container(
-                                  //     padding: EdgeInsets.only(left: 10),
-                                  //     width:MediaQuery.of(context).size.width*0.4,
-                                  //
-                                  //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                  //
-                                  //       //color: Colors.grey[300],
-                                  //
-                                  //       //border: Border.all(color: MyTheme.accent_color)
-                                  //
-                                  //     ),
-                                  //     child: Text(snapshot.data.data[index].subtotal.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                  //SizedBox(height: 4,),
-                                  // Container(
-                                  //     padding: EdgeInsets.only(left: 10),
-                                  //     width:MediaQuery.of(context).size.width*0.4,
-                                  //
-                                  //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                  //
-                                  //       //color: Colors.grey[300],
-                                  //
-                                  //       //border: Border.all(color: MyTheme.accent_color)
-                                  //
-                                  //     ),
-                                  //     child: Text(snapshot.data.data[index].tax.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-
-
-                                  SizedBox(height: 4,),
-
-
-
-                                  Container(
-                                      padding: EdgeInsets.only(left: 10),
-                                      width:MediaQuery.of(context).size.width*0.4,
-                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      child:
-                                      // Text("Date"),
-                                      Text(snapshot.data.data[index].date ??"".toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))
-
-                                  ),
-
-
-
-                                ],),
-
-                            ],),
-                        ),
-                      ),
-
-                      //SizedBox(height: 25,),
-
-                    ],);
-                },
-                //itemCount: 7,
+              ListView.builder(
                 itemCount: snapshot.data.data.length,
-              ),
+                itemBuilder: (context, int index) {
+                  //final datum = snapshot.data.data[index];
+                  return Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Container(
+                      padding: EdgeInsets.only(top: 10, bottom: 10),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(blurRadius: 10, color: Colors.grey, offset: Offset(1, 3))
+                        ],
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: 'Payment Type : ',
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                    // TextSpan(
+                                    //   text: paymentType,
+                                    //   style: TextStyle(color: MyTheme.accent_color),
+                                    // ),
+                                    TextSpan(
+                                      text: snapshot.data.data[index].paymentType. toString() ?? "" ,
+                                      style: TextStyle(color: MyTheme.accent_color),
+                                    ),
+
+                                  ],
+                                ),
+                              ),
+                              RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: 'Date : ',
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                    TextSpan(
+                                      text: snapshot.data.data[index].date.toString(),
+                                      style: TextStyle(color: MyTheme.accent_color),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: 'Amount	 : ',
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                    TextSpan(
+                                      text: snapshot.data.data[index].grandTotal.toString(),
+                                      style: TextStyle(color: MyTheme.accent_color),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              )
+
+
             );
+
+
 
           } else {
             return Container(
-              child: Center(child: Text("No Payment History ")),
+              padding: EdgeInsets.only(top: 258),
+              child: Column(
+                children: [
+
+                  Icon(Icons.history,size: 88,color: MyTheme.font_grey),
+                  Center(
+                      child: Text(
+                        "No Payment History.",
+                        style: TextStyle(color: MyTheme.font_grey),
+                      )),
+
+                ],
+              ),
             );
           }
         },
       );
 
-
-      // FutureBuilder(
-      //     future: paymentdata(),
-      //     builder: (context, snapshot) {
-      //
-      //       if (snapshot.hasData) {
-      //         return
-      //           Container(
-      //             //padding: EdgeInsets.only(top: 23),
-      //             child: ListView.builder(
-      //               shrinkWrap: true,
-      //               //physics:  NeverScrollableScrollPhysics(),
-      //               itemBuilder: (context, int index) {
-      //                 return Column(
-      //                   //crossAxisAlignment: CrossAxisAlignment.end,
-      //                   //mainAxisAlignment: MainAxisAlignment.start,
-      //                   children: [
-      //                     Padding(
-      //                       padding: const EdgeInsets.all(14.0),
-      //                       child: Container(
-      //                         padding: EdgeInsets.only(top: 10,bottom: 10),
-      //                         decoration: BoxDecoration(
-      //                             color: Colors.white,
-      //                             borderRadius: BorderRadius.circular(12),
-      //                             //border: Border.all(color: MyTheme.accent_color),
-      //                             boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,offset: Offset(1,3))]
-      //                         ),
-      //                         child:   Row(
-      //
-      //                           mainAxisAlignment: MainAxisAlignment.spaceAround,
-      //
-      //                           children: [
-      //
-      //                             Column(
-      //
-      //                               crossAxisAlignment: CrossAxisAlignment.start,
-      //
-      //                               children: [
-      //
-      //
-      //
-      //                                 Container(
-      //                                     padding: EdgeInsets.only(left: 7),
-      //                                     width:MediaQuery.of(context).size.width*0.43,
-      //
-      //                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //
-      //                                       //color: Colors.grey[300],
-      //
-      //                                       //border: Border.all(color: MyTheme.accent_color)
-      //
-      //
-      //
-      //                                     ),
-      //
-      //
-      //                                     child: Text("Id :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500),)),
-      //
-      //                                 //SizedBox(height: 4,),
-      //
-      //                                 // Container(
-      //                                 //     padding: EdgeInsets.only(left: 7),
-      //                                 //     width:MediaQuery.of(context).size.width*0.43,
-      //                                 //
-      //                                 //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //                                 //
-      //                                 //       //color: Colors.grey[300],
-      //                                 //
-      //                                 //       // border: Border.all(color: MyTheme.accent_color)
-      //                                 //
-      //                                 //     ),
-      //                                 //
-      //                                 //     child: Text("Code :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-      //
-      //                                // SizedBox(height: 4,),
-      //
-      //                                 // Container(
-      //                                 //     padding: EdgeInsets.only(left: 7),
-      //                                 //     width:MediaQuery.of(context).size.width*0.43,
-      //                                 //
-      //                                 //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //                                 //
-      //                                 //       //color: Colors.grey[300],
-      //                                 //
-      //                                 //       //border: Border.all(color: MyTheme.accent_color)
-      //                                 //
-      //                                 //     ),
-      //                                 //
-      //                                 //     child: Text("User_ID :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-      //
-      //                                 SizedBox(height: 4,),
-      //
-      //                                 Container(
-      //                                     padding: EdgeInsets.only(left: 7),
-      //                                     width:MediaQuery.of(context).size.width*0.43,
-      //
-      //                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //
-      //                                       //color: Colors.grey[300],
-      //
-      //                                       //border: Border.all(color: MyTheme.accent_color)
-      //
-      //                                     ),
-      //
-      //                                     child: Text("Payment_type :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-      //
-      //                                // SizedBox(height: 4,),
-      //
-      //                                 // Container(
-      //                                 //     padding: EdgeInsets.only(left: 7),
-      //                                 //     width:MediaQuery.of(context).size.width*0.43,
-      //                                 //
-      //                                 //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //                                 //
-      //                                 //       //color: Colors.grey[300],
-      //                                 //
-      //                                 //       //border: Border.all(color: MyTheme.accent_color)
-      //                                 //
-      //                                 //     ),
-      //                                 //
-      //                                 //     child: Text("Payment_status :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-      //
-      //                                // SizedBox(height: 4,),
-      //
-      //                                 // Container(
-      //                                 //     padding: EdgeInsets.only(left: 7),
-      //                                 //     width:MediaQuery.of(context).size.width*0.43,
-      //                                 //
-      //                                 //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //                                 //
-      //                                 //       //color: Colors.grey[300],
-      //                                 //
-      //                                 //       //border: Border.all(color: MyTheme.accent_color)
-      //                                 //
-      //                                 //     ),
-      //                                 //
-      //                                 //     child: Text("Payment status string :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-      //
-      //                                // SizedBox(height: 4,),
-      //
-      //                                 // Container(
-      //                                 //     padding: EdgeInsets.only(left: 7),
-      //                                 //     width:MediaQuery.of(context).size.width*0.43,
-      //                                 //
-      //                                 //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //                                 //
-      //                                 //       //color: Colors.grey[300],
-      //                                 //
-      //                                 //       // border: Border.all(color: MyTheme.accent_color)
-      //                                 //
-      //                                 //     ),
-      //                                 //
-      //                                 //     child: Text("Delivery Status :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-      //
-      //                                 SizedBox(height: 4,),
-      //
-      //                                 Container(
-      //                                     padding: EdgeInsets.only(left: 7),
-      //                                     width:MediaQuery.of(context).size.width*0.43,
-      //
-      //                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //
-      //                                       //color: Colors.grey[300],
-      //
-      //                                       //border: Border.all(color: MyTheme.accent_color)
-      //
-      //                                     ),
-      //
-      //                                     child: Text("Amount:",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-      //
-      //                                // SizedBox(height: 4,),
-      //
-      //                                 // Container(
-      //                                 //     padding: EdgeInsets.only(left: 7),
-      //                                 //     width:MediaQuery.of(context).size.width*0.43,
-      //                                 //
-      //                                 //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //                                 //
-      //                                 //       //color: Colors.grey[300],
-      //                                 //
-      //                                 //       // border: Border.all(color: MyTheme.accent_color)
-      //                                 //
-      //                                 //     ),
-      //                                 //
-      //                                 //     child: Text("Plane Grand Total :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-      //
-      //                                // SizedBox(height: 4,),
-      //
-      //                                 // Container(
-      //                                 //     padding: EdgeInsets.only(left: 7),
-      //                                 //     width:MediaQuery.of(context).size.width*0.43,
-      //                                 //
-      //                                 //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //                                 //
-      //                                 //       //color: Colors.grey[300],
-      //                                 //
-      //                                 //       //border: Border.all(color: MyTheme.accent_color)
-      //                                 //
-      //                                 //     ),
-      //                                 //
-      //                                 //     child: Text("Coupon Discount :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-      //
-      //                                 //SizedBox(height: 4,),
-      //
-      //                                 // Container(
-      //                                 //
-      //                                 //
-      //                                 //     padding: EdgeInsets.only(left: 7),
-      //                                 //     width:MediaQuery.of(context).size.width*0.43,
-      //                                 //
-      //                                 //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //                                 //
-      //                                 //       //color: Colors.grey[300],
-      //                                 //
-      //                                 //       //border: Border.all(color: MyTheme.accent_color)
-      //                                 //
-      //                                 //     ),child: Text("Shipping Cost :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-      //
-      //                                 //SizedBox(height: 4,),
-      //
-      //                                 // Container(
-      //                                 //     padding: EdgeInsets.only(left: 7),
-      //                                 //     width:MediaQuery.of(context).size.width*0.43,
-      //                                 //
-      //                                 //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //                                 //
-      //                                 //       //color: Colors.grey[300],
-      //                                 //
-      //                                 //       //border: Border.all(color: MyTheme.accent_color)
-      //                                 //
-      //                                 //     ),
-      //                                 //
-      //                                 //     child: Text("Sub Total :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-      //
-      //                                 //SizedBox(height: 4,),
-      //
-      //                                 // Container(
-      //                                 //     padding: EdgeInsets.only(left: 7),
-      //                                 //     width:MediaQuery.of(context).size.width*0.43,
-      //                                 //
-      //                                 //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //                                 //
-      //                                 //       //color: Colors.grey[300],
-      //                                 //
-      //                                 //       // border: Border.all(color: MyTheme.accent_color)
-      //                                 //
-      //                                 //     ),
-      //                                 //
-      //                                 //     child: Text("UMONDA FEES : ",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-      //
-      //                                 SizedBox(height: 4,),
-      //
-      //                                 Container(
-      //                                     padding: EdgeInsets.only(left: 7),
-      //                                     width:MediaQuery.of(context).size.width*0.43,
-      //
-      //                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //
-      //                                       //color: Colors.grey[300],
-      //
-      //                                       //  border: Border.all(color: MyTheme.accent_color)
-      //
-      //                                     ),
-      //
-      //                                     child: Text(" Date :",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-      //
-      //
-      //
-      //                               ],),
-      //
-      //
-      //
-      //
-      //
-      //                             SizedBox(width: 8,),
-      //
-      //                             Column(
-      //
-      //                               crossAxisAlignment: CrossAxisAlignment.start,
-      //
-      //                               children: [
-      //
-      //
-      //
-      //                                 Container(
-      //
-      //                                     width:MediaQuery.of(context).size.width*0.4,
-      //                                  padding: EdgeInsets.only(left: 10),
-      //                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //
-      //                                       //color: Colors.grey[300],
-      //
-      //                                       //border: Border.all(color: MyTheme.accent_color)
-      //
-      //                                     ),
-      //
-      //
-      //
-      //                                     child: Text(snapshot.data.data[index].id.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-      //
-      //
-      //                                // SizedBox(height: 4,),
-      //                                 // Container(
-      //                                 //     padding: EdgeInsets.only(left: 6),
-      //                                 //     width:MediaQuery.of(context).size.width*0.4,
-      //                                 //
-      //                                 //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //                                 //
-      //                                 //       //color: Colors.grey[300],
-      //                                 //
-      //                                 //       //border: Border.all(color: MyTheme.accent_color)
-      //                                 //
-      //                                 //     ),
-      //                                 //     child: Text(snapshot.data.data[index].code.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-      //                                 // SizedBox(height: 4,),
-      //                                 // Container(
-      //                                 //     padding: EdgeInsets.only(left: 10),
-      //                                 //     width:MediaQuery.of(context).size.width*0.4,
-      //                                 //
-      //                                 //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //                                 //
-      //                                 //       //color: Colors.grey[300],
-      //                                 //
-      //                                 //       //border: Border.all(color: MyTheme.accent_color)
-      //                                 //
-      //                                 //     ),
-      //                                 //     child: Text(snapshot.data.data[index].userId.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-      //
-      //
-      //                                 SizedBox(height: 4,),
-      //                                 Container(
-      //                                     padding: EdgeInsets.only(left: 10),
-      //                                     width:MediaQuery.of(context).size.width*0.4,
-      //
-      //                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //
-      //                                       //color: Colors.grey[300],
-      //
-      //                                       //border: Border.all(color: MyTheme.accent_color)
-      //
-      //                                     ),
-      //                                     child:
-      //                                    // // Text("AED " + (snapshot.data[0].adminToPay ?? "").toString(), style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
-      //                                    //
-      //                                     //Text("Govind"),
-      //                                      Text(snapshot.data.data[index].paymentType.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))
-      //                 ),
-      //
-      //
-      //                                 //SizedBox(height: 4,),
-      //                                 // Container(
-      //                                 //     padding: EdgeInsets.only(left: 10),
-      //                                 //     width:MediaQuery.of(context).size.width*0.4,
-      //                                 //
-      //                                 //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //                                 //
-      //                                 //       //color: Colors.grey[300],
-      //                                 //
-      //                                 //       //border: Border.all(color: MyTheme.accent_color)
-      //                                 //
-      //                                 //     ),
-      //                                 //     child: Text(snapshot.data.data[index].paymentStatus.toString().substring(14),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-      //
-      //
-      //                                // SizedBox(height: 4,),
-      //                                 // Container(
-      //                                 //     padding: EdgeInsets.only(left: 10),
-      //                                 //     width:MediaQuery.of(context).size.width*0.4,
-      //                                 //
-      //                                 //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //                                 //
-      //                                 //       //color: Colors.grey[300],
-      //                                 //
-      //                                 //       //border: Border.all(color: MyTheme.accent_color)
-      //                                 //
-      //                                 //     ),
-      //                                 //     child: Text(snapshot.data.data[index].paymentStatusString.toString().substring(20),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-      //
-      //
-      //                                // SizedBox(height: 4,),
-      //                                 // Container(
-      //                                 //     padding: EdgeInsets.only(left: 10),
-      //                                 //     width:MediaQuery.of(context).size.width*0.4,
-      //                                 //
-      //                                 //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //                                 //
-      //                                 //       //color: Colors.grey[300],
-      //                                 //
-      //                                 //       //border: Border.all(color: MyTheme.accent_color)
-      //                                 //
-      //                                 //     ),
-      //                                 //     child: Text(snapshot.data.data[index].deliveryStatus.toString().substring(15),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-      //
-      //
-      //                                 SizedBox(height: 4,),
-      //                                 Container(
-      //                                     padding: EdgeInsets.only(left: 10),
-      //                                     width:MediaQuery.of(context).size.width*0.4,
-      //
-      //                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //
-      //                                       //color: Colors.grey[300],
-      //
-      //                                       //border: Border.all(color: MyTheme.accent_color)
-      //
-      //                                     ),
-      //                                     child: Text(snapshot.data.data[index].grandTotal.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-      //
-      //
-      //                                // SizedBox(height: 4,),
-      //                                 // Container(
-      //                                 //     padding: EdgeInsets.only(left: 10),
-      //                                 //     width:MediaQuery.of(context).size.width*0.4,
-      //                                 //
-      //                                 //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //                                 //
-      //                                 //       //color: Colors.grey[300],
-      //                                 //
-      //                                 //       //border: Border.all(color: MyTheme.accent_color)
-      //                                 //
-      //                                 //     ),
-      //                                 //     child: Text(snapshot.data.data[index].planeGrandTotal.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-      //
-      //
-      //                                 //SizedBox(height: 4,),
-      //                                 // Container(
-      //                                 //     padding: EdgeInsets.only(left: 10),
-      //                                 //     width:MediaQuery.of(context).size.width*0.4,
-      //                                 //
-      //                                 //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //                                 //
-      //                                 //       //color: Colors.grey[300],
-      //                                 //
-      //                                 //       //border: Border.all(color: MyTheme.accent_color)
-      //                                 //
-      //                                 //     ),
-      //                                 //     child: Text(snapshot.data.data[index].couponDiscount.toString().substring(15),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-      //
-      //
-      //                                 //SizedBox(height: 4,),
-      //                                 // Container(
-      //                                 //     padding: EdgeInsets.only(left: 10),
-      //                                 //     width:MediaQuery.of(context).size.width*0.4,
-      //                                 //
-      //                                 //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //                                 //
-      //                                 //       //color: Colors.grey[300],
-      //                                 //
-      //                                 //       //border: Border.all(color: MyTheme.accent_color)
-      //                                 //
-      //                                 //     ),
-      //                                 //     child: Text(snapshot.data.data[index].shippingCost.toString().substring(15),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-      //
-      //
-      //                                 //SizedBox(height: 4,),
-      //                                 // Container(
-      //                                 //     padding: EdgeInsets.only(left: 10),
-      //                                 //     width:MediaQuery.of(context).size.width*0.4,
-      //                                 //
-      //                                 //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //                                 //
-      //                                 //       //color: Colors.grey[300],
-      //                                 //
-      //                                 //       //border: Border.all(color: MyTheme.accent_color)
-      //                                 //
-      //                                 //     ),
-      //                                 //     child: Text(snapshot.data.data[index].subtotal.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-      //
-      //
-      //                                 //SizedBox(height: 4,),
-      //                                 // Container(
-      //                                 //     padding: EdgeInsets.only(left: 10),
-      //                                 //     width:MediaQuery.of(context).size.width*0.4,
-      //                                 //
-      //                                 //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //                                 //
-      //                                 //       //color: Colors.grey[300],
-      //                                 //
-      //                                 //       //border: Border.all(color: MyTheme.accent_color)
-      //                                 //
-      //                                 //     ),
-      //                                 //     child: Text(snapshot.data.data[index].tax.toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))),
-      //
-      //
-      //                                SizedBox(height: 4,),
-      //
-      //
-      //
-      //                 Container(
-      //                                     padding: EdgeInsets.only(left: 10),
-      //                                     width:MediaQuery.of(context).size.width*0.4,
-      //                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-      //                                     ),
-      //                                     child:
-      //                                    // Text("Date"),
-      //                                     Text(snapshot.data.data[index].date ??"".toString(),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500))
-      //
-      //                                 ),
-      //
-      //
-      //
-      //                               ],),
-      //
-      //                           ],),
-      //                       ),
-      //                     ),
-      //
-      //                     //SizedBox(height: 25,),
-      //
-      //                   ],);
-      //               },
-      //               //itemCount: 7,
-      //                itemCount: snapshot.data.data.length,
-      //             ),
-      //           );
-      //       }
-      //       else{
-      //         return
-      //           Container(
-      //               child: Center(child: CircularProgressIndicator()));
-      //       }
-      //     }
-      // );
   }
 
 
-  Future<PaymenthistoryModel> paymentdata() async {
-    // Create Dio instance
+
+
+  Future<PaymenthistoryModel> paymentdataa() async {
     Dio dio = Dio();
 
-    // Define the headers
     Map<String, String> headers = {
-     // 'Authorization': 'Bearer 131|V1SPLBTs7BaNNUwZth5gTGjZfC1nc2qQ1EB6fpTs',
-     // 'Authorization': access_token.$,
-      'Cookie':
-      'XSRF-TOKEN=dT0lZnI5OsbNxA88TLF4S2x45edCmnKMTwmze0oJ;'
-          ' umonda_online_marketplace_session=k3LCVR020r4kAVJFwu2R66nEtLr7CtFTN7ekl25M'
-
-      //'Authorization': 'Bearer 272|zOSOR7ks4vioa05Rp8YwM61GTFAIpybBUSiX3WYv',
+      'Cookie': 'XSRF-TOKEN=dT0lZnI5OsbNxA88TLF4S2x45edCmnKMTwmze0oJ; umonda_online_marketplace_session=k3LCVR020r4kAVJFwu2R66nEtLr7CtFTN7ekl25M'
     };
 
-    // Define the API endpoint
-
-    // String url = "https://umonda.com/api/v2/payment-history/${user_id.$}";
-     String url = "${AppConfig.BASE_URL}/payment-history/${user_id.$}";
     //String url = "https://umonda.com/api/v2/payment-history/138";
+    String url = "${AppConfig.BASE_URL}/payment-history/${user_id.$}";
 
     try {
-      // Make the API call
       Response response = await dio.get(url, options: Options(headers: headers));
 
-      // Handle the response
       if (response.statusCode == 200) {
-        print("user idnbd${user_id.$}");
         print("Payments screen data ${response.data}");
         return PaymenthistoryModel.fromJson(response.data);
-
-        // API call successful
-        //print(response.data);
-      }
-
-     else if(response.statusCode == 401){
-
-        print("500 Internal Server Error........... ");
-        print("user id${user_id.$}");
-        print(response.data);
-      }
-
-      else {
-        // API call failed
+      } else {
         print('API call failed with status code ${response.statusCode}');
+        throw Exception('Failed to load data');
       }
     } catch (error) {
-      // Handle any errors
       print('An error occurred: $error');
+      throw error;
     }
   }
+
+
+
+
+
+
+
+
+
+
+
+
+  // Widget listview() {
+  //   return FutureBuilder(
+  //     future: paymentdataa(),
+  //     builder: (context, snapshot) {
+  //       if (snapshot.connectionState == ConnectionState.waiting) {
+  //         return Container(
+  //           child: Center(child: CircularProgressIndicator()),
+  //         );
+  //       } else if (snapshot.hasError) {
+  //         return Container(
+  //           child: Center(
+  //             child: Text('Error: ${snapshot.error}'),
+  //           ),
+  //         );
+  //       } else if (!snapshot.hasData || snapshot.data.data.isEmpty) {
+  //         return Container(
+  //           padding: EdgeInsets.only(top: 250),
+  //           child: Center(
+  //             child: Column(
+  //               children: [
+  //
+  //                 Icon(Icons.folder_off_outlined,size: 88,color: MyTheme.font_grey),
+  //                 Center(
+  //                     child: Text(
+  //                       "No Commission available.",
+  //                       style: TextStyle(color: MyTheme.font_grey),
+  //                     )),
+  //                 //Text('No data available.'),
+  //               ],
+  //             ),
+  //           ),
+  //         );
+  //       } else {
+  //         return Container(
+  //           child: ListView.builder(
+  //             shrinkWrap: true,
+  //             itemBuilder: (context, int index) {
+  //               return Column(
+  //                 children: [
+  //                   Padding(
+  //                     padding: const EdgeInsets.all(12.0),
+  //                     child: Container(
+  //                       padding: EdgeInsets.only(top: 10, bottom: 10),
+  //                       decoration: BoxDecoration(
+  //                         color: Colors.white,
+  //                         borderRadius: BorderRadius.circular(12),
+  //                         boxShadow: [BoxShadow(blurRadius: 10, color: Colors.grey, offset: Offset(1, 3))],
+  //                       ),
+  //                       child: Row(
+  //                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //                         children: [
+  //                           Column(
+  //                             crossAxisAlignment: CrossAxisAlignment.start,
+  //                             children: [
+  //                               // ... your existing code ...
+  //
+  //                               // Example: Display "No data" message if id is null
+  //                               //if (snapshot.data.data[index].id == null)
+  //                               //Text(snapshot.data.data[index].id.toString()),
+  //                               Text(snapshot.data.data[index].grandTotal.toString()),
+  //
+  //                               // Text("No data", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
+  //                               // Add similar checks for other fields
+  //
+  //                             ],
+  //                           ),
+  //
+  //                         ],
+  //                       ),
+  //                     ),
+  //                   ),
+  //                 ],
+  //               );
+  //             },
+  //             itemCount: snapshot.data.data.length,
+  //           ),
+  //         );
+  //       }
+  //     },
+  //   );
+  // }
+  //
+  //
+  //
+  // Future<PaymenthistoryModel> paymentdataa() async {
+  //   // Create Dio instance
+  //   Dio dio = Dio();
+  //
+  //   // Define the headers
+  //   Map<String, String> headers = {
+  //    // 'Authorization': 'Bearer 131|V1SPLBTs7BaNNUwZth5gTGjZfC1nc2qQ1EB6fpTs',
+  //    // 'Authorization': access_token.$,
+  //     'Cookie':
+  //     'XSRF-TOKEN=dT0lZnI5OsbNxA88TLF4S2x45edCmnKMTwmze0oJ;'
+  //         ' umonda_online_marketplace_session=k3LCVR020r4kAVJFwu2R66nEtLr7CtFTN7ekl25M'
+  //
+  //     //'Authorization': 'Bearer 272|zOSOR7ks4vioa05Rp8YwM61GTFAIpybBUSiX3WYv',
+  //   };
+  //
+  //   // Define the API endpoint
+  //
+  //   // String url = "https://umonda.com/api/v2/payment-history/${user_id.$}";
+  //    //String url = "${AppConfig.BASE_URL}/payment-history/${user_id.$}";
+  //   String url = "https://umonda.com/api/v2/payment-history/138";
+  //
+  //   try {
+  //     // Make the API call
+  //     Response response = await dio.get(url, options: Options(headers: headers));
+  //
+  //     // Handle the response
+  //     if (response.statusCode == 200) {
+  //       print("user idnbd${user_id.$}");
+  //       print("Payments screen data ${response.data}");
+  //       return PaymenthistoryModel.fromJson(response.data);
+  //
+  //       // API call successful
+  //       //print(response.data);
+  //     }
+  //
+  //    else if(response.statusCode == 401){
+  //
+  //       print("500 Internal Server Error........... ");
+  //       print("user id${user_id.$}");
+  //       print(response.data);
+  //     }
+  //
+  //     else {
+  //       // API call failed
+  //       print('API call failed with status code ${response.statusCode}');
+  //     }
+  //   } catch (error) {
+  //     // Handle any errors
+  //     print('An error occurred: $error');
+  //   }
+  // }
 }
 
 

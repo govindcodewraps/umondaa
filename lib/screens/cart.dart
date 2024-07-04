@@ -93,7 +93,7 @@ class _CartState extends State<Cart> {
                 ((cart_item.price + cart_item.tax) * cart_item.quantity)
                     .toStringAsFixed(2));
             _cartTotalString =
-                "${SystemConfig.systemCurrency.symbol}${_cartTotal.toStringAsFixed(2)}";
+                "AED ${_cartTotal.toStringAsFixed(2)}";
           });
         }
       });
@@ -675,21 +675,18 @@ class _CartState extends State<Cart> {
                       child: Row(
                         children: [
                           Text(
-                            SystemConfig.systemCurrency.symbol+
-                                (_shopList[seller_index]
-                                            .cart_items[item_index]
-                                            .price *
-                                        _shopList[seller_index]
-                                            .cart_items[item_index]
-                                            .quantity)
-                                    .toStringAsFixed(2),
+                           // SystemConfig.systemCurrency.symbol+
+                           "AED "+
+                                //(_shopList[seller_index].cart_items[item_index].price * _shopList[seller_index].cart_items[item_index].quantity)
+                                (_shopList[seller_index].cart_items[item_index].price)
+                                    .toStringAsFixed(1),
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
+                            maxLines: 1,
                             style: TextStyle(
                                 color: MyTheme.accent_color,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600),
                           ),
                         ],
                       ),

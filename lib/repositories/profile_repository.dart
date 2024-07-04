@@ -42,10 +42,13 @@ print("profile_repository, response : ${response.body}");
 
     print("profile_repository, getProfileUpdateResponse : ${response.body}");
     bool checkResult = ResponseCheck.apply(response.body);
-
+    print("twoooo");
+    print(response.body);
+    print(checkResult);
     if(!checkResult)
       return responseCheckModelFromJson(response.body);
-
+print("oneee");
+    print(response.body);
     return profileUpdateResponseFromJson(response.body);
   }
 

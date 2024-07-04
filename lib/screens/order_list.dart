@@ -167,7 +167,7 @@ class _OrderListState extends State<OrderList> {
         page: _page,
         payment_status: _selectedPaymentStatus.option_key,
         delivery_status: _selectedDeliveryStatus.option_key);
-    //print("or:"+orderResponse.toJson().toString());
+    print("orqqqqqqqqq:"+orderResponse.toJson().toString());
     _orderList.addAll(orderResponse.orders);
     _isInitial = false;
     _totalData = orderResponse.meta.total;
@@ -257,7 +257,7 @@ class _OrderListState extends State<OrderList> {
             decoration: BoxDecorations.buildBoxDecoration_1(),
             padding: EdgeInsets.symmetric(horizontal: 14),
             height: 36,
-            width: MediaQuery.of(context).size.width * .4,
+            width: MediaQuery.of(context).size.width * .44 ,
             child: new DropdownButton<PaymentStatus>(
               icon: Padding(
                 padding: const EdgeInsets.only(left: 38.0),
@@ -289,7 +289,7 @@ class _OrderListState extends State<OrderList> {
             decoration: BoxDecorations.buildBoxDecoration_1(),
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             height: 36,
-            width: MediaQuery.of(context).size.width * .4,
+            width: MediaQuery.of(context).size.width * .44,
             child: new DropdownButton<DeliveryStatus>(
               icon: Padding(
                 padding: const EdgeInsets.only(left: 22.0),
@@ -425,12 +425,13 @@ class _OrderListState extends State<OrderList> {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) {
-                    return OrderDetails(
-                      id: _orderList[index].id,
-                    );
-                  }));
+                  // Navigator.push(context,
+                  //     MaterialPageRoute(builder: (context) {
+                  //   return OrderDetails(
+                  //     id: _orderList[index].id,
+                  //   );
+                  // }));
+                  // print("order idddddd :: ${_orderList[index].id}");
                 },
                 child: buildOrderListItemCard(index),
               );

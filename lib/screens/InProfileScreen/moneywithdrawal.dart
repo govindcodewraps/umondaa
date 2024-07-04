@@ -50,7 +50,8 @@ class _MoneywithdrawalrewuestState extends State<Moneywithdrawalrewuest> {
         ),
       ),
 
-      body: Padding(
+      body:
+      Padding(
         padding: const EdgeInsets.only(left: 16,right: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,7 +76,6 @@ class _MoneywithdrawalrewuestState extends State<Moneywithdrawalrewuest> {
             SizedBox(height: 10,),
          Text("Amount",style: TextStyle(fontSize: 20),),
             SizedBox(
-
               height: 50,
               //width: 250,
               child: TextField(

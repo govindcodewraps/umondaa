@@ -27,14 +27,16 @@ class ProfileEdit extends StatefulWidget {
 class _ProfileEditState extends State<ProfileEdit> {
   ScrollController _mainScrollController = ScrollController();
 
-  TextEditingController _nameController =
-  TextEditingController(text: "${user_name.$}");
+  TextEditingController _nameController = TextEditingController(text: "${user_name.$}");
+  TextEditingController _phoneController = TextEditingController(text: "${user_phone.$}");
+  TextEditingController _emailController = TextEditingController(text: "${user_email.$}");
 
-  TextEditingController _phoneController =
-  TextEditingController(text: "${user_phone.$}");
+  TextEditingController _dobController = TextEditingController(text: "${user_dob.$}");
+  //bank detaisl controller
+  TextEditingController _bankController = TextEditingController(text: "${user_bankname.$}");
+  TextEditingController _ibanController = TextEditingController(text: "${user_iban.$}");
+  TextEditingController _bicController = TextEditingController(text: "${user_bic.$}");
 
-  TextEditingController _emailController =
-  TextEditingController(text: "${user_email.$}");
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _passwordConfirmController = TextEditingController();
 
@@ -116,6 +118,10 @@ class _ProfileEditState extends State<ProfileEdit> {
   onPressUpdate() async {
     var name = _nameController.text.toString();
     var phone = _phoneController.text.toString();
+    var dob=_dobController.text.toString();
+    var bankname=_bankController.text.toString();
+    var bankaccno=_bicController.text.toString();
+    var bankroutingno=_ibanController.text.toString();
 
     if (name == "") {
       ToastComponent.showDialog(
@@ -132,8 +138,42 @@ class _ProfileEditState extends State<ProfileEdit> {
       return;
     }
 
+    if (dob == "") {
+      ToastComponent.showDialog(
+          "Enter_DOB",
+          gravity: Toast.center,
+          duration: Toast.lengthLong);
+      return;
+    }
 
-    var post_body = jsonEncode({"name": "${name}","phone":phone});
+    if (bankname == "") {
+      ToastComponent.showDialog(
+          "Enter_Bank_Name",
+          gravity: Toast.center,
+          duration: Toast.lengthLong);
+      return;
+    }
+
+    if (bankaccno== "") {
+      ToastComponent.showDialog(
+          "Enter_IBAN_number",
+          gravity: Toast.center,
+          duration: Toast.lengthLong);
+      return;
+    }
+    if (bankroutingno== "") {
+      ToastComponent.showDialog(
+          "Enter_BIC_number",
+          gravity: Toast.center,
+          duration: Toast.lengthLong);
+      return;
+    }
+
+    // dob
+    // bank_name
+    // bank_acc_no
+    // bank_routing_no
+    var post_body = jsonEncode({"name": "${name}","phone":phone,"dob":dob,"bank_name":bankname,"bank_acc_no":bankaccno,"bank_routing_no":bankroutingno});
 
     var profileUpdateResponse =
     await ProfileRepository().getProfileUpdateResponse(post_body:post_body);
@@ -147,6 +187,10 @@ class _ProfileEditState extends State<ProfileEdit> {
 
       user_name.$ = name;
       user_phone.$ = phone;
+      user_dob.$ = dob;
+      user_bankname.$ = bankname;
+      user_bic.$ = bankaccno;
+      user_iban.$ = bankroutingno;
       setState(() {});
     }
   }
@@ -340,6 +384,8 @@ class _ProfileEditState extends State<ProfileEdit> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+
+
             buildBasicInfo(context),
 
             buildChangePassword(context),
@@ -586,8 +632,6 @@ class _ProfileEditState extends State<ProfileEdit> {
             ),
           ),
         ),
-
-
         Visibility(
           visible: true,
           child: Column(
@@ -634,6 +678,135 @@ class _ProfileEditState extends State<ProfileEdit> {
                 ),
               ),
             ],
+          ),
+        ),
+
+
+        Padding(
+          padding: const EdgeInsets.only(bottom: 4.0),
+          child: Text("DOB",
+            //AppLocalizations.of(context).phone_ucf,
+            style: TextStyle(
+                fontSize: 12,
+                color: MyTheme.dark_font_grey, fontWeight: FontWeight.normal),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 14.0),
+          child: Container(
+            decoration: BoxDecorations.buildBoxDecoration_1(),
+            height: 36,
+            child: TextField(
+              controller: _dobController,
+              autofocus: false,
+              keyboardType:TextInputType.phone,
+              style: TextStyle(color:MyTheme.dark_font_grey,fontSize: 12),
+              decoration: InputDecorations.buildInputDecoration_1(
+                  hint_text: "DD/MM/YYYY").copyWith(
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: MyTheme.accent_color),
+
+                ),),
+            ),
+          ),
+        ),
+
+        Padding(
+          padding: const EdgeInsets.only(bottom: 4.0),
+          child: Text("Bank Name",
+            //AppLocalizations.of(context).phone_ucf,
+            style: TextStyle(
+                fontSize: 12,
+                color: MyTheme.dark_font_grey, fontWeight: FontWeight.normal),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 14.0),
+          child: Container(
+            decoration: BoxDecorations.buildBoxDecoration_1(),
+            height: 36,
+            child: TextField(
+              controller: _bankController,
+              autofocus: false,
+              //keyboardType:TextInputType.phone,
+              style: TextStyle(color:MyTheme.dark_font_grey,fontSize: 12),
+              decoration: InputDecorations.buildInputDecoration_1(
+                  hint_text: "Bank Name").copyWith(
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: MyTheme.accent_color),
+
+                ),),
+            ),
+          ),
+        ),
+
+        Padding(
+          padding: const EdgeInsets.only(bottom: 4.0),
+          child: Text("IBAN",
+            //AppLocalizations.of(context).phone_ucf,
+            style: TextStyle(
+                fontSize: 12,
+                color: MyTheme.dark_font_grey, fontWeight: FontWeight.normal),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 14.0),
+          child: Container(
+            decoration: BoxDecorations.buildBoxDecoration_1(),
+            height: 36,
+            child: TextField(
+              controller: _ibanController,
+              autofocus: false,
+              //keyboardType:TextInputType.phone,
+              style: TextStyle(color:MyTheme.dark_font_grey,fontSize: 12),
+              decoration: InputDecorations.buildInputDecoration_1(
+                  hint_text: "IBAN").copyWith(
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: MyTheme.accent_color),
+
+                ),),
+            ),
+          ),
+        ),
+
+        Padding(
+          padding: const EdgeInsets.only(bottom: 4.0),
+          child: Text("BIC Number",
+            //AppLocalizations.of(context).phone_ucf,
+            style: TextStyle(
+                fontSize: 12,
+                color: MyTheme.dark_font_grey, fontWeight: FontWeight.normal),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 14.0),
+          child: Container(
+            decoration: BoxDecorations.buildBoxDecoration_1(),
+            height: 36,
+            child: TextField(
+              controller: _bicController,
+              autofocus: false,
+              //keyboardType:TextInputType.phone,
+              style: TextStyle(color:MyTheme.dark_font_grey,fontSize: 12),
+              decoration: InputDecorations.buildInputDecoration_1(
+                  hint_text: "BIC Number").copyWith(
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: MyTheme.accent_color),
+
+                ),),
+            ),
           ),
         ),
 

@@ -226,24 +226,24 @@ class _OtpState extends State<Otp> {
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 100),
-                    child: InkWell(
-                      onTap: (){
-                        onTapResend();
-                      },
-                      child: Text(AppLocalizations.of(context).resend_code_ucf,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: MyTheme.accent_color,
-                              decoration: TextDecoration.underline,
-                              fontSize: 13)),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(top: 80),
+                  //   child: InkWell(
+                  //     onTap: (){
+                  //       onTapResend();
+                  //     },
+                  //     child: Text(AppLocalizations.of(context).resend_code_ucf,
+                  //         textAlign: TextAlign.center,
+                  //         style: TextStyle(
+                  //             color: Colors.black,
+                  //             decoration: TextDecoration.underline,
+                  //             fontSize: 13)),
+                  //   ),
+                  // ),
                 ],
               )),
             ),
-            Icon(Icons.keyboard_backspace_rounded,color: Colors.red,),
+           // Icon(Icons.keyboard_backspace_rounded,color: Colors.red,),
 
           ],
         ),
