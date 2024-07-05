@@ -44,6 +44,7 @@ import 'package:social_share/social_share.dart';
 import 'package:toast/toast.dart';
 
 import '../data_model/product_details_response.dart';
+import '../reviewSreen/sellerrating.dart';
 
 //  print("100 dismantlfee with check box  ${dismantlfee}");
 var globdismantalfee;
@@ -1210,6 +1211,60 @@ class _ProductDetailsState extends State<ProductDetails>
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
 
+                              divider(),
+                              InkWell(
+                                onTap: () {
+                                  // Navigator.push(context,
+                                  //     MaterialPageRoute(builder: (context) {
+                                  //       return ProductReviews(id: widget.id);
+                                  //     })).then((value) {
+                                  //   onPopped(value);
+                                  // });
+
+
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                        return Sellerratingscreen(id: widget.id);
+                                      })).then((value) {
+                                    onPopped(value);
+                                  });
+
+                                },
+                                child: Container(
+                                  color: MyTheme.white,
+                                  height: 48,
+                                  child: Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                      18.0,
+                                      14.0,
+                                      18.0,
+                                      14.0,
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          //AppLocalizations.of(context).reviews_ucf,
+
+                                          "Seller Ratings",
+
+                                          style: TextStyle(
+                                              color: MyTheme.dark_font_grey,
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                        Spacer(),
+                                        Image.asset(
+                                          "assets/arrow.png",
+                                          height: 11,
+                                          width: 20,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              divider(),
+
                               Container(
                                 color: MyTheme.white,
                                 margin: EdgeInsets.only(top: 10),
@@ -1249,47 +1304,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                           )),
                                     ),
 
-                                    divider(),
-                                    InkWell(
-                                      onTap: () {
-                                        Navigator.push(context,
-                                            MaterialPageRoute(builder: (context) {
-                                              return ProductReviews(id: widget.id);
-                                            })).then((value) {
-                                          onPopped(value);
-                                        });
-                                      },
-                                      child: Container(
-                                        color: MyTheme.white,
-                                        height: 48,
-                                        child: Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                            18.0,
-                                            14.0,
-                                            18.0,
-                                            14.0,
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                AppLocalizations.of(context).reviews_ucf,
-                                                style: TextStyle(
-                                                    color: MyTheme.dark_font_grey,
-                                                    fontSize: 13,
-                                                    fontWeight: FontWeight.w600),
-                                              ),
-                                              Spacer(),
-                                              Image.asset(
-                                                "assets/arrow.png",
-                                                height: 11,
-                                                width: 20,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    divider(),
+
 
 
                                   ],

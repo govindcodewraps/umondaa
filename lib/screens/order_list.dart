@@ -12,6 +12,8 @@ import 'package:umonda/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:one_context/one_context.dart';
 
+import '../reviewSreen/productlistreview.dart';
+
 
 class PaymentStatus {
   String option_key;
@@ -521,7 +523,35 @@ class _OrderListState extends State<OrderList> {
                   style: TextStyle(color: MyTheme.dark_font_grey, fontSize: 12,fontWeight: FontWeight.w500),
                 ),
               ],
-            )
+            ),
+
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end, // Aligns the button to the right
+              children: [
+                Padding(
+                  padding: EdgeInsets.zero, // No extra padding
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                        return ForRevieworder(
+                          id: _orderList[index].id,
+                        );
+                      }));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.green, // Background color
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12), // Circular border
+                      ),
+                      padding: EdgeInsets.only(left: 6, right: 6), // Adjust padding if needed
+                    ),
+                    child: Text("Write a Review"),
+                  ),
+                ),
+              ],
+            ),
+
           ],
         ),
       ),
