@@ -270,6 +270,7 @@ class _Allnewads_ScreenState extends State<Allnewads_Screen> {
       print("1- home.dart, is_logged_in : ${is_logged_in}");
       print("2- home.dart, is_logged_in : ${is_logged_in.$}");
     }
+    pagecountapi();
   }
 
   change() {
@@ -505,7 +506,8 @@ class _Allnewads_ScreenState extends State<Allnewads_Screen> {
 
   Future<void> pagecountapi() async {
     Dio dio = Dio();
-    var apiUrl = 'https://umonda.com/api/v2/products?page=1';
+    //var apiUrl = 'https://umonda.com/api/v2/products?page=1';
+    var apiUrl = 'https://umonda.com/api/v2/products/search?page=1';
 
     try {
 // Make the API request using Dio

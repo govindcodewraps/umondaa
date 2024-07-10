@@ -180,71 +180,69 @@ class _MoneywithdrawalState extends State<Moneywithdrawal> {
         } else {
           return 
             SingleChildScrollView(
-            child: Expanded(
-              child: Container(
-                padding: EdgeInsets.only(bottom: 1),
-                height: MediaQuery.of(context).size.width * 1.4,
-                width: MediaQuery.of(context).size.width * 1,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [BoxShadow(blurRadius: 10, color: Colors.grey, offset: Offset(1, 3))],
-                ),
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  reverse: false,
-                  itemBuilder: (context, int index) {
-                    return Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Container(
-                            padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12),
-                              boxShadow: [BoxShadow(blurRadius: 10, color: Colors.grey, offset: Offset(1, 3))],
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text("Id :", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
-                                    SizedBox(height: 4),
-                                    Text("Amount :", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
-                                    SizedBox(height: 4),
-                                    Text("Date :", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
-                                    SizedBox(height: 4),
-                                    Text("Status :", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
-                                  ],
-                                ),
-                                SizedBox(width: 8),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(snapshot.data[index].id.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
-                                    SizedBox(height: 4),
-                                    Text("AED " + snapshot.data[index].amount.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
-                                    SizedBox(height: 4),
-                                    Text(snapshot.data[index].createdAt.toString().substring(0, 10), style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
-                                    SizedBox(height: 4),
-                                    if (snapshot.data[index].status == 0)
-                                      Text("Pending", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.orangeAccent)),
-                                    if (snapshot.data[index].status == 1)
-                                      Text("Successful", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.green)),
-                                  ],
-                                ),
-                              ],
-                            ),
+            child: Container(
+              padding: EdgeInsets.only(bottom: 1),
+              height: MediaQuery.of(context).size.width * 1.4,
+              width: MediaQuery.of(context).size.width * 1,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [BoxShadow(blurRadius: 10, color: Colors.grey, offset: Offset(1, 3))],
+              ),
+              child: ListView.builder(
+                shrinkWrap: true,
+                reverse: false,
+                itemBuilder: (context, int index) {
+                  return Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Container(
+                          padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [BoxShadow(blurRadius: 10, color: Colors.grey, offset: Offset(1, 3))],
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Id :", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
+                                  SizedBox(height: 4),
+                                  Text("Amount :", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
+                                  SizedBox(height: 4),
+                                  Text("Date :", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
+                                  SizedBox(height: 4),
+                                  Text("Status :", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
+                                ],
+                              ),
+                              SizedBox(width: 8),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(snapshot.data[index].id.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
+                                  SizedBox(height: 4),
+                                  Text("AED " + snapshot.data[index].amount.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
+                                  SizedBox(height: 4),
+                                  Text(snapshot.data[index].createdAt.toString().substring(0, 10), style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
+                                  SizedBox(height: 4),
+                                  if (snapshot.data[index].status == 0)
+                                    Text("Pending", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.orangeAccent)),
+                                  if (snapshot.data[index].status == 1)
+                                    Text("Successful", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.green)),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    );
-                  },
-                  itemCount: snapshot.data.length,
-                ),
+                      ),
+                    ],
+                  );
+                },
+                itemCount: snapshot.data.length,
               ),
             ),
           );

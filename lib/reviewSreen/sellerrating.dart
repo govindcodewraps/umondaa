@@ -46,18 +46,57 @@ class _SellerratingscreenState extends State<Sellerratingscreen> {
               future: _futureSellerRating,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                  return Center(child: Padding(
+                    padding: const EdgeInsets.only(top: 120),
+                    child: CircularProgressIndicator(),
+                  ));
                 } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 120),
+                    child: Column(
+                      children: [
+
+                        Row(
+                          //crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.star_border,size: 55,),
+                            Icon(Icons.star_border,size: 55,),
+                            Icon(Icons.star_border,size: 55,),
+                            Icon(Icons.star_border,size: 55,),
+                            Icon(Icons.star_border,size: 55,),
+
+                          ],
+                        ),
+SizedBox(height: 30,),
+                        Text('No Ratings Yet !',style: TextStyle(fontSize: 20),),
+
+                      ],
+                    ),
+                  );
                 } else if (!snapshot.hasData || snapshot.data.products.isEmpty) {
-                  return Center(child: Text('No data available'));
+                  return Center(child: Column(
+                    children: [
+                      Row(
+                        //crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.star_border,size: 55,),
+                          Icon(Icons.star_border,size: 55,),
+                          Icon(Icons.star_border,size: 55,),
+                          Icon(Icons.star_border,size: 55,),
+                          Icon(Icons.star_border,size: 55,),
+
+                        ],
+                      ),
+                      SizedBox(height: 30,),
+                      Text('No Ratings Yet !'),
+                    ],
+                  ));
                 } else {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-
-
-
 
                       Padding(
                         padding: const EdgeInsets.only(left: 10,right: 10),
@@ -164,7 +203,7 @@ class _SellerratingscreenState extends State<Sellerratingscreen> {
         ),
       ),
       title: Text(
-        "Seller Rating",
+        "Seller Ratings",
         style: TextStyle(fontSize: 16, color: MyTheme.accent_color),
       ),
       elevation: 0.0,
