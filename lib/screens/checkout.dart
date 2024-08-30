@@ -929,14 +929,14 @@ class _CheckoutState extends State<Checkout> {
                     child: Column(
                       children: [
 
-                        // widget.paymentFor == PaymentFor.Order
-                        //     ? Padding(
-                        //   padding:
-                        //   const EdgeInsets.only(bottom: 16.0),
-                        //   child: buildApplyCouponRow(context),
-                        // )
-                            //: Container(),
-                        SizedBox(height: 50,),
+                        widget.paymentFor == PaymentFor.Order
+                            ? Padding(
+                          padding:
+                          const EdgeInsets.only(bottom: 16.0),
+                          child: buildApplyCouponRow(context),
+                        )
+                            : Container(),
+                       // SizedBox(height: 50,),
                        grandTotalSection(),
                         //Text("data"),
                         Padding(

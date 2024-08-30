@@ -1,11 +1,11 @@
 
 import 'dart:ui';
 
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:umonda/app_config.dart';
 import 'package:umonda/my_theme.dart';
 import 'package:umonda/screens/main.dart';
 import 'package:flutter/material.dart';
-import 'package:package_info/package_info.dart';
 import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:umonda/helpers/shared_value_helper.dart';

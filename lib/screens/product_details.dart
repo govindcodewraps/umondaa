@@ -548,8 +548,8 @@ class _ProductDetailsState extends State<ProductDetails>
                           ),
                           onPressed: () {
                             onCopyTap(setState);
-                            SocialShare.copyToClipboard(
-                                text: _productDetails.link);
+                            // SocialShare.copyToClipboard(
+                            //     text: _productDetails.link);
                           },
                         ),
                       ),

@@ -350,8 +350,8 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                           ),
                           onPressed: () {
                             onCopyTap(setState);
-                            SocialShare.copyToClipboard(
-                                text: _auctionproductDetails.link);
+                            // SocialShare.copyToClipboard(
+                            //     text: _auctionproductDetails.link);
                           },
                         ),
                       ),

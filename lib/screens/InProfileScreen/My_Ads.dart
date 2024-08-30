@@ -134,7 +134,7 @@ class _My_adsScreenState extends State<My_adsScreen> {
 
                         return InkWell(
                           onTap: () {
-                            if(snapshot.data.data[index].sold_status==0)
+                            if(snapshot.data.data[index].soldStatus==0)
 
                               Navigator.push(context, MaterialPageRoute(builder: (context) => Edit_placead(Product_ID: product_Id,Product_Name: product_name,Product_Price: product_price)))
                                   .then((value){ if(value != null && value)
@@ -205,11 +205,11 @@ class _My_adsScreenState extends State<My_adsScreen> {
                                             Row(children: [
                                               Text("Status:"),
                                               Text(
-                                                snapshot.data.data[index].sold_status == 0 ? 'Not Sold' : 'Product Sold',
+                                                snapshot.data.data[index].soldStatus == 0 ? 'Not Sold' : 'Product Sold',
                                                 style: TextStyle(
                                                   fontSize: 13,
                                                   fontWeight: FontWeight.w500,
-                                                  color: snapshot.data.data[index].sold_status == 0 ? Colors.red : Colors.green,
+                                                  color: snapshot.data.data[index].soldStatus == 0 ? Colors.red : Colors.green,
                                                 ),
                                               ),
                                             ],),
@@ -220,7 +220,7 @@ class _My_adsScreenState extends State<My_adsScreen> {
                                     ],
                                   ),
                                 ),
-                               if(snapshot.data.data[index].sold_status==0)
+                               if(snapshot.data.data[index].soldStatus==0)
                                 Positioned(
                                   right: 1,
                                   child: GestureDetector(
@@ -344,7 +344,7 @@ class _My_adsScreenState extends State<My_adsScreen> {
     try {
       // Make the API call
       Response response = await dio.get(url, options: Options(headers: headers));
-
+print("print url::  ${url}");
       // Handle the response
       if (response.statusCode == 200) {
         print("user iddddd${user_id.$}");

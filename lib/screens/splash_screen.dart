@@ -1,3 +1,4 @@
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:umonda/app_config.dart';
 import 'package:umonda/custom/device_info.dart';
 import 'package:umonda/helpers/addons_helper.dart';
@@ -9,7 +10,6 @@ import 'package:umonda/presenter/currency_presenter.dart';
 import 'package:umonda/providers/locale_provider.dart';
 import 'package:umonda/screens/main.dart';
 import 'package:flutter/material.dart';
-import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {

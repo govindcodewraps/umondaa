@@ -1,4 +1,4 @@
-//import 'package:firebase_messaging/firebase_messaging.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'firebase_options.dart';
@@ -64,88 +64,13 @@ import 'screens/seller_details.dart';
 import 'screens/seller_products.dart';
 
 
-
-// main() async {
-//
-//   //WidgetsFlutterBinding.ensureInitialized();
-//
-//   //WidgetsFlutterBinding.ensureInitialized();
-//
-//   WidgetsFlutterBinding.ensureInitialized();
-//   //for ios
-//   // await
-//    //Firebase.initializeApp();
-//
-//    //for Android
-//
-//   await Firebase.initializeApp(
-//     options: DefaultFirebaseOptions.currentPlatform,
-//   );
-//
-//
-//   // await Firebase.initializeApp(
-//   //   options: DefaultFirebaseOptions.currentPlatform,
-//   // );
-//
-//
-//
-// /*  FlutterDownloader.initialize(
-//       debug: true,
-//       // optional: set to false to disable printing logs to console (default: true)
-//       ignoreSsl:
-//           true //
-//     // : set to false to disable working with http links (default: false)
-//       );
-//   SystemChrome.setPreferredOrientations([
-//     DeviceOrientation.portraitUp,
-//     DeviceOrientation.portraitDown,
-//   ]);*/
-//
-//   // AddonsHelper().setAddonsData();
-//   // BusinessSettingHelper().setBusinessSettingData();
-//   // app_language.load();
-//   // app_mobile_language.load();
-//   // app_language_rtl.load();
-//   //
-//   // access_token.load().whenComplete(() {
-//   //   AuthHelper().fetch_and_set();
-//   // });
-//
-// /*
-//   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-//     statusBarColor: Colors.transparent,
-//     systemNavigationBarDividerColor: Colors.transparent,
-//   ));
-// */
-//
-//
-//
-//
-//
-//
-//
-//
-//   // await Firebase.initializeApp(
-//   //   options: DefaultFirebaseOptions.currentPlatform,
-//   // );
-//
-//
-//
-//   runApp(
-//    // SharedValue.wrapApp(
-//       MyApp(),
-//     //),
-//   );
-// }
-
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
  // await Firebase.initializeApp();
   //for Android
 
   await Firebase.initializeApp(
-     //options: DefaultFirebaseOptions.currentPlatform,
+     options: DefaultFirebaseOptions.currentPlatform,
   );
   // runApp(MyApp());
     runApp(
@@ -165,24 +90,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // @override
-  // void initState() {
-  //   super.initState();
-  //
-  //   Future.delayed(Duration.zero).then(
-  //     (value) async {
-  //       Firebase.initializeApp().then((value) {
-  //         if (OtherConfig.USE_PUSH_NOTIFICATION) {
-  //           Future.delayed(Duration(milliseconds: 10), () async {
-  //             PushNotificationService().initialise();
-  //           });
-  //         }
-  //       });
-  //     },
-  //   );
-  // }
-
-  // final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
   @override
   void initState() {
@@ -197,31 +104,6 @@ class _MyAppState extends State<MyApp> {
 
     });
 
-    // Future.delayed(Duration.zero).then(
-    //       (value) async {
-    //     Firebase.initializeApp().then((value) {
-    //       if (OtherConfig.USE_PUSH_NOTIFICATION) {
-    //         Future.delayed(Duration(milliseconds: 10), () async {
-    //           PushNotificationService().initialise();
-    //         });
-    //       }
-    //     });
-    //   },
-    // );
-
-    // _firebaseMessaging.requestPermission();
-    //
-    // _firebaseMessaging.getToken().then((String token) {
-    //   print("Device Token: $token");
-    // });
-
-    // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    //   print("Received message: $message");
-    // });
-
-    // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-    //   print("Message opened: $message");
-    // });
   }
 
   @override
